@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>III 통계 — 대단원 마무리 풀이</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 23pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 4px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.example {
+  border: 1px solid var(--accent-line); border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0; break-inside: avoid;
+}
+.example .label {
+  font-size: 9pt; font-weight: 700; color: #fff; background: var(--accent);
+  border-radius: 4px; padding: 1px 8px; display: inline-block; margin-bottom: 8px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.problem { margin: 12px 0; break-inside: avoid; }
+.problem .q { font-weight: 700; }
+.problem .answer-space {
+  border-bottom: 1px dashed var(--accent-line); height: 26px; margin-top: 6px;
+}
+
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 7px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .concept, .example, .tip, .problem, .eq { break-inside: avoid; }
+}
+
+.m { font-family: 'Times New Roman', Georgia, serif; font-style: italic; }
+.eq {
+  text-align: center; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 12pt;
+  line-height: 1.6; break-inside: avoid;
+}
+.eq.boxed {
+  display: block; border: 1.6px solid var(--accent); border-radius: 6px;
+  padding: 8px 4px; background: #fbfcfe; font-weight: 600;
+}
+.frac { display: inline-block; vertical-align: middle; text-align: center; margin: 0 .12em; }
+.frac > span { display: block; padding: 0 .45em; line-height: 1.25; }
+.frac > .den { border-top: 1.3px solid currentColor; }
+.sqrt { white-space: nowrap; }
+.sqrt > .rad { border-top: 1.3px solid currentColor; padding: 0 .18em 0 .08em; }
+.sqrt::before { content: "\221A"; padding-right: .02em; }
+.ov { display: inline-block; line-height: 1; border-top: 1.4px solid currentColor; padding-top: .5px; }
+
+/* ---- 답 강조 ---- */
+.ans {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 11pt;
+  margin-top: 4px;
+}
+/* ---- 풀이패턴 태그 ---- */
+.pattern-tag {
+  display: inline-block; background: #e8f0fe; color: var(--accent);
+  border-radius: 3px; padding: 1px 8px; font-size: 9.5pt; font-weight: 600;
+  margin-bottom: 6px;
+}
+/* ---- 문제번호 뱃지 ---- */
+.qnum {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 22px; height: 22px; text-align: center;
+  line-height: 22px; font-size: 10pt; font-weight: 700; margin-right: 6px;
+}
+/* ---- 구분선 ---- */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+/* ---- 작은 테이블 (분포표) ---- */
+.dist-table { width: auto; margin: 8px auto; }
+.dist-table th, .dist-table td { text-align: center; padding: 5px 14px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — Title + 핵심 공식 모음 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">확률과통계 · III. 통계</div>
+    <h1>대단원 마무리 풀이 학습자료</h1>
+    <p class="subtitle">교과서 p.123~125 | 종합 14 + 서술형 4 = 총 18문항</p>
+    <div class="meta">고3 · 2026</div>
+  </div>
+
+  <h2>핵심 공식 모음</h2>
+
+  <div class="concept">
+    <span class="label">III단원 전체 필수 공식 10선</span>
+    <table>
+      <tr><th style="width:28%">공식</th><th>내용</th></tr>
+      <tr>
+        <td>확률의 총합</td>
+        <td><span class="m">Σ P</span>(<span class="m">X</span> = <span class="m">x<sub>i</sub></span>) = 1</td>
+      </tr>
+      <tr>
+        <td>평균</td>
+        <td><span class="m">E</span>(<span class="m">X</span>) = Σ <span class="m">x<sub>i</sub></span> · <span class="m">p<sub>i</sub></span></td>
+      </tr>
+      <tr>
+        <td>분산</td>
+        <td><span class="m">V</span>(<span class="m">X</span>) = <span class="m">E</span>(<span class="m">X</span><sup>2</sup>) − {<span class="m">E</span>(<span class="m">X</span>)}<sup>2</sup></td>
+      </tr>
+      <tr>
+        <td>표준편차</td>
+        <td>σ(<span class="m">X</span>) = <span class="sqrt"><span class="rad"><span class="m">V</span>(<span class="m">X</span>)</span></span></td>
+      </tr>
+      <tr>
+        <td>일차변환</td>
+        <td>
+          <span class="m">E</span>(<span class="m">aX</span>+<span class="m">b</span>) = <span class="m">a·E</span>(<span class="m">X</span>)+<span class="m">b</span>, &ensp;
+          <span class="m">V</span>(<span class="m">aX</span>+<span class="m">b</span>) = <span class="m">a</span><sup>2</sup><span class="m">V</span>(<span class="m">X</span>), &ensp;
+          σ(<span class="m">aX</span>+<span class="m">b</span>) = |<span class="m">a</span>|·σ(<span class="m">X</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>이항분포</td>
+        <td>
+          <span class="m">X</span> ~ <span class="m">B</span>(<span class="m">n</span>, <span class="m">p</span>) &ensp;→&ensp;
+          <span class="m">E</span> = <span class="m">np</span>, &ensp;
+          <span class="m">V</span> = <span class="m">npq</span>
+        </td>
+      </tr>
+      <tr>
+        <td>표준화</td>
+        <td>
+          <span class="m">Z</span> =
+          <span class="frac"><span class="num"><span class="m">X</span> − <span class="m">m</span></span><span class="den">σ</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td>표본평균</td>
+        <td>
+          <span class="m">E</span>(<span class="ov"><span class="m">X</span></span>) = <span class="m">m</span>, &ensp;
+          <span class="m">V</span>(<span class="ov"><span class="m">X</span></span>) =
+          <span class="frac"><span class="num">σ<sup>2</sup></span><span class="den"><span class="m">n</span></span></span>, &ensp;
+          σ(<span class="ov"><span class="m">X</span></span>) =
+          <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>
+        </td>
+      </tr>
+      <tr>
+        <td>신뢰구간 (95%)</td>
+        <td>
+          <span class="ov"><span class="m">X</span></span> ± 1.96 ×
+          <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>
+        </td>
+      </tr>
+      <tr>
+        <td>신뢰구간 (99%)</td>
+        <td>
+          <span class="ov"><span class="m">X</span></span> ± 2.58 ×
+          <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 1</span></div>
+</section>
+
+<!-- ============ PAGE 2 — 문항별 필수 개념 안내 ============ -->
+<section class="page">
+  <h2>문항별 필수 개념 안내</h2>
+  <p style="color:var(--muted);font-size:10.5pt;margin-top:0;">각 문항을 풀기 위해 반드시 알아야 하는 개념을 정리하였다. 개념을 먼저 확인한 뒤 풀이에 들어간다.</p>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❶ 이산확률변수 &ensp;→ 종합 1</span>
+    <p style="margin:4px 0;">확률변수가 취하는 값을 <strong>셀 수 있으면 이산</strong>, 연속적인 측정값이면 연속확률변수이다. "개수", "횟수"는 이산, "시간", "길이", "무게"는 연속이다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❷ 이산확률분포와 기댓값·분산 &ensp;→ 종합 2, 3, 4, 5</span>
+    <p style="margin:4px 0;">확률변수 <span class="m">X</span>가 취하는 각 값에 대하여 확률을 대응시킨 표를 <strong>확률분포표</strong>라 한다. 모든 확률의 합은 1이다.</p>
+    <p style="margin:2px 0;">
+      <span class="m">E</span>(<span class="m">X</span>) = Σ<span class="m">x<sub>i</sub>p<sub>i</sub></span>로 평균을,
+      <span class="m">V</span>(<span class="m">X</span>) = <span class="m">E</span>(<span class="m">X</span><sup>2</sup>) − {<span class="m">E</span>(<span class="m">X</span>)}<sup>2</sup>로 분산을 구한다.
+      일차변환 <span class="m">Y</span> = <span class="m">aX</span> + <span class="m">b</span>이면
+      <span class="m">V</span>(<span class="m">Y</span>) = <span class="m">a</span><sup>2</sup><span class="m">V</span>(<span class="m">X</span>)이다.
+    </p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❸ 이항분포 &ensp;→ 종합 6, 7</span>
+    <p style="margin:4px 0;">성공 확률 <span class="m">p</span>인 독립 시행을 <span class="m">n</span>회 반복할 때, 성공 횟수 <span class="m">X</span>는 <strong>이항분포</strong> <span class="m">B</span>(<span class="m">n</span>, <span class="m">p</span>)를 따른다.
+      <span class="m">E</span>(<span class="m">X</span>) = <span class="m">np</span>, &ensp;
+      <span class="m">V</span>(<span class="m">X</span>) = <span class="m">npq</span> &ensp;(<span class="m">q</span> = 1 − <span class="m">p</span>)이다.</p>
+    <p style="margin:2px 0;">점화관계 <span class="m">P</span>(<span class="m">X</span>=<span class="m">n</span>)과 <span class="m">P</span>(<span class="m">X</span>=<span class="m">n</span>−1)의 비를 이용하여 <span class="m">p</span>를 역산할 수 있다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❹ 정규분포와 표준화 &ensp;→ 종합 8, 9, 10</span>
+    <p style="margin:4px 0;"><span class="m">X</span> ~ <span class="m">N</span>(<span class="m">m</span>, σ<sup>2</sup>)일 때
+      <span class="m">Z</span> =
+      <span class="frac"><span class="num"><span class="m">X</span> − <span class="m">m</span></span><span class="den">σ</span></span>
+      로 <strong>표준화</strong>하면 <span class="m">Z</span> ~ <span class="m">N</span>(0, 1)이다.
+      구간 중점이 평균과 일치할 때 확률이 최대이다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❺ 표본평균의 분포 &ensp;→ 종합 11, 12</span>
+    <p style="margin:4px 0;">모집단 <span class="m">N</span>(<span class="m">m</span>, σ<sup>2</sup>)에서 크기 <span class="m">n</span>인 표본을 추출하면
+      <span class="ov"><span class="m">X</span></span> ~ <span class="m">N</span>(<span class="m">m</span>,
+      <span class="frac"><span class="num">σ<sup>2</sup></span><span class="den"><span class="m">n</span></span></span>)이다.
+      <span class="m">n</span>이 클수록 분산은 줄어든다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❻ 정규근사와 실생활 응용 &ensp;→ 종합 13</span>
+    <p style="margin:4px 0;">표본평균으로 변환 후 불량 확률을 구하고, 이항분포의 평균(<span class="m">np</span>)으로 전체 불량 수를 추정한다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❼ 모평균의 신뢰구간 추정 &ensp;→ 종합 14, 서술형 18</span>
+    <p style="margin:4px 0;">신뢰도 95% 신뢰구간:
+      <span class="ov"><span class="m">X</span></span> ± 1.96 ×
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>,
+      &ensp;99%:
+      <span class="ov"><span class="m">X</span></span> ± 2.58 ×
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>이다.
+      신뢰구간의 길이 <span class="m">b</span> − <span class="m">a</span>로 최소 표본 크기를 구할 수 있다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❽ 서술형 풀이 전략 &ensp;→ 서술형 15, 16, 17</span>
+    <p style="margin:4px 0;">비복원 추출의 대칭성, 상위 비율에서 <span class="m">Z</span>값 역산, 모분산 계산 후 표본평균의 표준편차를 구하는 절차를 단계별로 서술한다.</p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 2</span></div>
+</section>
+
+<!-- ============ PAGE 3 — 종합 1, 2, 3 ============ -->
+<section class="page">
+  <h2>종합 (1~14)</h2>
+
+  <div class="example">
+    <span class="label">종합 1</span>
+    <h3>이산확률변수 판별</h3>
+    <p><strong>문제:</strong> 다음 중 이산확률변수인 것은?<br>
+      ① A 반 학생들의 충치의 개수 &ensp;② B 공장에서 생산한 전구의 수명<br>
+      ③ C 정류장에서 버스를 기다리는 시간 &ensp;④ D 목장에서 하루 동안 생산된 우유의 양<br>
+      ⑤ E 지역 주민들이 소유한 자동차의 주행 거리
+    </p>
+    <span class="pattern-tag">풀이 패턴: 셀 수 있으면 이산, 연속적이면 연속</span>
+    <ul>
+      <li>① 충치의 개수: 0, 1, 2, … → 셀 수 있음 → <strong>이산확률변수</strong></li>
+      <li>② 전구의 수명: 연속적인 시간 → 연속확률변수</li>
+      <li>③ 버스 기다리는 시간: 연속 → 연속확률변수</li>
+      <li>④ 우유의 양: 연속 → 연속확률변수</li>
+      <li>⑤ 주행 거리: 연속 → 연속확률변수</li>
+    </ul>
+    <p><span class="ans">①</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 2</span>
+    <h3>카드 두 수의 차</h3>
+    <p><strong>문제:</strong>
+      1~5 카드 5장 중 2장 동시 추출. 두 수의 차를 <span class="m">X</span>라 할 때 <span class="m">P</span>(<span class="m">X</span> ≥ 2)
+    </p>
+    <span class="pattern-tag">풀이 패턴: 여사건 P(X≥2) = 1 − P(X=1)</span>
+    <div class="eq">
+      전체: <sub>5</sub>C<sub>2</sub> = 10
+    </div>
+    <p><span class="m">X</span> = 1인 경우: (1,2), (2,3), (3,4), (4,5) → 4가지</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> ≥ 2) = 1 −
+      <span class="frac"><span class="num">4</span><span class="den">10</span></span> =
+      <span class="frac"><span class="num">6</span><span class="den">10</span></span> =
+      <span class="frac"><span class="num">3</span><span class="den">5</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">3</span><span class="den">5</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 3</span>
+    <h3>확률질량함수 상수 (망원급수)</h3>
+    <p><strong>문제:</strong>
+      <span class="m">P</span>(<span class="m">X</span>=<span class="m">x</span>) = <span class="m">k</span>(
+      <span class="frac"><span class="num">1</span><span class="den"><span class="m">x</span></span></span> −
+      <span class="frac"><span class="num">1</span><span class="den"><span class="m">x</span>+1</span></span>), &ensp;
+      <span class="m">x</span> = 1, 2, …, 10일 때 <span class="m">k</span>의 값
+    </p>
+    <span class="pattern-tag">풀이 패턴: 확률 총합 = 1, 망원급수(telescoping)</span>
+    <div class="eq">
+      Σ = <span class="m">k</span>[(1 −
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span>) + (
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> −
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>) + ⋯ + (
+      <span class="frac"><span class="num">1</span><span class="den">10</span></span> −
+      <span class="frac"><span class="num">1</span><span class="den">11</span></span>)]
+      = <span class="m">k</span>(1 −
+      <span class="frac"><span class="num">1</span><span class="den">11</span></span>) =
+      <span class="frac"><span class="num">10<span class="m">k</span></span><span class="den">11</span></span>
+    </div>
+    <div class="eq">
+      <span class="frac"><span class="num">10<span class="m">k</span></span><span class="den">11</span></span> = 1
+      &ensp;⇒&ensp;
+      <span class="m">k</span> =
+      <span class="frac"><span class="num">11</span><span class="den">10</span></span>
+    </div>
+    <p><span class="ans"><span class="m">k</span> = <span class="frac"><span class="num">11</span><span class="den">10</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 3</span></div>
+</section>
+
+<!-- ============ PAGE 4 — 종합 4, 5 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 4</span>
+    <h3>주사위+동전 기댓값</h3>
+    <p><strong>문제:</strong>
+      주사위 1개를 던져 6의 약수이면 동전 2개, 아니면 동전 3개를 던진다. 앞면 개수를 <span class="m">X</span>라 할 때 <span class="m">E</span>(<span class="m">X</span>)
+    </p>
+    <span class="pattern-tag">풀이 패턴: 조건부 기댓값의 법칙</span>
+    <p>6의 약수: 1, 2, 3, 6 →
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">4</span><span class="den">6</span></span> =
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span> → 동전 2개<br>
+      약수 아님: 4, 5 →
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> → 동전 3개
+    </p>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span> | 동전 2개) = 2 ×
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> = 1, &emsp;
+      <span class="m">E</span>(<span class="m">X</span> | 동전 3개) = 3 ×
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> =
+      <span class="frac"><span class="num">3</span><span class="den">2</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span>) =
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span> × 1 +
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> ×
+      <span class="frac"><span class="num">3</span><span class="den">2</span></span> =
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span> +
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> =
+      <span class="frac"><span class="num">7</span><span class="den">6</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">7</span><span class="den">6</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 5</span>
+    <h3><span class="m">V</span>(<span class="m">X</span>/<span class="m">a</span>) 구하기</h3>
+    <p><strong>문제:</strong>
+      <span class="m">X</span> = 0, 1, 2의 확률이
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span>, <span class="m">a</span>, 2<span class="m">a</span>일 때
+      <span class="m">V</span>(
+      <span class="frac"><span class="num"><span class="m">X</span></span><span class="den"><span class="m">a</span></span></span>)
+    </p>
+    <span class="pattern-tag">풀이 패턴: 총합으로 a 결정 → V(X) → V(X/a) = V(X)/a²</span>
+    <div class="eq">
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> + <span class="m">a</span> + 2<span class="m">a</span> = 1
+      &ensp;⇒&ensp; 3<span class="m">a</span> =
+      <span class="frac"><span class="num">3</span><span class="den">4</span></span>
+      &ensp;⇒&ensp; <span class="m">a</span> =
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span>
+    </div>
+    <p>
+      <span class="frac"><span class="num"><span class="m">X</span></span><span class="den"><span class="m">a</span></span></span> =
+      <span class="frac"><span class="num"><span class="m">X</span></span><span class="den">1/4</span></span> = 4<span class="m">X</span>
+    </p>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span>) = 0 ·
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> + 1 ·
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> + 2 ·
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> =
+      <span class="frac"><span class="num">5</span><span class="den">4</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span><sup>2</sup>) = 0 + 1 ·
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> + 4 ·
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> =
+      <span class="frac"><span class="num">9</span><span class="den">4</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">V</span>(<span class="m">X</span>) =
+      <span class="frac"><span class="num">9</span><span class="den">4</span></span> − (
+      <span class="frac"><span class="num">5</span><span class="den">4</span></span>)<sup>2</sup> =
+      <span class="frac"><span class="num">9</span><span class="den">4</span></span> −
+      <span class="frac"><span class="num">25</span><span class="den">16</span></span> =
+      <span class="frac"><span class="num">11</span><span class="den">16</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">V</span>(4<span class="m">X</span>) = 16 ×
+      <span class="frac"><span class="num">11</span><span class="den">16</span></span> = <strong>11</strong>
+    </div>
+    <p><span class="ans">11</span></p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 4</span></div>
+</section>
+
+<!-- ============ PAGE 5 — 종합 6, 7 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 6</span>
+    <h3>이항분포 <span class="m">E</span>(<span class="m">X</span>) + <span class="m">V</span>(2<span class="m">X</span>)</h3>
+    <p><strong>문제:</strong>
+      <span class="m">P</span>(<span class="m">X</span>=<span class="m">x</span>) =
+      <sub>20</sub>C<sub><span class="m">x</span></sub>(
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span>)<sup><span class="m">x</span></sup>(
+      <span class="frac"><span class="num">3</span><span class="den">4</span></span>)<sup>20−<span class="m">x</span></sup>일 때
+      <span class="m">E</span>(<span class="m">X</span>) + <span class="m">V</span>(2<span class="m">X</span>)
+    </p>
+    <span class="pattern-tag">풀이 패턴: X ~ B(20, 1/4) → E=np, V=npq, V(2X)=4V(X)</span>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span>) = 20 ×
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> = 5
+    </div>
+    <div class="eq">
+      <span class="m">V</span>(<span class="m">X</span>) = 20 ×
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> ×
+      <span class="frac"><span class="num">3</span><span class="den">4</span></span> =
+      <span class="frac"><span class="num">15</span><span class="den">4</span></span>, &emsp;
+      <span class="m">V</span>(2<span class="m">X</span>) = 4 ×
+      <span class="frac"><span class="num">15</span><span class="den">4</span></span> = 15
+    </div>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span>) + <span class="m">V</span>(2<span class="m">X</span>) = 5 + 15 = <strong>20</strong>
+    </div>
+    <p><span class="ans">20</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 7</span>
+    <h3>이항분포 점화관계</h3>
+    <p><strong>문제:</strong>
+      <span class="m">X</span> ~ <span class="m">B</span>(<span class="m">n</span>, <span class="m">p</span>),
+      <span class="m">V</span>(<span class="m">X</span>) =
+      <span class="frac"><span class="num">15</span><span class="den">16</span></span>,
+      15<span class="m">P</span>(<span class="m">X</span>=<span class="m">n</span>) =
+      <span class="m">P</span>(<span class="m">X</span>=<span class="m">n</span>−1)일 때
+      <span class="m">E</span>(<span class="m">X</span>)
+    </p>
+    <span class="pattern-tag">풀이 패턴: 점화관계로 p → 분산으로 n → E=np</span>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span>=<span class="m">n</span>) = <span class="m">p<sup>n</sup></span>, &emsp;
+      <span class="m">P</span>(<span class="m">X</span>=<span class="m">n</span>−1) = <span class="m">np</span><sup><span class="m">n</span>−1</sup><span class="m">q</span>
+    </div>
+    <div class="eq">
+      15<span class="m">p<sup>n</sup></span> = <span class="m">np</span><sup><span class="m">n</span>−1</sup><span class="m">q</span>
+      &ensp;⇒&ensp; 15<span class="m">p</span> = <span class="m">nq</span> = <span class="m">n</span>(1−<span class="m">p</span>) &ensp;⋯ (*)
+    </div>
+    <p><span class="m">V</span>(<span class="m">X</span>) = <span class="m">npq</span> = <span class="m">nq</span> · <span class="m">p</span>에서 (*)를 대입:</p>
+    <div class="eq">
+      <span class="m">nq</span> · <span class="m">p</span> = 15<span class="m">p</span> · <span class="m">p</span> = 15<span class="m">p</span><sup>2</sup> =
+      <span class="frac"><span class="num">15</span><span class="den">16</span></span>
+      &ensp;⇒&ensp; <span class="m">p</span><sup>2</sup> =
+      <span class="frac"><span class="num">1</span><span class="den">16</span></span>
+      &ensp;⇒&ensp; <span class="m">p</span> =
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span>
+    </div>
+    <p>(*)에서: <span class="m">n</span> ·
+      <span class="frac"><span class="num">3</span><span class="den">4</span></span> = 15 ×
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> =
+      <span class="frac"><span class="num">15</span><span class="den">4</span></span>
+      &ensp;⇒&ensp; <span class="m">n</span> = 5
+    </p>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span>) = 5 ×
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> =
+      <span class="frac"><span class="num">5</span><span class="den">4</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">5</span><span class="den">4</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 5</span></div>
+</section>
+
+<!-- ============ PAGE 6 — 종합 8, 9 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 8</span>
+    <h3>정규분포 구간 확률 최대</h3>
+    <p><strong>문제:</strong>
+      <span class="m">X</span> ~ <span class="m">N</span>(7, 2<sup>2</sup>)일 때
+      <span class="m">P</span>(<span class="m">a</span>−1 ≤ <span class="m">X</span> ≤ <span class="m">a</span>+3)이 최대인 <span class="m">a</span>
+    </p>
+    <span class="pattern-tag">풀이 패턴: 구간 중점이 평균과 일치할 때 확률 최대</span>
+    <div class="eq">
+      구간 [<span class="m">a</span>−1, <span class="m">a</span>+3]의 중점 =
+      <span class="frac"><span class="num">(<span class="m">a</span>−1) + (<span class="m">a</span>+3)</span><span class="den">2</span></span> = <span class="m">a</span> + 1
+    </div>
+    <div class="eq">
+      <span class="m">a</span> + 1 = 7
+      &ensp;⇒&ensp; <span class="m">a</span> = <strong>6</strong>
+    </div>
+    <div class="tip">
+      <span class="label">포인트</span>
+      길이가 고정된 구간의 확률을 최대화하려면, 구간의 중점을 평균에 맞추면 된다.
+    </div>
+    <p><span class="ans"><span class="m">a</span> = 6</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 9</span>
+    <h3>팝콘 정규분포 비율</h3>
+    <p><strong>문제:</strong>
+      팝콘 개수 ~ <span class="m">N</span>(68, 6<sup>2</sup>). 56 이상 74 이하인 봉지 비율(%)
+    </p>
+    <span class="pattern-tag">풀이 패턴: 양쪽 표준화 → P(−2 ≤ Z ≤ 1)</span>
+    <div class="eq">
+      <span class="m">Z</span><sub>1</sub> =
+      <span class="frac"><span class="num">56 − 68</span><span class="den">6</span></span> = −2, &emsp;
+      <span class="m">Z</span><sub>2</sub> =
+      <span class="frac"><span class="num">74 − 68</span><span class="den">6</span></span> = 1
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(−2 ≤ <span class="m">Z</span> ≤ 1) =
+      <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 2) + <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 1)
+      = 0.4772 + 0.3413 = 0.8185
+    </div>
+    <p><span class="ans">81.85%</span></p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 6</span></div>
+</section>
+
+<!-- ============ PAGE 7 — 종합 10, 11 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 10</span>
+    <h3>동전 점수 이항분포 정규근사</h3>
+    <p><strong>문제:</strong>
+      동전 100번 던지기. 앞면 +5점, 뒷면 −2점. 0점에서 시작할 때 220점 이상일 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 앞면 횟수 X → 점수 = 7X − 200, B(100, 1/2) → 정규근사</span>
+    <div class="eq">
+      점수 = 5<span class="m">X</span> − 2(100 − <span class="m">X</span>) = 7<span class="m">X</span> − 200
+    </div>
+    <div class="eq">
+      7<span class="m">X</span> − 200 ≥ 220 &ensp;⇒&ensp; <span class="m">X</span> ≥ 60
+    </div>
+    <p><span class="m">X</span> ~ <span class="m">B</span>(100,
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span>): &ensp;
+      <span class="m">m</span> = 50, &ensp; σ =
+      <span class="sqrt"><span class="rad">100 ×
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> ×
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span></span></span> = 5
+    </p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> ≥ 60) =
+      <span class="m">P</span>(<span class="m">Z</span> ≥
+      <span class="frac"><span class="num">60 − 50</span><span class="den">5</span></span>) =
+      <span class="m">P</span>(<span class="m">Z</span> ≥ 2) = 0.5 − 0.4772
+    </div>
+    <p><span class="ans">0.0228</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 11</span>
+    <h3>표본평균 성질 보기</h3>
+    <p><strong>문제:</strong>
+      모평균 <span class="m">m</span>, 모표준편차 σ인 정규분포. 크기 <span class="m">n</span><sub>1</sub> 표본평균
+      <span class="ov"><span class="m">X</span></span>, 크기 <span class="m">n</span><sub>2</sub> 표본평균
+      <span class="ov"><span class="m">Y</span></span>에 대해 옳은 것만 고르시오.<br>
+      ㄱ. <span class="m">E</span>(<span class="ov"><span class="m">X</span></span>) = <span class="m">E</span>(<span class="ov"><span class="m">Y</span></span>) &ensp;
+      ㄴ. <span class="m">n</span><sub>1</sub> &lt; <span class="m">n</span><sub>2</sub>이면 <span class="m">V</span>(<span class="ov"><span class="m">X</span></span>) &gt; <span class="m">V</span>(<span class="ov"><span class="m">Y</span></span>) &ensp;
+      ㄷ. <span class="m">n</span><sub>1</sub> = 2<span class="m">n</span><sub>2</sub>이면 2σ(<span class="ov"><span class="m">X</span></span>) = σ(<span class="ov"><span class="m">Y</span></span>)
+    </p>
+    <span class="pattern-tag">풀이 패턴: E(X̄)=m, V(X̄)=σ²/n 대입하여 판정</span>
+
+    <p><strong>ㄱ.</strong> <span class="m">E</span>(<span class="ov"><span class="m">X</span></span>) = <span class="m">m</span> = <span class="m">E</span>(<span class="ov"><span class="m">Y</span></span>) → <strong>참</strong></p>
+
+    <p><strong>ㄴ.</strong>
+      <span class="m">V</span>(<span class="ov"><span class="m">X</span></span>) =
+      <span class="frac"><span class="num">σ<sup>2</sup></span><span class="den"><span class="m">n</span><sub>1</sub></span></span> &gt;
+      <span class="frac"><span class="num">σ<sup>2</sup></span><span class="den"><span class="m">n</span><sub>2</sub></span></span> =
+      <span class="m">V</span>(<span class="ov"><span class="m">Y</span></span>)
+      &ensp;(∵ <span class="m">n</span><sub>1</sub> &lt; <span class="m">n</span><sub>2</sub>) → <strong>참</strong>
+    </p>
+
+    <p><strong>ㄷ.</strong> <span class="m">n</span><sub>1</sub> = 2<span class="m">n</span><sub>2</sub>일 때:</p>
+    <div class="eq">
+      2σ(<span class="ov"><span class="m">X</span></span>) = 2 ·
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad">2<span class="m">n</span><sub>2</sub></span></span></span></span> =
+      <span class="frac"><span class="num"><span class="sqrt"><span class="rad">2</span></span> · σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span><sub>2</sub></span></span></span></span> =
+      <span class="sqrt"><span class="rad">2</span></span> · σ(<span class="ov"><span class="m">Y</span></span>) ≠ σ(<span class="ov"><span class="m">Y</span></span>)
+      &ensp;→ <strong>거짓</strong>
+    </div>
+    <p><span class="ans">ㄱ, ㄴ</span></p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 7</span></div>
+</section>
+
+<!-- ============ PAGE 8 — 종합 12, 13 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 12</span>
+    <h3>표본평균 확률</h3>
+    <p><strong>문제:</strong>
+      <span class="m">N</span>(24, 6<sup>2</sup>) 모집단에서 크기 4인 표본. <span class="m">P</span>(18 ≤ <span class="ov"><span class="m">X</span></span> ≤ 21)
+    </p>
+    <span class="pattern-tag">풀이 패턴: σ(X̄) = σ/√n = 6/√4 = 3 → 표준화</span>
+    <div class="eq">
+      σ(<span class="ov"><span class="m">X</span></span>) =
+      <span class="frac"><span class="num">6</span><span class="den"><span class="sqrt"><span class="rad">4</span></span></span></span> = 3
+    </div>
+    <div class="eq">
+      <span class="m">Z</span><sub>1</sub> =
+      <span class="frac"><span class="num">18 − 24</span><span class="den">3</span></span> = −2, &emsp;
+      <span class="m">Z</span><sub>2</sub> =
+      <span class="frac"><span class="num">21 − 24</span><span class="den">3</span></span> = −1
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(−2 ≤ <span class="m">Z</span> ≤ −1)
+      = <span class="m">P</span>(1 ≤ <span class="m">Z</span> ≤ 2)
+      = <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 2) − <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 1)
+      = 0.4772 − 0.3413
+    </div>
+    <p><span class="ans">0.1359</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 13</span>
+    <h3>블루베리 불량 상자 개수의 평균</h3>
+    <p><strong>문제:</strong>
+      블루베리 1개 무게 ~ <span class="m">N</span>(1.5, 0.2<sup>2</sup>). 100개씩 포장. 무게 합이 144g 미만이면 불량. 100만 개 포장 시 불량 상자 수의 평균
+    </p>
+    <span class="pattern-tag">풀이 패턴: 표본평균으로 변환 → 불량 확률 → 이항분포 평균</span>
+    <div class="eq">
+      <span class="ov"><span class="m">X</span></span> ~ <span class="m">N</span>(1.5,
+      (<span class="frac"><span class="num">0.2</span><span class="den"><span class="sqrt"><span class="rad">100</span></span></span></span>)<sup>2</sup>)
+      = <span class="m">N</span>(1.5, 0.02<sup>2</sup>)
+    </div>
+    <div class="eq">
+      불량 = 합 &lt; 144 &ensp;⇔&ensp; <span class="ov"><span class="m">X</span></span> &lt; 1.44
+    </div>
+    <div class="eq">
+      <span class="m">Z</span> =
+      <span class="frac"><span class="num">1.44 − 1.5</span><span class="den">0.02</span></span> = −3
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(<span class="ov"><span class="m">X</span></span> &lt; 1.44) =
+      <span class="m">P</span>(<span class="m">Z</span> &lt; −3) = 0.5 − 0.4987 = 0.0013
+    </div>
+    <p>상자 수 =
+      <span class="frac"><span class="num">1,000,000</span><span class="den">100</span></span> = 10,000
+    </p>
+    <div class="eq">
+      불량 평균 = 10,000 × 0.0013 = <strong>13</strong>
+    </div>
+    <p><span class="ans">13개</span></p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 8</span></div>
+</section>
+
+<!-- ============ PAGE 9 — 종합 14, 서술형 15 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 14</span>
+    <h3>사프란 모평균 95% 신뢰구간</h3>
+    <p><strong>문제:</strong>
+      사프란 추출량 ~ <span class="m">N</span>(<span class="m">m</span>, σ<sup>2</sup>). 36개 추출, 표본평균 7.5mg, 표본표준편차 0.6mg. 모평균 <span class="m">m</span>의 95% 신뢰구간
+    </p>
+    <span class="pattern-tag">풀이 패턴: X̄ ± 1.96 × s/√n</span>
+    <div class="eq">
+      7.5 ± 1.96 ×
+      <span class="frac"><span class="num">0.6</span><span class="den"><span class="sqrt"><span class="rad">36</span></span></span></span>
+      = 7.5 ± 1.96 × 0.1 = 7.5 ± 0.196
+    </div>
+    <div class="eq boxed">
+      7.304 ≤ <span class="m">m</span> ≤ 7.696
+    </div>
+    <p><span class="ans">7.304 ≤ <span class="m">m</span> ≤ 7.696</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <h2>서술형 (15~18)</h2>
+
+  <div class="example">
+    <span class="label">서술형 15</span>
+    <h3>열쇠 자물쇠 기댓값</h3>
+    <p><strong>문제:</strong>
+      열쇠 5개 중 하나만 맞음. 비복원으로 하나씩 시도할 때 열 때까지 확인한 열쇠 수 <span class="m">X</span>의 평균
+    </p>
+    <span class="pattern-tag">풀이 패턴: 비복원 추출 대칭성 → 균등분포</span>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> = <span class="m">k</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">5</span></span>
+      &ensp;(<span class="m">k</span> = 1, 2, 3, 4, 5)
+    </div>
+    <div class="tip">
+      <span class="label">포인트</span>
+      맞는 열쇠가 <span class="m">k</span>번째에 있을 확률은 대칭적으로 모두
+      <span class="frac"><span class="num">1</span><span class="den">5</span></span>이다.
+    </div>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span>) =
+      <span class="frac"><span class="num">1 + 2 + 3 + 4 + 5</span><span class="den">5</span></span> =
+      <span class="frac"><span class="num">15</span><span class="den">5</span></span> = 3
+    </div>
+    <p><span class="ans"><span class="m">E</span>(<span class="m">X</span>) = 3</span></p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 9</span></div>
+</section>
+
+<!-- ============ PAGE 10 — 서술형 16, 17 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">서술형 16</span>
+    <h3>필기시험 합격 최저 점수</h3>
+    <p><strong>문제:</strong>
+      2000명, 점수 ~ <span class="m">N</span>(220, 40<sup>2</sup>). 120명 합격. 최저 점수는?<br>
+      <span style="font-size:10pt;color:var(--muted);">(단, <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 1.55) = 0.44)</span>
+    </p>
+    <span class="pattern-tag">풀이 패턴: 상위 비율 → Z값 → 원점수 환원</span>
+    <div class="eq">
+      <span class="m">P</span>(합격) =
+      <span class="frac"><span class="num">120</span><span class="den">2000</span></span> = 0.06
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> ≥ <span class="m">a</span>) = 0.06
+      &ensp;⇒&ensp;
+      <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤
+      <span class="frac"><span class="num"><span class="m">a</span> − 220</span><span class="den">40</span></span>) = 0.5 − 0.06 = 0.44
+    </div>
+    <p>문제에서 <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 1.55) = 0.44이므로:</p>
+    <div class="eq">
+      <span class="frac"><span class="num"><span class="m">a</span> − 220</span><span class="den">40</span></span> = 1.55
+      &ensp;⇒&ensp; <span class="m">a</span> = 220 + 62 = <strong>282</strong>
+    </div>
+    <p><span class="ans">282점</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">서술형 17</span>
+    <h3>카드 표본평균의 표준편차</h3>
+    <p><strong>문제:</strong>
+      1이 적힌 카드 5장, 2가 4장, 3이 3장, 4가 2장, 5가 1장 (총 15장). 2장 임의추출. 카드에 적힌 수의 평균
+      <span class="ov"><span class="m">X</span></span>의 표준편차
+    </p>
+    <span class="pattern-tag">풀이 패턴: 모분산 구하기 → σ(X̄) = σ/√n</span>
+
+    <table class="dist-table">
+      <tr><th><span class="m">X</span></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr>
+        <td><span class="m">P</span></td>
+        <td><span class="frac"><span class="num">5</span><span class="den">15</span></span></td>
+        <td><span class="frac"><span class="num">4</span><span class="den">15</span></span></td>
+        <td><span class="frac"><span class="num">3</span><span class="den">15</span></span></td>
+        <td><span class="frac"><span class="num">2</span><span class="den">15</span></span></td>
+        <td><span class="frac"><span class="num">1</span><span class="den">15</span></span></td>
+      </tr>
+    </table>
+
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span>) =
+      <span class="frac"><span class="num">5 + 8 + 9 + 8 + 5</span><span class="den">15</span></span> =
+      <span class="frac"><span class="num">35</span><span class="den">15</span></span> =
+      <span class="frac"><span class="num">7</span><span class="den">3</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span><sup>2</sup>) =
+      <span class="frac"><span class="num">5 + 16 + 27 + 32 + 25</span><span class="den">15</span></span> =
+      <span class="frac"><span class="num">105</span><span class="den">15</span></span> = 7
+    </div>
+    <div class="eq">
+      <span class="m">V</span>(<span class="m">X</span>) = 7 − (
+      <span class="frac"><span class="num">7</span><span class="den">3</span></span>)<sup>2</sup> = 7 −
+      <span class="frac"><span class="num">49</span><span class="den">9</span></span> =
+      <span class="frac"><span class="num">14</span><span class="den">9</span></span>
+    </div>
+    <div class="eq">
+      σ(<span class="ov"><span class="m">X</span></span>) =
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad">2</span></span></span></span> =
+      <span class="frac"><span class="num"><span class="sqrt"><span class="rad">14</span></span></span><span class="den">3<span class="sqrt"><span class="rad">2</span></span></span></span> =
+      <span class="frac"><span class="num"><span class="sqrt"><span class="rad">7</span></span></span><span class="den">3</span></span>
+    </div>
+    <p><span class="ans">σ(<span class="ov"><span class="m">X</span></span>) = <span class="frac"><span class="num"><span class="sqrt"><span class="rad">7</span></span></span><span class="den">3</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 10</span></div>
+</section>
+
+<!-- ============ PAGE 11 — 서술형 18 + Z-표 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">서술형 18</span>
+    <h3>신뢰구간 길이로 <span class="m">n</span>의 최솟값</h3>
+    <p><strong>문제:</strong>
+      정규분포, 크기 <span class="m">n</span>인 표본, 99% 신뢰구간 <span class="m">a</span> ≤ <span class="m">m</span> ≤ <span class="m">b</span>.
+      <span class="m">b</span> − <span class="m">a</span> ≤ 0.86σ일 때 자연수 <span class="m">n</span>의 최솟값
+    </p>
+    <span class="pattern-tag">풀이 패턴: 신뢰구간 길이 공식 → 부등식 → n 최솟값</span>
+    <div class="eq">
+      <span class="m">b</span> − <span class="m">a</span> = 2 × 2.58 ×
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span> =
+      <span class="frac"><span class="num">5.16σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>
+    </div>
+    <div class="eq">
+      <span class="frac"><span class="num">5.16σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span> ≤ 0.86σ
+      &ensp;⇒&ensp;
+      <span class="frac"><span class="num">5.16</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span> ≤ 0.86
+    </div>
+    <div class="eq">
+      <span class="sqrt"><span class="rad"><span class="m">n</span></span></span> ≥
+      <span class="frac"><span class="num">5.16</span><span class="den">0.86</span></span> = 6
+      &ensp;⇒&ensp; <span class="m">n</span> ≥ 36
+    </div>
+    <p><span class="ans"><span class="m">n</span>의 최솟값 = 36</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <h2>표준정규분포표 (사용 값 정리)</h2>
+  <table>
+    <tr><th><span class="m">z</span></th><th><span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ <span class="m">z</span>)</th><th>사용 문항</th></tr>
+    <tr><td>1.0</td><td>0.3413</td><td>종합 9, 12</td></tr>
+    <tr><td>1.55</td><td>0.44 (문제 제공)</td><td>서술형 16</td></tr>
+    <tr><td>1.96</td><td>0.4750</td><td>종합 14</td></tr>
+    <tr><td>2.0</td><td>0.4772</td><td>종합 9, 10, 12</td></tr>
+    <tr><td>2.58</td><td>0.4950</td><td>서술형 18</td></tr>
+    <tr><td>3.0</td><td>0.4987</td><td>종합 13</td></tr>
+  </table>
+
+  <div class="page-footer"><span>III. 통계 — 대단원 마무리 풀이</span><span>p. 11</span></div>
+</section>
+
+</body>
+</html>
