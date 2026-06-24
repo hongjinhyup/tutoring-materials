@@ -95,17 +95,23 @@ strong { color: var(--accent); font-weight: 700; }
 .passage .hl {
   background: #fff3b0; padding: 1px 2px; border-radius: 2px;
 }
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
 .passage .signal {
   color: var(--accent); font-weight: 700;
 }
 .passage .blank {
   display: inline-block;
   border-bottom: 2px solid var(--accent);
-  min-width: 200px;
+  min-width: 220px;
   text-align: center;
-  font-weight: 700;
   color: var(--accent);
-  padding: 0 4px;
+  font-weight: 700;
+  font-size: 10pt;
+  padding: 0 4px 2px;
+  margin: 0 2px;
 }
 
 .syntax-box {
@@ -239,7 +245,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <div class="doc-header">
     <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
     <h1>13. 빈칸 내용 추론 (1) — Ex 2</h1>
-    <p class="subtitle">고대 건축물의 지진 대비 설계와 현대 공학의 재발견</p>
+    <p class="subtitle">AI 브레인스토밍 — 창의적 성과는 아이디어 수량에서 나온다</p>
     <p class="meta">
       <span class="code-badge">26005-0063</span>
       <span class="passage-badge">p.79 · Ex 2</span>
@@ -249,17 +255,17 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <table>
     <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
     <tbody>
-      <tr><td>02 (26005-0063)</td><td>빈칸 내용 추론</td><td><span class="ans-badge">④</span></td></tr>
+      <tr><td>Ex 2 (26005-0063)</td><td>빈칸 내용 추론</td><td><span class="ans-badge">④</span></td></tr>
     </tbody>
   </table>
 
   <h2>지문 원문</h2>
 
   <div class="passage">
-    &nbsp;&nbsp;Ancient builders may not have had access to modern technology, <span class="signal">but</span> many of their structures have withstood earthquakes that would destroy contemporary buildings. <span class="hl">The Parthenon in Athens, the Colosseum in Rome, and various ancient temples in Japan have all survived major seismic events, sometimes for thousands of years.</span> <span class="signal">In contrast</span>, many modern buildings collapse during earthquakes, often because they are designed primarily for cost efficiency rather than long-term resilience. <span class="signal">Interestingly</span>, when engineers study ancient structures, they often discover sophisticated techniques that align with current earthquake engineering principles. <span class="signal">For example</span>, some ancient Greek temples used a column design that allows slight movement during an earthquake, absorbing the shock rather than resisting it rigidly. <span class="hl">This suggests that ancient builders possessed an intuitive understanding of structural dynamics that modern engineers are only now beginning to fully appreciate and incorporate into their designs.</span> <span class="signal">In other words</span>, the wisdom embedded in these ancient structures demonstrates that <span class="blank">effective earthquake resistance is not solely a product of modern science but can also be found in time-tested traditional construction methods</span>.
+    &nbsp;&nbsp;AI is a prolific idea generator. <span class="hl">Human brainstorming groups tend to focus on the quality of creative ideas and almost immediately lean into variations of first suggestions, <span class="signal">but</span> good ideas are more likely when groups focus first on quantity.</span> As Linus Pauling put it, "The best way to have a good idea is to have lots of ideas." Psychologist Dean Keith Simonton called this the "equal odds rule" arguing that <span class="hl">creative success is correlated to the total number of works created.</span> Many studies have confirmed that creative quality comes from quantity of ideas (what Bob Sutton at a design and innovation consulting company called "idea ratio"), and one Stanford study pegged the number of ideas that distinguish a successful product from a failure at more than two thousand. <span class="hl"><span class="signal">This is why</span> design thinking and innovation are so focused on the processes (what Utley and Klebahn call "idea flow") of <span class="blank">_______________</span>.</span>
   </div>
-  <p style="font-size:9pt; color:var(--muted);">* seismic: 지진의 &nbsp; ** resilience: 회복력, 탄성
-  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어 &nbsp; <span style="border-bottom:2px solid var(--accent);">밑줄</span> = 빈칸 위치</p>
+  <p style="font-size:9pt; color:var(--muted);">* prolific: 많이 만들어 내는, 다작의 &nbsp; ** peg: 못박다
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어 &nbsp; <span style="border-bottom:2px solid var(--accent);">밑줄</span> = 빈칸</p>
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) 분석노트</span>
@@ -267,38 +273,46 @@ tr:nth-child(even) td { background: #f6f8fb; }
   </div>
 </section>
 
-<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<!-- ============ PAGE 2 — 구문 분석 + 전문 해석 ============ -->
 <section class="page">
 
   <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
 
   <div class="syntax-box">
-    <span class="label">구문 1 — 도입 (고대 건축물의 내진성)</span>
+    <span class="label">구문 1 — 대조 구문 (질 vs 양)</span>
     <div class="en">
-      <span class="chunk">Ancient builders may not have had access to</span> / <span class="chunk">modern technology</span>, / <span class="chunk">but many of their structures</span> / <span class="chunk">have withstood earthquakes</span> / <span class="chunk">that would destroy contemporary buildings</span>.
+      <span class="chunk">Human brainstorming groups</span> / <span class="chunk">tend to focus on the quality of creative ideas</span> / <span class="chunk">and almost immediately lean into</span> / <span class="chunk">variations of first suggestions</span>, / <b>but</b> / <span class="chunk">good ideas are more likely</span> / <span class="chunk">when groups focus first on quantity</span>.
     </div>
-    <div class="ko">→ 고대 건축가들은 / 현대 기술에 접근할 수 없었을지 모르지만 / 그들의 많은 구조물은 / 지진을 견뎌왔다 / 현대 건물을 파괴할 수 있는.</div>
+    <div class="ko">→ 인간 브레인스토밍 그룹은 / 창의적 아이디어의 질에 초점을 맞추는 경향이 있고 / 거의 즉시 기울어진다 / 첫 번째 제안의 변형으로 / 하지만 / 좋은 아이디어는 더 가능성이 높다 / 그룹이 먼저 양에 초점을 맞출 때.</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 2 — 예시 (고대 그리스 기둥 기술)</span>
+    <span class="label">구문 2 — 핵심 근거 (equal odds rule)</span>
     <div class="en">
-      <span class="chunk">some ancient Greek temples</span> / <span class="chunk">used a column design</span> / <span class="chunk">that allows slight movement</span> / <span class="chunk">during an earthquake</span>, / <span class="chunk">absorbing the shock</span> / <span class="chunk">rather than resisting it rigidly</span>.
+      <span class="chunk">Psychologist Dean Keith Simonton</span> / <span class="chunk">called this the "equal odds rule"</span> / <span class="chunk">arguing that</span> / <span class="chunk">creative success is correlated to</span> / <span class="chunk">the total number of works created</span>.
     </div>
-    <div class="ko">→ 일부 고대 그리스 신전은 / 기둥 설계를 사용했는데 / 약간의 움직임을 허용하는 / 지진 중에 / 충격을 흡수하는 / 딱딱하게 저항하기보다는.</div>
+    <div class="ko">→ 심리학자 Dean Keith Simonton은 / 이것을 "동일 확률 법칙"이라 불렀고 / ~라고 주장하며 / 창의적 성공은 ~에 상관관계가 있다 / 만들어진 작품의 총수와.</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 3 — 핵심 주장 (고대의 직관적 이해)</span>
+    <span class="label">구문 3 — 빈칸 포함 결론문</span>
     <div class="en">
-      <span class="chunk">This suggests that</span> / <span class="chunk">ancient builders possessed</span> / <span class="chunk">an intuitive understanding of structural dynamics</span> / <span class="chunk">that modern engineers</span> / <span class="chunk">are only now beginning to</span> / <span class="chunk">fully appreciate and incorporate into their designs</span>.
+      <span class="chunk"><b>This is why</b></span> / <span class="chunk">design thinking and innovation</span> / <span class="chunk">are so focused on the processes</span> / <span class="chunk">(what Utley and Klebahn call "idea flow")</span> / of <b>_______________</b>.
     </div>
-    <div class="ko">→ 이것은 ~을 시사한다 / 고대 건축가들이 보유했음을 / 구조 역학에 대한 직관적 이해를 / 현대 엔지니어들이 / 이제서야 ~하기 시작하는 / 완전히 인정하고 설계에 통합하기를.</div>
+    <div class="ko">→ 이것이 ~인 이유이다 / 디자인 사고와 혁신이 / 과정에 매우 집중하는 / (Utley와 Klebahn이 "아이디어 흐름"이라 부르는) / <b>_______________</b>의.</div>
   </div>
 
   <div class="tip">
     <span class="label">구문 포인트</span>
-    <strong>"may not have had"</strong>: 과거 사실에 대한 추측(~했을 리 없다). <strong>"that would destroy"</strong>의 would는 가정법적 용법으로, 현대 건물이라면 파괴될 것이라는 가정을 담는다. 두 구문 모두 고대와 현대의 <strong>대비</strong>를 강화한다.
+    <strong>This is why ~</strong>: 앞의 모든 논거(양이 질을 낳는다)를 받아 결론(빈칸)으로 연결하는 인과 신호어. 빈칸은 앞 내용 전체의 요약이 되어야 한다. <strong>"idea flow"</strong>라는 삽입 설명이 힌트 — 아이디어를 판단 없이 흘려보내는 과정.
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — Stanford 연구 (양적 근거)</span>
+    <div class="en">
+      <span class="chunk">one Stanford study</span> / <span class="chunk">pegged the number of ideas</span> / <span class="chunk">that distinguish a successful product from a failure</span> / <span class="chunk">at more than two thousand</span>.
+    </div>
+    <div class="ko">→ 한 스탠포드 연구는 / 아이디어의 수를 못 박았다 / 성공적인 제품을 실패와 구별하는 / 2,000개 이상으로.</div>
   </div>
 
   <hr class="divider">
@@ -306,7 +320,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <h2>전문 해석</h2>
 
   <div class="translation">
-    &nbsp;&nbsp;고대 건축가들은 현대 기술에 접근할 수 없었을지 모르지만, 그들의 많은 구조물은 현대 건물을 파괴할 수 있는 지진을 견뎌왔다. 아테네의 파르테논 신전, 로마의 콜로세움, 일본의 다양한 고대 사찰은 모두 주요 지진 사건에서 살아남았으며, 때로는 수천 년 동안 그래왔다. 이와 대조적으로, 많은 현대 건물은 지진 중에 붕괴하는데, 이는 종종 장기적 탄성보다는 비용 효율성을 위해 주로 설계되기 때문이다. 흥미롭게도, 엔지니어들이 고대 구조물을 연구할 때, 그들은 종종 현재의 내진 공학 원리와 일치하는 정교한 기술을 발견한다. 예를 들어, 일부 고대 그리스 신전은 지진 중에 약간의 움직임을 허용하여 딱딱하게 저항하기보다는 충격을 흡수하는 기둥 설계를 사용했다. 이것은 고대 건축가들이 현대 엔지니어들이 이제서야 완전히 인정하고 설계에 통합하기 시작한 구조 역학에 대한 직관적 이해를 보유했음을 시사한다. 다시 말해, 이러한 고대 구조물에 내재된 지혜는 <u>효과적인 내진 저항이 현대 과학만의 산물이 아니라 시간이 검증한 전통 건축 방식에서도 발견될 수 있음</u>을 보여준다.
+    &nbsp;&nbsp;AI는 다작하는 아이디어 생성기이다. 인간 브레인스토밍 그룹은 창의적 아이디어의 질에 초점을 맞추는 경향이 있으며 거의 즉각적으로 첫 번째 제안의 변형으로 기울어지지만, 좋은 아이디어는 그룹이 먼저 양에 초점을 맞출 때 나올 가능성이 더 높다. Linus Pauling이 말했듯이, "좋은 아이디어를 갖는 가장 좋은 방법은 많은 아이디어를 갖는 것이다." 심리학자 Dean Keith Simonton은 이를 "동일 확률 법칙"이라 부르며, 창의적 성공은 만들어진 작품의 총수에 상관관계가 있다고 주장했다. 많은 연구들이 창의적 질은 아이디어의 양(디자인 및 혁신 컨설팅 회사의 Bob Sutton이 "아이디어 비율"이라 부른 것)에서 나온다는 것을 확인했으며, 한 스탠포드 연구는 성공적인 제품을 실패와 구별하는 아이디어의 수를 2,000개 이상으로 못 박았다. 이것이 디자인 사고와 혁신이 (Utley와 Klebahn이 "아이디어 흐름"이라 부르는) <u><b>판단 없이 가능성을 만들어 내는</b></u> 과정에 그토록 집중하는 이유이다.
   </div>
 
   <div class="page-footer">
@@ -320,76 +334,71 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <h2>논리 구조 — 글의 흐름</h2>
 
-  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>대비 도입 → 구체적 증거 → 핵심 주장 → 결론(빈칸)</strong></p>
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>주장 → 인용 근거 → 학술 근거 → 통계 → 결론(빈칸)</strong></p>
 
   <div class="flow">
     <div class="flow-step">
-      <span class="step-label">도입 (대비)</span>
-      <p style="margin:4px 0; font-size:10.5pt;">고대 건축 = 현대 기술 없음, <strong>but</strong> 지진을 견딤 / 현대 건물 = 비용 효율 우선 → 붕괴</p>
+      <span class="step-label">도입</span>
+      <p style="margin:4px 0; font-size:10.5pt;">AI는 다작하는 아이디어 생성기. 인간은 <strong>질(quality)</strong>에 집중하지만, 좋은 아이디어는 <strong>양(quantity)</strong>에서 나온다.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">증거</span>
-      <p style="margin:4px 0; font-size:10.5pt;">파르테논·콜로세움·일본 사찰 = 수천 년간 <strong>주요 지진 생존</strong></p>
+      <span class="step-label">인용 근거 1</span>
+      <p style="margin:4px 0; font-size:10.5pt;">Linus Pauling: <strong>"좋은 아이디어를 갖는 최선의 방법은 많은 아이디어를 갖는 것"</strong></p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">분석</span>
-      <p style="margin:4px 0; font-size:10.5pt;">고대 기법 연구 → 현대 내진 공학 원리와 <strong>일치</strong>하는 정교한 기술 발견 (예: 유연한 기둥)</p>
+      <span class="step-label">학술 근거</span>
+      <p style="margin:4px 0; font-size:10.5pt;">Simonton의 <strong>"equal odds rule"</strong>: 창의적 성공 = 만들어진 작품 총수에 비례</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">핵심 주장</span>
-      <p style="margin:4px 0; font-size:10.5pt;">고대 건축가 = 구조 역학의 <strong>직관적 이해</strong> 보유 / 현대 엔지니어가 이제서야 인정·통합</p>
+      <span class="step-label">통계 근거</span>
+      <p style="margin:4px 0; font-size:10.5pt;">Stanford 연구: 성공/실패 구별 아이디어 수 = <strong>2,000개 이상</strong></p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
       <span class="step-label">결론 (빈칸)</span>
-      <p style="margin:4px 0; font-size:10.5pt;">내진 저항 = 현대 과학만의 산물이 아님 → <strong>전통 건축에서도 발견 가능</strong></p>
+      <p style="margin:4px 0; font-size:10.5pt;">"idea flow" = <strong>판단 없이 가능성을 만들어 내는(creating possibilities without judgment)</strong> 과정에 집중</p>
     </div>
-  </div>
-
-  <div class="tip">
-    <span class="label">글의 핵심</span>
-    고대 건축물이 현대 건물보다 지진에 강한 이유는 전통적 건축 기법 속에 <strong>현대 내진 공학과 일치하는 직관적 지혜</strong>가 담겨 있기 때문이다.
   </div>
 
   <hr class="divider">
 
-  <h2>문제 풀이 — Q02 (26005-0063)</h2>
+  <h2>문제 풀이</h2>
   <h3>다음 빈칸에 들어갈 말로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">④</span></h3>
 
   <ul class="choice-list">
     <li class="wrong">
       <span class="tag tag-x">X</span>
-      ① ancient civilizations relied heavily on trial and error for construction
-      <span class="reason">— 시행착오 의존은 언급되지 않음. '직관적 이해'가 핵심</span>
+      ① selecting the best idea of all
+      <span class="reason">— "최고의 아이디어 선택"은 양보다 질에 집중하는 것으로, 글의 논지와 반대</span>
     </li>
     <li class="wrong">
       <span class="tag tag-x">X</span>
-      ② modern technology has made traditional building methods completely obsolete
-      <span class="reason">— "completely obsolete"는 글 논지의 정반대 (전통 방법이 여전히 유효)</span>
+      ② drawing immediate outcomes
+      <span class="reason">— "즉각적인 결과 도출"은 본문의 과정(process) 중심 논의와 무관</span>
     </li>
     <li class="wrong">
       <span class="tag tag-x">X</span>
-      ③ earthquake-resistant design requires expensive materials and advanced tools
-      <span class="reason">— 비싼 재료·첨단 도구 필요성은 글에 없음. 오히려 고대 기술로 충분함을 주장</span>
+      ③ filtering options through analysis
+      <span class="reason">— "분석을 통한 옵션 필터링"은 선별/판단 과정이므로 "idea flow"와 상충</span>
     </li>
     <li class="correct">
       <span class="tag tag-o">O</span>
-      ④ effective earthquake resistance is not solely a product of modern science but can also be found in time-tested traditional construction methods
-      <span class="reason">— "현대 과학만의 산물이 아님 + 전통 건축에서도 발견 가능" = 글 전체 논지의 정확한 요약</span>
+      ④ creating possibilities without judgment
+      <span class="reason">— "판단 없이 가능성 만들기": 양 우선(quantity first) + 흐름(idea flow) = 판단 유보 속 대량 생성. 글 전체 논지와 완벽 일치</span>
     </li>
     <li class="wrong">
       <span class="tag tag-x">X</span>
-      ⑤ preserving ancient buildings is more important than constructing new ones
-      <span class="reason">— 보존의 중요성이 아니라 고대 기법의 내진 원리가 주제</span>
+      ⑤ judging creativity during brainstorming
+      <span class="reason">— "브레인스토밍 중 창의성 판단"은 질 중심 접근으로, 첫 문장에서 비판한 인간의 경향과 동일</span>
     </li>
   </ul>
 
   <div class="tip">
-    <span class="label">함정</span>
-    ②번은 "modern technology"와 "traditional methods"를 대비하지만 <strong>"completely obsolete"</strong>가 글의 논지와 정반대. 빈칸 앞 <strong>"In other words"</strong>는 '다시 말해'로, 바로 앞 문장을 <strong>바꿔 말하기(paraphrase)</strong>하는 구조. 따라서 빈칸 = 직전 주장의 요약.
+    <span class="label">풀이 핵심</span>
+    글 전체가 <strong>"양(quantity)이 질(quality)을 낳는다"</strong>는 주장을 일관되게 뒷받침한다. 빈칸은 이 주장의 결론부에 위치하므로, "많이 만들되 판단을 유보하라"는 ④가 유일하게 적합하다. ①③⑤는 모두 <strong>선별/판단</strong>을 포함하므로 글의 논지와 충돌한다.
   </div>
 
   <div class="page-footer">
@@ -398,53 +407,44 @@ tr:nth-child(even) td { background: #f6f8fb; }
   </div>
 </section>
 
-<!-- ============ PAGE 4 — 연결어 정리 ============ -->
+<!-- ============ PAGE 4 — 연결어/신호어 정리 ============ -->
 <section class="page">
 
   <h2>연결어/신호어 정리</h2>
 
   <table>
-    <thead><tr><th>신호어</th><th>기능</th><th>위치</th></tr></thead>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치·역할</th></tr></thead>
     <tbody>
-      <tr><td><strong>but</strong></td><td>대조/전환</td><td>도입: 현대 기술 없음 → 그러나 지진 견딤</td></tr>
-      <tr><td><strong>In contrast</strong></td><td>대조</td><td>고대(견딤) vs. 현대(붕괴)</td></tr>
-      <tr><td><strong>Interestingly</strong></td><td>관심 유도/전환</td><td>엔지니어의 고대 구조물 연구 도입</td></tr>
-      <tr><td><strong>For example</strong></td><td>구체적 예시</td><td>그리스 신전의 유연한 기둥 설계</td></tr>
-      <tr><td><strong>rather than</strong></td><td>대조 (선호)</td><td>충격 흡수 vs. 딱딱한 저항</td></tr>
-      <tr><td><strong>In other words</strong></td><td>바꿔 말하기/결론</td><td>빈칸 도입: 앞 주장의 재진술</td></tr>
+      <tr><td><strong>but</strong></td><td>대조</td><td>인간의 질 중심 접근 vs 양 우선이 더 효과적이라는 주장을 대조</td></tr>
+      <tr><td><strong>As ~ put it</strong></td><td>인용</td><td>Linus Pauling의 말을 인용하여 양 우선 주장 강화</td></tr>
+      <tr><td><strong>arguing that</strong></td><td>주장 제시</td><td>Simonton의 "equal odds rule" 주장 연결</td></tr>
+      <tr><td><strong>and</strong></td><td>추가</td><td>Stanford 연구를 추가 근거로 연결</td></tr>
+      <tr><td><strong>This is why</strong></td><td>인과 결론</td><td>앞의 모든 근거를 종합하여 빈칸(결론)으로 연결하는 핵심 신호어</td></tr>
     </tbody>
   </table>
 
   <hr class="divider">
 
-  <h2>빈칸 추론 전략 정리</h2>
+  <h2>핵심 어휘 정리</h2>
 
-  <div class="syntax-box">
-    <span class="label">빈칸 유형 — 재진술(paraphrase)형</span>
-    <div class="en">빈칸이 <strong>"In other words"</strong>(다시 말해) 뒤에 위치 → 바로 앞 문장의 바꿔 말하기.</div>
-    <div class="ko">→ 직전 문장: "고대 건축가가 구조 역학의 직관적 이해를 보유" → 이를 다른 표현으로 바꾼 것이 정답.</div>
-  </div>
-
-  <div class="tip">
-    <span class="label">풀이 전략</span>
-    ① <strong>"In other words" 활용</strong>: 이 표현 뒤 빈칸 = 직전 내용의 요약/재진술.<br>
-    ② <strong>대비 구조 파악</strong>: 글 전체가 '고대 vs. 현대' 대비. 빈칸도 "not solely modern ... but also traditional" 구조.<br>
-    ③ <strong>핵심 키워드</strong>: withstood, survived, sophisticated techniques, intuitive understanding → 모두 고대 기법의 우수성을 지지.<br>
-    ④ <strong>소거법</strong>: ①시행착오(언급 없음), ②완전 구식(반대), ③비싼 재료(반대), ⑤보존 중요성(주제 이탈) → ④만 적합.
-  </div>
-
-  <h3>핵심 어휘</h3>
   <table>
-    <thead><tr><th>어휘</th><th>의미</th><th>문맥</th></tr></thead>
+    <thead><tr><th>영어</th><th>뜻</th><th>문맥 속 의미</th></tr></thead>
     <tbody>
-      <tr><td>withstood</td><td>견디다, 버티다</td><td>고대 건축물이 지진을 견딤</td></tr>
-      <tr><td>seismic</td><td>지진의</td><td>major seismic events</td></tr>
-      <tr><td>resilience</td><td>회복력, 탄성</td><td>장기적 내구성(현대 건물에 부족)</td></tr>
-      <tr><td>sophisticated</td><td>정교한</td><td>고대 건축 기법의 수준</td></tr>
-      <tr><td>intuitive</td><td>직관적인</td><td>고대 건축가의 이해 방식</td></tr>
-      <tr><td>incorporate</td><td>통합하다</td><td>현대 설계에 고대 기법 반영</td></tr>
+      <tr><td>prolific</td><td>많이 만들어 내는, 다작의</td><td>AI가 대량의 아이디어를 생성하는 능력</td></tr>
+      <tr><td>lean into</td><td>~에 기울다, 몰입하다</td><td>인간이 첫 제안의 변형에 즉시 빠지는 경향</td></tr>
+      <tr><td>equal odds rule</td><td>동일 확률 법칙</td><td>창의적 성공은 작품 수에 비례한다는 Simonton의 이론</td></tr>
+      <tr><td>correlated to</td><td>~와 상관관계가 있는</td><td>창의적 성공과 작품 총수의 관계</td></tr>
+      <tr><td>idea ratio</td><td>아이디어 비율</td><td>Bob Sutton이 명명한 양적 아이디어 생성 비율</td></tr>
+      <tr><td>peg</td><td>못 박다, 고정하다</td><td>Stanford 연구가 필요한 아이디어 수를 특정 수치로 확정</td></tr>
+      <tr><td>idea flow</td><td>아이디어 흐름</td><td>Utley & Klebahn이 명명한 판단 없는 아이디어 생성 과정</td></tr>
+      <tr><td>distinguish A from B</td><td>A를 B와 구별하다</td><td>성공 제품과 실패를 구분 짓는 요인</td></tr>
     </tbody>
   </table>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ①과 ⑤가 가장 매력적인 오답이다. "best idea"와 "judging creativity"는 브레인스토밍과 관련된 어휘이지만, 이 글은 <strong>판단을 유보하고 양에 집중하라</strong>는 주장이므로, 선별·판단 관련 표현은 모두 글의 방향과 반대이다.
+  </div>
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) 분석노트</span>

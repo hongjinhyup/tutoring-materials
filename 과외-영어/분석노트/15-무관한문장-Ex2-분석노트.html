@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>15. 흐름에 무관한 문장 — Ex 2 분석노트</title>
+<title>15. 흐름에 무관한 문장 찾기 — Ex 2 분석노트</title>
 <style>
 @page { size: A4; margin: 18mm 16mm; }
 * { box-sizing: border-box; }
@@ -95,16 +95,21 @@ strong { color: var(--accent); font-weight: 700; }
 .passage .hl {
   background: #fff3b0; padding: 1px 2px; border-radius: 2px;
 }
-.passage .ul-word {
-  text-decoration: underline; text-decoration-color: var(--accent);
-  text-underline-offset: 3px;
-}
 .passage .signal {
   color: var(--accent); font-weight: 700;
 }
 .passage .irrelevant {
-  background: #fef2f2; border: 1px dashed var(--red-line);
+  background: var(--red-bg); border: 1px solid var(--red-line);
   border-radius: 4px; padding: 2px 4px;
+}
+.passage .sent-num {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 20px; height: 20px; text-align: center;
+  line-height: 20px; font-size: 9pt; font-weight: 700;
+  margin-right: 3px; font-family: sans-serif;
+}
+.passage .sent-num.wrong-num {
+  background: #c62828;
 }
 
 .syntax-box {
@@ -143,15 +148,15 @@ strong { color: var(--accent); font-weight: 700; }
   background: var(--accent-soft); border: 1px solid var(--accent-line);
   border-radius: 8px; padding: 10px 16px; break-inside: avoid;
 }
+.flow-step.wrong-step {
+  background: var(--red-bg); border-color: var(--red-line);
+}
 .flow-step .step-label {
   font-size: 9pt; font-weight: 700; color: #fff;
   background: var(--accent); border-radius: 4px;
   padding: 1px 8px; display: inline-block; margin-bottom: 4px;
 }
-.flow-step.irrelevant-step {
-  background: var(--red-bg); border-color: var(--red-line);
-}
-.flow-step.irrelevant-step .step-label {
+.flow-step.wrong-step .step-label {
   background: #c62828;
 }
 .flow-arrow {
@@ -243,8 +248,8 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <div class="doc-header">
     <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
-    <h1>15. 흐름에 무관한 문장 — Ex 2</h1>
-    <p class="subtitle">습관의 형성과 맥락 의존적 자동화</p>
+    <h1>15. 흐름에 무관한 문장 찾기 — Ex 2</h1>
+    <p class="subtitle">측정 장치의 정밀도 — 유효숫자와 자릿수 기록 원칙</p>
     <p class="meta">
       <span class="code-badge">26005-0073</span>
       <span class="passage-badge">p.90 · Ex 2</span>
@@ -254,64 +259,59 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <table>
     <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
     <tbody>
-      <tr><td>02 (26005-0073)</td><td>흐름에 무관한 문장</td><td><span class="ans-badge">③</span></td></tr>
+      <tr><td>Ex 2 (26005-0073)</td><td>전체 흐름과 관계 없는 문장</td><td><span class="ans-badge">③</span></td></tr>
     </tbody>
   </table>
 
   <h2>지문 원문</h2>
 
   <div class="passage">
-    &nbsp;&nbsp;As people repeat a behavior in a consistent context, the behavior becomes increasingly linked with that context. This process has been investigated in the laboratory. <span class="hl">① When people have performed a simple action repeatedly in a consistent context, performing that action becomes automatic.</span> <span class="hl">② This kind of automatic response develops because our minds are very sensitive to associations between actions and the contexts in which they are performed.</span> <span class="irrelevant">③ Since contexts keep shifting, we need to consider those contextual variations <span class="signal">rather than</span> relying only on the habitual response that has been established through repetition.</span> <span class="hl">④ <span class="signal">In other words</span>, when a behavior is repeated enough in a given context, it becomes mentally tied to features of that context.</span> <span class="hl">⑤ <span class="signal">As a result</span>, encountering those features is enough to trigger the behavior, even without a deliberate intention to act.</span>
+    &nbsp;&nbsp;The most fundamental rule regarding the use of any measuring device is that the device should always be read to its optimum capability with regard to precision. <span class="sent-num">①</span> Precision is reflected in the number of digits in a measurement; the more digits this measurement has, the more precise it is. <span class="sent-num">②</span> <span class="signal">For example</span>, the measurement 345.2 inches is more precise than the measurement 345 inches. <span class="sent-num wrong-num">③</span> <span class="irrelevant"><span class="signal">In addition</span>, many calculators today offer advanced graphing features that are useful in visualizing mathematical functions.</span> <span class="sent-num">④</span> If it is possible to obtain the first digit to the right of the decimal point from a device, then that digit should be recorded; if it is possible to obtain the second digit to the right of a decimal point, then that digit should be recorded, and so on. <span class="sent-num">⑤</span> <span class="signal">Thus</span>, a laboratory worker should endeavor to obtain the most digits possible from whatever device is being used whether it is a ruler, thermometer, barometer, or any other measuring device.
   </div>
-  <p style="font-size:9pt; color:var(--muted);">* deliberate: 의도적인
-  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="background:#fef2f2; border:1px dashed var(--red-line); padding:1px 4px; border-radius:3px;">점선 배경</span> = 무관한 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어</p>
+  <p style="font-size:9pt; color:var(--muted);">
+  <span style="color:#c62828;">■ 빨간 배경</span> = 무관한 문장(③) &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어</p>
 
   <div class="page-footer">
-    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 분석노트</span>
+    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 찾기 분석노트</span>
     <span>1 / 4</span>
   </div>
 </section>
 
-<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<!-- ============ PAGE 2 — 구문 분석 + 전문 해석 ============ -->
 <section class="page">
 
   <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
 
   <div class="syntax-box">
-    <span class="label">구문 1 — 도입부 (주제문)</span>
+    <span class="label">구문 1 — 주제문 (측정 장치의 기본 규칙)</span>
     <div class="en">
-      <span class="chunk">As people repeat a behavior</span> / <span class="chunk">in a consistent context</span>, / <span class="chunk">the behavior becomes</span> / <span class="chunk">increasingly linked with that context</span>.
+      <span class="chunk">The most fundamental rule</span> / <span class="chunk">regarding the use of any measuring device</span> / <span class="chunk">is that the device should always be read</span> / <span class="chunk">to its optimum capability</span> / <span class="chunk">with regard to precision</span>.
     </div>
-    <div class="ko">→ 사람들이 행동을 반복할 때 / 일관된 맥락에서 / 그 행동은 / 점점 더 그 맥락과 연결된다.</div>
+    <div class="ko">→ 가장 기본적인 규칙은 / 어떤 측정 장치의 사용에 관해서 / 장치가 항상 읽혀야 한다는 것이다 / 최적의 성능으로 / 정밀도와 관련하여</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 2 — ② 자동 반응의 원인</span>
+    <span class="label">구문 2 — ① 정밀도의 정의</span>
     <div class="en">
-      <span class="chunk">This kind of automatic response develops</span> / <span class="chunk">because our minds are very sensitive</span> / <span class="chunk">to associations</span> / <span class="chunk">between actions and the contexts</span> / <span class="chunk">in which they are performed</span>.
+      <span class="chunk">Precision is reflected</span> / <span class="chunk">in the number of digits in a measurement</span>; / <span class="chunk">the more digits this measurement has</span>, / <span class="chunk">the more precise it is</span>.
     </div>
-    <div class="ko">→ 이런 종류의 자동 반응이 발달하는 것은 / 우리의 마음이 매우 민감하기 때문이다 / 연관성에 대해 / 행동과 맥락 사이의 / 그것들이 수행되는.</div>
+    <div class="ko">→ 정밀도는 반영된다 / 측정의 자릿수에 / 이 측정이 더 많은 자릿수를 가질수록 / 더 정밀하다</div>
+  </div>
+
+  <div class="syntax-box" style="border-left-color: #c62828;">
+    <span class="label" style="color: #c62828;">구문 3 — ③ 무관한 문장</span>
+    <div class="en">
+      <span class="chunk">In addition</span>, / <span class="chunk">many calculators today</span> / <span class="chunk">offer advanced graphing features</span> / <span class="chunk">that are useful in visualizing</span> / <span class="chunk">mathematical functions</span>.
+    </div>
+    <div class="ko">→ 게다가 / 오늘날의 많은 계산기는 / 고급 그래프 기능을 제공한다 / 시각화에 유용한 / 수학 함수의</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 3 — ③ 무관한 문장 (정답)</span>
+    <span class="label">구문 4 — ④ 자릿수 기록 원칙 (조건문 반복)</span>
     <div class="en">
-      <span class="chunk"><b>Since</b> contexts keep shifting</span>, / <span class="chunk">we need to consider</span> / <span class="chunk">those contextual variations</span> / <span class="chunk"><b>rather than</b> relying only on</span> / <span class="chunk">the habitual response</span> / <span class="chunk">that has been established through repetition</span>.
+      <span class="chunk">If it is possible to obtain</span> / <span class="chunk">the first digit to the right of the decimal point</span> / <span class="chunk">from a device</span>, / <span class="chunk">then that digit should be recorded</span>; / <span class="chunk">if it is possible to obtain</span> / <span class="chunk">the second digit to the right of a decimal point</span>, / <span class="chunk">then that digit should be recorded</span>, / and so on.
     </div>
-    <div class="ko">→ 맥락이 계속 변하기 때문에 / 우리는 고려해야 한다 / 그러한 맥락적 변화를 / ~에만 의존하기보다는 / 습관적 반응 / 반복을 통해 확립된.</div>
-  </div>
-
-  <div class="tip">
-    <span class="label">구문 포인트</span>
-    <strong>"in which they are performed"</strong>: 관계부사절. "the contexts in which they are performed" = "행동이 수행되는 맥락". <strong>in which = where</strong>로 바꿔 읽을 수 있다.
-  </div>
-
-  <div class="syntax-box">
-    <span class="label">구문 4 — ⑤ 결론 (자동 행동 촉발)</span>
-    <div class="en">
-      <span class="chunk"><b>As a result</b></span>, / <span class="chunk">encountering those features</span> / <span class="chunk">is enough to trigger the behavior</span>, / <span class="chunk">even without a deliberate intention to act</span>.
-    </div>
-    <div class="ko">→ 그 결과 / 그러한 특징들을 접하는 것만으로도 / 행동을 촉발하기에 충분하다 / 행동하려는 의도적인 의지가 없어도.</div>
+    <div class="ko">→ 만약 얻을 수 있다면 / 소수점 오른쪽의 첫 번째 자릿수를 / 장치로부터 / 그 자릿수는 기록되어야 한다 / 만약 얻을 수 있다면 / 소수점 오른쪽의 두 번째 자릿수를 / 그 자릿수는 기록되어야 한다 / 이런 식으로 계속</div>
   </div>
 
   <hr class="divider">
@@ -319,11 +319,11 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <h2>전문 해석</h2>
 
   <div class="translation">
-    &nbsp;&nbsp;사람들이 일관된 맥락에서 행동을 반복하면, 그 행동은 점점 더 그 맥락과 연결된다. 이 과정은 실험실에서 연구되어 왔다. ① 사람들이 일관된 맥락에서 단순한 행동을 반복적으로 수행했을 때, 그 행동을 수행하는 것은 자동적이 된다. ② 이런 종류의 자동 반응이 발달하는 것은 우리의 마음이 행동과 그것이 수행되는 맥락 사이의 연관성에 매우 민감하기 때문이다. <span style="color:#c62828;">③ 맥락이 계속 변하기 때문에, 우리는 반복을 통해 확립된 습관적 반응에만 의존하기보다는 그러한 맥락적 변화를 고려해야 한다.</span> ④ 다시 말해, 행동이 주어진 맥락에서 충분히 반복되면, 그것은 그 맥락의 특징들과 정신적으로 결합된다. ⑤ 그 결과, 그러한 특징들을 접하는 것만으로도 의도적으로 행동하려는 의지가 없이도 행동을 촉발하기에 충분하다.
+    &nbsp;&nbsp;어떤 측정 장치의 사용에 관한 가장 기본적인 규칙은 장치가 항상 정밀도에 관해 최적의 성능으로 읽혀야 한다는 것이다. ① 정밀도는 측정의 자릿수에 반영된다; 이 측정이 더 많은 자릿수를 가질수록, 더 정밀하다. ② 예를 들어, 345.2인치의 측정값은 345인치의 측정값보다 더 정밀하다. <span style="color:#c62828; font-weight:700;">③ 게다가, 오늘날의 많은 계산기는 수학 함수의 시각화에 유용한 고급 그래프 기능을 제공한다.</span> ④ 장치로부터 소수점 오른쪽의 첫 번째 자릿수를 얻을 수 있다면, 그 자릿수는 기록되어야 한다; 소수점 오른쪽의 두 번째 자릿수를 얻을 수 있다면, 그 자릿수는 기록되어야 하며, 이런 식으로 계속된다. ⑤ 따라서, 실험실 작업자는 자, 온도계, 기압계, 또는 다른 어떤 측정 장치이든 사용하고 있는 장치로부터 가능한 한 가장 많은 자릿수를 얻기 위해 노력해야 한다.
   </div>
 
   <div class="page-footer">
-    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 분석노트</span>
+    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 찾기 분석노트</span>
     <span>2 / 4</span>
   </div>
 </section>
@@ -333,118 +333,129 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <h2>논리 구조 — 글의 흐름</h2>
 
-  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>주제 제시 → 실험적 근거 → 원인 설명 → 요약(In other words) → 결론(As a result)</strong></p>
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>규칙 제시 → 정의 → 예시 → [무관 문장] → 구체적 방법 → 결론</strong></p>
 
   <div class="flow">
     <div class="flow-step">
-      <span class="step-label">도입 (주제문)</span>
-      <p style="margin:4px 0; font-size:10.5pt;">일관된 맥락에서 행동 반복 → 행동이 맥락과 <strong>점점 더 연결</strong>된다.</p>
+      <span class="step-label">주제문</span>
+      <p style="margin:4px 0; font-size:10.5pt;">어떤 측정 장치든 <strong>정밀도에 관해 최적의 성능</strong>으로 읽어야 한다는 것이 가장 기본적인 규칙.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">① 실험적 근거</span>
-      <p style="margin:4px 0; font-size:10.5pt;">일관된 맥락에서 단순 행동 반복 → 행동이 <strong>자동적</strong>이 된다.</p>
+      <span class="step-label">① 정의</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>정밀도 = 자릿수</strong>. 자릿수가 많을수록 더 정밀함.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">② 원인 설명</span>
-      <p style="margin:4px 0; font-size:10.5pt;">마음이 행동-맥락 <strong>연관성에 민감</strong>하기 때문에 자동 반응이 발달한다.</p>
+      <span class="step-label">② 예시 (For example)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">345.2 inches &gt; 345 inches — <strong>소수점 이하 자릿수</strong>가 있으면 더 정밀.</p>
     </div>
-    <div class="flow-arrow" style="color:#c62828;">▼ ✕</div>
-    <div class="flow-step irrelevant-step">
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step wrong-step">
       <span class="step-label">③ 무관한 문장</span>
-      <p style="margin:4px 0; font-size:10.5pt;">맥락이 변하므로 <strong>습관에만 의존하지 말고</strong> 맥락 변화를 고려해야 한다 → 습관의 <strong>한계/주의사항</strong> (논지와 반대 방향)</p>
+      <p style="margin:4px 0; font-size:10.5pt;">"계산기의 <strong>고급 그래프 기능</strong>과 수학 함수 시각화" — 측정 장치의 정밀도·자릿수와 무관한 <strong>계산기 기능</strong> 이야기.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">④ 요약 (In other words)</span>
-      <p style="margin:4px 0; font-size:10.5pt;">행동이 충분히 반복되면 맥락의 특징들과 <strong>정신적으로 결합</strong>된다.</p>
+      <span class="step-label">④ 구체적 방법</span>
+      <p style="margin:4px 0; font-size:10.5pt;">소수점 오른쪽의 첫째, 둘째 자릿수를 얻을 수 있으면 <strong>반드시 기록</strong>해야 한다.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">⑤ 결론 (As a result)</span>
-      <p style="margin:4px 0; font-size:10.5pt;">맥락 특징 접촉 → 의도 없이도 행동이 <strong>자동 촉발</strong>된다.</p>
+      <span class="step-label">⑤ 결론 (Thus)</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>Thus</strong>: 실험실 작업자는 어떤 측정 장치에서든 가능한 한 <strong>가장 많은 자릿수</strong>를 얻기 위해 노력해야 한다.</p>
     </div>
   </div>
 
-  <h3>③번이 무관한 이유</h3>
+  <hr class="divider">
 
-  <p>글 전체는 <strong>"일관된 맥락에서 행동을 반복하면 자동화된다"</strong>는 습관 형성의 메커니즘을 설명한다. ②에서 자동 반응이 발달하는 원인을 밝히고, ④에서 "In other words"로 이를 재진술하는 자연스러운 흐름이다.</p>
-  <p>그런데 ③번은 <strong>"맥락이 변하므로 습관에만 의존하지 말아야 한다"</strong>는 내용으로, 습관 형성의 <strong>한계/경고</strong>를 제시한다. 이는 습관의 자동화 메커니즘을 긍정적으로 설명하는 글의 논지와 <strong>방향이 반대</strong>이다.</p>
+  <h2>문제 풀이</h2>
+  <h3>전체 흐름과 관계 없는 문장은? &nbsp; 정답: <span class="ans-badge">③</span></h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ① Precision is reflected in the number of digits in a measurement...
+      <span class="reason">— 정밀도의 정의. 주제(정밀도)에 직접 관련</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② For example, the measurement 345.2 inches is more precise than...
+      <span class="reason">— ①의 구체적 예시. 자릿수와 정밀도 관계 설명</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ③ In addition, many calculators today offer advanced graphing features...
+      <span class="reason">— "<strong>계산기의 그래프 기능</strong>"은 측정 장치의 정밀도/자릿수와 무관. 수학 시각화 영역</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ④ If it is possible to obtain the first digit to the right of the decimal point...
+      <span class="reason">— 자릿수 기록의 구체적 방법. 주제의 핵심 내용</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ⑤ Thus, a laboratory worker should endeavor to obtain the most digits possible...
+      <span class="reason">— 결론 요약. 측정 장치에서 최대한 많은 자릿수를 얻을 것</span>
+    </li>
+  </ul>
 
   <div class="tip">
     <span class="label">함정</span>
-    ③번에 "contexts", "habitual response", "repetition" 등 글의 핵심 키워드가 모두 등장하여 같은 주제인 듯 보인다. 그러나 <strong>"rather than relying only on"</strong>이라는 표현이 습관적 반응을 <strong>경계</strong>하는 방향으로 전환시킨다. 키워드의 유사성에 속지 말고 <strong>논지의 방향</strong>(긍정/부정)을 확인해야 한다.
+    ③은 "In addition"이라는 추가 정보 연결사로 시작하여 앞 문장에 자연스럽게 이어지는 것처럼 보인다. 또한 "calculators(계산기)"와 "mathematical(수학적)"이라는 단어가 측정·수치와 관련된 것처럼 느껴질 수 있다. 그러나 글의 핵심은 <strong>"측정 장치의 정밀도와 자릿수 기록"</strong>이고, 계산기의 <strong>그래프 기능</strong>은 이와 전혀 다른 주제이다.
   </div>
 
   <div class="page-footer">
-    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 분석노트</span>
+    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 찾기 분석노트</span>
     <span>3 / 4</span>
   </div>
 </section>
 
-<!-- ============ PAGE 4 — 연결어 정리 + 추가 분석 ============ -->
+<!-- ============ PAGE 4 — 연결어/신호어 ============ -->
 <section class="page">
+
+  <h2>③이 무관한 이유 — 상세 분석</h2>
+
+  <div class="syntax-box" style="border-left-color: #c62828;">
+    <span class="label" style="color: #c62828;">글의 주제와 ③의 키워드 비교</span>
+    <div class="en" style="font-family: inherit;">
+      <strong>글의 핵심 키워드:</strong> measuring device, precision, digits, measurement, decimal point, recorded, ruler, thermometer, barometer<br>
+      <strong>③의 키워드:</strong> calculators, graphing features, visualizing, mathematical functions — <span style="color:#c62828;">측정 장치의 정밀도·자릿수와 무관</span>
+    </div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">③ 제거 후 ②→④ 연결 확인</span>
+    <div class="en">
+      ② <span class="chunk">For example, the measurement <b>345.2 inches</b> is more precise than the measurement <b>345 inches</b>.</span> ④ If it is possible to obtain <span class="chunk">the first <b>digit</b> to the right of the <b>decimal point</b></span> from a device, then that digit should be recorded...
+    </div>
+    <div class="ko">→ ②에서 소수점 이하 자릿수가 정밀도를 높임을 보여준 뒤 → ④에서 소수점 오른쪽 자릿수를 <strong>기록하는 구체적 방법</strong>을 제시. 자연스러운 흐름.</div>
+  </div>
+
+  <hr class="divider">
 
   <h2>연결어/신호어 정리</h2>
 
   <table>
-    <thead><tr><th>신호어</th><th>기능</th><th>위치 · 역할</th></tr></thead>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치/역할</th></tr></thead>
     <tbody>
-      <tr><td><strong>As</strong></td><td>시간/조건</td><td>도입부 — 행동 반복 시 맥락과 연결됨</td></tr>
-      <tr><td><strong>When</strong></td><td>조건</td><td>①번 — 일관된 맥락에서 반복 수행 시 자동화</td></tr>
-      <tr><td><strong>because</strong></td><td>원인</td><td>②번 — 자동 반응 발달의 이유</td></tr>
-      <tr><td><strong>Since</strong></td><td>원인 (위장)</td><td>③번 — 맥락 변화를 이유로 습관 의존 경계</td></tr>
-      <tr><td><strong>rather than</strong></td><td>대비/선택</td><td>③번 — 습관에만 의존하지 말 것 (논지와 충돌)</td></tr>
-      <tr><td><strong>In other words</strong></td><td>환언/재진술</td><td>④번 — ②의 내용을 다시 정리</td></tr>
-      <tr><td><strong>As a result</strong></td><td>결과</td><td>⑤번 — 최종 결론 도출</td></tr>
+      <tr><td><strong>regarding</strong></td><td>주제 한정</td><td>주제문: 측정 장치 사용에 관한 규칙</td></tr>
+      <tr><td><strong>For example</strong></td><td>예시</td><td>② 345.2 vs 345 — 자릿수와 정밀도 관계</td></tr>
+      <tr><td><strong>In addition</strong></td><td>추가 (위장)</td><td>③ 앞 내용에 추가하는 것처럼 보이나, 주제 이탈</td></tr>
+      <tr><td><strong>If... then</strong></td><td>조건</td><td>④ 자릿수 기록의 구체적 방법 (반복 조건문)</td></tr>
+      <tr><td><strong>and so on</strong></td><td>열거 계속</td><td>④ 셋째, 넷째 자릿수도 동일 원칙 적용</td></tr>
+      <tr><td><strong>Thus</strong></td><td>결론</td><td>⑤ 최대한 많은 자릿수를 얻어야 한다는 결론</td></tr>
+      <tr><td><strong>whether... or</strong></td><td>열거/불문</td><td>⑤ 어떤 장치든(자, 온도계, 기압계 등)</td></tr>
     </tbody>
   </table>
-
-  <hr class="divider">
-
-  <h2>③ 제거 후 글의 응집성 분석</h2>
-
-  <p>③번을 제거하면 ② → ④의 연결이 완벽하게 자연스러워진다.</p>
-
-  <div class="syntax-box">
-    <span class="label">② → ④ 연결 흐름</span>
-    <div class="en">
-      ② our minds are very sensitive to associations between actions and the contexts...
-      <br><b>In other words</b>,
-      <br>④ when a behavior is repeated enough in a given context, it becomes mentally tied to features of that context.
-    </div>
-    <div class="ko">→ ②에서 "마음이 행동-맥락 연관성에 민감하다"는 원인을 제시하고, ④에서 <strong>"In other words(다시 말해)"</strong>로 이를 재진술한다. ③이 빠지면 환언 구조가 매끄럽게 이어진다.</div>
-  </div>
-
-  <p>또한 ④ → ⑤도 <strong>"As a result"</strong>로 자연스럽게 연결된다: 맥락과 정신적 결합(④) → 그 결과 맥락 접촉만으로 행동 촉발(⑤).</p>
 
   <div class="tip">
     <span class="label">풀이 전략</span>
-    이 지문의 핵심 판별 기준은 <strong>논지의 방향성</strong>이다:<br>
-    - 나머지 문장: 습관의 자동화 메커니즘을 <strong>설명/긍정</strong><br>
-    - ③번: 습관에 의존하지 말라는 <strong>경고/부정</strong><br>
-    같은 키워드(context, habitual, repetition)를 사용하더라도 <strong>논지의 방향이 반대</strong>이면 무관한 문장이다.
+    이 문제는 ③의 "In addition"이라는 <strong>추가 연결사의 함정</strong>을 이용한다. 무관한 문장 유형에서는 연결사에 현혹되지 말고, 각 문장의 <strong>핵심 명사(주어와 목적어)</strong>가 글의 주제와 일치하는지 확인해야 한다. "calculators"와 "graphing features"는 "measuring device"와 "precision"의 키워드 범주에 속하지 않는다.
   </div>
 
-  <hr class="divider">
-
-  <h2>핵심 어휘 정리</h2>
-
-  <table>
-    <thead><tr><th>영어</th><th>뜻</th><th>문맥 활용</th></tr></thead>
-    <tbody>
-      <tr><td><strong>consistent</strong></td><td>일관된, 한결같은</td><td>일관된 맥락에서의 반복 행동</td></tr>
-      <tr><td><strong>association</strong></td><td>연관(성), 연합</td><td>행동과 맥락 사이의 연관성</td></tr>
-      <tr><td><strong>automatic</strong></td><td>자동적인</td><td>반복 행동이 자동적이 됨</td></tr>
-      <tr><td><strong>contextual</strong></td><td>맥락의, 상황의</td><td>맥락적 변화(contextual variations)</td></tr>
-      <tr><td><strong>trigger</strong></td><td>촉발하다</td><td>맥락 접촉이 행동을 촉발</td></tr>
-      <tr><td><strong>deliberate</strong></td><td>의도적인</td><td>의도적인 의지 없이도 행동 촉발</td></tr>
-    </tbody>
-  </table>
-
   <div class="page-footer">
-    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 분석노트</span>
+    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 찾기 분석노트</span>
     <span>4 / 4</span>
   </div>
 </section>

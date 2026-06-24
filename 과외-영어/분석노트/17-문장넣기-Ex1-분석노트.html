@@ -85,6 +85,7 @@ h3 {
 p { margin: 8px 0; }
 strong { color: var(--accent); font-weight: 700; }
 
+/* 지문 박스 */
 .passage {
   background: #fafbfd; border: 1px solid var(--accent-line);
   border-radius: 8px; padding: 16px 20px; margin: 12px 0;
@@ -103,25 +104,39 @@ strong { color: var(--accent); font-weight: 700; }
   color: var(--accent); font-weight: 700;
 }
 
+/* 주어진 문장 박스 */
 .given-sentence {
-  background: var(--warn-bg); border: 2px solid var(--warn-line);
-  border-radius: 8px; padding: 12px 18px; margin: 12px 0;
+  background: #fff7e6; border: 2px solid var(--warn-line);
+  border-radius: 8px; padding: 14px 20px; margin: 12px 0;
   font-family: 'Times New Roman', Georgia, serif;
   font-size: 11pt; line-height: 1.85; color: #222;
   break-inside: avoid;
 }
 .given-sentence .label {
-  display: block; font-family: 'Pretendard', sans-serif;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
   font-size: 9pt; font-weight: 700; color: #9a6b00;
-  letter-spacing: .5px; margin-bottom: 6px;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
 }
 
+/* 삽입 위치 마커 */
 .marker {
-  display: inline-block; font-weight: 700; color: var(--accent);
-  font-family: 'Pretendard', sans-serif; font-size: 10pt;
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  width: 20px; height: 20px;
+  text-align: center;
+  line-height: 20px;
+  font-size: 9pt;
+  font-weight: 700;
   margin: 0 2px;
+  vertical-align: middle;
+}
+.marker.correct {
+  background: #c62828;
 }
 
+/* 구문 분석 */
 .syntax-box {
   background: var(--accent-soft); border: 1px solid var(--accent-line);
   border-left: 4px solid var(--accent);
@@ -144,12 +159,14 @@ strong { color: var(--accent); font-weight: 700; }
   padding-bottom: 1px;
 }
 
+/* 해석 박스 */
 .translation {
   background: #f8f9fc; border: 1px solid var(--accent-line);
   border-radius: 8px; padding: 16px 20px; margin: 12px 0;
   font-size: 10.5pt; line-height: 1.85; color: #333;
 }
 
+/* 논리 구조 플로우 */
 .flow {
   display: flex; flex-direction: column; gap: 0;
   margin: 12px 0;
@@ -168,6 +185,7 @@ strong { color: var(--accent); font-weight: 700; }
   line-height: 1; padding: 2px 0;
 }
 
+/* 선지 분석 */
 .choice-list { margin: 10px 0; padding: 0; list-style: none; }
 .choice-list li {
   padding: 6px 12px; margin: 4px 0; border-radius: 6px;
@@ -188,6 +206,7 @@ strong { color: var(--accent); font-weight: 700; }
 .choice-list .tag-x { background: #bbb; color: #fff; }
 .choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
 
+/* 뱃지 */
 .code-badge {
   display: inline-block; background: var(--accent); color: #fff;
   border-radius: 4px; padding: 2px 10px; font-weight: 700;
@@ -253,7 +272,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <div class="doc-header">
     <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
     <h1>17. 문장 넣기 — Ex 1</h1>
-    <p class="subtitle">이중 처리 이론: 직관과 논리의 충돌</p>
+    <p class="subtitle">딥 워크 vs 셸로우 워크 — 깊은 집중과 얕은 업무</p>
     <p class="meta">
       <span class="code-badge">26005-0084</span>
       <span class="passage-badge">p.102 · Ex 1</span>
@@ -263,23 +282,24 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <table>
     <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
     <tbody>
-      <tr><td>Ex 1 (26005-0084)</td><td>문장 넣기</td><td><span class="ans-badge">②</span></td></tr>
+      <tr><td>Ex 1 (26005-0084)</td><td>글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳은?</td><td><span class="ans-badge">②</span></td></tr>
     </tbody>
   </table>
 
-  <h2>지문 원문</h2>
+  <h2>주어진 문장</h2>
 
   <div class="given-sentence">
-    <span class="label">주어진 문장</span>
-    <span class="hl">This initial, intuitive response is what dual-process theories refer to as Type 1 processing.</span>
+    <span class="label">주어진 문장 (Given Sentence)</span>
+    For many people though, we spend far too much time on the other end of the scale, doing what is referred to as <strong>shallow work</strong>.
   </div>
 
+  <h2>지문 원문</h2>
+
   <div class="passage">
-    &nbsp;&nbsp;Imagine being asked the following question: A bat and ball cost $1.10. The bat costs $1.00 more than the ball. How much does the ball cost? <span class="signal">For most people</span>, the answer that immediately comes to mind is 10 cents. <span class="marker">①</span> <span class="signal">However</span>, with a little more thought, you can probably figure out that this answer is wrong, <span class="hl">since if the ball costs 10 cents, the bat would cost $1.10 for a total of $1.20</span>. <span class="marker">②</span> To arrive at the correct answer of 5 cents, you need to engage in some more careful, deliberate thinking. <span class="marker">③</span> According to dual-process theories, <span class="hl">this deliberate, effortful thinking is Type 2 processing</span>. <span class="marker">④</span> Type 1 processing is fast and automatic, while Type 2 processing is slow and deliberate. <span class="marker">⑤</span> <span class="signal">In many cases</span>, Type 1 and Type 2 processing will lead to the same response, <span class="signal">but</span> as illustrated by the bat-and-ball problem, they can sometimes conflict.
+    &nbsp;&nbsp;Deep work is when you perform an activity with deep concentration that pushes your cognitive capabilities, and by doing so create new value and improve your skills. <span class="marker">①</span> These efforts are hard to replicate; and to be able to do deep work, we need a distraction-free environment. <span class="marker correct">②</span> This style of working is not cognitively demanding but is rather an execution of logical-type tasks that rarely create new value (although they may still be important). <span class="marker">③</span> We often perform these tasks while we are distracted. <span class="marker">④</span> Shallow work has its place, both because routine-type tasks need to be done and because we cannot spend our entire time doing deep work. <span class="marker">⑤</span> The problem with too much shallow work is that we feel busy, maybe even stressed, but we rarely see any output reflecting our experienced effort.
   </div>
-  <p style="font-size:9pt; color:var(--muted);">
-    <span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어
-  </p>
+  <p style="font-size:9pt; color:var(--muted);">* replicate: 재현하다, 반복하다 &nbsp; ** execution: 실행, 수행
+  <br><span style="color:#c62828; font-weight:700;">빨간 원</span> = 정답 삽입 위치</p>
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 분석노트</span>
@@ -287,46 +307,46 @@ tr:nth-child(even) td { background: #f6f8fb; }
   </div>
 </section>
 
-<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<!-- ============ PAGE 2 — 구문 분석 + 전문 해석 ============ -->
 <section class="page">
 
   <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
 
   <div class="syntax-box">
-    <span class="label">구문 1 — 주어진 문장 (삽입 문장)</span>
+    <span class="label">구문 1 — Deep work 정의문</span>
     <div class="en">
-      <span class="chunk">This initial, intuitive response</span> / <span class="chunk">is what dual-process theories refer to</span> / <span class="chunk">as Type 1 processing</span>.
+      <span class="chunk">Deep work is</span> / <span class="chunk">when you perform an activity</span> / <span class="chunk">with deep concentration</span> / <span class="chunk">that pushes your cognitive capabilities</span>, / and <span class="chunk">by doing so</span> / <span class="chunk">create new value</span> / and <span class="chunk">improve your skills</span>.
     </div>
-    <div class="ko">→ 이 초기의 직관적 반응은 / 이중 처리 이론이 ~라고 부르는 것이다 / 유형 1 처리(라고).</div>
+    <div class="ko">→ 딥 워크란 / 활동을 수행할 때이다 / 깊은 집중을 하며 / 인지적 능력을 밀어붙이는 / 그렇게 함으로써 / 새로운 가치를 창출하고 / 자신의 기술을 향상시키는.</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 2 — ① 앞 문장 (직관적 반응 설명)</span>
+    <span class="label">구문 2 — 주어진 문장 (삽입 문장)</span>
     <div class="en">
-      <span class="chunk">For most people</span>, / <span class="chunk">the answer that immediately comes to mind</span> / <span class="chunk">is 10 cents</span>.
+      <span class="chunk">For many people though</span>, / <span class="chunk">we spend far too much time</span> / <span class="chunk">on the other end of the scale</span>, / <span class="chunk">doing what is referred to as</span> / <span class="chunk">shallow work</span>.
     </div>
-    <div class="ko">→ 대부분의 사람들에게 / 즉시 떠오르는 답은 / 10센트이다.</div>
+    <div class="ko">→ 하지만 많은 사람에게 / 우리는 너무 많은 시간을 보낸다 / 척도의 반대쪽 끝에서 / ~라고 불리는 것을 하면서 / 얕은 업무(shallow work).</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 3 — ② 앞 문장 (오답 근거)</span>
+    <span class="label">구문 3 — Shallow work의 자리 (② 뒤 문장)</span>
     <div class="en">
-      <span class="chunk">However</span>, / <span class="chunk">with a little more thought</span>, / <span class="chunk">you can probably figure out</span> / <span class="chunk">that this answer is wrong</span>, / <span class="chunk">since if the ball costs 10 cents</span>, / <span class="chunk">the bat would cost $1.10</span> / <span class="chunk">for a total of $1.20</span>.
+      <span class="chunk">This style of working</span> / <span class="chunk">is not cognitively demanding</span> / <span class="chunk">but is rather an execution</span> / <span class="chunk">of logical-type tasks</span> / <span class="chunk">that rarely create new value</span> / (<span class="chunk">although they may still be important</span>).
     </div>
-    <div class="ko">→ 그러나 / 조금 더 생각해 보면 / 아마 알 수 있을 것이다 / 이 답이 틀렸다는 것을 / 공이 10센트라면 / 배트는 1.10달러가 되어 / 총 1.20달러가 되므로.</div>
+    <div class="ko">→ 이 업무 방식은 / 인지적으로 요구되는 것이 아니라 / 오히려 실행이다 / 논리적 유형의 업무의 / 새로운 가치를 거의 창출하지 않는 / (비록 여전히 중요할 수는 있지만).</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — 결론 (too much shallow work의 문제)</span>
+    <div class="en">
+      <span class="chunk">The problem with too much shallow work</span> / <span class="chunk">is that we feel busy</span>, / maybe even stressed, / <span class="chunk">but we rarely see any output</span> / <span class="chunk">reflecting our experienced effort</span>.
+    </div>
+    <div class="ko">→ 너무 많은 얕은 업무의 문제는 / 우리가 바쁘다고 느낀다는 것이다 / 심지어 스트레스를 받을 수도 있지만 / 우리는 거의 어떤 산출물도 보지 못한다 / 우리가 경험한 노력을 반영하는.</div>
   </div>
 
   <div class="tip">
     <span class="label">구문 포인트</span>
-    <strong>what ~ refer to as ...</strong>: "~라고 부르는 것"이라는 뜻의 관계대명사 what 구문. refer to A as B(A를 B라고 부르다) 구조에서 A가 what으로 앞으로 나간 형태.
-  </div>
-
-  <div class="syntax-box">
-    <span class="label">구문 4 — 결론부</span>
-    <div class="en">
-      <span class="chunk">In many cases</span>, / <span class="chunk">Type 1 and Type 2 processing</span> / <span class="chunk">will lead to the same response</span>, / <span class="chunk">but as illustrated by the bat-and-ball problem</span>, / <span class="chunk">they can sometimes conflict</span>.
-    </div>
-    <div class="ko">→ 많은 경우에 / 유형 1과 유형 2 처리는 / 같은 반응으로 이어지지만, / 배트와 공 문제에서 보여주듯이 / 때때로 충돌할 수 있다.</div>
+    <strong>"the other end of the scale"</strong>은 deep work와 대비되는 반대쪽 끝(= shallow work)을 가리키는 비유적 표현이다. <strong>"This style of working"</strong>(② 바로 뒤)이 삽입 문장에서 소개한 shallow work를 받는 지시어이다.
   </div>
 
   <hr class="divider">
@@ -334,7 +354,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <h2>전문 해석</h2>
 
   <div class="translation">
-    &nbsp;&nbsp;다음 질문을 받는다고 상상해 보라. 배트와 공의 가격은 합해서 1달러 10센트이다. 배트는 공보다 1달러 더 비싸다. 공의 가격은 얼마인가? 대부분의 사람들에게 즉시 떠오르는 답은 10센트이다. <strong>[주어진 문장]</strong> 이 초기의 직관적 반응은 이중 처리 이론이 유형 1 처리라고 부르는 것이다. 그러나 조금 더 생각해 보면, 이 답이 틀렸다는 것을 아마 알 수 있을 것인데, 공이 10센트라면 배트는 1달러 10센트가 되어 총 1달러 20센트가 되기 때문이다. 정확한 답인 5센트에 도달하려면, 좀 더 신중하고 의도적인 사고에 참여해야 한다. 이중 처리 이론에 따르면, 이 의도적이고 노력을 요하는 사고가 유형 2 처리이다. 유형 1 처리는 빠르고 자동적인 반면, 유형 2 처리는 느리고 의도적이다. 많은 경우에 유형 1과 유형 2 처리는 같은 반응으로 이어지지만, 배트와 공 문제에서 보여주듯이 때때로 충돌할 수 있다.
+    &nbsp;&nbsp;딥 워크(깊은 업무)란 깊은 집중으로 인지적 능력을 밀어붙이는 활동을 수행하여, 그렇게 함으로써 새로운 가치를 창출하고 자신의 기술을 향상시키는 것이다. 이러한 노력은 재현하기 어렵고, 딥 워크를 할 수 있으려면 방해 없는 환경이 필요하다. <span style="color:#c62828; font-weight:600;">[주어진 문장 삽입]</span> 하지만 많은 사람에게 우리는 척도의 반대쪽 끝에서, 즉 셸로우 워크(얕은 업무)라고 불리는 것을 하는 데 너무 많은 시간을 보낸다. 이 업무 방식은 인지적으로 요구되는 것이 아니라 오히려 새로운 가치를 거의 창출하지 않는 논리적 유형의 업무를 실행하는 것이다(비록 여전히 중요할 수는 있지만). 우리는 종종 방해를 받으면서 이런 업무를 수행한다. 셸로우 워크도 자리가 있는데, 루틴적 업무가 수행되어야 하고, 모든 시간을 딥 워크에 보낼 수 없기 때문이다. 너무 많은 셸로우 워크의 문제는 우리가 바쁘다고, 심지어 스트레스를 받는다고 느끼지만, 경험한 노력을 반영하는 산출물을 거의 보지 못한다는 것이다.
   </div>
 
   <div class="page-footer">
@@ -348,77 +368,61 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <h2>논리 구조 — 글의 흐름</h2>
 
-  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>문제 제시 → 직관적 반응 → [삽입] 개념 명명 → 오류 지적 → 분석적 사고 → 개념 정리 → 결론</strong></p>
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>개념 정의(deep work) → 전환(shallow work 도입) → 부연 설명 → 균형적 관점 → 문제 제기</strong></p>
 
   <div class="flow">
     <div class="flow-step">
-      <span class="step-label">도입 — 문제 제시</span>
-      <p style="margin:4px 0; font-size:10.5pt;">배트와 공 문제를 제시하여 독자의 직관적 사고를 유도한다.</p>
-    </div>
-    <div class="flow-arrow">▼</div>
-    <div class="flow-step">
-      <span class="step-label">직관적 반응</span>
-      <p style="margin:4px 0; font-size:10.5pt;">"대부분의 사람들에게 즉시 떠오르는 답은 <strong>10센트</strong>이다." → <strong>initial, intuitive response</strong></p>
+      <span class="step-label">문장 1~2 (① 이전)</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>Deep work 정의</strong>: 깊은 집중 + 인지적 능력 확장 → 새로운 가치 창출, 기술 향상. 재현 어려움, 방해 없는 환경 필요.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step" style="background: var(--warn-bg); border-color: var(--warn-line);">
-      <span class="step-label" style="background:#9a6b00;">② 삽입 문장</span>
-      <p style="margin:4px 0; font-size:10.5pt;">"이 초기의 직관적 반응은 이중 처리 이론이 <strong>유형 1 처리</strong>라고 부르는 것이다." → 직관적 반응에 학술적 명칭을 부여</p>
+      <span class="step-label" style="background: #9a6b00;">② 삽입 문장</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>전환</strong>: "the other end of the scale" → deep work와 반대인 <strong>shallow work</strong> 개념 도입. "though"가 역접 신호.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">오류 지적 + 분석적 사고</span>
-      <p style="margin:4px 0; font-size:10.5pt;">However: 10센트는 오답 → 정답 5센트에 도달하려면 <strong>신중하고 의도적인 사고</strong>가 필요</p>
+      <span class="step-label">문장 3~4 (② 뒤)</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>Shallow work 설명</strong>: "This style of working" = shallow work. 인지적 부담 없는 논리적 업무, 방해 속에서 수행.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">개념 대비</span>
-      <p style="margin:4px 0; font-size:10.5pt;">이 의도적 사고 = <strong>유형 2 처리</strong> → 유형 1(빠르고 자동적) vs. 유형 2(느리고 의도적)</p>
+      <span class="step-label">문장 5 (④~⑤ 사이)</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>균형적 인정</strong>: 셸로우 워크도 루틴 업무에 필요하고, 항상 딥 워크만 할 수는 없다.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
       <span class="step-label">결론</span>
-      <p style="margin:4px 0; font-size:10.5pt;">두 유형이 같은 결과를 내기도 하지만, 배트-공 문제처럼 <strong>충돌</strong>하기도 한다.</p>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>문제 제기</strong>: 너무 많은 셸로우 워크 → 바쁘고 스트레스를 받지만 성과가 보이지 않는다.</p>
     </div>
   </div>
 
   <hr class="divider">
 
   <h2>문제 풀이 — 삽입 위치 분석</h2>
-  <h3>주어진 문장이 들어가기에 가장 적절한 곳은? &nbsp; 정답: <span class="ans-badge">②</span></h3>
+  <h3>주어진 문장이 ②에 들어가야 하는 이유 &nbsp; 정답: <span class="ans-badge">②</span></h3>
 
-  <p><strong>삽입 문장의 핵심 단서:</strong></p>
-  <ul style="font-size:10.5pt; margin:6px 0;">
-    <li><strong>"This initial, intuitive response"</strong> → 앞에 '직관적으로 떠오르는 답'이 먼저 제시되어야 함</li>
-    <li><strong>"Type 1 processing"</strong>이라는 명칭을 부여 → 뒤에서 이와 대비되는 Type 2가 등장해야 함</li>
-  </ul>
+  <div class="syntax-box">
+    <span class="label">핵심 단서 1 — "the other end of the scale"</span>
+    <div class="en">주어진 문장의 "the other end of the scale"은 <b>deep work</b>의 반대편을 가리킨다.</div>
+    <div class="ko">→ deep work에 대한 설명이 완료된 직후에 삽입되어야 문맥상 자연스럽다. ①은 아직 deep work 설명 중이므로 부적절.</div>
+  </div>
 
-  <ul class="choice-list">
-    <li class="wrong">
-      <span class="tag tag-x">X</span>
-      ① — 아직 '즉시 떠오르는 답(10센트)'이 언급되지 않았으므로 "This initial, intuitive response"의 지시 대상이 없음
-    </li>
-    <li class="correct">
-      <span class="tag tag-o">O</span>
-      ② — 바로 앞: "the answer that immediately comes to mind is 10 cents" → "This initial, intuitive response"가 이를 지칭. 바로 뒤: "However... this answer is wrong" → Type 1의 오류를 지적하며 Type 2로 전환
-    </li>
-    <li class="wrong">
-      <span class="tag tag-x">X</span>
-      ③ — 이미 "deliberate thinking"이 언급된 후이므로, 다시 Type 1을 명명하면 논리 순서가 역전
-    </li>
-    <li class="wrong">
-      <span class="tag tag-x">X</span>
-      ④ — Type 2의 정의가 끝난 후. Type 1과 2의 비교가 이어지는 흐름을 끊음
-    </li>
-    <li class="wrong">
-      <span class="tag tag-x">X</span>
-      ⑤ — 결론부에 위치하면 이미 완결된 논의를 불필요하게 반복
-    </li>
-  </ul>
+  <div class="syntax-box">
+    <span class="label">핵심 단서 2 — "This style of working" (② 직후 문장)</span>
+    <div class="en">"This style of working is not cognitively demanding..."에서 <b>"This style"</b>이 가리키는 대상이 필요하다.</div>
+    <div class="ko">→ 주어진 문장이 "shallow work"를 소개해야 "This style" = shallow work로 자연스럽게 연결. ② 외 위치에서는 "This"의 지시 대상이 불분명해진다.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">핵심 단서 3 — "though" (역접 연결)</span>
+    <div class="en">주어진 문장의 <b>"though"</b>는 앞 내용(deep work의 가치)에 대한 역접 전환 신호이다.</div>
+    <div class="ko">→ ② 앞: deep work에는 방해 없는 환경이 필요 → ② 삽입: "하지만(though) 많은 사람이 반대쪽(shallow work)에 시간을 너무 많이 보낸다" → 자연스러운 대조 전환.</div>
+  </div>
 
   <div class="tip">
-    <span class="label">풀이 포인트</span>
-    지시어 <strong>"This"</strong>가 가리키는 대상을 찾는 것이 핵심이다. "initial, intuitive response" = "10 cents"라는 직관적 답. 이 답이 나온 직후이면서, 동시에 뒤에 <strong>However</strong>로 이어지며 오류 지적 → Type 2 도입이라는 <strong>대비 구조</strong>가 자연스럽게 연결되는 ②번이 정답이다.
+    <span class="label">풀이 전략</span>
+    문장 넣기 문제에서는 <strong>지시어(This, These, Such)</strong>와 <strong>연결어(though, however, instead)</strong>를 1차 단서로 삼아 삽입 위치를 좁힌다. 이 문제에서 "This style of working"이 삽입 문장의 "shallow work"를 받는 것이 결정적 근거이다.
   </div>
 
   <div class="page-footer">
@@ -427,45 +431,43 @@ tr:nth-child(even) td { background: #f6f8fb; }
   </div>
 </section>
 
-<!-- ============ PAGE 4 — 연결어 정리 ============ -->
+<!-- ============ PAGE 4 — 연결어/신호어 ============ -->
 <section class="page">
 
   <h2>연결어/신호어 정리</h2>
 
   <table>
-    <thead><tr><th>신호어</th><th>기능</th><th>위치/역할</th></tr></thead>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치 / 역할</th></tr></thead>
     <tbody>
-      <tr><td><strong>For most people</strong></td><td>일반화</td><td>직관적 답(10센트)이 보편적 반응임을 강조</td></tr>
-      <tr><td><strong>However</strong></td><td>역접/전환</td><td>직관적 답(Type 1)이 틀렸음을 지적하며 분석적 사고로 전환</td></tr>
-      <tr><td><strong>since</strong></td><td>이유</td><td>10센트가 오답인 구체적 이유(총 $1.20) 제시</td></tr>
-      <tr><td><strong>According to</strong></td><td>근거 인용</td><td>이중 처리 이론을 학술적 근거로 도입</td></tr>
-      <tr><td><strong>while</strong></td><td>대조</td><td>Type 1(빠르고 자동적) vs. Type 2(느리고 의도적)</td></tr>
-      <tr><td><strong>In many cases</strong></td><td>일반화</td><td>두 유형이 보통 같은 결과를 낸다는 보편적 상황 제시</td></tr>
-      <tr><td><strong>but</strong></td><td>역접</td><td>때때로 충돌할 수 있다는 예외 제시 (= 배트-공 문제)</td></tr>
+      <tr><td><strong>though</strong></td><td>역접 / 전환</td><td>주어진 문장 — deep work에서 shallow work로 화제 전환</td></tr>
+      <tr><td><strong>the other end of the scale</strong></td><td>대조 표현</td><td>주어진 문장 — deep work의 반대쪽(= shallow work)을 지칭</td></tr>
+      <tr><td><strong>what is referred to as</strong></td><td>용어 도입</td><td>주어진 문장 — "shallow work"라는 새 용어를 소개하는 표현</td></tr>
+      <tr><td><strong>This style of working</strong></td><td>지시어 (앞 문장 수용)</td><td>② 직후 — 삽입 문장에서 소개한 shallow work를 받음</td></tr>
+      <tr><td><strong>although</strong></td><td>양보</td><td>shallow work가 새 가치를 거의 못 만들지만 "여전히 중요할 수 있다"</td></tr>
+      <tr><td><strong>both because ~ and because ~</strong></td><td>이중 이유</td><td>셸로우 워크가 존재하는 두 가지 근거 제시</td></tr>
+      <tr><td><strong>but</strong></td><td>역접</td><td>결론 — 바쁘다고 느끼지만(but) 성과가 보이지 않는다</td></tr>
     </tbody>
   </table>
 
   <hr class="divider">
 
-  <h2>핵심 어휘 정리</h2>
+  <h2>어휘 정리</h2>
 
   <table>
-    <thead><tr><th>어휘</th><th>뜻</th><th>문맥</th></tr></thead>
+    <thead><tr><th>어휘</th><th>의미</th></tr></thead>
     <tbody>
-      <tr><td><strong>intuitive</strong></td><td>직관적인</td><td>즉시 떠오르는 반응 (Type 1)</td></tr>
-      <tr><td><strong>dual-process theories</strong></td><td>이중 처리 이론</td><td>사고를 두 유형으로 구분하는 심리학 이론</td></tr>
-      <tr><td><strong>deliberate</strong></td><td>의도적인, 신중한</td><td>Type 2 처리의 특성</td></tr>
-      <tr><td><strong>effortful</strong></td><td>노력을 요하는</td><td>Type 2 처리 = 의식적 노력 필요</td></tr>
-      <tr><td><strong>automatic</strong></td><td>자동적인</td><td>Type 1 처리의 특성</td></tr>
-      <tr><td><strong>conflict</strong></td><td>충돌하다</td><td>Type 1과 Type 2가 다른 답을 내는 경우</td></tr>
-      <tr><td><strong>engage in</strong></td><td>~에 참여하다</td><td>신중한 사고에 참여하다</td></tr>
+      <tr><td>deep work</td><td>깊은 업무 — 깊은 집중으로 인지적 능력을 확장하는 작업</td></tr>
+      <tr><td>shallow work</td><td>얕은 업무 — 인지적 부담이 적고 새 가치를 거의 만들지 않는 루틴적 작업</td></tr>
+      <tr><td>cognitive capabilities</td><td>인지적 능력</td></tr>
+      <tr><td>replicate</td><td>재현하다, 반복하다</td></tr>
+      <tr><td>distraction-free</td><td>방해 없는</td></tr>
+      <tr><td>cognitively demanding</td><td>인지적으로 요구되는</td></tr>
+      <tr><td>execution</td><td>실행, 수행</td></tr>
+      <tr><td>logical-type tasks</td><td>논리적 유형의 업무</td></tr>
+      <tr><td>routine-type tasks</td><td>루틴적(일상적) 업무</td></tr>
+      <tr><td>output</td><td>산출물, 결과물</td></tr>
     </tbody>
   </table>
-
-  <div class="tip">
-    <span class="label">TIP</span>
-    문장 넣기 문제에서는 <strong>지시어(This, Such, These)</strong>와 <strong>연결어(However, Therefore)</strong>가 삽입 위치를 결정하는 핵심 단서이다. 삽입 문장에 지시어가 있으면 → 가리키는 대상이 <strong>바로 앞</strong>에 있는지, 연결어가 있으면 → 앞뒤의 <strong>논리적 관계</strong>가 자연스러운지를 확인한다.
-  </div>
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 분석노트</span>

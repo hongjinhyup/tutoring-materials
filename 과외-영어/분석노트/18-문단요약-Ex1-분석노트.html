@@ -95,30 +95,29 @@ strong { color: var(--accent); font-weight: 700; }
 .passage .hl {
   background: #fff3b0; padding: 1px 2px; border-radius: 2px;
 }
-.passage .ul-word {
-  text-decoration: underline; text-decoration-color: var(--accent);
-  text-underline-offset: 3px;
-}
 .passage .signal {
   color: var(--accent); font-weight: 700;
 }
 
+/* 요약문 박스 */
 .summary-box {
   background: var(--green-bg); border: 2px solid var(--green-line);
-  border-radius: 8px; padding: 12px 18px; margin: 12px 0;
+  border-radius: 8px; padding: 14px 20px; margin: 12px 0;
   font-family: 'Times New Roman', Georgia, serif;
   font-size: 11pt; line-height: 1.85; color: #222;
   break-inside: avoid;
 }
 .summary-box .label {
-  display: block; font-family: 'Pretendard', sans-serif;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
   font-size: 9pt; font-weight: 700; color: #2e7d32;
-  letter-spacing: .5px; margin-bottom: 6px;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
 }
-.blank {
-  display: inline-block; border-bottom: 2px solid var(--accent);
-  min-width: 80px; text-align: center; font-weight: 700;
-  color: var(--accent); padding: 0 4px;
+.summary-box .blank {
+  display: inline-block;
+  background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 10px;
+  font-weight: 700; font-size: 10pt;
+  font-family: 'Pretendard', sans-serif;
 }
 
 .syntax-box {
@@ -252,7 +251,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <div class="doc-header">
     <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
     <h1>18. 문단 요약 — Ex 1</h1>
-    <p class="subtitle">전통 지식과 과학: 효능 확인의 역할 분담</p>
+    <p class="subtitle">아일랜드 매시 퍼거슨 35 트랙터 — 내구성이 아닌 애정의 결과</p>
     <p class="meta">
       <span class="code-badge">26005-0091</span>
       <span class="passage-badge">p.108 · Ex 1</span>
@@ -262,36 +261,32 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <table>
     <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
     <tbody>
-      <tr><td>Ex 1 (26005-0091)</td><td>문단 요약</td><td><span class="ans-badge">①</span></td></tr>
+      <tr><td>Ex 1 (26005-0091)</td><td>빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?</td><td><span class="ans-badge">①</span></td></tr>
     </tbody>
   </table>
 
   <h2>지문 원문</h2>
 
   <div class="passage">
-    &nbsp;&nbsp;It is a mistake to suppose that, by identifying the active ingredients in traditional herbal medicines, science has provided an account of <span class="hl">why these remedies work that is superior in every way</span> to the accounts given in traditional knowledge systems. <span class="signal">What</span> scientific pharmacology can <span class="signal">indeed</span> provide is a <span class="hl">detailed knowledge of the mechanisms by which the active ingredients produce their effects</span> within the body. <span class="signal">But</span> that does not mean that science can explain why these particular substances were originally chosen as remedies. What science <span class="signal">cannot</span> account for, and what traditional knowledge <span class="signal">can</span>, is how <span class="hl">the medicinal use of plants was discovered in the first place</span>. Knowing the pharmacological mechanism by which a drug produces its effects does not explain how people figured out that a particular plant was worth trying, nor does it explain <span class="hl">the discovery process by which the dosage and method of preparation were optimized over time</span>. <span class="signal">For these aspects</span>, we must look to the <span class="hl">traditional knowledge systems that developed and refined these remedies over generations</span>.
+    &nbsp;&nbsp;There are estimated to be more than 160,000 farms spread across Northern Ireland and the Republic of Ireland combined. On all of those farms, you will find barns, and in some of those barns, you might be fortunate enough to stumble across a classic tractor like the Massey Ferguson 35. Production of the Massey Ferguson 35 in the UK and the USA stopped in 1964. If you were to strike up a conversation with a farmer who still owns one, she might well give the chassis of her Massey Ferguson 35 an affectionate tap and nostalgically remark, 'They don't make 'em like that anymore.' <span class="hl">The fact that the tractor has survived at least fifty-eight years seems to provide evidence of its superior build quality.</span> <span class="signal">But wait</span> — how long did the other 388,381 Massey Ferguson 35 tractors produced between 1956 and 1964 last before they went for scrap? <span class="signal">Rather than</span> build quality, <span class="hl">it might well be the fondness that people in Ireland have for the little red tractor (Harry Ferguson, who developed it, was born in Ireland) that has led farmers there to hold on to their Massey Fergusons and take care of them as well as they have.</span>
   </div>
+  <p style="font-size:9pt; color:var(--muted);">* stumble across: ~을 우연히 발견하다 &nbsp; ** chassis: 차대(자동차의 기본 프레임 구조) &nbsp; *** scrap: 폐품
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어</p>
+
+  <h2>요약문</h2>
 
   <div class="summary-box">
-    <span class="label">요약문</span>
-    While science can clarify the <span class="blank">(A)</span> through which traditional remedies produce their effects, it falls short of explaining how these remedies were originally <span class="blank">(B)</span>.
+    <span class="label">Summary</span>
+    While the long-standing presence of the Massey Ferguson 35 on Irish farms may seem to reflect its <span class="blank">(A)</span>, it might instead be due to the strong <span class="blank">(B)</span> that farmers have for the tractor.
   </div>
 
-  <table>
-    <thead><tr><th>선지</th><th>(A)</th><th>(B)</th></tr></thead>
-    <tbody>
-      <tr><td>①</td><td>mechanisms</td><td>discovered</td></tr>
-      <tr><td>②</td><td>mechanisms</td><td>funded</td></tr>
-      <tr><td>③</td><td>limitations</td><td>discovered</td></tr>
-      <tr><td>④</td><td>limitations</td><td>funded</td></tr>
-      <tr><td>⑤</td><td>limitations</td><td>classified</td></tr>
-    </tbody>
-  </table>
-
-  <p style="font-size:9pt; color:var(--muted);">
-    * herbal: 약초의 &nbsp; ** pharmacology: 약리학 &nbsp; *** dosage: 복용량
-    <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어
-  </p>
+  <ul class="choice-list">
+    <li class="correct"><span class="tag tag-o">O</span> ① durability …… affection</li>
+    <li class="wrong"><span class="tag tag-x">X</span> ② appearance …… appreciation</li>
+    <li class="wrong"><span class="tag tag-x">X</span> ③ reliability …… tolerance</li>
+    <li class="wrong"><span class="tag tag-x">X</span> ④ affordability …… affection</li>
+    <li class="wrong"><span class="tag tag-x">X</span> ⑤ technology …… tolerance</li>
+  </ul>
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 18. 문단 요약 분석노트</span>
@@ -299,46 +294,38 @@ tr:nth-child(even) td { background: #f6f8fb; }
   </div>
 </section>
 
-<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<!-- ============ PAGE 2 — 구문 분석 + 전문 해석 ============ -->
 <section class="page">
 
   <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
 
   <div class="syntax-box">
-    <span class="label">구문 1 — 도입 (오해 지적)</span>
+    <span class="label">구문 1 — 표면적 근거 (내구성 착각)</span>
     <div class="en">
-      <span class="chunk">It is a mistake to suppose</span> / <span class="chunk">that, by identifying the active ingredients</span> / <span class="chunk">in traditional herbal medicines</span>, / <span class="chunk">science has provided an account of</span> / <span class="chunk">why these remedies work</span> / <span class="chunk">that is superior in every way</span> / <span class="chunk">to the accounts given in traditional knowledge systems</span>.
+      <span class="chunk">The fact that the tractor has survived</span> / <span class="chunk">at least fifty-eight years</span> / <span class="chunk">seems to provide evidence</span> / <span class="chunk">of its superior build quality</span>.
     </div>
-    <div class="ko">→ ~라고 가정하는 것은 실수이다 / 전통 약초 약의 / 유효 성분을 확인함으로써 / 과학이 ~에 대한 설명을 제공했다고 / 이 약이 왜 효과가 있는지에 대해 / 모든 면에서 우월한 / 전통적 지식 체계에서 주어진 설명보다.</div>
+    <div class="ko">→ 그 트랙터가 살아남았다는 사실은 / 최소 58년간 / 증거를 제공하는 것처럼 보인다 / 그것의 우수한 제작 품질의.</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 2 — 과학이 할 수 있는 것</span>
+    <span class="label">구문 2 — 반론 (But wait)</span>
     <div class="en">
-      <span class="chunk">What scientific pharmacology can indeed provide</span> / <span class="chunk">is a detailed knowledge of the mechanisms</span> / <span class="chunk">by which the active ingredients produce their effects</span> / <span class="chunk">within the body</span>.
+      <span class="chunk">But wait</span> — / <span class="chunk">how long did the other 388,381</span> / <span class="chunk">Massey Ferguson 35 tractors</span> / <span class="chunk">produced between 1956 and 1964</span> / <span class="chunk">last before they went for scrap</span>?
     </div>
-    <div class="ko">→ 과학적 약리학이 실제로 제공할 수 있는 것은 / 메커니즘에 대한 상세한 지식이다 / 유효 성분이 그 효과를 생산하는 / 체내에서.</div>
+    <div class="ko">→ 하지만 잠깐 — / 나머지 388,381대의 / 매시 퍼거슨 35 트랙터는 / 1956년에서 1964년 사이에 생산된 / 폐품으로 처리되기 전에 얼마나 오래 지속되었는가?</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 3 — 과학이 할 수 없는 것 vs. 전통 지식이 할 수 있는 것</span>
+    <span class="label">구문 3 — 핵심 주장 (진짜 이유 = 애정)</span>
     <div class="en">
-      <span class="chunk">What science cannot account for</span>, / <span class="chunk">and what traditional knowledge can</span>, / <span class="chunk">is how the medicinal use of plants</span> / <span class="chunk">was discovered in the first place</span>.
+      <span class="chunk">Rather than build quality</span>, / <span class="chunk">it might well be the fondness</span> / <span class="chunk">that people in Ireland have</span> / <span class="chunk">for the little red tractor</span> / (<span class="chunk">Harry Ferguson, who developed it, was born in Ireland</span>) / <span class="chunk">that has led farmers there</span> / <span class="chunk">to hold on to their Massey Fergusons</span> / and <span class="chunk">take care of them</span> / <span class="chunk">as well as they have</span>.
     </div>
-    <div class="ko">→ 과학이 설명할 수 없고 / 전통 지식이 설명할 수 있는 것은 / 식물의 약용이 / 애초에 어떻게 발견되었는지이다.</div>
+    <div class="ko">→ 제작 품질이라기보다 / 오히려 애정일 수 있다 / 아일랜드 사람들이 가진 / 그 작은 빨간 트랙터에 대한 / (그것을 개발한 Harry Ferguson은 아일랜드에서 태어났다) / 그것이 그곳의 농부들로 하여금 / 자신의 매시 퍼거슨을 간직하고 / 잘 돌보게 만든 것일 수 있다 / 그들이 해 온 것처럼.</div>
   </div>
 
   <div class="tip">
     <span class="label">구문 포인트</span>
-    <strong>What S can(not) V</strong> 구조가 반복되어 과학과 전통 지식의 <strong>역할 분담</strong>을 대비한다. "What science cannot... and what traditional knowledge can" — 병렬구조에서 <strong>can</strong> 뒤에 <strong>account for</strong>가 생략되어 있음에 주의.
-  </div>
-
-  <div class="syntax-box">
-    <span class="label">구문 4 — 결론</span>
-    <div class="en">
-      <span class="chunk">For these aspects</span>, / <span class="chunk">we must look to</span> / <span class="chunk">the traditional knowledge systems</span> / <span class="chunk">that developed and refined these remedies</span> / <span class="chunk">over generations</span>.
-    </div>
-    <div class="ko">→ 이러한 측면에 대해서는 / 우리는 ~에 의존해야 한다 / 전통적 지식 체계에 / 이 약을 발전시키고 다듬어 온 / 여러 세대에 걸쳐.</div>
+    마지막 문장은 <strong>강조 구문(It ... that ~)</strong>이다. "it might well be <u>the fondness</u> ... <u>that</u> has led farmers..." → 주어(the fondness)를 강조하기 위해 It ~ that 구문을 사용. "might well"은 "~일 가능성이 충분하다"는 의미의 조동사 표현.
   </div>
 
   <hr class="divider">
@@ -346,7 +333,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <h2>전문 해석</h2>
 
   <div class="translation">
-    &nbsp;&nbsp;전통적인 약초 약의 유효 성분을 확인함으로써 과학이 이 약이 왜 효과가 있는지에 대해 전통적 지식 체계에서 주어진 설명보다 모든 면에서 우월한 설명을 제공했다고 가정하는 것은 실수이다. 과학적 약리학이 실제로 제공할 수 있는 것은 유효 성분이 체내에서 그 효과를 생산하는 메커니즘에 대한 상세한 지식이다. 그러나 그것이 과학이 왜 이 특정 물질들이 원래 약으로 선택되었는지를 설명할 수 있다는 것을 의미하지는 않는다. 과학이 설명할 수 없고 전통 지식이 설명할 수 있는 것은 식물의 약용이 애초에 어떻게 발견되었는지이다. 약이 그 효과를 생산하는 약리학적 메커니즘을 아는 것은 사람들이 특정 식물이 시도해 볼 가치가 있다고 어떻게 알아냈는지를 설명하지 못하며, 복용량과 조제 방법이 시간이 지남에 따라 어떻게 최적화되었는지의 발견 과정도 설명하지 못한다. 이러한 측면에 대해서는 여러 세대에 걸쳐 이 약을 발전시키고 다듬어 온 전통적 지식 체계에 의존해야 한다.
+    &nbsp;&nbsp;북아일랜드와 아일랜드 공화국을 합쳐 16만 개 이상의 농장이 퍼져 있는 것으로 추정된다. 그 모든 농장에서 헛간을 찾을 수 있으며, 일부 헛간에서는 매시 퍼거슨 35 같은 클래식 트랙터를 우연히 발견할 수도 있을 것이다. 영국과 미국에서의 매시 퍼거슨 35 생산은 1964년에 중단되었다. 여전히 한 대를 소유하고 있는 농부와 대화를 나눈다면, 그녀는 매시 퍼거슨 35의 차대를 애정 어린 손길로 두드리며 "더 이상 저렇게는 안 만들지"라고 향수에 젖어 말할 수도 있을 것이다. 그 트랙터가 최소 58년간 살아남았다는 사실은 그것의 우수한 제작 품질의 증거를 제공하는 것처럼 보인다. 하지만 잠깐 — 1956년에서 1964년 사이에 생산된 나머지 388,381대의 매시 퍼거슨 35 트랙터는 폐품으로 처리되기 전에 얼마나 오래 지속되었을까? 제작 품질이라기보다, 오히려 아일랜드 사람들이 그 작은 빨간 트랙터(그것을 개발한 Harry Ferguson은 아일랜드 출생이다)에 가진 애정이 그곳의 농부들로 하여금 자신의 매시 퍼거슨을 간직하고 그들이 해 온 것만큼 잘 돌보게 만든 것일 수 있다.
   </div>
 
   <div class="page-footer">
@@ -360,78 +347,71 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <h2>논리 구조 — 글의 흐름</h2>
 
-  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>오해 지적 → 과학의 역할(할 수 있는 것) → 과학의 한계(할 수 없는 것) → 전통 지식의 가치</strong></p>
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>배경 제시 → 표면적 해석(내구성) → 반론 제기 → 진짜 이유(애정)</strong></p>
 
   <div class="flow">
     <div class="flow-step">
-      <span class="step-label">도입 — 오해 지적</span>
-      <p style="margin:4px 0; font-size:10.5pt;">과학이 전통 약초의 효능에 대해 <strong>모든 면에서 우월한 설명</strong>을 제공했다고 생각하는 것은 <strong>실수</strong></p>
+      <span class="step-label">배경</span>
+      <p style="margin:4px 0; font-size:10.5pt;">아일랜드 16만+ 농장 → 일부 헛간에 <strong>매시 퍼거슨 35</strong>(1964 단종) 남아 있음. 농부들의 향수어린 반응.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">과학이 할 수 있는 것</span>
-      <p style="margin:4px 0; font-size:10.5pt;">유효 성분이 체내에서 효과를 내는 <strong>메커니즘(mechanisms)</strong>에 대한 상세한 지식 제공</p>
+      <span class="step-label">표면적 해석 (오해)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">58년 이상 생존 → <strong>"제작 품질(build quality)"이 우수</strong>하기 때문인 것처럼 보인다. (= 요약문의 (A) durability)</p>
     </div>
     <div class="flow-arrow">▼</div>
-    <div class="flow-step">
-      <span class="step-label">과학이 할 수 없는 것 (But / cannot)</span>
-      <p style="margin:4px 0; font-size:10.5pt;">특정 식물이 왜 약으로 선택되었는지, 복용량과 조제법이 어떻게 최적화되었는지 = <strong>발견(discovery) 과정</strong></p>
+    <div class="flow-step" style="background: var(--red-bg); border-color: var(--red-line);">
+      <span class="step-label" style="background: #c62828;">반론 (But wait)</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>나머지 388,381대</strong>는 어떻게 됐는가? → 대부분 폐품이 되었을 것. 생존한 트랙터는 극소수에 불과.</p>
     </div>
     <div class="flow-arrow">▼</div>
-    <div class="flow-step">
-      <span class="step-label">결론 — 전통 지식의 가치</span>
-      <p style="margin:4px 0; font-size:10.5pt;">발견 과정은 여러 세대에 걸쳐 약을 발전·정제해 온 <strong>전통적 지식 체계</strong>에 의존해야 한다.</p>
+    <div class="flow-step" style="background: var(--green-bg); border-color: var(--green-line);">
+      <span class="step-label" style="background: #2e7d32;">진짜 이유 (Rather than)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">제작 품질이 아니라 <strong>애정(fondness)</strong>이 진짜 이유. Harry Ferguson이 아일랜드 출신 → 아일랜드인의 자부심 + 애착 → 잘 돌봄. (= 요약문의 (B) affection)</p>
     </div>
   </div>
 
   <hr class="divider">
 
-  <h2>문제 풀이 — 요약문 빈칸 분석</h2>
-  <h3>요약문의 (A), (B)에 들어갈 말로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">①</span></h3>
+  <h2>문제 풀이 — (A)(B) 빈칸 분석</h2>
+  <h3>정답: <span class="ans-badge">① durability …… affection</span></h3>
 
-  <div class="summary-box">
-    <span class="label">요약문 (정답 대입)</span>
-    While science can clarify the <span class="blank">mechanisms</span> through which traditional remedies produce their effects, it falls short of explaining how these remedies were originally <span class="blank">discovered</span>.
+  <div class="syntax-box">
+    <span class="label">(A) durability가 들어가는 이유</span>
+    <div class="en">요약문: "may seem to reflect its (A)___" = "~을 반영하는 것처럼 보인다"</div>
+    <div class="ko">→ 본문: "seems to provide evidence of its <b>superior build quality</b>" = 우수한 제작 품질 → 이를 한 단어로 함축하면 <strong>durability(내구성)</strong>. "seem"이 표면적/겉보기 해석임을 암시.</div>
   </div>
-  <p style="font-size:10pt; color:var(--muted);">→ 과학은 전통 약이 효과를 내는 <strong>메커니즘</strong>을 밝힐 수 있지만, 이 약이 원래 어떻게 <strong>발견</strong>되었는지를 설명하는 데는 부족하다.</p>
 
-  <h3>(A) mechanisms이 정답인 근거</h3>
-  <p>본문: "a detailed knowledge of the <strong>mechanisms</strong> by which the active ingredients produce their effects" → 요약문: "the (A) through which traditional remedies produce their effects" — <strong>직접 대응</strong></p>
+  <div class="syntax-box">
+    <span class="label">(B) affection이 들어가는 이유</span>
+    <div class="en">요약문: "the strong (B)___ that farmers have for the tractor" = "농부들이 가진 강한 ___"</div>
+    <div class="ko">→ 본문: "the <b>fondness</b> that people in Ireland have for the little red tractor" = 애정. fondness의 동의어 = <strong>affection</strong>.</div>
+  </div>
 
-  <h3>(B) discovered가 정답인 근거</h3>
-  <p>본문: "how the medicinal use of plants was <strong>discovered</strong> in the first place" → 요약문: "how these remedies were originally (B)" — <strong>직접 대응</strong></p>
+  <h3>오답 분석</h3>
 
   <ul class="choice-list">
-    <li class="correct">
-      <span class="tag tag-o">O</span>
-      ① (A) mechanisms — (B) discovered
-      <span class="reason">— 본문 핵심 어휘와 정확히 대응</span>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>② appearance …… appreciation
+      <span class="reason">— 외모(appearance)에 대한 언급 없음. appreciation은 "감사/감상"으로 fondness와 뉘앙스 차이</span>
     </li>
     <li class="wrong">
-      <span class="tag tag-x">X</span>
-      ② (A) mechanisms — (B) funded
-      <span class="reason">— "자금 지원(funded)"은 본문에 언급 없음</span>
+      <span class="tag tag-x">X</span>③ reliability …… tolerance
+      <span class="reason">— reliability(신뢰성)은 durability에 가깝지만, tolerance(관용)는 fondness와 전혀 다른 뜻</span>
     </li>
     <li class="wrong">
-      <span class="tag tag-x">X</span>
-      ③ (A) limitations — (B) discovered
-      <span class="reason">— 과학이 밝히는 것은 "한계"가 아니라 "메커니즘"</span>
+      <span class="tag tag-x">X</span>④ affordability …… affection
+      <span class="reason">— (B)는 맞지만 affordability(경제성)는 본문에 언급되지 않음. 가격이 아닌 품질이 화제</span>
     </li>
     <li class="wrong">
-      <span class="tag tag-x">X</span>
-      ④ (A) limitations — (B) funded
-      <span class="reason">— (A), (B) 모두 본문과 불일치</span>
-    </li>
-    <li class="wrong">
-      <span class="tag tag-x">X</span>
-      ⑤ (A) limitations — (B) classified
-      <span class="reason">— "분류(classified)"도 본문에 없고, (A)도 부적절</span>
+      <span class="tag tag-x">X</span>⑤ technology …… tolerance
+      <span class="reason">— technology(기술)도, tolerance(관용)도 본문의 키워드와 맞지 않음</span>
     </li>
   </ul>
 
   <div class="tip">
-    <span class="label">함정</span>
-    ③번에서 (B) discovered는 맞지만, (A) limitations는 오답이다. 본문이 "과학의 한계"를 언급하긴 하지만, 요약문의 "(A) through which ~ produce their effects"라는 구조에서는 <strong>효과를 내는 수단/경로</strong>를 설명하는 어휘가 필요하므로 "limitations"는 문맥상 부적절하다.
+    <span class="label">풀이 전략</span>
+    문단 요약 문제에서는 요약문의 <strong>seem/appear(겉보기)</strong>와 <strong>instead/rather(실제)</strong> 구조를 파악하라. 이 글에서 (A)는 "겉보기 이유", (B)는 "실제 이유"이다. 본문의 <strong>"seems to"</strong> → <strong>"Rather than"</strong> 전환이 핵심.
   </div>
 
   <div class="page-footer">
@@ -440,44 +420,45 @@ tr:nth-child(even) td { background: #f6f8fb; }
   </div>
 </section>
 
-<!-- ============ PAGE 4 — 연결어 정리 ============ -->
+<!-- ============ PAGE 4 — 연결어/신호어 ============ -->
 <section class="page">
 
   <h2>연결어/신호어 정리</h2>
 
   <table>
-    <thead><tr><th>신호어</th><th>기능</th><th>위치/역할</th></tr></thead>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치 / 역할</th></tr></thead>
     <tbody>
-      <tr><td><strong>It is a mistake to suppose that</strong></td><td>오해 지적</td><td>도입부에서 잘못된 가정을 제시하며 반박 구조 시작</td></tr>
-      <tr><td><strong>What ~ can indeed provide</strong></td><td>인정/양보</td><td>과학이 할 수 있는 부분(메커니즘)을 먼저 인정</td></tr>
-      <tr><td><strong>But</strong></td><td>역접/전환</td><td>과학의 능력 인정 후 → 과학의 한계로 전환</td></tr>
-      <tr><td><strong>What ~ cannot / what ~ can</strong></td><td>대비</td><td>과학 vs. 전통 지식의 역할을 명확히 대비</td></tr>
-      <tr><td><strong>nor does it explain</strong></td><td>부정 추가</td><td>과학이 설명하지 못하는 것을 추가로 나열</td></tr>
-      <tr><td><strong>For these aspects</strong></td><td>결론 전환</td><td>앞서 언급한 측면들에 대해 → 전통 지식으로 결론</td></tr>
+      <tr><td><strong>seems to</strong></td><td>표면적 해석 (겉보기)</td><td>"seems to provide evidence" — 내구성이 이유인 것 '처럼 보인다'</td></tr>
+      <tr><td><strong>But wait</strong></td><td>반론 / 전환</td><td>표면적 해석에 제동 — 나머지 38만 대는 어떻게 됐는가?</td></tr>
+      <tr><td><strong>Rather than</strong></td><td>대조 / 진짜 이유 제시</td><td>"제작 품질이라기보다" → 진짜 이유(애정)로 전환하는 핵심 연결어</td></tr>
+      <tr><td><strong>might well be</strong></td><td>개연적 추론</td><td>"~일 가능성이 충분하다" — 확정이 아닌 합리적 추론임을 표시</td></tr>
+      <tr><td><strong>If you were to ~</strong></td><td>가정법 (비현실 가정)</td><td>농부와 대화를 나눈다면 → 가정 상황 제시</td></tr>
     </tbody>
   </table>
 
   <hr class="divider">
 
-  <h2>핵심 어휘 정리</h2>
+  <h2>어휘 정리</h2>
 
   <table>
-    <thead><tr><th>어휘</th><th>뜻</th><th>문맥</th></tr></thead>
+    <thead><tr><th>어휘</th><th>의미</th></tr></thead>
     <tbody>
-      <tr><td><strong>active ingredients</strong></td><td>유효 성분</td><td>약초 약에서 실제로 효과를 내는 화학 성분</td></tr>
-      <tr><td><strong>mechanism</strong></td><td>메커니즘, 기전</td><td>유효 성분이 체내에서 작용하는 방식</td></tr>
-      <tr><td><strong>pharmacology</strong></td><td>약리학</td><td>약물의 작용 메커니즘을 연구하는 학문</td></tr>
-      <tr><td><strong>remedy / remedies</strong></td><td>치료제, 약</td><td>전통 약초 약</td></tr>
-      <tr><td><strong>account for</strong></td><td>설명하다</td><td>과학이 발견 과정을 설명할 수 없다</td></tr>
-      <tr><td><strong>dosage</strong></td><td>복용량</td><td>시간이 지남에 따라 최적화된 것</td></tr>
-      <tr><td><strong>refine</strong></td><td>다듬다, 정제하다</td><td>전통 지식이 여러 세대에 걸쳐 약을 정제함</td></tr>
-      <tr><td><strong>fall short of</strong></td><td>~에 미치지 못하다</td><td>요약문: 과학이 발견 과정 설명에 미치지 못한다</td></tr>
+      <tr><td>stumble across</td><td>~을 우연히 발견하다</td></tr>
+      <tr><td>chassis</td><td>차대 (자동차/트랙터의 기본 프레임)</td></tr>
+      <tr><td>affectionate tap</td><td>애정 어린 손길로 두드림</td></tr>
+      <tr><td>nostalgically</td><td>향수에 젖어</td></tr>
+      <tr><td>superior build quality</td><td>우수한 제작 품질</td></tr>
+      <tr><td>scrap</td><td>폐품, 고철</td></tr>
+      <tr><td>fondness</td><td>애정, 좋아함 (= affection)</td></tr>
+      <tr><td>hold on to</td><td>~을 간직하다, 놓지 않다</td></tr>
+      <tr><td>durability</td><td>내구성</td></tr>
+      <tr><td>affection</td><td>애정</td></tr>
     </tbody>
   </table>
 
   <div class="tip">
-    <span class="label">TIP</span>
-    문단 요약 문제에서는 요약문의 <strong>빈칸 전후 구조</strong>를 먼저 파악한다. "(A) through which ~ produce their effects"에서 "(A)를 통해 효과를 낸다"이므로 (A)에는 수단/경로를 나타내는 명사가 와야 한다. 본문에서 <strong>동일한 구조</strong>("mechanisms by which the active ingredients produce their effects")를 찾으면 정답을 확정할 수 있다.
+    <span class="label">핵심 정리</span>
+    이 글의 핵심 논리는 <strong>"생존 편향(survivorship bias)"</strong>과 유사하다. 살아남은 소수의 트랙터만 보고 "품질이 좋다"고 단정하는 것은 오류이며, 진짜 이유는 아일랜드인의 <strong>자국 발명품에 대한 애정과 돌봄</strong>이다.
   </div>
 
   <div class="page-footer">

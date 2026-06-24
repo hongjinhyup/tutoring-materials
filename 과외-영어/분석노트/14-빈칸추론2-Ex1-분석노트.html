@@ -95,17 +95,23 @@ strong { color: var(--accent); font-weight: 700; }
 .passage .hl {
   background: #fff3b0; padding: 1px 2px; border-radius: 2px;
 }
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
 .passage .signal {
   color: var(--accent); font-weight: 700;
 }
 .passage .blank {
   display: inline-block;
   border-bottom: 2px solid var(--accent);
-  min-width: 200px;
+  min-width: 220px;
   text-align: center;
-  font-weight: 700;
   color: var(--accent);
-  padding: 0 4px;
+  font-weight: 700;
+  font-size: 10pt;
+  padding: 0 4px 2px;
+  margin: 0 2px;
 }
 
 .syntax-box {
@@ -239,7 +245,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <div class="doc-header">
     <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
     <h1>14. 빈칸 내용 추론 (2) — Ex 1</h1>
-    <p class="subtitle">전문가의 직관적 판단과 의식적 분석의 관계</p>
+    <p class="subtitle">어른과 유아의 관점 차이 — 같은 경험, 다른 의미</p>
     <p class="meta">
       <span class="code-badge">26005-0067</span>
       <span class="passage-badge">p.84 · Ex 1</span>
@@ -249,17 +255,17 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <table>
     <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
     <tbody>
-      <tr><td>01 (26005-0067)</td><td>빈칸 내용 추론</td><td><span class="ans-badge">②</span></td></tr>
+      <tr><td>Ex 1 (26005-0067)</td><td>빈칸 내용 추론</td><td><span class="ans-badge">②</span></td></tr>
     </tbody>
   </table>
 
   <h2>지문 원문</h2>
 
   <div class="passage">
-    &nbsp;&nbsp;Experts in various fields often make quick decisions that appear to be based on instinct, <span class="signal">but</span> these snap judgments are actually the result of years of experience and deep knowledge. A chess grandmaster, <span class="signal">for instance</span>, can look at a board and immediately see the best move, not because of some magical intuition, <span class="hl">but because their brain has stored thousands of patterns from previous games.</span> <span class="signal">Similarly</span>, an experienced doctor can often diagnose a condition within seconds of seeing a patient, drawing on a vast mental database of symptoms and cases. <span class="signal">However</span>, <span class="hl">this type of expert intuition can be misleading when it is applied outside the domain in which it was developed.</span> A brilliant chess player's intuition is unlikely to help them make better financial decisions, and a doctor's clinical instincts do not necessarily translate to expertise in engineering. <span class="signal">Thus</span>, while expert intuition is a powerful tool within its specific field, it is important to recognize that it <span class="blank">is domain-specific and does not automatically transfer to unrelated areas of knowledge</span>.
+    &nbsp;&nbsp;<span class="hl">Sharing meanings and experiences is not a simple, automatic process</span>: whenever two or more people observe or participate in the same ongoing event they experience it from different perspectives, with different histories, with different background knowledge. <span class="hl">These differences are most glaring when the individuals involved include an infant or very young child and an adult</span>, <span class="signal">although</span> an adult arranging an event for an infant may find it difficult to keep these differences in mind. When giving a bath, <span class="signal">for example</span>, a parent whose experience with water play has been fun, whose knowledge about the source of the water and its disposition provides confidence, and whose body control ensures that the baby is safely held and not in danger, expects the infant to enjoy splashing water. <span class="signal">Yet</span> <span class="hl">the baby may make it clear (perhaps by terrified crying) that her perspective is quite different from that of the adult.</span> The two <span class="blank">_______________</span>.
   </div>
-  <p style="font-size:9pt; color:var(--muted);">* snap judgment: 즉각적 판단 &nbsp; ** diagnose: 진단하다
-  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어 &nbsp; <span style="border-bottom:2px solid var(--accent);">밑줄</span> = 빈칸 위치</p>
+  <p style="font-size:9pt; color:var(--muted);">* glaring: 두드러진 &nbsp; ** disposition: 성질
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어 &nbsp; <span style="border-bottom:2px solid var(--accent);">밑줄</span> = 빈칸</p>
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 14. 빈칸 내용 추론 (2) 분석노트</span>
@@ -267,38 +273,46 @@ tr:nth-child(even) td { background: #f6f8fb; }
   </div>
 </section>
 
-<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<!-- ============ PAGE 2 — 구문 분석 + 전문 해석 ============ -->
 <section class="page">
 
   <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
 
   <div class="syntax-box">
-    <span class="label">구문 1 — 전문가 직관의 본질 (체스 예시)</span>
+    <span class="label">구문 1 — 주제문 (의미 공유의 어려움)</span>
     <div class="en">
-      <span class="chunk">A chess grandmaster</span> / <span class="chunk">can look at a board</span> / <span class="chunk">and immediately see the best move</span>, / <span class="chunk">not because of some magical intuition</span>, / <span class="chunk">but because their brain has stored</span> / <span class="chunk">thousands of patterns from previous games</span>.
+      <span class="chunk">Sharing meanings and experiences</span> / <span class="chunk">is not a simple, automatic process</span>: / <span class="chunk">whenever two or more people</span> / <span class="chunk">observe or participate in</span> / <span class="chunk">the same ongoing event</span> / <span class="chunk">they experience it</span> / <span class="chunk">from different perspectives</span>, / <span class="chunk">with different histories</span>, / <span class="chunk">with different background knowledge</span>.
     </div>
-    <div class="ko">→ 체스 그랜드마스터는 / 보드를 보고 / 즉시 최선의 수를 볼 수 있는데 / 어떤 마법적 직관 때문이 아니라 / 그들의 뇌가 저장해 왔기 때문이다 / 이전 게임에서의 수천 개의 패턴을.</div>
+    <div class="ko">→ 의미와 경험을 공유하는 것은 / 단순하고 자동적인 과정이 아니다: / 두 명 이상의 사람들이 / 관찰하거나 참여할 때마다 / 같은 진행 중인 사건에 / 그들은 그것을 경험한다 / 다른 관점에서 / 다른 역사를 가지고 / 다른 배경 지식을 가지고.</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 2 — 핵심 전환 (직관의 한계)</span>
+    <span class="label">구문 2 — 목욕 사례 (부모의 관점) — 긴 관계절 3개 병렬</span>
     <div class="en">
-      <span class="chunk">However</span>, / <span class="chunk">this type of expert intuition</span> / <span class="chunk">can be misleading</span> / <span class="chunk">when it is applied</span> / <span class="chunk">outside the domain</span> / <span class="chunk">in which it was developed</span>.
+      a parent / <span class="chunk">whose experience with water play has been fun</span>, / <span class="chunk">whose knowledge about the source of the water and its disposition provides confidence</span>, / <span class="chunk">and whose body control ensures that the baby is safely held</span> / and not in danger, / <span class="chunk">expects the infant to enjoy splashing water</span>.
     </div>
-    <div class="ko">→ 그러나 / 이러한 유형의 전문가 직관은 / 오해를 불러일으킬 수 있다 / 그것이 적용될 때 / 그것이 개발된 / 영역 밖에서.</div>
+    <div class="ko">→ 물놀이 경험이 즐거웠고 / 물의 원천과 성질에 대한 지식이 자신감을 주고 / 신체 통제력이 아기가 안전하게 안겨 있음을 보장하는 / 부모는 / 유아가 물 튀기기를 즐기기를 기대한다.</div>
   </div>
 
   <div class="syntax-box">
-    <span class="label">구문 3 — 구체적 반례</span>
+    <span class="label">구문 3 — 반전 (아기의 관점)</span>
     <div class="en">
-      <span class="chunk">A brilliant chess player's intuition</span> / <span class="chunk">is unlikely to help them</span> / <span class="chunk">make better financial decisions</span>, / and <span class="chunk">a doctor's clinical instincts</span> / <span class="chunk">do not necessarily translate to</span> / <span class="chunk">expertise in engineering</span>.
+      <b>Yet</b> / <span class="chunk">the baby may make it clear</span> / <span class="chunk">(perhaps by terrified crying)</span> / <span class="chunk">that her perspective</span> / <span class="chunk">is quite different from that of the adult</span>.
     </div>
-    <div class="ko">→ 뛰어난 체스 선수의 직관이 / 그들이 ~하는 데 도움이 될 가능성은 낮고 / 더 나은 재무 결정을 내리는 데 / 의사의 임상적 본능이 / 반드시 ~으로 전환되지는 않는다 / 공학의 전문성으로.</div>
+    <div class="ko">→ 그러나 / 아기는 분명히 할 수 있다 / (아마도 겁에 질린 울음으로) / 자신의 관점이 / 어른의 그것과 상당히 다르다는 것을.</div>
   </div>
 
   <div class="tip">
     <span class="label">구문 포인트</span>
-    <strong>"not because A, but because B"</strong>: 'A 때문이 아니라 B 때문이다'는 상관 접속사 구조. 직관의 원천이 '마법'이 아닌 '경험 축적'임을 대비적으로 강조한다. <strong>"in which"</strong>: 관계대명사의 전치사 + which 형태로, "the domain in which it was developed" = 직관이 개발된 영역.
+    구문 2의 <strong>whose ~ whose ~ whose</strong> 3중 관계절은 수능에서 자주 출제되는 긴 주어 구조. 주어(a parent)와 동사(expects)가 매우 멀리 떨어져 있어, 핵심 의미를 놓치기 쉽다. 관계절은 모두 <strong>부모의 경험·지식·능력</strong>을 나열하며, 부모가 왜 아기도 즐길 거라 기대하는지의 이유를 제공한다.
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — 빈칸 문장 (결론)</span>
+    <div class="en">
+      <span class="chunk">The two</span> / <b>_______________</b>.
+    </div>
+    <div class="ko">→ 그 둘은 / <b>_______________</b>.</div>
   </div>
 
   <hr class="divider">
@@ -306,7 +320,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   <h2>전문 해석</h2>
 
   <div class="translation">
-    &nbsp;&nbsp;다양한 분야의 전문가들은 종종 본능에 기반한 것처럼 보이는 빠른 결정을 내리지만, 이러한 즉각적 판단은 실제로 수년간의 경험과 깊은 지식의 결과이다. 예를 들어, 체스 그랜드마스터는 보드를 보고 즉시 최선의 수를 볼 수 있는데, 어떤 마법적 직관 때문이 아니라 그들의 뇌가 이전 게임에서의 수천 개의 패턴을 저장해 왔기 때문이다. 마찬가지로, 경험이 풍부한 의사는 환자를 본 지 몇 초 만에 상태를 진단할 수 있으며, 방대한 증상과 사례의 정신적 데이터베이스를 활용한다. 그러나, 이러한 유형의 전문가 직관은 그것이 개발된 영역 밖에서 적용될 때 오해를 불러일으킬 수 있다. 뛰어난 체스 선수의 직관이 더 나은 재무 결정을 내리는 데 도움이 될 가능성은 낮고, 의사의 임상적 본능이 반드시 공학의 전문성으로 전환되지는 않는다. 따라서, 전문가 직관은 특정 분야 내에서 강력한 도구이지만, 그것이 <u>영역 특수적이며 관련 없는 지식 분야로 자동으로 전이되지 않는다</u>는 것을 인식하는 것이 중요하다.
+    &nbsp;&nbsp;의미와 경험을 공유하는 것은 단순하고 자동적인 과정이 아니다: 두 명 이상의 사람들이 같은 진행 중인 사건을 관찰하거나 참여할 때마다, 그들은 다른 관점에서, 다른 역사를 가지고, 다른 배경 지식을 가지고 그것을 경험한다. 이러한 차이는 관련된 개인이 유아나 아주 어린 아이와 어른을 포함할 때 가장 두드러지는데, 비록 유아를 위해 사건을 마련하는 어른은 이러한 차이를 명심하기가 어려울 수 있지만 말이다. 예를 들어, 목욕을 시킬 때, 물놀이 경험이 즐거웠고, 물의 원천과 성질에 대한 지식이 자신감을 주며, 신체 통제력이 아기가 안전하게 안겨 있고 위험하지 않음을 보장하는 부모는, 유아가 물 튀기기를 즐기기를 기대한다. 그러나 아기는 (아마도 겁에 질린 울음으로) 자신의 관점이 어른의 관점과 상당히 다르다는 것을 분명히 할 수 있다. 그 둘은 <u><b>경험은 공유하지만, 의미는 공유하지 않는다</b></u>.
   </div>
 
   <div class="page-footer">
@@ -320,76 +334,74 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <h2>논리 구조 — 글의 흐름</h2>
 
-  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>현상 소개 → 긍정적 예시 → 역접(한계) → 반례 → 결론(빈칸)</strong></p>
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>주장 → 가장 극단적 사례(유아-어른) → 구체적 예시(목욕) → 반전(Yet) → 결론(빈칸)</strong></p>
 
   <div class="flow">
     <div class="flow-step">
-      <span class="step-label">도입</span>
-      <p style="margin:4px 0; font-size:10.5pt;">전문가의 빠른 판단 = 본능처럼 보이지만 실은 <strong>경험과 지식의 결과</strong></p>
+      <span class="step-label">주장</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>의미와 경험의 공유는 자동적이지 않다.</strong> 같은 사건이라도 관점·역사·배경지식에 따라 다르게 경험된다.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">긍정적 예시</span>
-      <p style="margin:4px 0; font-size:10.5pt;">체스 그랜드마스터: 패턴 저장 → 즉시 최선의 수 / 의사: 증상 데이터베이스 → 수초 만에 진단</p>
+      <span class="step-label">극단적 사례</span>
+      <p style="margin:4px 0; font-size:10.5pt;">유아와 어른 사이에서 이 차이가 <strong>가장 두드러진다(most glaring)</strong>.</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">전환 (However)</span>
-      <p style="margin:4px 0; font-size:10.5pt;">전문가 직관 = <strong>개발된 영역 밖에서 적용하면 오해를 불러일으킬 수 있음</strong></p>
+      <span class="step-label">구체적 예시 — 부모 관점</span>
+      <p style="margin:4px 0; font-size:10.5pt;">
+        목욕 시 부모: 물놀이 경험(즐거움) + 물에 대한 지식(자신감) + 신체 통제(안전)<br>
+        → 아기도 물놀이를 <strong>즐길 것이라 기대</strong>
+      </p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
-      <span class="step-label">반례</span>
-      <p style="margin:4px 0; font-size:10.5pt;">체스 직관 ≠ 재무 결정 도움 / 의사 본능 ≠ 공학 전문성</p>
+      <span class="step-label">반전 (Yet) — 아기 관점</span>
+      <p style="margin:4px 0; font-size:10.5pt;">아기는 <strong>겁에 질린 울음</strong>으로 자신의 관점이 어른과 다르다는 것을 표현 → 같은 경험, 다른 반응</p>
     </div>
     <div class="flow-arrow">▼</div>
     <div class="flow-step">
       <span class="step-label">결론 (빈칸)</span>
-      <p style="margin:4px 0; font-size:10.5pt;">전문가 직관 = <strong>영역 특수적(domain-specific)</strong>이며 다른 분야로 자동 전이 불가</p>
+      <p style="margin:4px 0; font-size:10.5pt;">둘은 같은 <strong>경험(experience)</strong>은 공유하지만, 같은 <strong>의미(meaning)</strong>는 공유하지 않는다 → ② share an experience, but not a meaning</p>
     </div>
-  </div>
-
-  <div class="tip">
-    <span class="label">글의 핵심</span>
-    전문가 직관은 해당 분야의 축적된 경험에서 비롯되므로, <strong>그 분야 내에서만 유효</strong>하다. 다른 분야로의 자동 전이를 기대하는 것은 착각이다.
   </div>
 
   <hr class="divider">
 
-  <h2>문제 풀이 — Q01 (26005-0067)</h2>
+  <h2>문제 풀이</h2>
   <h3>다음 빈칸에 들어갈 말로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">②</span></h3>
 
   <ul class="choice-list">
     <li class="wrong">
       <span class="tag tag-x">X</span>
-      ① can always be trusted to produce accurate results
-      <span class="reason">— "항상 신뢰할 수 있다"는 However 이후의 한계 논의와 모순</span>
+      ① fail to regulate their emotions
+      <span class="reason">— "감정 조절 실패"는 부모와 아기 모두에게 해당하지 않음. 부모는 이성적, 아기의 울음은 감정 조절의 문제가 아님</span>
     </li>
     <li class="correct">
       <span class="tag tag-o">O</span>
-      ② is domain-specific and does not automatically transfer to unrelated areas of knowledge
-      <span class="reason">— "영역 특수적 + 자동 전이 불가" = However 이후 제시된 한계의 정확한 요약</span>
+      ② share an experience, but not a meaning
+      <span class="reason">— "경험은 공유하지만 의미는 공유하지 않는다": 첫 문장의 "Sharing meanings and experiences is not automatic"과 정확히 대응. 같은 목욕 경험, 다른 의미(즐거움 vs 공포)</span>
     </li>
     <li class="wrong">
       <span class="tag tag-x">X</span>
-      ③ develops naturally without any deliberate practice or training
-      <span class="reason">— 의도적 연습 없이 자연 발생한다는 주장은 없음. 오히려 "years of experience" 강조</span>
+      ③ hesitate to share their unique experiences
+      <span class="reason">— "경험 공유를 주저한다"는 글의 논점과 무관. 이미 같은 사건에 함께 참여 중</span>
     </li>
     <li class="wrong">
       <span class="tag tag-x">X</span>
-      ④ should be replaced by systematic analytical methods in all cases
-      <span class="reason">— "모든 경우에 대체해야 한다"는 극단적. "powerful tool within its specific field"와 모순</span>
+      ④ try to understand each other's perspectives
+      <span class="reason">— "서로의 관점을 이해하려 한다"는 사실과 반대. 부모는 차이를 인식하지 못하고, 유아는 이해할 수 없음</span>
     </li>
     <li class="wrong">
       <span class="tag tag-x">X</span>
-      ⑤ becomes more reliable as a person gains experience in multiple fields
-      <span class="reason">— 여러 분야 경험이 직관 신뢰도를 높인다는 내용은 없음. 영역 간 전이 불가가 핵심</span>
+      ⑤ are open to differences, and ready to collaborate
+      <span class="reason">— "차이에 열려 있고 협력 준비가 되어 있다"는 긍정적 서술이지만, 글은 차이의 어려움을 강조</span>
     </li>
   </ul>
 
   <div class="tip">
-    <span class="label">함정</span>
-    ⑤번이 매력적인 오답. "여러 분야의 경험"이 직관 향상에 기여할 것 같지만, 글은 각 분야의 직관이 <strong>독립적(domain-specific)</strong>이라고 주장한다. 또한 빈칸 앞 <strong>"while ... a powerful tool within its specific field"</strong>이 양보절로, 뒤에는 한계/제한이 와야 한다.
+    <span class="label">풀이 핵심</span>
+    빈칸은 글의 <strong>마지막 문장</strong>에 위치하므로, 글 전체의 <strong>요약/결론</strong> 역할을 해야 한다. 첫 문장이 "의미와 경험의 공유는 자동적이지 않다"고 선언하고, 목욕 사례가 이를 구체적으로 보여준 뒤, 빈칸에서 <strong>경험(experience)은 공유하지만 의미(meaning)는 공유하지 않는다</strong>고 정리한다. 첫 문장의 키워드 <strong>"meanings and experiences"</strong>가 빈칸의 답과 직접 연결된다.
   </div>
 
   <div class="page-footer">
@@ -398,53 +410,42 @@ tr:nth-child(even) td { background: #f6f8fb; }
   </div>
 </section>
 
-<!-- ============ PAGE 4 — 연결어 정리 ============ -->
+<!-- ============ PAGE 4 — 연결어/신호어 정리 ============ -->
 <section class="page">
 
   <h2>연결어/신호어 정리</h2>
 
   <table>
-    <thead><tr><th>신호어</th><th>기능</th><th>위치</th></tr></thead>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치·역할</th></tr></thead>
     <tbody>
-      <tr><td><strong>but</strong></td><td>대조/전환</td><td>도입: 본능처럼 보이지만 → 실은 경험의 결과</td></tr>
-      <tr><td><strong>for instance</strong></td><td>구체적 예시</td><td>체스 그랜드마스터의 패턴 인식</td></tr>
-      <tr><td><strong>Similarly</strong></td><td>유사 예시 추가</td><td>의사의 빠른 진단</td></tr>
-      <tr><td><strong>However</strong></td><td>역접/전환</td><td>직관의 한계: 영역 밖 적용 시 문제</td></tr>
-      <tr><td><strong>not ... but</strong></td><td>대비 (부정-긍정)</td><td>마법적 직관 아님 → 패턴 저장의 결과</td></tr>
-      <tr><td><strong>Thus</strong></td><td>결론</td><td>빈칸 도입: 전체 논의의 결론 도출</td></tr>
-      <tr><td><strong>while</strong></td><td>양보</td><td>"강력한 도구이지만" → 한계 제시</td></tr>
+      <tr><td><strong>although</strong></td><td>양보</td><td>차이가 가장 두드러짐 — "비록 어른이 차이를 명심하기 어렵지만"으로 보충</td></tr>
+      <tr><td><strong>for example</strong></td><td>구체적 예시</td><td>유아-어른 차이를 목욕 사례로 구체화</td></tr>
+      <tr><td><strong>Yet</strong></td><td>반전/대조</td><td>부모의 기대(즐거움) vs 아기의 실제 반응(공포) — 핵심 반전 신호어</td></tr>
     </tbody>
   </table>
 
   <hr class="divider">
 
-  <h2>빈칸 추론 전략 정리</h2>
+  <h2>핵심 어휘 정리</h2>
 
-  <div class="syntax-box">
-    <span class="label">빈칸 유형 — 양보+결론형</span>
-    <div class="en"><strong>"while A, it is important to recognize that [빈칸]"</strong> → A(긍정적 측면)를 인정하면서 한계를 제시하는 구조.</div>
-    <div class="ko">→ "~이긴 하지만, [빈칸]이라는 것을 인식하는 것이 중요하다" → 빈칸에는 <strong>제한/한계</strong> 내용이 와야 한다.</div>
-  </div>
-
-  <div class="tip">
-    <span class="label">풀이 전략</span>
-    ① <strong>However 위치 확인</strong>: 글 중간의 However가 논지 전환점. 그 전 = 직관의 위력, 그 후 = 직관의 한계.<br>
-    ② <strong>빈칸 문장의 while 구조</strong>: 양보절(긍정) + 주절(한계) → 빈칸은 한계를 표현해야 함.<br>
-    ③ <strong>핵심 키워드 반복</strong>: domain, field, outside, applied → 모두 '영역 제한'을 가리킴.<br>
-    ④ <strong>반례 활용</strong>: 체스→재무(X), 의사→공학(X) → "영역 간 전이 불가"를 직접 증명.
-  </div>
-
-  <h3>핵심 어휘</h3>
   <table>
-    <thead><tr><th>어휘</th><th>의미</th><th>문맥</th></tr></thead>
+    <thead><tr><th>영어</th><th>뜻</th><th>문맥 속 의미</th></tr></thead>
     <tbody>
-      <tr><td>snap judgment</td><td>즉각적 판단</td><td>전문가의 빠른 의사결정</td></tr>
-      <tr><td>intuition</td><td>직관</td><td>경험에서 비롯된 즉각적 인식</td></tr>
-      <tr><td>domain-specific</td><td>영역 특수적인</td><td>특정 분야에만 적용 가능</td></tr>
-      <tr><td>translate to</td><td>~으로 전환되다</td><td>의사 본능 → 공학 전문성(전환 불가)</td></tr>
-      <tr><td>misleading</td><td>오해를 불러일으키는</td><td>영역 밖 적용 시 직관의 위험성</td></tr>
+      <tr><td>sharing meanings</td><td>의미를 공유하다</td><td>같은 사건에 대해 같은 해석을 나누는 것 — 자동적이지 않음</td></tr>
+      <tr><td>glaring</td><td>두드러진, 눈에 띄는</td><td>유아-어른 간 관점 차이가 가장 두드러짐</td></tr>
+      <tr><td>perspective</td><td>관점, 시각</td><td>같은 사건을 바라보는 서로 다른 해석의 틀</td></tr>
+      <tr><td>disposition</td><td>성질, 처분</td><td>물의 성질(어디서 오고 어디로 가는지)에 대한 지식</td></tr>
+      <tr><td>terrified crying</td><td>겁에 질린 울음</td><td>아기가 물놀이를 두려워하는 반응</td></tr>
+      <tr><td>splashing</td><td>물을 튀기다</td><td>부모가 아기에게 기대하는 즐거운 물놀이 행위</td></tr>
+      <tr><td>ongoing event</td><td>진행 중인 사건</td><td>현재 함께 경험하고 있는 사건</td></tr>
+      <tr><td>background knowledge</td><td>배경 지식</td><td>경험의 해석에 영향을 미치는 사전 지식</td></tr>
     </tbody>
   </table>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ④번 "try to understand each other's perspectives"는 일상적 상식으로는 그럴듯하지만, 본문은 <strong>이해하려 "노력"하는 상황이 아니라, 관점의 차이가 "존재"한다는 사실</strong>을 말한다. 특히 유아는 상대방의 관점을 이해하려 할 수 있는 인지 능력 자체가 없다.
+  </div>
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 14. 빈칸 내용 추론 (2) 분석노트</span>
