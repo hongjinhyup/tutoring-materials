@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영어 단어 정리 — 과외학습자료</title>
+<style>
+  :root { --accent: #1a3a6b; --line: #e2e6ee; --bg: #f6f7fb; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 40px 20px;
+    font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg); color: #222; line-height: 1.6;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  h1 { color: var(--accent); font-size: 28px; margin: 0 0 6px; }
+  .sub { color: #667; margin: 0 0 32px; font-size: 14px; }
+  .back {
+    display: inline-block; text-decoration: none; color: var(--accent);
+    font-size: 13px; margin-bottom: 16px;
+  }
+  .back:hover { text-decoration: underline; }
+  h2 {
+    font-size: 17px; color: var(--accent); margin: 28px 0 12px;
+    padding-bottom: 6px; border-bottom: 2px solid var(--accent);
+  }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { margin: 0 0 10px; }
+  a.card {
+    display: block; text-decoration: none; color: #222;
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 18px; transition: all .15s ease;
+  }
+  a.card:hover { border-color: var(--accent); box-shadow: 0 4px 14px rgba(26,58,107,.12); transform: translateY(-1px); }
+  a.card .t { font-weight: 600; font-size: 15px; }
+  a.card .d { color: #778; font-size: 13px; margin-top: 2px; }
+  .empty-state {
+    text-align: center; padding: 48px 20px; color: #99a;
+    background: #fff; border: 2px dashed var(--line); border-radius: 12px;
+    margin: 20px 0;
+  }
+  .empty-state .icon { font-size: 36px; margin-bottom: 12px; }
+  .empty-state .msg { font-size: 15px; margin-bottom: 8px; color: #667; }
+  .empty-state .detail { font-size: 13px; line-height: 1.7; }
+  .guide {
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 22px; margin-top: 20px; font-size: 13px; color: #556;
+  }
+  .guide h3 { font-size: 14px; color: var(--accent); margin: 0 0 10px; }
+  .guide ul { list-style: disc; padding-left: 18px; }
+  .guide li { margin: 4px 0; color: #556; }
+  footer { margin-top: 40px; color: #99a; font-size: 12px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../../index.html">&larr; 전체 자료 목록</a>
+  <h1>영어 단어 정리</h1>
+  <p class="sub">지문별 핵심 단어 · 품사 · 뜻 · 예문 정리</p>
+
+  <h2>지문별 단어 목록</h2>
+
+  <div class="empty-state">
+    <div class="icon">📖</div>
+    <div class="msg">아직 등록된 단어 자료가 없습니다</div>
+    <div class="detail">지문별 단어 정리가 추가되면 여기에 카드로 표시됩니다</div>
+  </div>
+
+  <!-- 단어 자료가 추가되면 아래 형식으로 카드를 넣는다:
+  <ul>
+    <li>
+      <a class="card" href="지문파일명.html">
+        <div class="t">지문 제목</div>
+        <div class="d">단어 N개 | 출처/교재 정보</div>
+      </a>
+    </li>
+  </ul>
+  -->
+
+  <div class="guide">
+    <h3>단어 카드 구성</h3>
+    <ul>
+      <li>각 지문별 HTML 파일로 단어를 정리합니다</li>
+      <li>단어 + 품사 + 뜻 + 예문으로 구성됩니다</li>
+      <li>카드를 클릭하면 해당 지문의 단어 페이지로 이동합니다</li>
+    </ul>
+  </div>
+
+  <footer>github.com/hongjinhyup/tutoring-materials</footer>
+</div>
+</body>
+</html>
