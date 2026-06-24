@@ -161,9 +161,45 @@ tr:nth-child(even) td { background: #f6f8fb; }
   .page:last-of-type { page-break-after: auto; }
   h2, h3, table, .concept, .tip { break-inside: avoid; }
 }
+
+/* ---- 암기 모드 ---- */
+.quiz-bar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: center; gap: 10px;
+  background: var(--accent); padding: 8px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+.quiz-bar button {
+  font-size: 10pt; font-weight: 600; border: 1.5px solid #fff;
+  border-radius: 6px; padding: 5px 16px; cursor: pointer;
+  font-family: inherit; transition: all .15s;
+}
+.quiz-bar button { background: transparent; color: #fff; }
+.quiz-bar button.on { background: #fff; color: var(--accent); }
+
+body.hide-word .vocab-table td.word {
+  color: transparent; background: repeating-linear-gradient(
+    90deg, var(--accent-line) 0 6px, transparent 6px 10px
+  ); border-radius: 2px; user-select: none; transition: color .2s;
+}
+body.hide-word .vocab-table td.word:hover { color: var(--accent); background: none; }
+
+body.hide-mean .vocab-table td:nth-child(4) {
+  color: transparent; background: repeating-linear-gradient(
+    90deg, var(--accent-line) 0 6px, transparent 6px 10px
+  ); border-radius: 2px; user-select: none; transition: color .2s;
+}
+body.hide-mean .vocab-table td:nth-child(4):hover { color: var(--ink); background: none; }
+
+@media print { .quiz-bar { display: none; } }
 </style>
 </head>
 <body>
+
+<div class="quiz-bar">
+  <button id="btnWord" onclick="document.body.classList.toggle('hide-word');this.classList.toggle('on')">단어 가리기</button>
+  <button id="btnMean" onclick="document.body.classList.toggle('hide-mean');this.classList.toggle('on')">뜻 가리기</button>
+</div>
 
 <!-- ============ PAGE 1 — 표지 ============ -->
 <section class="page first">
