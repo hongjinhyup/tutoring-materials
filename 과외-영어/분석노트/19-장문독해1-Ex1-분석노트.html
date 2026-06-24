@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>19. 장문 독해 (1) — Ex 1 분석노트</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+
+/* 구문 분석 */
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+/* 해석 박스 */
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+/* 논리 구조 플로우 */
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+/* 선지 분석 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 지문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
+    <h1>19. 장문 독해 (1) — Ex 1</h1>
+    <p class="subtitle">18세기 여성 드레스의 재활용과 실용적 패션</p>
+    <p class="meta">
+      <span class="code-badge">26005-0097 / 0098</span>
+      <span class="passage-badge">p.114 · Ex 1 (01~02)</span>
+    </p>
+  </div>
+
+  <table>
+    <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr><td>01 (26005-0097)</td><td>윗글의 제목</td><td><span class="ans-badge">⑤</span></td></tr>
+      <tr><td>02 (26005-0098)</td><td>어휘 적절성 (밑줄 친 낱말)</td><td><span class="ans-badge">④ (d)</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;Women's dresses from the eighteenth century offered a great opportunity for repurposing, as they were frequently fashioned from long, uncut lengths of fabric. Textiles were significantly more (a) <span class="ul-word">costly</span> than the labor it took to alter them, <span class="signal">and as a result</span>, most garments were modified numerous times to keep up with changes in fashion. <span class="hl">"Even the wealthy saved fabrics, remodeled clothes, and sold unwanted items in the secondhand market,"</span> observes fashion scholar Linda Welters. "Sustainability was a way of life." <span class="signal">Indeed</span>, although change is inherent to fashion, the remodeling of the existing clothing, rather than buying new, was a widespread practice. It is (b) <span class="ul-word">rare</span>, in fact, to find an eighteenth-century dress that does not show some sign of alteration. The cost of having a gown made, or remade, was only about half the cost of the textile itself and could be significantly less, depending on the type of fabric. <span class="signal">In addition to</span> updated dress silhouettes, accessories and trimmings played an important role in refreshing old clothing styles. <span class="signal">For example</span>, the addition of a row of lace on an upper part of a gown was an economical alternative to the full (c) <span class="ul-word">replacement</span> of the gown. Many eighteenth-century dresses, particularly those from the first half of the century, were constructed with relatively crude stitches, <span class="hl">indicating that the effortless (d) <span class="ul-word">preservation</span> of the original gown was a consideration.</span> <span class="signal">Because</span> fabrics (e) <span class="ul-word">retained</span> value even when they were not in fashion, hand-woven silks, cherished for their quality and beauty, were sometimes passed down through generations.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* garment: 의복 &nbsp; ** crude: 조잡한 &nbsp; *** cherish: 소중히 여기다
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) 분석노트</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 구문 분석 ============ -->
+<section class="page">
+
+  <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
+
+  <div class="syntax-box">
+    <span class="label">구문 1 — 주제문 (Linda Welters 인용)</span>
+    <div class="en">
+      "<span class="chunk">Even the wealthy</span> / <span class="chunk">saved fabrics</span>, / <span class="chunk">remodeled clothes</span>, / and <span class="chunk">sold unwanted items</span> / <span class="chunk">in the secondhand market</span>,"
+    </div>
+    <div class="ko">→ "부유한 사람들조차 / 직물을 보관하고 / 옷을 개조하고 / 원치 않는 물건을 팔았다 / 중고 시장에서"</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 2 — 핵심 근거 (비용 비교)</span>
+    <div class="en">
+      <span class="chunk">The cost of having a gown made</span>, / or remade, / <span class="chunk">was only about half</span> / <span class="chunk">the cost of the textile itself</span> / and <span class="chunk">could be significantly less</span>, / <span class="chunk">depending on the type of fabric</span>.
+    </div>
+    <div class="ko">→ 가운을 만들거나 / 다시 만드는 비용은 / 직물 자체 비용의 약 절반에 불과했고 / 직물의 종류에 따라 / 훨씬 더 적을 수도 있었다.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 3 — Q02 정답 근거 (d) preservation ← 오답 어휘</span>
+    <div class="en">
+      Many eighteenth-century dresses, / <span class="chunk">particularly those from the first half of the century</span>, / <span class="chunk">were constructed with relatively crude stitches</span>, / <span class="chunk">indicating that</span> / <span class="chunk">the effortless (d) <b>preservation</b> of the original gown</span> / <span class="chunk">was a consideration</span>.
+    </div>
+    <div class="ko">→ 18세기의 많은 드레스는, / 특히 그 세기 전반기의 것들은 / 비교적 조잡한 바느질로 만들어졌는데, / 이는 ~을 나타낸다 / 원래 가운의 손쉬운 (d) <b>보존</b>이 / 고려 사항이었음을.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">구문 포인트</span>
+    <strong>indicating that ~</strong>: 분사구문(결과). "were constructed... indicating..." → 앞 내용의 결과/함의를 제시하는 패턴. <strong>that절</strong>의 주어(the effortless preservation)가 길어 핵심을 놓치기 쉽다.
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — 결론부</span>
+    <div class="en">
+      <span class="chunk">Because fabrics (e) retained value</span> / <span class="chunk">even when they were not in fashion</span>, / <span class="chunk">hand-woven silks</span>, / <span class="chunk">cherished for their quality and beauty</span>, / <span class="chunk">were sometimes passed down</span> / <span class="chunk">through generations</span>.
+    </div>
+    <div class="ko">→ 직물이 유행하지 않을 때에도 가치를 유지했기 때문에 / 손으로 짠 비단은 / 품질과 아름다움으로 소중히 여겨져 / 때때로 여러 세대에 걸쳐 전해졌다.</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>전문 해석</h2>
+
+  <div class="translation">
+    &nbsp;&nbsp;18세기의 여성 드레스는 용도 변경의 큰 기회를 제공했는데, 자르지 않은 긴 길이의 직물로 자주 만들어졌기 때문이다. 직물은 그것을 수선하는 데 드는 노동력보다 훨씬 더 (a) <u>비쌌고</u>, 그 결과 대부분의 의복은 유행의 변화를 따라가기 위해 여러 차례 수정되었다. "부유한 사람들조차 직물을 보관하고, 옷을 개조하고, 원치 않는 물건을 중고 시장에서 팔았다"고 패션 학자 Linda Welters는 논평한다. "지속 가능성은 삶의 방식이었다." 실제로, 변화가 패션에 내재되어 있긴 하지만, 새로 구매하기보다는 기존 의류를 리모델링하는 것이 널리 퍼진 관행이었다. 사실, 어떤 수선의 흔적도 보이지 않는 18세기 드레스를 찾는 것은 (b) <u>드문</u> 일이다. 가운을 만들거나 다시 만드는 비용은 직물 자체 비용의 약 절반에 불과했고, 직물의 종류에 따라 상당히 더 적을 수 있었다. 최신 드레스 실루엣 외에도, 액세서리와 장식은 오래된 의류 스타일을 새롭게 하는 데 중요한 역할을 했다. 예를 들어, 가운 윗부분에 레이스 한 줄을 추가하는 것은 가운 전체를 (c) <u>교체</u>하는 것에 대한 경제적인 대안이었다. 18세기의 많은 드레스, 특히 그 세기 전반기의 것들은 비교적 조잡한 바느질로 만들어졌는데, 이는 원래 가운의 손쉬운 (d) <u>보존</u>이 고려 사항이었음을 나타낸다. 직물은 유행하지 않을 때에도 가치를 (e) <u>유지했기</u> 때문에, 품질과 아름다움으로 소중히 여겨진 손으로 짠 비단은 때때로 여러 세대에 걸쳐 전해졌다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) 분석노트</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 논리 구조 ============ -->
+<section class="page">
+
+  <h2>논리 구조 — 글의 흐름</h2>
+
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>주장 → 인용 근거 → 구체적 예시 → 보충 설명</strong></p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="step-label">도입</span>
+      <p style="margin:4px 0; font-size:10.5pt;">18세기 드레스는 <strong>자르지 않은 긴 직물</strong>로 만들어져 용도 변경(repurposing)에 좋았다.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">핵심 근거</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>직물이 노동력보다 훨씬 비쌌다</strong> → 새로 사기보다 수선이 경제적이었음. 대부분의 의복이 여러 차례 수정됨.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">전문가 인용</span>
+      <p style="margin:4px 0; font-size:10.5pt;">Linda Welters: "부유한 사람들조차 직물을 보관·개조·중고 판매" → <strong>"지속 가능성은 삶의 방식"</strong></p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">구체적 예시</span>
+      <p style="margin:4px 0; font-size:10.5pt;">
+        ① 수선 흔적 없는 드레스를 찾기 어려움 (= 거의 모든 드레스가 수선됨)<br>
+        ② 수선 비용 = 직물 비용의 약 절반<br>
+        ③ 레이스 추가 = 전체 교체의 경제적 대안<br>
+        ④ 조잡한 바느질 = 쉬운 <strong>변형(alteration)</strong>을 고려한 설계
+      </p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">결론</span>
+      <p style="margin:4px 0; font-size:10.5pt;">직물은 유행과 무관하게 가치를 유지 → 손으로 짠 비단이 여러 세대에 걸쳐 전해짐.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="label">글의 핵심</span>
+    18세기 여성들은 비싼 직물을 버리지 않고 <strong>수선·리모델링·재활용</strong>하는 것이 일반적인 관행이었다. 이는 경제적 이유에서 비롯된 <strong>실용적 선택</strong>이었다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — Q01 (26005-0097)</h2>
+  <h3>윗글의 제목으로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">⑤</span></h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ① The Evolution of Female Fashion Trends Over Time
+      <span class="reason">— 패션 '트렌드의 변화'가 아니라 '드레스의 재활용'이 핵심</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② How Have Secondhand Clothing Businesses Thrived?
+      <span class="reason">— 중고 시장은 언급되나 '사업 번성'이 주제가 아님</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ③ A Modified Dress: Symbol of the Wealthy in the 18th Century
+      <span class="reason">— 부유층뿐 아니라 모든 계층의 관행. "Symbol"도 부적절</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ④ Sustainable Fashion: An Unattainable Ideal in the 18th Century
+      <span class="reason">— "Unattainable(달성 불가능한)"이 반대. 실제로 실천된 관행</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ⑤ Redesigning Old Dresses: A Practical Choice for 18th-century Women
+      <span class="reason">— "Redesigning(재디자인)" + "Practical Choice(실용적 선택)" = 글의 핵심과 정확히 일치</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ④번의 "Sustainable Fashion"은 본문 인용("Sustainability was a way of life")과 어휘가 겹쳐 함정으로 작용. 그러나 <strong>"Unattainable Ideal"</strong>이라는 수식어가 본문 내용과 정반대이므로 오답.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) 분석노트</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — Q02 풀이 ============ -->
+<section class="page">
+
+  <h2>문제 풀이 — Q02 (26005-0098)</h2>
+  <h3>밑줄 친 (a)~(e) 중에서 문맥상 낱말의 쓰임이 적절하지 않은 것은? &nbsp; 정답: <span class="ans-badge">④ (d)</span></h3>
+
+  <table>
+    <thead><tr><th>기호</th><th>밑줄 단어</th><th>문맥 의미</th><th>적절성</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>(a)</td>
+        <td><strong>costly</strong></td>
+        <td>직물이 노동력보다 "비싸다" → 수선의 이유를 설명</td>
+        <td style="color:#2e7d32; font-weight:700;">O 적절</td>
+      </tr>
+      <tr>
+        <td>(b)</td>
+        <td><strong>rare</strong></td>
+        <td>수선 흔적이 없는 드레스를 찾기 "드문" 일 → 수선이 보편적이었음</td>
+        <td style="color:#2e7d32; font-weight:700;">O 적절</td>
+      </tr>
+      <tr>
+        <td>(c)</td>
+        <td><strong>replacement</strong></td>
+        <td>가운 전체를 "교체"하는 것 → 레이스 추가가 이에 대한 대안</td>
+        <td style="color:#2e7d32; font-weight:700;">O 적절</td>
+      </tr>
+      <tr>
+        <td>(d)</td>
+        <td><strong>preservation</strong></td>
+        <td>원래 가운의 "보존"? → 조잡한 바느질이 보존을 위한 것이라면 모순</td>
+        <td style="color:#c62828; font-weight:700;">X 부적절</td>
+      </tr>
+      <tr>
+        <td>(e)</td>
+        <td><strong>retained</strong></td>
+        <td>직물이 가치를 "유지했다" → 세대에 걸쳐 전해진 이유 설명</td>
+        <td style="color:#2e7d32; font-weight:700;">O 적절</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>(d) preservation이 틀린 이유</h3>
+
+  <div class="syntax-box">
+    <span class="label">원문</span>
+    <div class="en">were constructed with relatively <b>crude stitches</b>, indicating that the effortless (d) <b>preservation</b> of the original gown was a consideration.</div>
+  </div>
+
+  <p>
+    <strong>논리 흐름:</strong> 조잡한(crude) 바느질 → 쉽게 뜯어낼 수 있음 → 나중에 <strong>쉽게 변형/수선(alteration)</strong>할 수 있도록 의도한 것.
+  </p>
+  <p>
+    "preservation(보존)"은 원래 상태를 그대로 유지한다는 뜻으로, <strong>수선·변형이 핵심인 글의 논지와 정반대</strong>이다.
+  </p>
+
+  <div class="syntax-box">
+    <span class="label">교정</span>
+    <div class="en">preservation → <b>alteration / modification / transformation</b></div>
+    <div class="ko">→ "원래 가운의 손쉬운 <strong>변형</strong>이 고려 사항이었음을 나타낸다"</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">오답 포인트</span>
+    (d)를 "보존"으로 해석하면 문장 자체는 자연스럽게 읽히지만, <strong>글 전체의 논지(repurposing, remodeling, alteration)</strong>와 충돌한다. 어휘 문제는 단어 단위가 아니라 <strong>글 전체 맥락</strong>에서 판단해야 한다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>연결어/신호어 정리</h2>
+
+  <table>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td><strong>and as a result</strong></td><td>인과 (원인 → 결과)</td><td>직물이 비싸다 → 수선이 보편적</td></tr>
+      <tr><td><strong>Indeed</strong></td><td>강조/부연</td><td>인용에 이어 본문의 주장 강화</td></tr>
+      <tr><td><strong>in fact</strong></td><td>사실 강조</td><td>수선 흔적 없는 드레스가 드물다</td></tr>
+      <tr><td><strong>In addition to</strong></td><td>추가 정보</td><td>실루엣 변경 외에 장식도 역할</td></tr>
+      <tr><td><strong>For example</strong></td><td>구체적 예시</td><td>레이스 추가의 예</td></tr>
+      <tr><td><strong>Because</strong></td><td>이유</td><td>직물의 가치 유지 → 세대 간 전승</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) 분석노트</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

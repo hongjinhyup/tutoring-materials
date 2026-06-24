@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20. 장문 독해 (2) — Ex 1 분석노트</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10pt; line-height: 1.8; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+.passage .blank {
+  display: inline-block; border-bottom: 2px solid var(--accent);
+  min-width: 100px; text-align: center; font-weight: 700;
+  color: var(--accent); padding: 0 4px;
+}
+
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 지문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
+    <h1>20. 장문 독해 (2) — Ex 1</h1>
+    <p class="subtitle">아마추어 과학자의 역할 변화와 시민 과학</p>
+    <p class="meta">
+      <span class="code-badge">26005-0108 / 0109 / 0110</span>
+      <span class="passage-badge">pp.120~121 · Ex 1 (01~03)</span>
+    </p>
+  </div>
+
+  <table>
+    <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr><td>01 (26005-0108)</td><td>빈칸 추론</td><td><span class="ans-badge">⑤</span></td></tr>
+      <tr><td>02 (26005-0109)</td><td>밑줄 친 부분의 의미 추론</td><td><span class="ans-badge">⑤</span></td></tr>
+      <tr><td>03 (26005-0110)</td><td>윗글의 내용 일치/불일치</td><td><span class="ans-badge">③</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage" style="font-size:9.8pt; line-height:1.75;">
+    &nbsp;&nbsp;During the eighteenth and nineteenth centuries, the practice of science was not confined to universities or professional institutions. <span class="hl">Many significant contributions came from individuals who pursued scientific inquiry as a passionate hobby rather than a formal career.</span> These amateur scientists, often self-funded and self-taught, made discoveries that shaped entire fields. Charles Darwin, before becoming one of the most influential scientists in history, was essentially an amateur naturalist whose voyage on the Beagle was initially undertaken as a gentleman companion to the ship's captain. Mary Anning, a fossil collector from a working-class family in Lyme Regis, unearthed some of the most important paleontological finds of the nineteenth century, <span class="signal">yet</span> she was largely excluded from the scientific community of her time due to her gender and social class.
+    <br><br>
+    &nbsp;&nbsp;<span class="signal">However</span>, <span class="hl">as science became increasingly professionalized in the late nineteenth and early twentieth centuries, the role of the amateur was gradually <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.</span> The growing complexity of scientific research demanded specialized training, expensive equipment, and institutional support that were beyond the reach of most individuals. The establishment of formal degree programs and professional societies created clear boundaries between credentialed experts and enthusiastic outsiders. <span class="hl">The amateur, once celebrated as a noble seeker of knowledge, came to be viewed with suspicion &mdash; an untrained intruder whose contributions were more likely to muddy the waters than to clarify them.</span>
+    <br><br>
+    &nbsp;&nbsp;<span class="signal">In recent decades</span>, <span class="signal">however</span>, <span class="hl">a remarkable shift has occurred. The rise of citizen science &mdash; collaborative projects in which volunteers participate in data collection, analysis, and even experimental design &mdash; has reopened the door for non-professionals to make meaningful contributions.</span> Technology has been a key enabler of this transformation: smartphones equipped with GPS and cameras allow ordinary people to document wildlife sightings, air quality measurements, and astronomical observations with a level of precision that was previously unattainable. Projects like eBird, which collects bird observation data from volunteers worldwide, have generated datasets of unprecedented scale. <span class="signal">Moreover</span>, online platforms have democratized access to scientific literature and analytical tools, enabling citizen scientists to engage with research at a depth that would have been impossible a generation ago. <span class="hl">The boundary between professional and amateur, once thought to be firmly established, is once again becoming <span class="ul-word">permeable</span>.</span>
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* paleontological: 고생물학의 &nbsp; ** credentialed: 자격을 갖춘 &nbsp; *** democratize: 민주화하다
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) 분석노트</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<section class="page">
+
+  <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
+
+  <div class="syntax-box">
+    <span class="label">구문 1 — 아마추어의 기여 (1단락 주제)</span>
+    <div class="en">
+      <span class="chunk">Many significant contributions</span> / <span class="chunk">came from individuals</span> / <span class="chunk">who pursued scientific inquiry</span> / <span class="chunk">as a passionate hobby</span> / <span class="chunk">rather than a formal career</span>.
+    </div>
+    <div class="ko">→ 많은 중요한 기여가 / 개인들로부터 나왔다 / 과학적 탐구를 추구한 / 열정적인 취미로서 / 공식적인 직업이 아닌.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 2 — Q02 밑줄 문장 (아마추어에 대한 인식 변화)</span>
+    <div class="en">
+      <span class="chunk">The amateur</span>, / <span class="chunk">once celebrated as a noble seeker of knowledge</span>, / <span class="chunk">came to be viewed with suspicion</span> / &mdash; <span class="chunk">an untrained intruder</span> / <span class="chunk">whose contributions were more likely</span> / <span class="chunk">to muddy the waters</span> / <span class="chunk">than to clarify them</span>.
+    </div>
+    <div class="ko">→ 아마추어는 / 한때 고귀한 지식 탐구자로 칭송받았으나 / 의심의 눈초리로 보이게 되었다 / — 훈련받지 않은 침입자 / 그의 기여가 더 가능성이 높은 / 물을 흐리는 데 / 그것들을 맑히는 것보다.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">구문 포인트</span>
+    <strong>muddy the waters</strong>: "물을 흐리다" = 상황을 더 혼란스럽게 만들다. 비유적 관용 표현. <strong>more likely to A than to B</strong> 구문으로 아마추어에 대한 부정적 인식을 드러냄.
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 3 — 시민 과학의 등장 (3단락 핵심)</span>
+    <div class="en">
+      <span class="chunk">The rise of citizen science</span> / &mdash; <span class="chunk">collaborative projects</span> / <span class="chunk">in which volunteers participate</span> / <span class="chunk">in data collection, analysis, and even experimental design</span> / &mdash; <span class="chunk">has reopened the door</span> / <span class="chunk">for non-professionals</span> / <span class="chunk">to make meaningful contributions</span>.
+    </div>
+    <div class="ko">→ 시민 과학의 부상이 / — 자원봉사자들이 참여하는 협력 프로젝트 / 데이터 수집, 분석, 심지어 실험 설계에 / — 문을 다시 열어 주었다 / 비전문가들에게 / 의미 있는 기여를 할 수 있도록.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — 결론 (permeable)</span>
+    <div class="en">
+      <span class="chunk">The boundary between professional and amateur</span>, / <span class="chunk">once thought to be firmly established</span>, / <span class="chunk">is once again becoming</span> / <span class="chunk"><b>permeable</b></span>.
+    </div>
+    <div class="ko">→ 전문가와 아마추어 사이의 경계는 / 한때 확고히 확립된 것으로 여겨졌으나 / 다시 한번 되어가고 있다 / <b>투과성 있는(허물어지는)</b>.</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>전문 해석</h2>
+
+  <div class="translation" style="font-size:10pt;">
+    &nbsp;&nbsp;18세기와 19세기 동안 과학의 실천은 대학이나 전문 기관에 국한되지 않았다. 많은 중요한 기여가 공식적인 직업이 아닌 열정적인 취미로서 과학적 탐구를 추구한 개인들로부터 나왔다. 이 아마추어 과학자들은 종종 자비로 활동하고 독학했으며, 전체 분야를 형성한 발견을 했다. 찰스 다윈은 역사상 가장 영향력 있는 과학자 중 한 명이 되기 전에, 본질적으로 아마추어 자연학자였으며 그의 비글호 항해는 처음에 선장의 신사 동반자로서 착수되었다. 라임 레지스의 노동자 계층 가정 출신의 화석 수집가인 메리 애닝은 19세기의 가장 중요한 고생물학적 발견들 중 일부를 발굴했지만, 성별과 사회적 계층 때문에 당시 과학계에서 대체로 배제되었다.
+    <br><br>
+    &nbsp;&nbsp;그러나 19세기 후반과 20세기 초에 과학이 점점 더 전문화됨에 따라, 아마추어의 역할은 점차 <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>. 과학 연구의 증가하는 복잡성은 대부분의 개인들이 감당할 수 없는 전문 훈련, 비싼 장비, 기관의 지원을 요구했다. 정규 학위 과정과 전문 학회의 설립은 자격을 갖춘 전문가와 열정적인 외부인 사이에 명확한 경계를 만들었다. 한때 고귀한 지식 탐구자로 칭송받던 아마추어는 의심의 눈초리로 보이게 되었다 — 그 기여가 상황을 명확히 하기보다는 흐리게 할 가능성이 더 높은 훈련받지 않은 침입자로.
+    <br><br>
+    &nbsp;&nbsp;그러나 최근 수십 년간 주목할 만한 변화가 일어났다. 자원봉사자들이 데이터 수집, 분석, 심지어 실험 설계에 참여하는 협력 프로젝트인 시민 과학의 부상이 비전문가들이 의미 있는 기여를 할 수 있는 문을 다시 열어 주었다. 기술은 이 변환의 핵심 촉진제였다: GPS와 카메라가 장착된 스마트폰은 일반인들이 야생 생물 목격, 공기질 측정, 천문학적 관측을 이전에는 달성할 수 없었던 수준의 정밀도로 기록할 수 있게 해 준다. 전 세계 자원봉사자들로부터 조류 관찰 데이터를 수집하는 eBird 같은 프로젝트는 전례 없는 규모의 데이터 세트를 생성했다. 더욱이, 온라인 플랫폼은 과학 문헌과 분석 도구에 대한 접근을 민주화하여, 시민 과학자들이 한 세대 전에는 불가능했을 깊이로 연구에 참여할 수 있게 했다. 한때 확고히 확립된 것으로 여겨졌던 전문가와 아마추어 사이의 경계는 다시 한번 <u>투과성 있는(허물어지는)</u> 것이 되어가고 있다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) 분석노트</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 논리 구조 + Q01 ============ -->
+<section class="page">
+
+  <h2>논리 구조 — 글의 흐름</h2>
+
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>과거 긍정 → 전문화로 인한 배제(역전) → 시민 과학으로 재부상(재역전)</strong></p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="step-label">1단락 — 과거: 아마추어의 황금기</span>
+      <p style="margin:4px 0; font-size:10.5pt;">18~19세기 아마추어 과학자들이 <strong>중요한 기여</strong>(다윈, 메리 애닝). 과학이 대학/기관에 국한되지 않았음.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">2단락 — 전환: 전문화와 아마추어 배제</span>
+      <p style="margin:4px 0; font-size:10.5pt;">19세기 후반~20세기 초 과학의 <strong>전문화</strong> → 전문 훈련·장비·기관 지원 필요 → 아마추어 역할 <strong>축소</strong>. "물을 흐리는 침입자"로 인식.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">3단락 — 재전환: 시민 과학의 부상</span>
+      <p style="margin:4px 0; font-size:10.5pt;">기술(스마트폰, 온라인 플랫폼) → <strong>시민 과학</strong> 확산 → 비전문가가 다시 의미 있는 기여. 경계가 다시 <strong>허물어지는</strong> 중.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="label">글의 핵심</span>
+    아마추어 과학자는 과거에 중요한 기여를 했으나, 과학의 전문화로 배제되었다가, 최근 <strong>시민 과학과 기술의 발전</strong>으로 다시 문이 열리고 있다. 전문가-아마추어 경계의 역사적 변화를 추적하는 글.
+  </div>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — Q01 (26005-0108)</h2>
+  <h3>윗글의 빈칸에 들어갈 말로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">⑤</span></h3>
+
+  <div class="syntax-box">
+    <span class="label">빈칸 위치</span>
+    <div class="en">... as science became increasingly professionalized ..., the role of the amateur was gradually <b>[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</b>.</div>
+    <div class="ko">→ 과학이 점점 전문화됨에 따라, 아마추어의 역할은 점차 <b>[&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]</b>.</div>
+  </div>
+
+  <p><strong>핵심 단서:</strong> 빈칸 뒤 문장들이 설명: 전문 훈련·장비 필요 → 경계 형성 → 아마추어를 "침입자"로 인식. 즉 아마추어의 역할이 <strong>축소/주변화</strong>되었다.</p>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ① diversified across multiple scientific disciplines
+      <span class="reason">— "다양화"는 역할 확대. 문맥은 축소/배제 방향</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② strengthened through informal networks of collaboration
+      <span class="reason">— "강화"는 긍정적. 2단락은 부정적 변화를 서술</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ③ formalized through government-sponsored research programs
+      <span class="reason">— "공식화"는 제도권 편입. 실제로는 제도권에서 배제됨</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ④ recognized as essential to the advancement of scientific knowledge
+      <span class="reason">— "필수적으로 인정"은 정반대. 의심·배제의 대상이 됨</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ⑤ marginalized as the field demanded greater specialization
+      <span class="reason">— "주변화" + "전문화 요구" = 2단락의 핵심 내용과 정확히 일치</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ④번의 "essential"은 1단락(과거의 기여)과 혼동할 수 있으나, 빈칸은 <strong>2단락(전문화 이후)</strong>에 위치. 시간적 맥락을 정확히 파악해야 한다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) 분석노트</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — Q02 + Q03 + 연결어 ============ -->
+<section class="page">
+
+  <h2>문제 풀이 — Q02 (26005-0109)</h2>
+  <h3>밑줄 친 "permeable"이 의미하는 바로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">⑤</span></h3>
+
+  <div class="syntax-box">
+    <span class="label">원문 맥락</span>
+    <div class="en">The boundary between professional and amateur, once thought to be firmly established, is once again becoming <b>permeable</b>.</div>
+  </div>
+
+  <p><strong>추론:</strong> permeable = "투과성 있는" → 경계가 확고했으나 다시 <strong>넘나들 수 있게</strong> 됨 (시민 과학으로 비전문가가 참여 가능).</p>
+
+  <ul class="choice-list">
+    <li class="wrong"><span class="tag tag-x">X</span> ① more rigid and difficult to cross <span class="reason">— 정반대. "firmly established" 상태에서 벗어나는 중</span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ② completely eliminated in the modern era <span class="reason">— "완전 제거"는 과도. becoming permeable ≠ 사라짐</span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ③ redefined by government regulations <span class="reason">— 정부 규제 언급 없음</span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ④ increasingly dependent on institutional approval <span class="reason">— 기관 승인 의존성 증가는 반대 방향</span></li>
+    <li class="correct"><span class="tag tag-o">O</span> ⑤ open to being crossed as non-experts rejoin the scientific enterprise <span class="reason">— "비전문가가 과학 활동에 재참여하면서 넘을 수 있게 됨" = permeable의 정확한 의미</span></li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — Q03 (26005-0110)</h2>
+  <h3>윗글의 내용과 일치하지 않는 것은? &nbsp; 정답: <span class="ans-badge">③</span></h3>
+
+  <ul class="choice-list">
+    <li class="wrong"><span class="tag tag-x">X</span> ① Darwin was originally an amateur naturalist before becoming famous. <span class="reason">— 본문: "was essentially an amateur naturalist" → 일치</span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ② Mary Anning was excluded from the scientific community due to her gender and class. <span class="reason">— 본문: "largely excluded ... due to her gender and social class" → 일치</span></li>
+    <li class="correct"><span class="tag tag-o">O</span> ③ Professional societies welcomed amateur contributions throughout the twentieth century. <span class="reason">— 본문: 전문 학회가 경계를 만들어 아마추어를 배제했다고 서술 → <strong>불일치</strong></span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ④ Smartphones have helped ordinary people contribute to scientific data collection. <span class="reason">— 본문: "smartphones ... allow ordinary people to document ..." → 일치</span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ⑤ eBird collects bird observation data from volunteers around the world. <span class="reason">— 본문: "collects bird observation data from volunteers worldwide" → 일치</span></li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ③번은 "throughout the twentieth century(20세기 내내)"가 핵심 오류. 본문은 20세기 초에 전문 학회가 아마추어를 <strong>배제</strong>했다고 서술하며, 아마추어의 재참여는 "최근 수십 년" 시민 과학 덕분.
+  </div>
+
+  <hr class="divider">
+
+  <h2>연결어/신호어 정리</h2>
+
+  <table>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td><strong>rather than</strong></td><td>대조</td><td>취미 vs 정식 직업</td></tr>
+      <tr><td><strong>yet</strong></td><td>역접/양보</td><td>메리 애닝의 기여에도 불구하고 배제</td></tr>
+      <tr><td><strong>However</strong></td><td>역접 전환</td><td>1단락(긍정) → 2단락(전문화로 배제)</td></tr>
+      <tr><td><strong>In recent decades, however</strong></td><td>시간 + 역접</td><td>2단락(배제) → 3단락(시민 과학으로 재부상)</td></tr>
+      <tr><td><strong>Moreover</strong></td><td>추가 정보</td><td>스마트폰 외에 온라인 플랫폼도 기여</td></tr>
+      <tr><td><strong>once again</strong></td><td>순환/회귀</td><td>과거처럼 경계가 다시 허물어짐</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) 분석노트</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

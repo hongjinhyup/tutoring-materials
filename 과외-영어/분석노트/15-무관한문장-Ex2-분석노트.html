@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15. 흐름에 무관한 문장 — Ex 2 분석노트</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+.passage .irrelevant {
+  background: #fef2f2; border: 1px dashed var(--red-line);
+  border-radius: 4px; padding: 2px 4px;
+}
+
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-step.irrelevant-step {
+  background: var(--red-bg); border-color: var(--red-line);
+}
+.flow-step.irrelevant-step .step-label {
+  background: #c62828;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 지문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
+    <h1>15. 흐름에 무관한 문장 — Ex 2</h1>
+    <p class="subtitle">습관의 형성과 맥락 의존적 자동화</p>
+    <p class="meta">
+      <span class="code-badge">26005-0073</span>
+      <span class="passage-badge">p.90 · Ex 2</span>
+    </p>
+  </div>
+
+  <table>
+    <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr><td>02 (26005-0073)</td><td>흐름에 무관한 문장</td><td><span class="ans-badge">③</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;As people repeat a behavior in a consistent context, the behavior becomes increasingly linked with that context. This process has been investigated in the laboratory. <span class="hl">① When people have performed a simple action repeatedly in a consistent context, performing that action becomes automatic.</span> <span class="hl">② This kind of automatic response develops because our minds are very sensitive to associations between actions and the contexts in which they are performed.</span> <span class="irrelevant">③ Since contexts keep shifting, we need to consider those contextual variations <span class="signal">rather than</span> relying only on the habitual response that has been established through repetition.</span> <span class="hl">④ <span class="signal">In other words</span>, when a behavior is repeated enough in a given context, it becomes mentally tied to features of that context.</span> <span class="hl">⑤ <span class="signal">As a result</span>, encountering those features is enough to trigger the behavior, even without a deliberate intention to act.</span>
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* deliberate: 의도적인
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="background:#fef2f2; border:1px dashed var(--red-line); padding:1px 4px; border-radius:3px;">점선 배경</span> = 무관한 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 분석노트</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<section class="page">
+
+  <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
+
+  <div class="syntax-box">
+    <span class="label">구문 1 — 도입부 (주제문)</span>
+    <div class="en">
+      <span class="chunk">As people repeat a behavior</span> / <span class="chunk">in a consistent context</span>, / <span class="chunk">the behavior becomes</span> / <span class="chunk">increasingly linked with that context</span>.
+    </div>
+    <div class="ko">→ 사람들이 행동을 반복할 때 / 일관된 맥락에서 / 그 행동은 / 점점 더 그 맥락과 연결된다.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 2 — ② 자동 반응의 원인</span>
+    <div class="en">
+      <span class="chunk">This kind of automatic response develops</span> / <span class="chunk">because our minds are very sensitive</span> / <span class="chunk">to associations</span> / <span class="chunk">between actions and the contexts</span> / <span class="chunk">in which they are performed</span>.
+    </div>
+    <div class="ko">→ 이런 종류의 자동 반응이 발달하는 것은 / 우리의 마음이 매우 민감하기 때문이다 / 연관성에 대해 / 행동과 맥락 사이의 / 그것들이 수행되는.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 3 — ③ 무관한 문장 (정답)</span>
+    <div class="en">
+      <span class="chunk"><b>Since</b> contexts keep shifting</span>, / <span class="chunk">we need to consider</span> / <span class="chunk">those contextual variations</span> / <span class="chunk"><b>rather than</b> relying only on</span> / <span class="chunk">the habitual response</span> / <span class="chunk">that has been established through repetition</span>.
+    </div>
+    <div class="ko">→ 맥락이 계속 변하기 때문에 / 우리는 고려해야 한다 / 그러한 맥락적 변화를 / ~에만 의존하기보다는 / 습관적 반응 / 반복을 통해 확립된.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">구문 포인트</span>
+    <strong>"in which they are performed"</strong>: 관계부사절. "the contexts in which they are performed" = "행동이 수행되는 맥락". <strong>in which = where</strong>로 바꿔 읽을 수 있다.
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — ⑤ 결론 (자동 행동 촉발)</span>
+    <div class="en">
+      <span class="chunk"><b>As a result</b></span>, / <span class="chunk">encountering those features</span> / <span class="chunk">is enough to trigger the behavior</span>, / <span class="chunk">even without a deliberate intention to act</span>.
+    </div>
+    <div class="ko">→ 그 결과 / 그러한 특징들을 접하는 것만으로도 / 행동을 촉발하기에 충분하다 / 행동하려는 의도적인 의지가 없어도.</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>전문 해석</h2>
+
+  <div class="translation">
+    &nbsp;&nbsp;사람들이 일관된 맥락에서 행동을 반복하면, 그 행동은 점점 더 그 맥락과 연결된다. 이 과정은 실험실에서 연구되어 왔다. ① 사람들이 일관된 맥락에서 단순한 행동을 반복적으로 수행했을 때, 그 행동을 수행하는 것은 자동적이 된다. ② 이런 종류의 자동 반응이 발달하는 것은 우리의 마음이 행동과 그것이 수행되는 맥락 사이의 연관성에 매우 민감하기 때문이다. <span style="color:#c62828;">③ 맥락이 계속 변하기 때문에, 우리는 반복을 통해 확립된 습관적 반응에만 의존하기보다는 그러한 맥락적 변화를 고려해야 한다.</span> ④ 다시 말해, 행동이 주어진 맥락에서 충분히 반복되면, 그것은 그 맥락의 특징들과 정신적으로 결합된다. ⑤ 그 결과, 그러한 특징들을 접하는 것만으로도 의도적으로 행동하려는 의지가 없이도 행동을 촉발하기에 충분하다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 분석노트</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 논리 구조 + 문제 풀이 ============ -->
+<section class="page">
+
+  <h2>논리 구조 — 글의 흐름</h2>
+
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>주제 제시 → 실험적 근거 → 원인 설명 → 요약(In other words) → 결론(As a result)</strong></p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="step-label">도입 (주제문)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">일관된 맥락에서 행동 반복 → 행동이 맥락과 <strong>점점 더 연결</strong>된다.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">① 실험적 근거</span>
+      <p style="margin:4px 0; font-size:10.5pt;">일관된 맥락에서 단순 행동 반복 → 행동이 <strong>자동적</strong>이 된다.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">② 원인 설명</span>
+      <p style="margin:4px 0; font-size:10.5pt;">마음이 행동-맥락 <strong>연관성에 민감</strong>하기 때문에 자동 반응이 발달한다.</p>
+    </div>
+    <div class="flow-arrow" style="color:#c62828;">▼ ✕</div>
+    <div class="flow-step irrelevant-step">
+      <span class="step-label">③ 무관한 문장</span>
+      <p style="margin:4px 0; font-size:10.5pt;">맥락이 변하므로 <strong>습관에만 의존하지 말고</strong> 맥락 변화를 고려해야 한다 → 습관의 <strong>한계/주의사항</strong> (논지와 반대 방향)</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">④ 요약 (In other words)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">행동이 충분히 반복되면 맥락의 특징들과 <strong>정신적으로 결합</strong>된다.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">⑤ 결론 (As a result)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">맥락 특징 접촉 → 의도 없이도 행동이 <strong>자동 촉발</strong>된다.</p>
+    </div>
+  </div>
+
+  <h3>③번이 무관한 이유</h3>
+
+  <p>글 전체는 <strong>"일관된 맥락에서 행동을 반복하면 자동화된다"</strong>는 습관 형성의 메커니즘을 설명한다. ②에서 자동 반응이 발달하는 원인을 밝히고, ④에서 "In other words"로 이를 재진술하는 자연스러운 흐름이다.</p>
+  <p>그런데 ③번은 <strong>"맥락이 변하므로 습관에만 의존하지 말아야 한다"</strong>는 내용으로, 습관 형성의 <strong>한계/경고</strong>를 제시한다. 이는 습관의 자동화 메커니즘을 긍정적으로 설명하는 글의 논지와 <strong>방향이 반대</strong>이다.</p>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ③번에 "contexts", "habitual response", "repetition" 등 글의 핵심 키워드가 모두 등장하여 같은 주제인 듯 보인다. 그러나 <strong>"rather than relying only on"</strong>이라는 표현이 습관적 반응을 <strong>경계</strong>하는 방향으로 전환시킨다. 키워드의 유사성에 속지 말고 <strong>논지의 방향</strong>(긍정/부정)을 확인해야 한다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 분석노트</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 연결어 정리 + 추가 분석 ============ -->
+<section class="page">
+
+  <h2>연결어/신호어 정리</h2>
+
+  <table>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치 · 역할</th></tr></thead>
+    <tbody>
+      <tr><td><strong>As</strong></td><td>시간/조건</td><td>도입부 — 행동 반복 시 맥락과 연결됨</td></tr>
+      <tr><td><strong>When</strong></td><td>조건</td><td>①번 — 일관된 맥락에서 반복 수행 시 자동화</td></tr>
+      <tr><td><strong>because</strong></td><td>원인</td><td>②번 — 자동 반응 발달의 이유</td></tr>
+      <tr><td><strong>Since</strong></td><td>원인 (위장)</td><td>③번 — 맥락 변화를 이유로 습관 의존 경계</td></tr>
+      <tr><td><strong>rather than</strong></td><td>대비/선택</td><td>③번 — 습관에만 의존하지 말 것 (논지와 충돌)</td></tr>
+      <tr><td><strong>In other words</strong></td><td>환언/재진술</td><td>④번 — ②의 내용을 다시 정리</td></tr>
+      <tr><td><strong>As a result</strong></td><td>결과</td><td>⑤번 — 최종 결론 도출</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <h2>③ 제거 후 글의 응집성 분석</h2>
+
+  <p>③번을 제거하면 ② → ④의 연결이 완벽하게 자연스러워진다.</p>
+
+  <div class="syntax-box">
+    <span class="label">② → ④ 연결 흐름</span>
+    <div class="en">
+      ② our minds are very sensitive to associations between actions and the contexts...
+      <br><b>In other words</b>,
+      <br>④ when a behavior is repeated enough in a given context, it becomes mentally tied to features of that context.
+    </div>
+    <div class="ko">→ ②에서 "마음이 행동-맥락 연관성에 민감하다"는 원인을 제시하고, ④에서 <strong>"In other words(다시 말해)"</strong>로 이를 재진술한다. ③이 빠지면 환언 구조가 매끄럽게 이어진다.</div>
+  </div>
+
+  <p>또한 ④ → ⑤도 <strong>"As a result"</strong>로 자연스럽게 연결된다: 맥락과 정신적 결합(④) → 그 결과 맥락 접촉만으로 행동 촉발(⑤).</p>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    이 지문의 핵심 판별 기준은 <strong>논지의 방향성</strong>이다:<br>
+    - 나머지 문장: 습관의 자동화 메커니즘을 <strong>설명/긍정</strong><br>
+    - ③번: 습관에 의존하지 말라는 <strong>경고/부정</strong><br>
+    같은 키워드(context, habitual, repetition)를 사용하더라도 <strong>논지의 방향이 반대</strong>이면 무관한 문장이다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>핵심 어휘 정리</h2>
+
+  <table>
+    <thead><tr><th>영어</th><th>뜻</th><th>문맥 활용</th></tr></thead>
+    <tbody>
+      <tr><td><strong>consistent</strong></td><td>일관된, 한결같은</td><td>일관된 맥락에서의 반복 행동</td></tr>
+      <tr><td><strong>association</strong></td><td>연관(성), 연합</td><td>행동과 맥락 사이의 연관성</td></tr>
+      <tr><td><strong>automatic</strong></td><td>자동적인</td><td>반복 행동이 자동적이 됨</td></tr>
+      <tr><td><strong>contextual</strong></td><td>맥락의, 상황의</td><td>맥락적 변화(contextual variations)</td></tr>
+      <tr><td><strong>trigger</strong></td><td>촉발하다</td><td>맥락 접촉이 행동을 촉발</td></tr>
+      <tr><td><strong>deliberate</strong></td><td>의도적인</td><td>의도적인 의지 없이도 행동 촉발</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 흐름에 무관한 문장 분석노트</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

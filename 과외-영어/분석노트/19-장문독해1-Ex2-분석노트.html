@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>19. 장문 독해 (1) — Ex 2 분석노트</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+
+/* 구문 분석 */
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+/* 해석 박스 */
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+/* 논리 구조 플로우 */
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+/* 선지 분석 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 지문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
+    <h1>19. 장문 독해 (1) — Ex 2</h1>
+    <p class="subtitle">해양 포식자의 다중 감각 사냥 전략</p>
+    <p class="meta">
+      <span class="code-badge">26005-0099 / 0100</span>
+      <span class="passage-badge">p.115 · Ex 2 (03~04)</span>
+    </p>
+  </div>
+
+  <table>
+    <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr><td>03 (26005-0099)</td><td>윗글의 주제</td><td><span class="ans-badge">①</span></td></tr>
+      <tr><td>04 (26005-0100)</td><td>밑줄 친 낱말의 의미 추론</td><td><span class="ans-badge">④</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;Aquatic predators face a unique challenge: <span class="hl">detecting and capturing prey in an environment where visibility can be severely limited.</span> Unlike terrestrial hunters, which primarily rely on vision, marine predators have evolved a diverse array of sensory tools to navigate the murky depths. Sharks, <span class="signal">for instance</span>, possess electroreceptors called ampullae of Lorenzini, which detect the faint electrical fields generated by the muscle contractions of nearby prey. This electroreception allows them to locate hidden prey even in complete darkness or buried beneath the sand. Dolphins, <span class="signal">on the other hand</span>, use echolocation, emitting high-frequency clicks and interpreting the returning echoes to build a detailed acoustic image of their surroundings. <span class="signal">Similarly</span>, many species of deep-sea fish have developed highly sensitive lateral line systems that detect minute changes in water pressure and vibrations caused by the movements of other organisms. <span class="hl">These specialized senses do not operate in isolation; <span class="signal">rather</span>, they are integrated into a multisensory system that enhances the predator's ability to detect, track, and capture prey.</span> A shark approaching its target might initially detect a scent trail, <span class="signal">then</span> switch to electroreception as it closes in, demonstrating a seamless transition between sensory modes. <span class="hl">This sensory integration is not merely additive but synergistic &mdash; the combined input provides a richer, more reliable picture of the environment than any single sense alone.</span>
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* ampullae of Lorenzini: 로렌치니 기관(상어의 전기수용기) &nbsp; ** echolocation: 반향정위 &nbsp; *** lateral line: 측선(어류의 감각기관)
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) 분석노트</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<section class="page">
+
+  <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
+
+  <div class="syntax-box">
+    <span class="label">구문 1 — 도입부 (해양 포식자의 과제)</span>
+    <div class="en">
+      <span class="chunk">Aquatic predators</span> / <span class="chunk">face a unique challenge</span>: / <span class="chunk">detecting and capturing prey</span> / <span class="chunk">in an environment</span> / <span class="chunk">where visibility can be severely limited</span>.
+    </div>
+    <div class="ko">→ 수중 포식자는 / 독특한 과제에 직면한다: / 먹이를 탐지하고 포획하는 것 / 환경에서 / 시야가 심각하게 제한될 수 있는.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 2 — 핵심 주제문 (다중감각 통합)</span>
+    <div class="en">
+      <span class="chunk">These specialized senses</span> / <span class="chunk">do not operate in isolation</span>; / <span class="chunk">rather, they are integrated</span> / <span class="chunk">into a multisensory system</span> / <span class="chunk">that enhances the predator's ability</span> / <span class="chunk">to detect, track, and capture prey</span>.
+    </div>
+    <div class="ko">→ 이러한 특수화된 감각들은 / 독립적으로 작동하지 않는다; / 오히려 그것들은 통합되어 있다 / 다중 감각 체계 안에 / 포식자의 능력을 향상시키는 / 먹이를 탐지, 추적, 포획하는.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 3 — 감각 전환 예시</span>
+    <div class="en">
+      <span class="chunk">A shark approaching its target</span> / <span class="chunk">might initially detect a scent trail</span>, / <span class="chunk">then switch to electroreception</span> / <span class="chunk">as it closes in</span>, / <span class="chunk">demonstrating a seamless transition</span> / <span class="chunk">between sensory modes</span>.
+    </div>
+    <div class="ko">→ 목표물에 접근하는 상어는 / 처음에 냄새 흔적을 감지하고 / 그다음 전기수용으로 전환할 수 있다 / 가까이 다가가면서 / 매끄러운 전환을 보여주며 / 감각 방식 사이의.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">구문 포인트</span>
+    <strong>not merely additive but synergistic</strong>: "단순히 더해지는 것이 아니라 시너지를 내는" — <strong>not A but B</strong> 구문. 마지막 문장에서 주제를 압축. 'synergistic(시너지 효과의)'이 Q04 밑줄 어휘 추론의 핵심.
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — 결론 (시너지 효과)</span>
+    <div class="en">
+      <span class="chunk">This sensory integration</span> / <span class="chunk">is not merely additive</span> / <span class="chunk">but synergistic</span> &mdash; / <span class="chunk">the combined input provides</span> / <span class="chunk">a richer, more reliable picture</span> / <span class="chunk">of the environment</span> / <span class="chunk">than any single sense alone</span>.
+    </div>
+    <div class="ko">→ 이 감각 통합은 / 단순히 더해지는 것이 아니라 / 시너지를 내는 것이다 — / 결합된 입력이 제공한다 / 더 풍부하고 신뢰할 수 있는 그림을 / 환경의 / 어떤 단일 감각만으로보다.</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>전문 해석</h2>
+
+  <div class="translation">
+    &nbsp;&nbsp;수중 포식자는 독특한 과제에 직면한다: 시야가 심각하게 제한될 수 있는 환경에서 먹이를 탐지하고 포획하는 것. 주로 시각에 의존하는 육상 사냥꾼과 달리, 해양 포식자는 어두운 심해를 헤쳐 나가기 위해 다양한 감각 도구를 진화시켜 왔다. 예를 들어, 상어는 로렌치니 기관이라 불리는 전기수용기를 가지고 있는데, 이것은 가까이 있는 먹이의 근육 수축에 의해 생성되는 미약한 전기장을 감지한다. 이 전기수용은 완전한 어둠 속에서나 모래 아래에 숨어 있는 먹이도 찾아낼 수 있게 해 준다. 반면에 돌고래는 반향정위를 사용하여 고주파 딸깍 소리를 내보내고 돌아오는 메아리를 해석하여 주변 환경의 상세한 음향 이미지를 구축한다. 마찬가지로, 많은 종의 심해 어류는 다른 유기체의 움직임에 의해 야기되는 수압과 진동의 미세한 변화를 감지하는 매우 민감한 측선 체계를 발달시켜 왔다. 이러한 특수화된 감각들은 독립적으로 작동하지 않는다; 오히려 그것들은 포식자가 먹이를 탐지, 추적, 포획하는 능력을 향상시키는 다중 감각 체계로 통합되어 있다. 목표물에 접근하는 상어는 처음에 냄새 흔적을 감지한 다음, 가까이 다가가면서 전기수용으로 전환할 수 있는데, 이는 감각 방식 간의 매끄러운 전환을 보여준다. 이 감각 통합은 단순히 더해지는 것이 아니라 시너지를 내는 것이다 — 결합된 입력은 어떤 단일 감각만으로보다 더 풍부하고 신뢰할 수 있는 환경의 그림을 제공한다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) 분석노트</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 논리 구조 + Q03 ============ -->
+<section class="page">
+
+  <h2>논리 구조 — 글의 흐름</h2>
+
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>문제 제기 → 개별 사례 나열 → 통합 원리 제시 → 예시 → 결론</strong></p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="step-label">문제 제기</span>
+      <p style="margin:4px 0; font-size:10.5pt;">수중에서는 <strong>시야가 제한</strong>되어 먹이 탐지·포획이 어려움. 육상 사냥꾼과 다른 전략 필요.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">개별 감각 사례</span>
+      <p style="margin:4px 0; font-size:10.5pt;">
+        ① 상어 — <strong>전기수용</strong>(로렌치니 기관): 근육 수축의 전기장 감지<br>
+        ② 돌고래 — <strong>반향정위</strong>: 고주파 클릭 → 음향 이미지<br>
+        ③ 심해 어류 — <strong>측선 체계</strong>: 수압·진동 변화 감지
+      </p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">핵심 원리</span>
+      <p style="margin:4px 0; font-size:10.5pt;">개별 감각은 <strong>독립적으로 작동하지 않고</strong>, 다중 감각 체계로 <strong>통합</strong>되어 탐지·추적·포획 능력을 향상.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">통합 예시</span>
+      <p style="margin:4px 0; font-size:10.5pt;">상어: 냄새 흔적(후각) → 가까이 다가가면 전기수용으로 전환 = <strong>감각 방식 간 매끄러운 전환</strong></p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">결론</span>
+      <p style="margin:4px 0; font-size:10.5pt;">감각 통합은 단순 합산이 아닌 <strong>시너지</strong> → 단일 감각보다 더 풍부하고 신뢰할 수 있는 정보 제공.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="label">글의 핵심</span>
+    해양 포식자는 시야가 제한된 수중 환경에서 전기수용, 반향정위, 측선 등 <strong>다양한 감각을 통합</strong>하여 먹이를 사냥한다. 이 통합은 <strong>시너지 효과</strong>를 내어 개별 감각의 합보다 더 큰 능력을 발휘한다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — Q03 (26005-0099)</h2>
+  <h3>윗글의 주제로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">①</span></h3>
+
+  <ul class="choice-list">
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ① how marine predators integrate multiple senses to hunt in low-visibility environments
+      <span class="reason">— "다중 감각 통합" + "저시야 환경에서의 사냥" = 글 전체의 주제와 정확히 일치</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② the evolutionary advantages of electroreception in deep-sea organisms
+      <span class="reason">— 전기수용은 상어의 사례일 뿐, 글의 주제는 다중 감각 통합</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ③ differences in hunting strategies between terrestrial and aquatic predators
+      <span class="reason">— 육상/수중 비교는 도입부 한 문장. 이후 수중 포식자의 감각 통합에 집중</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ④ the role of echolocation in helping dolphins navigate ocean environments
+      <span class="reason">— 돌고래 반향정위는 세 사례 중 하나. 주제를 대표하지 못함</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ⑤ why aquatic predators are more successful hunters than their land-based counterparts
+      <span class="reason">— 수중 vs 육상 우열 비교가 아니라, 수중 포식자의 감각 전략이 핵심</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ③번은 도입부의 "Unlike terrestrial hunters"에 이끌리기 쉬우나, 이는 배경 설명일 뿐이고 글의 본론은 수중 포식자의 <strong>다중 감각 통합 메커니즘</strong>이다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) 분석노트</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — Q04 풀이 + 연결어 ============ -->
+<section class="page">
+
+  <h2>문제 풀이 — Q04 (26005-0100)</h2>
+  <h3>밑줄 친 "synergistic"이 의미하는 바로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">④</span></h3>
+
+  <div class="syntax-box">
+    <span class="label">원문 맥락</span>
+    <div class="en">This sensory integration is <b>not merely additive but synergistic</b> &mdash; the combined input provides a richer, more reliable picture of the environment than any single sense alone.</div>
+    <div class="ko">→ 이 감각 통합은 단순히 더해지는 것이 아니라 <b>시너지를 내는</b> 것이다 — 결합된 입력은 단일 감각만으로보다 더 풍부하고 신뢰할 수 있는 환경의 그림을 제공한다.</div>
+  </div>
+
+  <p><strong>핵심 단서:</strong> "not merely additive <strong>but</strong> ~" 구문에서 additive(단순 합산)와 <strong>대조</strong>되는 의미를 찾아야 한다. 대시(—) 뒤에서 "combined input provides a <strong>richer, more reliable picture</strong> ... than any single sense alone"으로 구체화 → 합친 결과가 개별 합산보다 <strong>더 큰</strong> 효과를 냄.</p>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ① operating independently without interference from other senses
+      <span class="reason">— "독립적으로 작동"은 정반대 (not operate in isolation)</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② functioning in a fixed sequence from one sense to the next
+      <span class="reason">— "고정된 순서"는 본문에 없음. seamless transition은 순서 고정이 아닌 유연한 전환</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ③ replacing one sensory mode with a more dominant one over time
+      <span class="reason">— "하나를 대체"가 아니라 여러 감각이 동시에 통합</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ④ producing a combined effect greater than the sum of individual senses
+      <span class="reason">— "시너지" = 개별 합 이상의 결합 효과. 대시 뒤 설명("richer, more reliable ... than any single sense alone")과 정확히 일치</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ⑤ relying primarily on the strongest sense available in a given habitat
+      <span class="reason">— "가장 강한 감각에 의존"은 다중 감각 통합과 반대</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">어휘 포인트</span>
+    <strong>synergistic</strong>은 수능에서 자주 등장하는 고급 어휘. syn-(함께) + erg-(일하다) + -istic → "함께 작용하여 시너지를 내는". <strong>not A but B</strong> 구조에서 A(additive)의 반의어 관계로 B(synergistic)의 의미를 추론하는 전형적인 어휘 추론 문제.
+  </div>
+
+  <hr class="divider">
+
+  <h2>연결어/신호어 정리</h2>
+
+  <table>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Unlike</strong></td><td>대조</td><td>육상 사냥꾼 vs 해양 포식자</td></tr>
+      <tr><td><strong>for instance</strong></td><td>구체적 예시</td><td>상어의 전기수용 사례</td></tr>
+      <tr><td><strong>on the other hand</strong></td><td>대조적 예시</td><td>돌고래의 반향정위 사례</td></tr>
+      <tr><td><strong>Similarly</strong></td><td>유사 예시 추가</td><td>심해 어류의 측선 체계</td></tr>
+      <tr><td><strong>rather</strong></td><td>정정/전환</td><td>독립 작동 X → 통합 체계로</td></tr>
+      <tr><td><strong>then</strong></td><td>시간 순서</td><td>냄새 감지 후 전기수용 전환</td></tr>
+      <tr><td><strong>not merely ~ but ~</strong></td><td>대조 강조</td><td>단순 합산이 아닌 시너지</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) 분석노트</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18. 문단 요약 — Ex 1 분석노트</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+
+.summary-box {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 8px; padding: 12px 18px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.summary-box .label {
+  display: block; font-family: 'Pretendard', sans-serif;
+  font-size: 9pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; margin-bottom: 6px;
+}
+.blank {
+  display: inline-block; border-bottom: 2px solid var(--accent);
+  min-width: 80px; text-align: center; font-weight: 700;
+  color: var(--accent); padding: 0 4px;
+}
+
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 지문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
+    <h1>18. 문단 요약 — Ex 1</h1>
+    <p class="subtitle">전통 지식과 과학: 효능 확인의 역할 분담</p>
+    <p class="meta">
+      <span class="code-badge">26005-0091</span>
+      <span class="passage-badge">p.108 · Ex 1</span>
+    </p>
+  </div>
+
+  <table>
+    <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr><td>Ex 1 (26005-0091)</td><td>문단 요약</td><td><span class="ans-badge">①</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;It is a mistake to suppose that, by identifying the active ingredients in traditional herbal medicines, science has provided an account of <span class="hl">why these remedies work that is superior in every way</span> to the accounts given in traditional knowledge systems. <span class="signal">What</span> scientific pharmacology can <span class="signal">indeed</span> provide is a <span class="hl">detailed knowledge of the mechanisms by which the active ingredients produce their effects</span> within the body. <span class="signal">But</span> that does not mean that science can explain why these particular substances were originally chosen as remedies. What science <span class="signal">cannot</span> account for, and what traditional knowledge <span class="signal">can</span>, is how <span class="hl">the medicinal use of plants was discovered in the first place</span>. Knowing the pharmacological mechanism by which a drug produces its effects does not explain how people figured out that a particular plant was worth trying, nor does it explain <span class="hl">the discovery process by which the dosage and method of preparation were optimized over time</span>. <span class="signal">For these aspects</span>, we must look to the <span class="hl">traditional knowledge systems that developed and refined these remedies over generations</span>.
+  </div>
+
+  <div class="summary-box">
+    <span class="label">요약문</span>
+    While science can clarify the <span class="blank">(A)</span> through which traditional remedies produce their effects, it falls short of explaining how these remedies were originally <span class="blank">(B)</span>.
+  </div>
+
+  <table>
+    <thead><tr><th>선지</th><th>(A)</th><th>(B)</th></tr></thead>
+    <tbody>
+      <tr><td>①</td><td>mechanisms</td><td>discovered</td></tr>
+      <tr><td>②</td><td>mechanisms</td><td>funded</td></tr>
+      <tr><td>③</td><td>limitations</td><td>discovered</td></tr>
+      <tr><td>④</td><td>limitations</td><td>funded</td></tr>
+      <tr><td>⑤</td><td>limitations</td><td>classified</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:9pt; color:var(--muted);">
+    * herbal: 약초의 &nbsp; ** pharmacology: 약리학 &nbsp; *** dosage: 복용량
+    <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어
+  </p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 18. 문단 요약 분석노트</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<section class="page">
+
+  <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
+
+  <div class="syntax-box">
+    <span class="label">구문 1 — 도입 (오해 지적)</span>
+    <div class="en">
+      <span class="chunk">It is a mistake to suppose</span> / <span class="chunk">that, by identifying the active ingredients</span> / <span class="chunk">in traditional herbal medicines</span>, / <span class="chunk">science has provided an account of</span> / <span class="chunk">why these remedies work</span> / <span class="chunk">that is superior in every way</span> / <span class="chunk">to the accounts given in traditional knowledge systems</span>.
+    </div>
+    <div class="ko">→ ~라고 가정하는 것은 실수이다 / 전통 약초 약의 / 유효 성분을 확인함으로써 / 과학이 ~에 대한 설명을 제공했다고 / 이 약이 왜 효과가 있는지에 대해 / 모든 면에서 우월한 / 전통적 지식 체계에서 주어진 설명보다.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 2 — 과학이 할 수 있는 것</span>
+    <div class="en">
+      <span class="chunk">What scientific pharmacology can indeed provide</span> / <span class="chunk">is a detailed knowledge of the mechanisms</span> / <span class="chunk">by which the active ingredients produce their effects</span> / <span class="chunk">within the body</span>.
+    </div>
+    <div class="ko">→ 과학적 약리학이 실제로 제공할 수 있는 것은 / 메커니즘에 대한 상세한 지식이다 / 유효 성분이 그 효과를 생산하는 / 체내에서.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 3 — 과학이 할 수 없는 것 vs. 전통 지식이 할 수 있는 것</span>
+    <div class="en">
+      <span class="chunk">What science cannot account for</span>, / <span class="chunk">and what traditional knowledge can</span>, / <span class="chunk">is how the medicinal use of plants</span> / <span class="chunk">was discovered in the first place</span>.
+    </div>
+    <div class="ko">→ 과학이 설명할 수 없고 / 전통 지식이 설명할 수 있는 것은 / 식물의 약용이 / 애초에 어떻게 발견되었는지이다.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">구문 포인트</span>
+    <strong>What S can(not) V</strong> 구조가 반복되어 과학과 전통 지식의 <strong>역할 분담</strong>을 대비한다. "What science cannot... and what traditional knowledge can" — 병렬구조에서 <strong>can</strong> 뒤에 <strong>account for</strong>가 생략되어 있음에 주의.
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — 결론</span>
+    <div class="en">
+      <span class="chunk">For these aspects</span>, / <span class="chunk">we must look to</span> / <span class="chunk">the traditional knowledge systems</span> / <span class="chunk">that developed and refined these remedies</span> / <span class="chunk">over generations</span>.
+    </div>
+    <div class="ko">→ 이러한 측면에 대해서는 / 우리는 ~에 의존해야 한다 / 전통적 지식 체계에 / 이 약을 발전시키고 다듬어 온 / 여러 세대에 걸쳐.</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>전문 해석</h2>
+
+  <div class="translation">
+    &nbsp;&nbsp;전통적인 약초 약의 유효 성분을 확인함으로써 과학이 이 약이 왜 효과가 있는지에 대해 전통적 지식 체계에서 주어진 설명보다 모든 면에서 우월한 설명을 제공했다고 가정하는 것은 실수이다. 과학적 약리학이 실제로 제공할 수 있는 것은 유효 성분이 체내에서 그 효과를 생산하는 메커니즘에 대한 상세한 지식이다. 그러나 그것이 과학이 왜 이 특정 물질들이 원래 약으로 선택되었는지를 설명할 수 있다는 것을 의미하지는 않는다. 과학이 설명할 수 없고 전통 지식이 설명할 수 있는 것은 식물의 약용이 애초에 어떻게 발견되었는지이다. 약이 그 효과를 생산하는 약리학적 메커니즘을 아는 것은 사람들이 특정 식물이 시도해 볼 가치가 있다고 어떻게 알아냈는지를 설명하지 못하며, 복용량과 조제 방법이 시간이 지남에 따라 어떻게 최적화되었는지의 발견 과정도 설명하지 못한다. 이러한 측면에 대해서는 여러 세대에 걸쳐 이 약을 발전시키고 다듬어 온 전통적 지식 체계에 의존해야 한다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 18. 문단 요약 분석노트</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 논리 구조 + 문제 풀이 ============ -->
+<section class="page">
+
+  <h2>논리 구조 — 글의 흐름</h2>
+
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>오해 지적 → 과학의 역할(할 수 있는 것) → 과학의 한계(할 수 없는 것) → 전통 지식의 가치</strong></p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="step-label">도입 — 오해 지적</span>
+      <p style="margin:4px 0; font-size:10.5pt;">과학이 전통 약초의 효능에 대해 <strong>모든 면에서 우월한 설명</strong>을 제공했다고 생각하는 것은 <strong>실수</strong></p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">과학이 할 수 있는 것</span>
+      <p style="margin:4px 0; font-size:10.5pt;">유효 성분이 체내에서 효과를 내는 <strong>메커니즘(mechanisms)</strong>에 대한 상세한 지식 제공</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">과학이 할 수 없는 것 (But / cannot)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">특정 식물이 왜 약으로 선택되었는지, 복용량과 조제법이 어떻게 최적화되었는지 = <strong>발견(discovery) 과정</strong></p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">결론 — 전통 지식의 가치</span>
+      <p style="margin:4px 0; font-size:10.5pt;">발견 과정은 여러 세대에 걸쳐 약을 발전·정제해 온 <strong>전통적 지식 체계</strong>에 의존해야 한다.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — 요약문 빈칸 분석</h2>
+  <h3>요약문의 (A), (B)에 들어갈 말로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">①</span></h3>
+
+  <div class="summary-box">
+    <span class="label">요약문 (정답 대입)</span>
+    While science can clarify the <span class="blank">mechanisms</span> through which traditional remedies produce their effects, it falls short of explaining how these remedies were originally <span class="blank">discovered</span>.
+  </div>
+  <p style="font-size:10pt; color:var(--muted);">→ 과학은 전통 약이 효과를 내는 <strong>메커니즘</strong>을 밝힐 수 있지만, 이 약이 원래 어떻게 <strong>발견</strong>되었는지를 설명하는 데는 부족하다.</p>
+
+  <h3>(A) mechanisms이 정답인 근거</h3>
+  <p>본문: "a detailed knowledge of the <strong>mechanisms</strong> by which the active ingredients produce their effects" → 요약문: "the (A) through which traditional remedies produce their effects" — <strong>직접 대응</strong></p>
+
+  <h3>(B) discovered가 정답인 근거</h3>
+  <p>본문: "how the medicinal use of plants was <strong>discovered</strong> in the first place" → 요약문: "how these remedies were originally (B)" — <strong>직접 대응</strong></p>
+
+  <ul class="choice-list">
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ① (A) mechanisms — (B) discovered
+      <span class="reason">— 본문 핵심 어휘와 정확히 대응</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② (A) mechanisms — (B) funded
+      <span class="reason">— "자금 지원(funded)"은 본문에 언급 없음</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ③ (A) limitations — (B) discovered
+      <span class="reason">— 과학이 밝히는 것은 "한계"가 아니라 "메커니즘"</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ④ (A) limitations — (B) funded
+      <span class="reason">— (A), (B) 모두 본문과 불일치</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ⑤ (A) limitations — (B) classified
+      <span class="reason">— "분류(classified)"도 본문에 없고, (A)도 부적절</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ③번에서 (B) discovered는 맞지만, (A) limitations는 오답이다. 본문이 "과학의 한계"를 언급하긴 하지만, 요약문의 "(A) through which ~ produce their effects"라는 구조에서는 <strong>효과를 내는 수단/경로</strong>를 설명하는 어휘가 필요하므로 "limitations"는 문맥상 부적절하다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 18. 문단 요약 분석노트</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 연결어 정리 ============ -->
+<section class="page">
+
+  <h2>연결어/신호어 정리</h2>
+
+  <table>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치/역할</th></tr></thead>
+    <tbody>
+      <tr><td><strong>It is a mistake to suppose that</strong></td><td>오해 지적</td><td>도입부에서 잘못된 가정을 제시하며 반박 구조 시작</td></tr>
+      <tr><td><strong>What ~ can indeed provide</strong></td><td>인정/양보</td><td>과학이 할 수 있는 부분(메커니즘)을 먼저 인정</td></tr>
+      <tr><td><strong>But</strong></td><td>역접/전환</td><td>과학의 능력 인정 후 → 과학의 한계로 전환</td></tr>
+      <tr><td><strong>What ~ cannot / what ~ can</strong></td><td>대비</td><td>과학 vs. 전통 지식의 역할을 명확히 대비</td></tr>
+      <tr><td><strong>nor does it explain</strong></td><td>부정 추가</td><td>과학이 설명하지 못하는 것을 추가로 나열</td></tr>
+      <tr><td><strong>For these aspects</strong></td><td>결론 전환</td><td>앞서 언급한 측면들에 대해 → 전통 지식으로 결론</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <h2>핵심 어휘 정리</h2>
+
+  <table>
+    <thead><tr><th>어휘</th><th>뜻</th><th>문맥</th></tr></thead>
+    <tbody>
+      <tr><td><strong>active ingredients</strong></td><td>유효 성분</td><td>약초 약에서 실제로 효과를 내는 화학 성분</td></tr>
+      <tr><td><strong>mechanism</strong></td><td>메커니즘, 기전</td><td>유효 성분이 체내에서 작용하는 방식</td></tr>
+      <tr><td><strong>pharmacology</strong></td><td>약리학</td><td>약물의 작용 메커니즘을 연구하는 학문</td></tr>
+      <tr><td><strong>remedy / remedies</strong></td><td>치료제, 약</td><td>전통 약초 약</td></tr>
+      <tr><td><strong>account for</strong></td><td>설명하다</td><td>과학이 발견 과정을 설명할 수 없다</td></tr>
+      <tr><td><strong>dosage</strong></td><td>복용량</td><td>시간이 지남에 따라 최적화된 것</td></tr>
+      <tr><td><strong>refine</strong></td><td>다듬다, 정제하다</td><td>전통 지식이 여러 세대에 걸쳐 약을 정제함</td></tr>
+      <tr><td><strong>fall short of</strong></td><td>~에 미치지 못하다</td><td>요약문: 과학이 발견 과정 설명에 미치지 못한다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">TIP</span>
+    문단 요약 문제에서는 요약문의 <strong>빈칸 전후 구조</strong>를 먼저 파악한다. "(A) through which ~ produce their effects"에서 "(A)를 통해 효과를 낸다"이므로 (A)에는 수단/경로를 나타내는 명사가 와야 한다. 본문에서 <strong>동일한 구조</strong>("mechanisms by which the active ingredients produce their effects")를 찾으면 정답을 확정할 수 있다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 18. 문단 요약 분석노트</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

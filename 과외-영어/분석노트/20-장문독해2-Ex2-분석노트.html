@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20. 장문 독해 (2) — Ex 2 분석노트</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10pt; line-height: 1.8; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 지문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
+    <h1>20. 장문 독해 (2) — Ex 2</h1>
+    <p class="subtitle">구전 전통의 기억 기법과 문자 문화로의 전환</p>
+    <p class="meta">
+      <span class="code-badge">26005-0111 / 0112 / 0113</span>
+      <span class="passage-badge">pp.122~123 · Ex 2 (04~06)</span>
+    </p>
+  </div>
+
+  <table>
+    <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr><td>04 (26005-0111)</td><td>윗글의 주제</td><td><span class="ans-badge">③</span></td></tr>
+      <tr><td>05 (26005-0112)</td><td>어휘 적절성 (밑줄 친 낱말)</td><td><span class="ans-badge">④</span></td></tr>
+      <tr><td>06 (26005-0113)</td><td>윗글의 내용 일치/불일치</td><td><span class="ans-badge">③</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage" style="font-size:9.6pt; line-height:1.72;">
+    &nbsp;&nbsp;Before the widespread adoption of writing systems, human societies depended entirely on oral traditions to (a) <span class="ul-word">preserve</span> and transmit knowledge across generations. <span class="hl">This was no simple task, as the sheer volume of information &mdash; from legal codes and genealogies to agricultural practices and medicinal remedies &mdash; required sophisticated memory techniques far beyond casual recollection.</span> Oral cultures developed remarkably (b) <span class="ul-word">elaborate</span> strategies for encoding knowledge into memorable forms. Rhythmic patterns, melodic structures, and formulaic phrases served as cognitive anchors, making complex information easier to store and retrieve. <span class="signal">For example</span>, the Homeric epics, composed and transmitted orally for centuries before being written down, employed a system of stock epithets and recurring narrative formulas that allowed bards to reconstruct lengthy passages from memory rather than memorizing them word for word.
+    <br><br>
+    &nbsp;&nbsp;<span class="signal">Beyond</span> mere mnemonic devices, oral traditions embedded knowledge within social structures and communal practices. Storytelling ceremonies, ritual performances, and apprenticeship systems created multiple (c) <span class="ul-word">redundant</span> pathways for information transmission, ensuring that critical knowledge was not dependent on any single individual's memory. Elders served as living libraries, and the act of repeated public recitation functioned as a form of peer review, <span class="hl">where errors could be identified and (d) <span class="ul-word">reinforced</span> by the community.</span>
+    <br><br>
+    &nbsp;&nbsp;<span class="signal">However</span>, the transition to literacy did not simply add a new tool to existing practices; <span class="hl">it fundamentally (e) <span class="ul-word">transformed</span> the relationship between memory and knowledge.</span> Writing externalized information storage, reducing the cognitive burden on individuals <span class="signal">but also</span> diminishing the social practices that had sustained collective memory. As Plato famously warned through the voice of Socrates, writing would create "forgetfulness in the learners' souls" by encouraging reliance on external records rather than internal understanding. <span class="signal">While</span> this concern may seem exaggerated from a modern perspective, <span class="hl">research in cognitive science has confirmed that the availability of external information storage does indeed alter how and what we choose to remember.</span>
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* genealogy: 족보, 계보 &nbsp; ** epithet: 수식어구 &nbsp; *** bard: 음유시인 &nbsp; **** mnemonic: 기억술의
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) 분석노트</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<section class="page">
+
+  <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
+
+  <div class="syntax-box">
+    <span class="label">구문 1 — 도입부 (구전 전통의 과제)</span>
+    <div class="en">
+      <span class="chunk">This was no simple task</span>, / <span class="chunk">as the sheer volume of information</span> / &mdash; <span class="chunk">from legal codes and genealogies</span> / <span class="chunk">to agricultural practices and medicinal remedies</span> &mdash; / <span class="chunk">required sophisticated memory techniques</span> / <span class="chunk">far beyond casual recollection</span>.
+    </div>
+    <div class="ko">→ 이것은 간단한 과제가 아니었다 / 순전히 정보의 양이 / — 법전과 족보에서 / 농업 관행과 약학적 치료법에 이르기까지 — / 정교한 기억 기법을 요구했기 때문에 / 가벼운 회상을 훨씬 넘어서는.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 2 — Q05 정답 근거 (d) reinforced</span>
+    <div class="en">
+      <span class="chunk">the act of repeated public recitation</span> / <span class="chunk">functioned as a form of peer review</span>, / <span class="chunk">where errors could be identified</span> / <span class="chunk">and (d) <b>reinforced</b></span> / <span class="chunk">by the community</span>.
+    </div>
+    <div class="ko">→ 반복적인 공개 암송 행위는 / 동료 검토의 한 형태로 기능했다 / 오류가 확인될 수 있고 / (d) <b>강화될</b> 수 있는 / 공동체에 의해.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">구문 포인트</span>
+    <strong>where errors could be identified and (d) reinforced</strong>: "peer review(동료 검토)"에서 오류를 발견하면 <strong>수정(corrected)</strong>하는 것이 논리적. "강화(reinforced)"하면 오류를 더 퍼뜨린다는 의미가 되어 맥락에 맞지 않음.
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 3 — 문자의 영향 (3단락 핵심)</span>
+    <div class="en">
+      <span class="chunk">Writing externalized information storage</span>, / <span class="chunk">reducing the cognitive burden on individuals</span> / <span class="chunk">but also diminishing the social practices</span> / <span class="chunk">that had sustained collective memory</span>.
+    </div>
+    <div class="ko">→ 문자는 정보 저장을 외부화했고 / 개인에 대한 인지적 부담을 줄였지만 / 또한 사회적 관행을 약화시켰다 / 집단 기억을 유지해 왔던.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — 결론 (인지과학 확인)</span>
+    <div class="en">
+      <span class="chunk">research in cognitive science has confirmed</span> / <span class="chunk">that the availability of external information storage</span> / <span class="chunk">does indeed alter</span> / <span class="chunk">how and what</span> / <span class="chunk">we choose to remember</span>.
+    </div>
+    <div class="ko">→ 인지과학의 연구가 확인해 주었다 / 외부 정보 저장의 가용성이 / 실제로 바꾼다는 것을 / 어떻게 그리고 무엇을 / 우리가 기억하기로 선택하는지를.</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>전문 해석</h2>
+
+  <div class="translation" style="font-size:10pt;">
+    &nbsp;&nbsp;문자 체계가 널리 채택되기 전에, 인류 사회는 세대를 걸쳐 지식을 (a) <u>보존</u>하고 전달하기 위해 전적으로 구전 전통에 의존했다. 이것은 간단한 과제가 아니었는데, 법전과 족보에서 농업 관행과 약학적 치료법에 이르는 순전한 정보의 양이 가벼운 회상을 훨씬 넘어서는 정교한 기억 기법을 요구했기 때문이다. 구전 문화는 지식을 기억할 수 있는 형태로 부호화하기 위해 놀라울 정도로 (b) <u>정교한</u> 전략을 개발했다. 리듬 패턴, 선율 구조, 관용적 구절은 인지적 닻 역할을 하여 복잡한 정보를 더 쉽게 저장하고 인출할 수 있게 해 주었다. 예를 들어, 호메로스 서사시는 기록되기 수세기 전에 구전으로 작곡되고 전달되었는데, 음유시인들이 한 단어 한 단어 외우기보다는 기억에서 긴 구절을 재구성할 수 있게 해 주는 고정 수식어구와 반복되는 서사 공식 체계를 사용했다.
+    <br><br>
+    &nbsp;&nbsp;단순한 기억 장치를 넘어서, 구전 전통은 사회 구조와 공동체적 관행 안에 지식을 내장했다. 이야기 의식, 의례적 공연, 도제 체계는 정보 전달의 여러 (c) <u>중복된</u> 경로를 만들어, 중요한 지식이 어떤 한 개인의 기억에 의존하지 않도록 보장했다. 장로들은 살아 있는 도서관 역할을 했고, 반복적인 공개 암송 행위는 공동체에 의해 오류가 확인되고 (d) <u>강화</u>될 수 있는 동료 검토의 한 형태로 기능했다.
+    <br><br>
+    &nbsp;&nbsp;그러나 문자로의 전환은 기존 관행에 단순히 새로운 도구를 추가한 것이 아니었다; 그것은 기억과 지식 사이의 관계를 근본적으로 (e) <u>변형시켰다</u>. 문자는 정보 저장을 외부화하여 개인의 인지적 부담을 줄였지만, 동시에 집단 기억을 유지해 왔던 사회적 관행도 약화시켰다. 플라톤이 소크라테스의 목소리를 빌려 유명하게 경고했듯이, 문자는 내적 이해보다 외부 기록에 대한 의존을 촉진함으로써 "학습자의 영혼에 망각"을 만들어 낼 것이었다. 이 우려가 현대적 관점에서 과장된 것처럼 보일 수 있지만, 인지과학의 연구는 외부 정보 저장의 가용성이 실제로 우리가 무엇을 어떻게 기억하기로 선택하는지를 바꾼다는 것을 확인해 주었다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) 분석노트</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 논리 구조 + Q04 ============ -->
+<section class="page">
+
+  <h2>논리 구조 — 글의 흐름</h2>
+
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>구전 시대의 기억 기법 → 사회적 전달 체계 → 문자의 등장과 변화</strong></p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="step-label">1단락 — 구전 문화의 기억 기법</span>
+      <p style="margin:4px 0; font-size:10.5pt;">문자 이전 사회: 방대한 지식을 <strong>정교한 기억 기법</strong>(리듬, 선율, 관용구)으로 부호화. 호메로스 서사시의 고정 수식어구 예시.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">2단락 — 사회적 전달 체계</span>
+      <p style="margin:4px 0; font-size:10.5pt;">기억 장치를 넘어 <strong>사회 구조</strong>에 지식 내장: 의식·도제·공개 암송 = <strong>중복 경로</strong> 확보. 장로 = 살아 있는 도서관, 공개 암송 = 동료 검토.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">3단락 — 문자 전환의 양면성</span>
+      <p style="margin:4px 0; font-size:10.5pt;">문자 = 정보 저장 <strong>외부화</strong> → 인지 부담 감소 <strong>but</strong> 집단 기억의 사회적 관행 약화. 플라톤의 경고 + 인지과학 확인.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="label">글의 핵심</span>
+    구전 문화는 정교한 기억 기법과 사회적 구조를 통해 지식을 전달했으나, <strong>문자의 등장</strong>이 기억과 지식의 관계를 근본적으로 변화시켰다. 외부화된 정보 저장은 편리하지만 내적 기억 능력과 집단적 기억 관행을 약화시킨다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — Q04 (26005-0111)</h2>
+  <h3>윗글의 주제로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">③</span></h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ① the superiority of oral traditions over written records in preserving cultural heritage
+      <span class="reason">— 구전 전통의 "우월성" 주장이 아님. 양쪽의 특성과 전환 과정을 서술</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② how ancient civilizations failed to develop effective methods for transmitting knowledge
+      <span class="reason">— "실패"가 아니라 매우 정교한 기법을 "개발했다"고 서술</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ③ the sophisticated memory practices of oral cultures and their transformation by literacy
+      <span class="reason">— "구전 문화의 정교한 기억 관행" + "문자에 의한 변형" = 세 단락의 흐름과 정확히 일치</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ④ the role of cognitive science in understanding how modern technology affects memory
+      <span class="reason">— 인지과학 언급은 마지막 한 문장. 글의 중심 주제가 아님</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ⑤ why Plato's critique of writing remains relevant in the digital age
+      <span class="reason">— 플라톤 인용은 보조 근거. 디지털 시대 언급은 없음</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ①번은 "구전 전통의 우수함"이 긍정적으로 서술된 1~2단락에 이끌리기 쉬우나, 3단락에서 문자 전환의 영향까지 다루므로 <strong>두 측면을 모두 포괄하는</strong> ③이 정답.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) 분석노트</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — Q05 + Q06 + 연결어 ============ -->
+<section class="page">
+
+  <h2>문제 풀이 — Q05 (26005-0112)</h2>
+  <h3>밑줄 친 (a)~(e) 중에서 문맥상 낱말의 쓰임이 적절하지 않은 것은? &nbsp; 정답: <span class="ans-badge">④ (d)</span></h3>
+
+  <table>
+    <thead><tr><th>기호</th><th>밑줄 단어</th><th>문맥 의미</th><th>적절성</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>(a)</td>
+        <td><strong>preserve</strong></td>
+        <td>지식을 "보존"하고 전달 → 구전 전통의 목적</td>
+        <td style="color:#2e7d32; font-weight:700;">O 적절</td>
+      </tr>
+      <tr>
+        <td>(b)</td>
+        <td><strong>elaborate</strong></td>
+        <td>"정교한" 전략 → 리듬, 선율 등 복잡한 기법을 설명</td>
+        <td style="color:#2e7d32; font-weight:700;">O 적절</td>
+      </tr>
+      <tr>
+        <td>(c)</td>
+        <td><strong>redundant</strong></td>
+        <td>"중복된" 경로 → 여러 경로를 만들어 지식 전달을 보장</td>
+        <td style="color:#2e7d32; font-weight:700;">O 적절</td>
+      </tr>
+      <tr>
+        <td>(d)</td>
+        <td><strong>reinforced</strong></td>
+        <td>오류가 "강화되다"? → 동료 검토에서 오류는 수정되어야 함</td>
+        <td style="color:#c62828; font-weight:700;">X 부적절</td>
+      </tr>
+      <tr>
+        <td>(e)</td>
+        <td><strong>transformed</strong></td>
+        <td>기억과 지식의 관계를 "변형시켰다" → 문자의 근본적 영향</td>
+        <td style="color:#2e7d32; font-weight:700;">O 적절</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>(d) reinforced가 틀린 이유</h3>
+
+  <div class="syntax-box">
+    <span class="label">원문</span>
+    <div class="en">the act of repeated public recitation functioned as a form of <b>peer review</b>, where errors could be identified and (d) <b>reinforced</b> by the community.</div>
+  </div>
+
+  <p><strong>논리 흐름:</strong> 공개 암송 = 동료 검토(peer review) → 오류를 발견(identified)하면 당연히 <strong>수정(corrected)</strong>해야 함. "강화(reinforced)"하면 오류를 더 굳히는 결과 → 동료 검토의 목적과 <strong>정반대</strong>.</p>
+
+  <div class="syntax-box">
+    <span class="label">교정</span>
+    <div class="en">reinforced → <b>corrected / rectified / amended</b></div>
+    <div class="ko">→ "오류가 공동체에 의해 확인되고 <strong>수정</strong>될 수 있는"</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — Q06 (26005-0113)</h2>
+  <h3>윗글의 내용과 일치하지 않는 것은? &nbsp; 정답: <span class="ans-badge">③</span></h3>
+
+  <ul class="choice-list">
+    <li class="wrong"><span class="tag tag-x">X</span> ① Oral cultures used rhythmic patterns and melodic structures as memory aids. <span class="reason">— 본문: "Rhythmic patterns, melodic structures ... served as cognitive anchors" → 일치</span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ② The Homeric epics used stock epithets and narrative formulas for oral transmission. <span class="reason">— 본문: "employed a system of stock epithets and recurring narrative formulas" → 일치</span></li>
+    <li class="correct"><span class="tag tag-o">O</span> ③ The transition to literacy simply added writing as a supplementary tool without affecting oral practices. <span class="reason">— 본문: "did <strong>not</strong> simply add a new tool ... it <strong>fundamentally transformed</strong>" → <strong>불일치</strong></span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ④ Plato expressed concern that writing would lead to forgetfulness. <span class="reason">— 본문: "writing would create 'forgetfulness in the learners' souls'" → 일치</span></li>
+    <li class="wrong"><span class="tag tag-x">X</span> ⑤ Cognitive science research has shown that external storage affects what we remember. <span class="reason">— 본문: "does indeed alter how and what we choose to remember" → 일치</span></li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ③번은 3단락 첫 문장 "did not simply add a new tool"의 <strong>부정문을 긍정으로 바꾼</strong> 전형적 불일치 선지. 내용 일치 문제에서 부정 표현(not, never, no)의 유무를 꼼꼼히 확인해야 한다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>연결어/신호어 정리</h2>
+
+  <table>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td><strong>For example</strong></td><td>구체적 예시</td><td>호메로스 서사시의 기억 기법</td></tr>
+      <tr><td><strong>Beyond</strong></td><td>확장/심화</td><td>기억 장치 → 사회적 구조로 범위 확장</td></tr>
+      <tr><td><strong>However</strong></td><td>역접 전환</td><td>구전 문화 → 문자 전환의 영향</td></tr>
+      <tr><td><strong>but also</strong></td><td>추가 (양면성)</td><td>인지 부담 감소 + 사회적 관행 약화</td></tr>
+      <tr><td><strong>While</strong></td><td>양보</td><td>플라톤 우려가 과장처럼 보이나...</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) 분석노트</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

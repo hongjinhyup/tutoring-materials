@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13. 빈칸 내용 추론 (1) — Ex 2 분석노트</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+.passage .blank {
+  display: inline-block;
+  border-bottom: 2px solid var(--accent);
+  min-width: 200px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 0 4px;
+}
+
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 지문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
+    <h1>13. 빈칸 내용 추론 (1) — Ex 2</h1>
+    <p class="subtitle">고대 건축물의 지진 대비 설계와 현대 공학의 재발견</p>
+    <p class="meta">
+      <span class="code-badge">26005-0063</span>
+      <span class="passage-badge">p.79 · Ex 2</span>
+    </p>
+  </div>
+
+  <table>
+    <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr><td>02 (26005-0063)</td><td>빈칸 내용 추론</td><td><span class="ans-badge">④</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;Ancient builders may not have had access to modern technology, <span class="signal">but</span> many of their structures have withstood earthquakes that would destroy contemporary buildings. <span class="hl">The Parthenon in Athens, the Colosseum in Rome, and various ancient temples in Japan have all survived major seismic events, sometimes for thousands of years.</span> <span class="signal">In contrast</span>, many modern buildings collapse during earthquakes, often because they are designed primarily for cost efficiency rather than long-term resilience. <span class="signal">Interestingly</span>, when engineers study ancient structures, they often discover sophisticated techniques that align with current earthquake engineering principles. <span class="signal">For example</span>, some ancient Greek temples used a column design that allows slight movement during an earthquake, absorbing the shock rather than resisting it rigidly. <span class="hl">This suggests that ancient builders possessed an intuitive understanding of structural dynamics that modern engineers are only now beginning to fully appreciate and incorporate into their designs.</span> <span class="signal">In other words</span>, the wisdom embedded in these ancient structures demonstrates that <span class="blank">effective earthquake resistance is not solely a product of modern science but can also be found in time-tested traditional construction methods</span>.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* seismic: 지진의 &nbsp; ** resilience: 회복력, 탄성
+  <br><span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어 &nbsp; <span style="border-bottom:2px solid var(--accent);">밑줄</span> = 빈칸 위치</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) 분석노트</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<section class="page">
+
+  <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
+
+  <div class="syntax-box">
+    <span class="label">구문 1 — 도입 (고대 건축물의 내진성)</span>
+    <div class="en">
+      <span class="chunk">Ancient builders may not have had access to</span> / <span class="chunk">modern technology</span>, / <span class="chunk">but many of their structures</span> / <span class="chunk">have withstood earthquakes</span> / <span class="chunk">that would destroy contemporary buildings</span>.
+    </div>
+    <div class="ko">→ 고대 건축가들은 / 현대 기술에 접근할 수 없었을지 모르지만 / 그들의 많은 구조물은 / 지진을 견뎌왔다 / 현대 건물을 파괴할 수 있는.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 2 — 예시 (고대 그리스 기둥 기술)</span>
+    <div class="en">
+      <span class="chunk">some ancient Greek temples</span> / <span class="chunk">used a column design</span> / <span class="chunk">that allows slight movement</span> / <span class="chunk">during an earthquake</span>, / <span class="chunk">absorbing the shock</span> / <span class="chunk">rather than resisting it rigidly</span>.
+    </div>
+    <div class="ko">→ 일부 고대 그리스 신전은 / 기둥 설계를 사용했는데 / 약간의 움직임을 허용하는 / 지진 중에 / 충격을 흡수하는 / 딱딱하게 저항하기보다는.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 3 — 핵심 주장 (고대의 직관적 이해)</span>
+    <div class="en">
+      <span class="chunk">This suggests that</span> / <span class="chunk">ancient builders possessed</span> / <span class="chunk">an intuitive understanding of structural dynamics</span> / <span class="chunk">that modern engineers</span> / <span class="chunk">are only now beginning to</span> / <span class="chunk">fully appreciate and incorporate into their designs</span>.
+    </div>
+    <div class="ko">→ 이것은 ~을 시사한다 / 고대 건축가들이 보유했음을 / 구조 역학에 대한 직관적 이해를 / 현대 엔지니어들이 / 이제서야 ~하기 시작하는 / 완전히 인정하고 설계에 통합하기를.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">구문 포인트</span>
+    <strong>"may not have had"</strong>: 과거 사실에 대한 추측(~했을 리 없다). <strong>"that would destroy"</strong>의 would는 가정법적 용법으로, 현대 건물이라면 파괴될 것이라는 가정을 담는다. 두 구문 모두 고대와 현대의 <strong>대비</strong>를 강화한다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>전문 해석</h2>
+
+  <div class="translation">
+    &nbsp;&nbsp;고대 건축가들은 현대 기술에 접근할 수 없었을지 모르지만, 그들의 많은 구조물은 현대 건물을 파괴할 수 있는 지진을 견뎌왔다. 아테네의 파르테논 신전, 로마의 콜로세움, 일본의 다양한 고대 사찰은 모두 주요 지진 사건에서 살아남았으며, 때로는 수천 년 동안 그래왔다. 이와 대조적으로, 많은 현대 건물은 지진 중에 붕괴하는데, 이는 종종 장기적 탄성보다는 비용 효율성을 위해 주로 설계되기 때문이다. 흥미롭게도, 엔지니어들이 고대 구조물을 연구할 때, 그들은 종종 현재의 내진 공학 원리와 일치하는 정교한 기술을 발견한다. 예를 들어, 일부 고대 그리스 신전은 지진 중에 약간의 움직임을 허용하여 딱딱하게 저항하기보다는 충격을 흡수하는 기둥 설계를 사용했다. 이것은 고대 건축가들이 현대 엔지니어들이 이제서야 완전히 인정하고 설계에 통합하기 시작한 구조 역학에 대한 직관적 이해를 보유했음을 시사한다. 다시 말해, 이러한 고대 구조물에 내재된 지혜는 <u>효과적인 내진 저항이 현대 과학만의 산물이 아니라 시간이 검증한 전통 건축 방식에서도 발견될 수 있음</u>을 보여준다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) 분석노트</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 논리 구조 + 문제 풀이 ============ -->
+<section class="page">
+
+  <h2>논리 구조 — 글의 흐름</h2>
+
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>대비 도입 → 구체적 증거 → 핵심 주장 → 결론(빈칸)</strong></p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="step-label">도입 (대비)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">고대 건축 = 현대 기술 없음, <strong>but</strong> 지진을 견딤 / 현대 건물 = 비용 효율 우선 → 붕괴</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">증거</span>
+      <p style="margin:4px 0; font-size:10.5pt;">파르테논·콜로세움·일본 사찰 = 수천 년간 <strong>주요 지진 생존</strong></p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">분석</span>
+      <p style="margin:4px 0; font-size:10.5pt;">고대 기법 연구 → 현대 내진 공학 원리와 <strong>일치</strong>하는 정교한 기술 발견 (예: 유연한 기둥)</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">핵심 주장</span>
+      <p style="margin:4px 0; font-size:10.5pt;">고대 건축가 = 구조 역학의 <strong>직관적 이해</strong> 보유 / 현대 엔지니어가 이제서야 인정·통합</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">결론 (빈칸)</span>
+      <p style="margin:4px 0; font-size:10.5pt;">내진 저항 = 현대 과학만의 산물이 아님 → <strong>전통 건축에서도 발견 가능</strong></p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <span class="label">글의 핵심</span>
+    고대 건축물이 현대 건물보다 지진에 강한 이유는 전통적 건축 기법 속에 <strong>현대 내진 공학과 일치하는 직관적 지혜</strong>가 담겨 있기 때문이다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — Q02 (26005-0063)</h2>
+  <h3>다음 빈칸에 들어갈 말로 가장 적절한 것은? &nbsp; 정답: <span class="ans-badge">④</span></h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ① ancient civilizations relied heavily on trial and error for construction
+      <span class="reason">— 시행착오 의존은 언급되지 않음. '직관적 이해'가 핵심</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② modern technology has made traditional building methods completely obsolete
+      <span class="reason">— "completely obsolete"는 글 논지의 정반대 (전통 방법이 여전히 유효)</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ③ earthquake-resistant design requires expensive materials and advanced tools
+      <span class="reason">— 비싼 재료·첨단 도구 필요성은 글에 없음. 오히려 고대 기술로 충분함을 주장</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ④ effective earthquake resistance is not solely a product of modern science but can also be found in time-tested traditional construction methods
+      <span class="reason">— "현대 과학만의 산물이 아님 + 전통 건축에서도 발견 가능" = 글 전체 논지의 정확한 요약</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ⑤ preserving ancient buildings is more important than constructing new ones
+      <span class="reason">— 보존의 중요성이 아니라 고대 기법의 내진 원리가 주제</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    ②번은 "modern technology"와 "traditional methods"를 대비하지만 <strong>"completely obsolete"</strong>가 글의 논지와 정반대. 빈칸 앞 <strong>"In other words"</strong>는 '다시 말해'로, 바로 앞 문장을 <strong>바꿔 말하기(paraphrase)</strong>하는 구조. 따라서 빈칸 = 직전 주장의 요약.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) 분석노트</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 연결어 정리 ============ -->
+<section class="page">
+
+  <h2>연결어/신호어 정리</h2>
+
+  <table>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td><strong>but</strong></td><td>대조/전환</td><td>도입: 현대 기술 없음 → 그러나 지진 견딤</td></tr>
+      <tr><td><strong>In contrast</strong></td><td>대조</td><td>고대(견딤) vs. 현대(붕괴)</td></tr>
+      <tr><td><strong>Interestingly</strong></td><td>관심 유도/전환</td><td>엔지니어의 고대 구조물 연구 도입</td></tr>
+      <tr><td><strong>For example</strong></td><td>구체적 예시</td><td>그리스 신전의 유연한 기둥 설계</td></tr>
+      <tr><td><strong>rather than</strong></td><td>대조 (선호)</td><td>충격 흡수 vs. 딱딱한 저항</td></tr>
+      <tr><td><strong>In other words</strong></td><td>바꿔 말하기/결론</td><td>빈칸 도입: 앞 주장의 재진술</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <h2>빈칸 추론 전략 정리</h2>
+
+  <div class="syntax-box">
+    <span class="label">빈칸 유형 — 재진술(paraphrase)형</span>
+    <div class="en">빈칸이 <strong>"In other words"</strong>(다시 말해) 뒤에 위치 → 바로 앞 문장의 바꿔 말하기.</div>
+    <div class="ko">→ 직전 문장: "고대 건축가가 구조 역학의 직관적 이해를 보유" → 이를 다른 표현으로 바꾼 것이 정답.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    ① <strong>"In other words" 활용</strong>: 이 표현 뒤 빈칸 = 직전 내용의 요약/재진술.<br>
+    ② <strong>대비 구조 파악</strong>: 글 전체가 '고대 vs. 현대' 대비. 빈칸도 "not solely modern ... but also traditional" 구조.<br>
+    ③ <strong>핵심 키워드</strong>: withstood, survived, sophisticated techniques, intuitive understanding → 모두 고대 기법의 우수성을 지지.<br>
+    ④ <strong>소거법</strong>: ①시행착오(언급 없음), ②완전 구식(반대), ③비싼 재료(반대), ⑤보존 중요성(주제 이탈) → ④만 적합.
+  </div>
+
+  <h3>핵심 어휘</h3>
+  <table>
+    <thead><tr><th>어휘</th><th>의미</th><th>문맥</th></tr></thead>
+    <tbody>
+      <tr><td>withstood</td><td>견디다, 버티다</td><td>고대 건축물이 지진을 견딤</td></tr>
+      <tr><td>seismic</td><td>지진의</td><td>major seismic events</td></tr>
+      <tr><td>resilience</td><td>회복력, 탄성</td><td>장기적 내구성(현대 건물에 부족)</td></tr>
+      <tr><td>sophisticated</td><td>정교한</td><td>고대 건축 기법의 수준</td></tr>
+      <tr><td>intuitive</td><td>직관적인</td><td>고대 건축가의 이해 방식</td></tr>
+      <tr><td>incorporate</td><td>통합하다</td><td>현대 설계에 고대 기법 반영</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) 분석노트</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

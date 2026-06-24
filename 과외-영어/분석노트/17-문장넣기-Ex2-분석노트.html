@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17. 문장 넣기 — Ex 2 분석노트</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+
+.given-sentence {
+  background: var(--warn-bg); border: 2px solid var(--warn-line);
+  border-radius: 8px; padding: 12px 18px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.given-sentence .label {
+  display: block; font-family: 'Pretendard', sans-serif;
+  font-size: 9pt; font-weight: 700; color: #9a6b00;
+  letter-spacing: .5px; margin-bottom: 6px;
+}
+
+.marker {
+  display: inline-block; font-weight: 700; color: var(--accent);
+  font-family: 'Pretendard', sans-serif; font-size: 10pt;
+  margin: 0 2px;
+}
+
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 지문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 분석노트</div>
+    <h1>17. 문장 넣기 — Ex 2</h1>
+    <p class="subtitle">과학 혁명과 측정 기술의 상호 의존</p>
+    <p class="meta">
+      <span class="code-badge">26005-0085</span>
+      <span class="passage-badge">p.102 · Ex 2</span>
+    </p>
+  </div>
+
+  <table>
+    <thead><tr><th>문항</th><th>유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr><td>Ex 2 (26005-0085)</td><td>문장 넣기</td><td><span class="ans-badge">③</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>지문 원문</h2>
+
+  <div class="given-sentence">
+    <span class="label">주어진 문장</span>
+    <span class="hl">In other words, scientific revolutions are very often preceded by instrument revolutions.</span>
+  </div>
+
+  <div class="passage">
+    &nbsp;&nbsp;Throughout the history of science, <span class="hl">new instruments have been the keys to new knowledge</span>. <span class="marker">①</span> That is why <span class="hl">it is wrong to consider scientific instruments merely as tools for investigating phenomena already identified by scientific theory</span>. <span class="marker">②</span> <span class="signal">In fact</span>, <span class="hl">many of the most important phenomena in the history of science were actually revealed by instruments prior to being accounted for by theory</span>. <span class="marker">③</span> Galileo's use of the telescope to view the night sky was one of the earliest and most significant examples. <span class="marker">④</span> <span class="signal">Without</span> the telescope, Galileo would never have been able to develop his revolutionary theory of astronomy that forever changed our understanding of the universe. <span class="marker">⑤</span> <span class="signal">Thus</span>, a scientific genius without the right instruments is like a fish without water.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">
+    <span style="color:var(--accent);">■ 하이라이트</span> = 핵심 문장 &nbsp; <span style="color:var(--accent); font-weight:700;">굵은 글씨</span> = 연결어/신호어
+  </p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 분석노트</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 구문 분석 + 해석 ============ -->
+<section class="page">
+
+  <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
+
+  <div class="syntax-box">
+    <span class="label">구문 1 — 주어진 문장 (삽입 문장)</span>
+    <div class="en">
+      <span class="chunk">In other words</span>, / <span class="chunk">scientific revolutions</span> / <span class="chunk">are very often preceded</span> / <span class="chunk">by instrument revolutions</span>.
+    </div>
+    <div class="ko">→ 다시 말해서 / 과학 혁명은 / 매우 자주 선행된다 / 도구(기기) 혁명에 의해.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 2 — 주제문 (도구가 지식의 열쇠)</span>
+    <div class="en">
+      <span class="chunk">Throughout the history of science</span>, / <span class="chunk">new instruments</span> / <span class="chunk">have been the keys</span> / <span class="chunk">to new knowledge</span>.
+    </div>
+    <div class="ko">→ 과학의 역사 전반에 걸쳐 / 새로운 도구는 / 열쇠가 되어 왔다 / 새로운 지식으로의.</div>
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 3 — ② 뒤 핵심 근거 (도구가 이론보다 선행)</span>
+    <div class="en">
+      <span class="chunk">many of the most important phenomena</span> / <span class="chunk">in the history of science</span> / <span class="chunk">were actually revealed by instruments</span> / <span class="chunk">prior to being accounted for by theory</span>.
+    </div>
+    <div class="ko">→ 과학의 역사에서 / 가장 중요한 현상들 중 많은 것이 / 실제로 도구에 의해 밝혀졌다 / 이론에 의해 설명되기 전에.</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">구문 포인트</span>
+    <strong>be preceded by ~</strong>: "~에 의해 선행되다" (수동태). 주어진 문장의 핵심 구조. <strong>prior to being accounted for by theory</strong>: "이론에 의해 설명되기 전에" — prior to + 동명사의 수동형(being p.p.).
+  </div>
+
+  <div class="syntax-box">
+    <span class="label">구문 4 — 결론 비유</span>
+    <div class="en">
+      <span class="chunk">Thus</span>, / <span class="chunk">a scientific genius</span> / <span class="chunk">without the right instruments</span> / <span class="chunk">is like a fish without water</span>.
+    </div>
+    <div class="ko">→ 따라서 / 적절한 도구가 없는 과학 천재는 / 물 없는 물고기와 같다.</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>전문 해석</h2>
+
+  <div class="translation">
+    &nbsp;&nbsp;과학의 역사 전반에 걸쳐, 새로운 도구는 새로운 지식의 열쇠가 되어 왔다. 그것이 바로 과학적 도구를 단지 과학 이론에 의해 이미 확인된 현상을 조사하기 위한 도구로 간주하는 것이 잘못인 이유이다. 사실, 과학 역사에서 가장 중요한 현상들 중 많은 것이 실제로 이론에 의해 설명되기 전에 도구에 의해 밝혀졌다. <strong>[주어진 문장]</strong> 다시 말해서, 과학 혁명은 매우 자주 도구 혁명에 의해 선행된다. 갈릴레오가 밤하늘을 관찰하기 위해 망원경을 사용한 것은 가장 초기이자 가장 의미 있는 사례 중 하나였다. 망원경이 없었다면, 갈릴레오는 우주에 대한 우리의 이해를 영원히 바꾼 그의 혁명적인 천문학 이론을 결코 발전시킬 수 없었을 것이다. 따라서, 적절한 도구가 없는 과학 천재는 물 없는 물고기와 같다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 분석노트</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 논리 구조 + 문제 풀이 ============ -->
+<section class="page">
+
+  <h2>논리 구조 — 글의 흐름</h2>
+
+  <p style="font-size:10pt; color:var(--muted);">전개 패턴: <strong>주장 → 부연 → 근거 → [삽입] 요약/환언 → 구체적 예시 → 결론</strong></p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <span class="step-label">주제문</span>
+      <p style="margin:4px 0; font-size:10.5pt;">새로운 도구 = 새로운 지식의 <strong>열쇠</strong></p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">부연 — 잘못된 관점 비판</span>
+      <p style="margin:4px 0; font-size:10.5pt;">도구를 "이론이 확인한 현상을 조사하는 수단"으로만 보는 것은 <strong>잘못</strong>이다.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">핵심 근거</span>
+      <p style="margin:4px 0; font-size:10.5pt;">In fact: 많은 중요한 현상이 <strong>이론보다 도구에 의해 먼저</strong> 밝혀졌다.</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step" style="background: var(--warn-bg); border-color: var(--warn-line);">
+      <span class="step-label" style="background:#9a6b00;">③ 삽입 문장</span>
+      <p style="margin:4px 0; font-size:10.5pt;"><strong>In other words</strong>: "과학 혁명은 매우 자주 도구 혁명에 의해 선행된다" → 앞 문장의 <strong>환언(paraphrase)</strong></p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">구체적 예시</span>
+      <p style="margin:4px 0; font-size:10.5pt;">갈릴레오의 <strong>망원경</strong> → 혁명적 천문학 이론 개발의 전제 조건</p>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      <span class="step-label">결론 — 비유</span>
+      <p style="margin:4px 0; font-size:10.5pt;">적절한 도구 없는 천재 = <strong>물 없는 물고기</strong></p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>문제 풀이 — 삽입 위치 분석</h2>
+  <h3>주어진 문장이 들어가기에 가장 적절한 곳은? &nbsp; 정답: <span class="ans-badge">③</span></h3>
+
+  <p><strong>삽입 문장의 핵심 단서:</strong></p>
+  <ul style="font-size:10.5pt; margin:6px 0;">
+    <li><strong>"In other words"</strong> → 앞 문장의 내용을 <strong>다른 말로 바꿔</strong> 표현하는 환언(paraphrase) 신호</li>
+    <li><strong>"scientific revolutions are preceded by instrument revolutions"</strong> → "도구가 이론보다 먼저"라는 주장의 요약</li>
+  </ul>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ① — 주제문 직후. 아직 "도구가 이론에 선행"이라는 내용이 나오지 않아 환언할 대상이 없음
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ② — "이론이 확인한 현상의 도구"라는 잘못된 관점을 비판한 직후. 아직 "선행" 관계가 명시되지 않음
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span>
+      ③ — 바로 앞: "현상이 이론에 의해 설명되기 전에 도구에 의해 밝혀졌다" → 이 내용을 "In other words"로 환언하면 "과학 혁명은 도구 혁명에 의해 선행된다"로 자연스럽게 연결. 뒤: 갈릴레오 예시가 이 주장을 뒷받침
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ④ — 갈릴레오 예시의 중간에 일반적 진술을 넣으면 구체적 예시의 흐름이 끊김
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span>
+      ⑤ — 결론(Thus) 직전. 이미 예시가 완료된 후이므로 환언이 뒤늦고 부자연스러움
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 포인트</span>
+    <strong>"In other words"</strong>는 앞 문장을 다른 말로 바꿔 말하는 신호이다. ② 뒤의 "phenomena were revealed by instruments <strong>prior to</strong> being accounted for by theory"(현상이 이론에 앞서 도구로 밝혀졌다)와 삽입 문장의 "scientific revolutions are <strong>preceded by</strong> instrument revolutions"(과학 혁명이 도구 혁명에 의해 선행된다)은 <strong>동일한 내용의 다른 표현</strong>이다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 분석노트</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 연결어 정리 ============ -->
+<section class="page">
+
+  <h2>연결어/신호어 정리</h2>
+
+  <table>
+    <thead><tr><th>신호어</th><th>기능</th><th>위치/역할</th></tr></thead>
+    <tbody>
+      <tr><td><strong>That is why</strong></td><td>인과 (앞 → 결과)</td><td>새 도구 = 열쇠 → 도구를 단순 수단으로 보는 것은 잘못</td></tr>
+      <tr><td><strong>In fact</strong></td><td>사실 강조</td><td>이론보다 도구가 먼저 현상을 밝혔다는 역사적 사실 강조</td></tr>
+      <tr><td><strong>In other words</strong></td><td>환언(paraphrase)</td><td>삽입 문장: 앞 내용을 "도구 혁명 → 과학 혁명" 순서로 재진술</td></tr>
+      <tr><td><strong>Without</strong></td><td>가정법 조건</td><td>망원경 없이는 혁명적 이론 불가 → 도구의 필수성 부각</td></tr>
+      <tr><td><strong>Thus</strong></td><td>결론 도출</td><td>전체 논의를 비유로 마무리</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+
+  <h2>핵심 어휘 정리</h2>
+
+  <table>
+    <thead><tr><th>어휘</th><th>뜻</th><th>문맥</th></tr></thead>
+    <tbody>
+      <tr><td><strong>instrument</strong></td><td>(과학적) 도구, 기기</td><td>새로운 지식 발견의 열쇠</td></tr>
+      <tr><td><strong>phenomena</strong></td><td>현상 (phenomenon의 복수)</td><td>도구에 의해 밝혀진 과학적 현상</td></tr>
+      <tr><td><strong>precede</strong></td><td>선행하다</td><td>도구 혁명이 과학 혁명에 선행</td></tr>
+      <tr><td><strong>account for</strong></td><td>설명하다</td><td>이론이 현상을 설명하다</td></tr>
+      <tr><td><strong>merely</strong></td><td>단지, 단순히</td><td>도구를 단순한 조사 수단으로 보는 관점 비판</td></tr>
+      <tr><td><strong>reveal</strong></td><td>밝히다, 드러내다</td><td>도구가 현상을 밝히다</td></tr>
+      <tr><td><strong>revolutionary</strong></td><td>혁명적인</td><td>갈릴레오의 천문학 이론</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">TIP</span>
+    <strong>"In other words"</strong>와 <strong>"That is (to say)"</strong>는 모두 환언 신호이다. 문장 넣기에서 이 표현이 삽입 문장에 있으면, 앞 문장과 <strong>의미가 같지만 표현이 다른</strong> 위치를 찾는 것이 핵심 전략이다. 앞 문장의 핵심 표현("revealed by instruments prior to theory")과 삽입 문장의 표현("preceded by instrument revolutions")의 <strong>의미적 대응 관계</strong>를 파악하는 것이 중요하다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 분석노트</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>
