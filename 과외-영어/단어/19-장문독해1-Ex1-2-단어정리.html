@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>19. 장문 독해 (1) — Exercise 1·2 단어 정리</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: auto;
+}
+th, td { border: 1px solid var(--accent-line); padding: 5px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 단어 테이블 전용 */
+.vocab-table { width: 100%; }
+.vocab-table col.c-no   { width: 6%; }
+.vocab-table col.c-word { width: 28%; }
+.vocab-table col.c-pos  { width: 8%; }
+.vocab-table col.c-mean { width: 58%; }
+.vocab-table td.word {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; font-size: 10.5pt; color: var(--accent);
+}
+.vocab-table td.pos {
+  text-align: center; font-size: 9pt; color: var(--muted);
+  font-style: italic;
+}
+
+/* 지문 코드 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 핵심 공식 모음 테이블 (표지용) */
+.summary-table { width: 100%; margin: 14px 0; }
+.summary-table th { font-size: 9.5pt; padding: 6px 10px; }
+.summary-table td { font-size: 9.5pt; padding: 6px 10px; line-height: 1.5; }
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .concept, .tip { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어</div>
+    <h1>19. 장문 독해 (1) — 단어 정리</h1>
+    <p class="subtitle">Exercise 1·2 (p.114~115) 지문별 핵심 어휘 50선</p>
+    <p class="meta">수능특강 유형편 | 지문 식별 번호: 26005-0097~0100</p>
+  </div>
+
+  <h2>수록 지문 안내</h2>
+
+  <table class="summary-table">
+    <colgroup>
+      <col style="width:12%">
+      <col style="width:22%">
+      <col style="width:38%">
+      <col style="width:14%">
+      <col style="width:14%">
+    </colgroup>
+    <thead>
+      <tr><th>문항</th><th>지문 코드</th><th>주제</th><th>페이지</th><th>단어 수</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ex 1 (01~02)</td>
+        <td>26005-0097 / 0098</td>
+        <td>18세기 여성 드레스의 재활용과 지속 가능성</td>
+        <td>p.114</td>
+        <td>50개</td>
+      </tr>
+      <tr>
+        <td>Ex 2 (03~04)</td>
+        <td>26005-0099 / 0100</td>
+        <td>인터넷 기반 뉴스의 부상과 양면성</td>
+        <td>p.115</td>
+        <td>50개</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>학습 가이드</h2>
+
+  <div class="concept">
+    <span class="label">STEP 1 — 지문 읽기 전 어휘 확인</span>
+    아래 단어 목록을 훑으며 모르는 단어에 체크한다. 이미 아는 단어는 건너뛰어도 좋다.
+  </div>
+
+  <div class="concept">
+    <span class="label">STEP 2 — 지문 독해</span>
+    수능특강 p.114~115 지문을 읽으며 단어의 문맥적 의미를 확인한다.
+  </div>
+
+  <div class="concept">
+    <span class="label">STEP 3 — 복습 테스트</span>
+    단어 목록에서 뜻을 가리고 영단어만 보며 의미를 떠올려 본다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1)</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 지문 1 단어 (1~30) ============ -->
+<section class="page">
+
+  <h2>지문 1 — 18세기 여성 드레스의 재활용</h2>
+  <p>
+    <span class="code-badge">26005-0097 / 0098</span>
+    <span class="passage-badge">p.114 · Ex 1 (01~02)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="word">repurpose</td><td class="pos">v.</td><td>용도를 변경하다</td></tr>
+      <tr><td>2</td><td class="word">fashion</td><td class="pos">v.</td><td>(옷을) 만들다, 제작하다</td></tr>
+      <tr><td>3</td><td class="word">uncut</td><td class="pos">a.</td><td>자르지 않은</td></tr>
+      <tr><td>4</td><td class="word">length</td><td class="pos">n.</td><td>길이; (천의) 한 조각</td></tr>
+      <tr><td>5</td><td class="word">fabric</td><td class="pos">n.</td><td>직물, 천</td></tr>
+      <tr><td>6</td><td class="word">textile</td><td class="pos">n.</td><td>직물, 섬유</td></tr>
+      <tr><td>7</td><td class="word">significantly</td><td class="pos">ad.</td><td>상당히, 현저하게</td></tr>
+      <tr><td>8</td><td class="word">costly</td><td class="pos">a.</td><td>비용이 많이 드는</td></tr>
+      <tr><td>9</td><td class="word">labor</td><td class="pos">n.</td><td>노동, 수고</td></tr>
+      <tr><td>10</td><td class="word">alter</td><td class="pos">v.</td><td>수선하다, 변경하다</td></tr>
+      <tr><td>11</td><td class="word">garment</td><td class="pos">n.</td><td>의복, 옷</td></tr>
+      <tr><td>12</td><td class="word">modify</td><td class="pos">v.</td><td>수정하다, 변형하다</td></tr>
+      <tr><td>13</td><td class="word">numerous</td><td class="pos">a.</td><td>다수의, 수많은</td></tr>
+      <tr><td>14</td><td class="word">wealthy</td><td class="pos">a.</td><td>부유한</td></tr>
+      <tr><td>15</td><td class="word">remodel</td><td class="pos">v.</td><td>개조하다, 리모델링하다</td></tr>
+      <tr><td>16</td><td class="word">unwanted</td><td class="pos">a.</td><td>원치 않는</td></tr>
+      <tr><td>17</td><td class="word">secondhand</td><td class="pos">a.</td><td>중고의</td></tr>
+      <tr><td>18</td><td class="word">observe</td><td class="pos">v.</td><td>논평하다; 관찰하다</td></tr>
+      <tr><td>19</td><td class="word">scholar</td><td class="pos">n.</td><td>학자</td></tr>
+      <tr><td>20</td><td class="word">sustainability</td><td class="pos">n.</td><td>지속 가능성</td></tr>
+      <tr><td>21</td><td class="word">inherent</td><td class="pos">a.</td><td>본질적인, 내재된</td></tr>
+      <tr><td>22</td><td class="word">existing</td><td class="pos">a.</td><td>기존의, 현재의</td></tr>
+      <tr><td>23</td><td class="word">widespread</td><td class="pos">a.</td><td>널리 퍼진, 광범위한</td></tr>
+      <tr><td>24</td><td class="word">practice</td><td class="pos">n.</td><td>관행, 관례</td></tr>
+      <tr><td>25</td><td class="word">rare</td><td class="pos">a.</td><td>드문, 희귀한</td></tr>
+      <tr><td>26</td><td class="word">alteration</td><td class="pos">n.</td><td>수선, 변경</td></tr>
+      <tr><td>27</td><td class="word">gown</td><td class="pos">n.</td><td>(여성용) 드레스, 가운</td></tr>
+      <tr><td>28</td><td class="word">cost</td><td class="pos">n.</td><td>비용, 값</td></tr>
+      <tr><td>29</td><td class="word">depend on</td><td class="pos">v.</td><td>~에 달려 있다</td></tr>
+      <tr><td>30</td><td class="word">silhouette</td><td class="pos">n.</td><td>실루엣, 윤곽</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1)</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 지문 1 단어 (31~50) ============ -->
+<section class="page">
+
+  <h2>지문 1 — 18세기 여성 드레스의 재활용 (계속)</h2>
+  <p>
+    <span class="code-badge">26005-0097 / 0098</span>
+    <span class="passage-badge">p.114 · Ex 1 (01~02)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>31</td><td class="word">accessory</td><td class="pos">n.</td><td>액세서리, 장신구</td></tr>
+      <tr><td>32</td><td class="word">trimming</td><td class="pos">n.</td><td>장식, 트리밍</td></tr>
+      <tr><td>33</td><td class="word">refresh</td><td class="pos">v.</td><td>새롭게 하다, 산뜻하게 하다</td></tr>
+      <tr><td>34</td><td class="word">lace</td><td class="pos">n.</td><td>레이스 (장식용 천)</td></tr>
+      <tr><td>35</td><td class="word">economical</td><td class="pos">a.</td><td>경제적인, 절약하는</td></tr>
+      <tr><td>36</td><td class="word">alternative</td><td class="pos">n.</td><td>대안, 대체물</td></tr>
+      <tr><td>37</td><td class="word">replacement</td><td class="pos">n.</td><td>교체, 대체</td></tr>
+      <tr><td>38</td><td class="word">crude</td><td class="pos">a.</td><td>조잡한, 거친</td></tr>
+      <tr><td>39</td><td class="word">stitch</td><td class="pos">n.</td><td>바느질 땀, 한 땀</td></tr>
+      <tr><td>40</td><td class="word">indicate</td><td class="pos">v.</td><td>나타내다, 보여 주다</td></tr>
+      <tr><td>41</td><td class="word">effortless</td><td class="pos">a.</td><td>힘들이지 않는, 수월한</td></tr>
+      <tr><td>42</td><td class="word">preservation</td><td class="pos">n.</td><td>보존, 보전</td></tr>
+      <tr><td>43</td><td class="word">retain</td><td class="pos">v.</td><td>유지하다, 보유하다</td></tr>
+      <tr><td>44</td><td class="word">cherish</td><td class="pos">v.</td><td>소중히 여기다</td></tr>
+      <tr><td>45</td><td class="word">hand-woven</td><td class="pos">a.</td><td>손으로 짠</td></tr>
+      <tr><td>46</td><td class="word">silk</td><td class="pos">n.</td><td>비단, 실크</td></tr>
+      <tr><td>47</td><td class="word">generation</td><td class="pos">n.</td><td>세대</td></tr>
+      <tr><td>48</td><td class="word">opportunity</td><td class="pos">n.</td><td>기회</td></tr>
+      <tr><td>49</td><td class="word">relatively</td><td class="pos">ad.</td><td>비교적, 상대적으로</td></tr>
+      <tr><td>50</td><td class="word">construct</td><td class="pos">v.</td><td>만들다, 구성하다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">TIP</span>
+    <strong>alter</strong>와 <strong>alteration</strong>은 같은 어근. 동사 → 명사 파생 패턴(<strong>-ation</strong>)을 함께 익혀 두자.
+    <br>비슷한 패턴: <strong>preserve → preservation</strong>, <strong>replace → replacement</strong>
+  </div>
+
+  <hr class="divider">
+
+  <h2>지문 2 — 인터넷 기반 뉴스의 부상과 양면성</h2>
+  <p>
+    <span class="code-badge">26005-0099 / 0100</span>
+    <span class="passage-badge">p.115 · Ex 2 (03~04)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="word">rise</td><td class="pos">n.</td><td>부상, 증가</td></tr>
+      <tr><td>2</td><td class="word">produce</td><td class="pos">v.</td><td>생산하다, 만들어 내다</td></tr>
+      <tr><td>3</td><td class="word">distribute</td><td class="pos">v.</td><td>배포하다, 유통하다</td></tr>
+      <tr><td>4</td><td class="word">consume</td><td class="pos">v.</td><td>소비하다</td></tr>
+      <tr><td>5</td><td class="word">reliability</td><td class="pos">n.</td><td>신뢰성</td></tr>
+      <tr><td>6</td><td class="word">questionable</td><td class="pos">a.</td><td>의심스러운, 미심쩍은</td></tr>
+      <tr><td>7</td><td class="word">organization</td><td class="pos">n.</td><td>조직, 기관</td></tr>
+      <tr><td>8</td><td class="word">individual</td><td class="pos">n.</td><td>개인</td></tr>
+      <tr><td>9</td><td class="word">context</td><td class="pos">n.</td><td>맥락, 상황</td></tr>
+      <tr><td>10</td><td class="word">confront</td><td class="pos">v.</td><td>직면하다, 맞닥뜨리다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1)</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 지문 2 단어 (11~50) ============ -->
+<section class="page">
+
+  <h2>지문 2 — 인터넷 기반 뉴스의 부상과 양면성 (계속)</h2>
+  <p>
+    <span class="code-badge">26005-0099 / 0100</span>
+    <span class="passage-badge">p.115 · Ex 2 (03~04)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>11</td><td class="word">overwhelming</td><td class="pos">a.</td><td>압도적인, 엄청난</td></tr>
+      <tr><td>12</td><td class="word">amount</td><td class="pos">n.</td><td>양, 총량</td></tr>
+      <tr><td>13</td><td class="word">via</td><td class="pos">prep.</td><td>~을 통하여</td></tr>
+      <tr><td>14</td><td class="word">minute-by-minute</td><td class="pos">a.</td><td>분 단위의, 실시간의</td></tr>
+      <tr><td>15</td><td class="word">transmit</td><td class="pos">v.</td><td>전송하다, 보내다</td></tr>
+      <tr><td>16</td><td class="word">audience</td><td class="pos">n.</td><td>청중, 시청자</td></tr>
+      <tr><td>17</td><td class="word">globe</td><td class="pos">n.</td><td>지구, 전 세계</td></tr>
+      <tr><td>18</td><td class="word">involve</td><td class="pos">v.</td><td>관여시키다, 포함하다</td></tr>
+      <tr><td>19</td><td class="word">organize</td><td class="pos">v.</td><td>정리하다, 조직하다</td></tr>
+      <tr><td>20</td><td class="word">manage</td><td class="pos">v.</td><td>관리하다</td></tr>
+      <tr><td>21</td><td class="word">receive</td><td class="pos">v.</td><td>받다, 수신하다</td></tr>
+      <tr><td>22</td><td class="word">irrespective</td><td class="pos">a.</td><td>~에 관계없이</td></tr>
+      <tr><td>23</td><td class="word">access</td><td class="pos">v.</td><td>접근하다, 이용하다</td></tr>
+      <tr><td>24</td><td class="word">broadcaster</td><td class="pos">n.</td><td>방송사, 방송인</td></tr>
+      <tr><td>25</td><td class="word">locate</td><td class="pos">v.</td><td>위치시키다, ~에 두다</td></tr>
+      <tr><td>26</td><td class="word">portable</td><td class="pos">a.</td><td>휴대용의, 이동 가능한</td></tr>
+      <tr><td>27</td><td class="word">device</td><td class="pos">n.</td><td>장치, 기기</td></tr>
+      <tr><td>28</td><td class="word">affordable</td><td class="pos">a.</td><td>저렴한, 가격이 적당한</td></tr>
+      <tr><td>29</td><td class="word">compact</td><td class="pos">a.</td><td>소형의, 콤팩트한</td></tr>
+      <tr><td>30</td><td class="word">embed</td><td class="pos">v.</td><td>깊숙이 자리 잡게 하다</td></tr>
+      <tr><td>31</td><td class="word">replace</td><td class="pos">v.</td><td>대체하다, 교체하다</td></tr>
+      <tr><td>32</td><td class="word">advance</td><td class="pos">n.</td><td>발전, 진보</td></tr>
+      <tr><td>33</td><td class="word">integral</td><td class="pos">a.</td><td>필수적인, 핵심적인</td></tr>
+      <tr><td>34</td><td class="word">feature</td><td class="pos">n.</td><td>특징, 특색</td></tr>
+      <tr><td>35</td><td class="word">difficulty</td><td class="pos">n.</td><td>어려움, 곤란</td></tr>
+      <tr><td>36</td><td class="word">affordability</td><td class="pos">n.</td><td>(가격의) 적정성, 저렴함</td></tr>
+      <tr><td>37</td><td class="word">sociologist</td><td class="pos">n.</td><td>사회학자</td></tr>
+      <tr><td>38</td><td class="word">technological</td><td class="pos">a.</td><td>기술적인, 과학 기술의</td></tr>
+      <tr><td>39</td><td class="word">democratic</td><td class="pos">a.</td><td>민주적인, 평등한</td></tr>
+      <tr><td>40</td><td class="word">background</td><td class="pos">n.</td><td>배경, 환경</td></tr>
+      <tr><td>41</td><td class="word">threat</td><td class="pos">n.</td><td>위협</td></tr>
+      <tr><td>42</td><td class="word">pose</td><td class="pos">v.</td><td>(위협 등을) 제기하다</td></tr>
+      <tr><td>43</td><td class="word">unregulated</td><td class="pos">a.</td><td>규제되지 않은</td></tr>
+      <tr><td>44</td><td class="word">accessible</td><td class="pos">a.</td><td>접근 가능한, 이용 가능한</td></tr>
+      <tr><td>45</td><td class="word">discern</td><td class="pos">v.</td><td>분별하다, 식별하다</td></tr>
+      <tr><td>46</td><td class="word">put out</td><td class="pos">v.</td><td>내놓다, 발표하다</td></tr>
+      <tr><td>47</td><td class="word">daily basis</td><td class="pos">n.</td><td>매일, 일상적으로</td></tr>
+      <tr><td>48</td><td class="word">update</td><td class="pos">n.</td><td>최신 정보, 업데이트</td></tr>
+      <tr><td>49</td><td class="word">fear</td><td class="pos">v.</td><td>두려워하다, 우려하다</td></tr>
+      <tr><td>50</td><td class="word">transform</td><td class="pos">v.</td><td>변화시키다, 바꾸다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">TIP</span>
+    <strong>affordable</strong> / <strong>affordability</strong> — 접미사 <strong>-able</strong>(형용사) → <strong>-ability</strong>(명사) 전환 패턴.
+    <br>비슷한 패턴: <strong>accessible → accessibility</strong>, <strong>reliable → reliability</strong>
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1)</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

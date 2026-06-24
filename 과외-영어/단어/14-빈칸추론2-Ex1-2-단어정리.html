@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14. 빈칸 내용 추론 (2) — Exercise 1·2 단어 정리</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: auto;
+}
+th, td { border: 1px solid var(--accent-line); padding: 5px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 단어 테이블 전용 */
+.vocab-table { width: 100%; }
+.vocab-table col.c-no   { width: 6%; }
+.vocab-table col.c-word { width: 28%; }
+.vocab-table col.c-pos  { width: 8%; }
+.vocab-table col.c-mean { width: 58%; }
+.vocab-table td.word {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; font-size: 10.5pt; color: var(--accent);
+}
+.vocab-table td.pos {
+  text-align: center; font-size: 9pt; color: var(--muted);
+  font-style: italic;
+}
+
+/* 지문 코드 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 핵심 공식 모음 테이블 (표지용) */
+.summary-table { width: 100%; margin: 14px 0; }
+.summary-table th { font-size: 9.5pt; padding: 6px 10px; }
+.summary-table td { font-size: 9.5pt; padding: 6px 10px; line-height: 1.5; }
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .concept, .tip { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어</div>
+    <h1>14. 빈칸 내용 추론 (2) — 단어 정리</h1>
+    <p class="subtitle">Exercise 1·2 (p.84~85) 지문별 핵심 어휘 50선</p>
+    <p class="meta">수능특강 유형편 | 지문 식별 번호: 26005-0067, 26005-0068</p>
+  </div>
+
+  <h2>수록 지문 안내</h2>
+
+  <table class="summary-table">
+    <colgroup>
+      <col style="width:12%">
+      <col style="width:22%">
+      <col style="width:38%">
+      <col style="width:14%">
+      <col style="width:14%">
+    </colgroup>
+    <thead>
+      <tr><th>문항</th><th>지문 코드</th><th>주제</th><th>페이지</th><th>단어 수</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ex 1 (01)</td>
+        <td>26005-0067</td>
+        <td>지식의 역설: 전문성이 창의적 사고를 제한하는 방식</td>
+        <td>p.84</td>
+        <td>50개</td>
+      </tr>
+      <tr>
+        <td>Ex 2 (02)</td>
+        <td>26005-0068</td>
+        <td>타인의 관점 수용이 갈등 해결에 미치는 효과</td>
+        <td>p.85</td>
+        <td>50개</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>학습 가이드</h2>
+
+  <div class="concept">
+    <span class="label">STEP 1 — 지문 읽기 전 어휘 확인</span>
+    아래 단어 목록을 훑으며 모르는 단어에 체크한다. 이미 아는 단어는 건너뛰어도 좋다.
+  </div>
+
+  <div class="concept">
+    <span class="label">STEP 2 — 지문 독해</span>
+    수능특강 p.84~85 지문을 읽으며 단어의 문맥적 의미를 확인한다.
+  </div>
+
+  <div class="concept">
+    <span class="label">STEP 3 — 복습 테스트</span>
+    단어 목록에서 뜻을 가리고 영단어만 보며 의미를 떠올려 본다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 14. 빈칸 내용 추론 (2)</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 지문 1 단어 (1~30) ============ -->
+<section class="page">
+
+  <h2>지문 1 — 지식의 역설과 창의적 사고의 제한</h2>
+  <p>
+    <span class="code-badge">26005-0067</span>
+    <span class="passage-badge">p.84 · Ex 1 (01)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="word">expertise</td><td class="pos">n.</td><td>전문 지식, 전문성</td></tr>
+      <tr><td>2</td><td class="word">paradox</td><td class="pos">n.</td><td>역설, 모순</td></tr>
+      <tr><td>3</td><td class="word">constrain</td><td class="pos">v.</td><td>제한하다, 구속하다</td></tr>
+      <tr><td>4</td><td class="word">creative</td><td class="pos">a.</td><td>창의적인</td></tr>
+      <tr><td>5</td><td class="word">domain</td><td class="pos">n.</td><td>영역, 분야</td></tr>
+      <tr><td>6</td><td class="word">accumulate</td><td class="pos">v.</td><td>축적하다, 모으다</td></tr>
+      <tr><td>7</td><td class="word">assumption</td><td class="pos">n.</td><td>가정, 전제</td></tr>
+      <tr><td>8</td><td class="word">established</td><td class="pos">a.</td><td>확립된, 기존의</td></tr>
+      <tr><td>9</td><td class="word">convention</td><td class="pos">n.</td><td>관습, 관례</td></tr>
+      <tr><td>10</td><td class="word">framework</td><td class="pos">n.</td><td>틀, 체계</td></tr>
+      <tr><td>11</td><td class="word">rigid</td><td class="pos">a.</td><td>경직된, 융통성 없는</td></tr>
+      <tr><td>12</td><td class="word">flexibility</td><td class="pos">a.</td><td>유연성</td></tr>
+      <tr><td>13</td><td class="word">perspective</td><td class="pos">n.</td><td>관점, 시각</td></tr>
+      <tr><td>14</td><td class="word">hinder</td><td class="pos">v.</td><td>방해하다, 저해하다</td></tr>
+      <tr><td>15</td><td class="word">breakthrough</td><td class="pos">n.</td><td>돌파구, 획기적 발전</td></tr>
+      <tr><td>16</td><td class="word">conventional</td><td class="pos">a.</td><td>관습적인, 전통적인</td></tr>
+      <tr><td>17</td><td class="word">preconception</td><td class="pos">n.</td><td>선입견, 예단</td></tr>
+      <tr><td>18</td><td class="word">obstacle</td><td class="pos">n.</td><td>장애물</td></tr>
+      <tr><td>19</td><td class="word">innovative</td><td class="pos">a.</td><td>혁신적인</td></tr>
+      <tr><td>20</td><td class="word">entrenched</td><td class="pos">a.</td><td>깊이 뿌리박힌, 확고한</td></tr>
+      <tr><td>21</td><td class="word">discipline</td><td class="pos">n.</td><td>학문 분야, 규율</td></tr>
+      <tr><td>22</td><td class="word">proficiency</td><td class="pos">n.</td><td>숙련도, 능숙함</td></tr>
+      <tr><td>23</td><td class="word">ironically</td><td class="pos">ad.</td><td>아이러니하게도</td></tr>
+      <tr><td>24</td><td class="word">blind spot</td><td class="pos">n.</td><td>사각지대, 맹점</td></tr>
+      <tr><td>25</td><td class="word">overlook</td><td class="pos">v.</td><td>간과하다, 못 보고 넘기다</td></tr>
+      <tr><td>26</td><td class="word">alternative</td><td class="pos">n.</td><td>대안, 대체 방법</td></tr>
+      <tr><td>27</td><td class="word">solution</td><td class="pos">n.</td><td>해결책</td></tr>
+      <tr><td>28</td><td class="word">novice</td><td class="pos">n.</td><td>초보자</td></tr>
+      <tr><td>29</td><td class="word">outsider</td><td class="pos">n.</td><td>외부인, 비전문가</td></tr>
+      <tr><td>30</td><td class="word">approach</td><td class="pos">n.</td><td>접근법</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 14. 빈칸 내용 추론 (2)</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 지문 1 단어 (31~50) ============ -->
+<section class="page">
+
+  <h2>지문 1 — 지식의 역설과 창의적 사고의 제한 (계속)</h2>
+  <p>
+    <span class="code-badge">26005-0067</span>
+    <span class="passage-badge">p.84 · Ex 1 (01)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>31</td><td class="word">unencumbered</td><td class="pos">a.</td><td>부담 없는, 방해받지 않는</td></tr>
+      <tr><td>32</td><td class="word">fresh</td><td class="pos">a.</td><td>새로운, 참신한</td></tr>
+      <tr><td>33</td><td class="word">insight</td><td class="pos">n.</td><td>통찰, 통찰력</td></tr>
+      <tr><td>34</td><td class="word">precisely</td><td class="pos">ad.</td><td>정확하게, 바로</td></tr>
+      <tr><td>35</td><td class="word">ingrained</td><td class="pos">a.</td><td>깊이 배어든, 뿌리 깊은</td></tr>
+      <tr><td>36</td><td class="word">tendency</td><td class="pos">n.</td><td>경향, 성향</td></tr>
+      <tr><td>37</td><td class="word">well-trodden</td><td class="pos">a.</td><td>자주 다녀 닳은, 진부한</td></tr>
+      <tr><td>38</td><td class="word">pursue</td><td class="pos">v.</td><td>추구하다</td></tr>
+      <tr><td>39</td><td class="word">exploration</td><td class="pos">n.</td><td>탐구, 탐색</td></tr>
+      <tr><td>40</td><td class="word">inhibit</td><td class="pos">v.</td><td>억제하다, 방해하다</td></tr>
+      <tr><td>41</td><td class="word">familiarity</td><td class="pos">n.</td><td>익숙함, 정통함</td></tr>
+      <tr><td>42</td><td class="word">complacency</td><td class="pos">n.</td><td>자기만족, 안주</td></tr>
+      <tr><td>43</td><td class="word">question</td><td class="pos">v.</td><td>의문을 제기하다</td></tr>
+      <tr><td>44</td><td class="word">fundamental</td><td class="pos">a.</td><td>근본적인, 기본적인</td></tr>
+      <tr><td>45</td><td class="word">challenge</td><td class="pos">v.</td><td>도전하다, 이의를 제기하다</td></tr>
+      <tr><td>46</td><td class="word">take for granted</td><td class="pos">v.</td><td>당연하게 여기다</td></tr>
+      <tr><td>47</td><td class="word">uncharted</td><td class="pos">a.</td><td>미지의, 미개척의</td></tr>
+      <tr><td>48</td><td class="word">territory</td><td class="pos">n.</td><td>영역, 영토</td></tr>
+      <tr><td>49</td><td class="word">counterintuitive</td><td class="pos">a.</td><td>직관에 반하는</td></tr>
+      <tr><td>50</td><td class="word">stifle</td><td class="pos">v.</td><td>억누르다, 질식시키다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">TIP</span>
+    <strong>un-</strong> 접두사 부정 패턴에 주목: <strong>unencumbered</strong>(방해받지 않는), <strong>uncharted</strong>(미개척의).
+    <br>비슷한 패턴: <strong>unprecedented</strong>(전례 없는), <strong>unforeseen</strong>(예기치 못한), <strong>unconventional</strong>(비관습적인)
+  </div>
+
+  <hr class="divider">
+
+  <h2>지문 2 — 타인의 관점 수용과 갈등 해결</h2>
+  <p>
+    <span class="code-badge">26005-0068</span>
+    <span class="passage-badge">p.85 · Ex 2 (02)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="word">perspective-taking</td><td class="pos">n.</td><td>관점 수용, 관점 취하기</td></tr>
+      <tr><td>2</td><td class="word">conflict</td><td class="pos">n.</td><td>갈등, 충돌</td></tr>
+      <tr><td>3</td><td class="word">resolution</td><td class="pos">n.</td><td>해결, 결의</td></tr>
+      <tr><td>4</td><td class="word">negotiation</td><td class="pos">n.</td><td>협상</td></tr>
+      <tr><td>5</td><td class="word">empathy</td><td class="pos">n.</td><td>공감, 감정이입</td></tr>
+      <tr><td>6</td><td class="word">opponent</td><td class="pos">n.</td><td>상대방, 적</td></tr>
+      <tr><td>7</td><td class="word">underlying</td><td class="pos">a.</td><td>근본적인, 이면의</td></tr>
+      <tr><td>8</td><td class="word">interest</td><td class="pos">n.</td><td>이해관계, 관심사</td></tr>
+      <tr><td>9</td><td class="word">mutual</td><td class="pos">a.</td><td>상호의, 서로의</td></tr>
+      <tr><td>10</td><td class="word">beneficial</td><td class="pos">a.</td><td>유익한, 이로운</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 14. 빈칸 내용 추론 (2)</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 지문 2 단어 (11~50) ============ -->
+<section class="page">
+
+  <h2>지문 2 — 타인의 관점 수용과 갈등 해결 (계속)</h2>
+  <p>
+    <span class="code-badge">26005-0068</span>
+    <span class="passage-badge">p.85 · Ex 2 (02)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>11</td><td class="word">outcome</td><td class="pos">n.</td><td>결과, 성과</td></tr>
+      <tr><td>12</td><td class="word">compromise</td><td class="pos">n.</td><td>타협, 절충</td></tr>
+      <tr><td>13</td><td class="word">acknowledge</td><td class="pos">v.</td><td>인정하다, 인식하다</td></tr>
+      <tr><td>14</td><td class="word">concession</td><td class="pos">n.</td><td>양보, 양도</td></tr>
+      <tr><td>15</td><td class="word">yield</td><td class="pos">v.</td><td>양보하다, 산출하다</td></tr>
+      <tr><td>16</td><td class="word">integrate</td><td class="pos">v.</td><td>통합하다</td></tr>
+      <tr><td>17</td><td class="word">cooperative</td><td class="pos">a.</td><td>협력적인</td></tr>
+      <tr><td>18</td><td class="word">stance</td><td class="pos">n.</td><td>입장, 태도</td></tr>
+      <tr><td>19</td><td class="word">adversarial</td><td class="pos">a.</td><td>적대적인</td></tr>
+      <tr><td>20</td><td class="word">dispute</td><td class="pos">n.</td><td>분쟁, 논쟁</td></tr>
+      <tr><td>21</td><td class="word">hostility</td><td class="pos">n.</td><td>적대감</td></tr>
+      <tr><td>22</td><td class="word">productive</td><td class="pos">a.</td><td>생산적인</td></tr>
+      <tr><td>23</td><td class="word">dialogue</td><td class="pos">n.</td><td>대화</td></tr>
+      <tr><td>24</td><td class="word">assumption</td><td class="pos">n.</td><td>가정, 전제</td></tr>
+      <tr><td>25</td><td class="word">motive</td><td class="pos">n.</td><td>동기</td></tr>
+      <tr><td>26</td><td class="word">attribute</td><td class="pos">v.</td><td>~의 탓으로 돌리다</td></tr>
+      <tr><td>27</td><td class="word">intention</td><td class="pos">n.</td><td>의도</td></tr>
+      <tr><td>28</td><td class="word">misinterpret</td><td class="pos">v.</td><td>잘못 해석하다</td></tr>
+      <tr><td>29</td><td class="word">genuine</td><td class="pos">a.</td><td>진짜의, 진정한</td></tr>
+      <tr><td>30</td><td class="word">concern</td><td class="pos">n.</td><td>관심사, 우려</td></tr>
+      <tr><td>31</td><td class="word">accommodate</td><td class="pos">v.</td><td>수용하다, 맞추다</td></tr>
+      <tr><td>32</td><td class="word">willingness</td><td class="pos">n.</td><td>기꺼이 함, 의향</td></tr>
+      <tr><td>33</td><td class="word">foster</td><td class="pos">v.</td><td>촉진하다, 양성하다</td></tr>
+      <tr><td>34</td><td class="word">trust</td><td class="pos">n.</td><td>신뢰</td></tr>
+      <tr><td>35</td><td class="word">defensiveness</td><td class="pos">n.</td><td>방어적 태도</td></tr>
+      <tr><td>36</td><td class="word">diminish</td><td class="pos">v.</td><td>줄어들다, 약화시키다</td></tr>
+      <tr><td>37</td><td class="word">satisfactory</td><td class="pos">a.</td><td>만족스러운</td></tr>
+      <tr><td>38</td><td class="word">agreement</td><td class="pos">n.</td><td>합의, 동의</td></tr>
+      <tr><td>39</td><td class="word">perceive</td><td class="pos">v.</td><td>인식하다, 감지하다</td></tr>
+      <tr><td>40</td><td class="word">counterpart</td><td class="pos">n.</td><td>상대, 대응 관계에 있는 것</td></tr>
+      <tr><td>41</td><td class="word">constructive</td><td class="pos">a.</td><td>건설적인</td></tr>
+      <tr><td>42</td><td class="word">engage in</td><td class="pos">v.</td><td>~에 참여하다</td></tr>
+      <tr><td>43</td><td class="word">retaliation</td><td class="pos">n.</td><td>보복, 앙갚음</td></tr>
+      <tr><td>44</td><td class="word">escalate</td><td class="pos">v.</td><td>확대되다, 고조되다</td></tr>
+      <tr><td>45</td><td class="word">tension</td><td class="pos">n.</td><td>긴장, 갈등</td></tr>
+      <tr><td>46</td><td class="word">insight</td><td class="pos">n.</td><td>통찰, 이해</td></tr>
+      <tr><td>47</td><td class="word">facilitate</td><td class="pos">v.</td><td>촉진하다, 용이하게 하다</td></tr>
+      <tr><td>48</td><td class="word">reconcile</td><td class="pos">v.</td><td>화해시키다, 조화시키다</td></tr>
+      <tr><td>49</td><td class="word">sustainable</td><td class="pos">a.</td><td>지속 가능한</td></tr>
+      <tr><td>50</td><td class="word">interpersonal</td><td class="pos">a.</td><td>대인 관계의</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">TIP</span>
+    <strong>-tion</strong> 접미사 명사 패턴: <strong>negotiate → negotiation</strong>, <strong>resolve → resolution</strong>, <strong>escalate → escalation</strong>, <strong>retaliate → retaliation</strong>.
+    <br>동사 어미를 바꿔 명사로 전환하는 가장 흔한 패턴이다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 14. 빈칸 내용 추론 (2)</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>

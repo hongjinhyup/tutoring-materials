@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17. 문단 속에 문장 넣기 — Exercise 1·2 단어 정리</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: auto;
+}
+th, td { border: 1px solid var(--accent-line); padding: 5px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 단어 테이블 전용 */
+.vocab-table { width: 100%; }
+.vocab-table col.c-no   { width: 6%; }
+.vocab-table col.c-word { width: 28%; }
+.vocab-table col.c-pos  { width: 8%; }
+.vocab-table col.c-mean { width: 58%; }
+.vocab-table td.word {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; font-size: 10.5pt; color: var(--accent);
+}
+.vocab-table td.pos {
+  text-align: center; font-size: 9pt; color: var(--muted);
+  font-style: italic;
+}
+
+/* 지문 코드 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 핵심 공식 모음 테이블 (표지용) */
+.summary-table { width: 100%; margin: 14px 0; }
+.summary-table th { font-size: 9.5pt; padding: 6px 10px; }
+.summary-table td { font-size: 9.5pt; padding: 6px 10px; line-height: 1.5; }
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .concept, .tip { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어</div>
+    <h1>17. 문단 속에 문장 넣기 — 단어 정리</h1>
+    <p class="subtitle">Exercise 1·2 (p.102) 지문별 핵심 어휘 50선</p>
+    <p class="meta">수능특강 유형편 | 지문 식별 번호: 26005-0084, 26005-0085</p>
+  </div>
+
+  <h2>수록 지문 안내</h2>
+
+  <table class="summary-table">
+    <colgroup>
+      <col style="width:12%">
+      <col style="width:22%">
+      <col style="width:38%">
+      <col style="width:14%">
+      <col style="width:14%">
+    </colgroup>
+    <thead>
+      <tr><th>문항</th><th>지문 코드</th><th>주제</th><th>페이지</th><th>단어 수</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ex 1 (01)</td>
+        <td>26005-0084</td>
+        <td>스키마(인지 틀)를 이용한 정보 처리와 이해</td>
+        <td>p.102</td>
+        <td>50개</td>
+      </tr>
+      <tr>
+        <td>Ex 2 (02)</td>
+        <td>26005-0085</td>
+        <td>소비자 선택의 역설 — 과잉 선택지와 결정 마비</td>
+        <td>p.102</td>
+        <td>50개</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>학습 가이드</h2>
+
+  <div class="concept">
+    <span class="label">STEP 1 — 지문 읽기 전 어휘 확인</span>
+    아래 단어 목록을 훑으며 모르는 단어에 체크한다. 이미 아는 단어는 건너뛰어도 좋다.
+  </div>
+
+  <div class="concept">
+    <span class="label">STEP 2 — 지문 독해</span>
+    수능특강 p.102 지문을 읽으며 단어의 문맥적 의미를 확인한다.
+  </div>
+
+  <div class="concept">
+    <span class="label">STEP 3 — 복습 테스트</span>
+    단어 목록에서 뜻을 가리고 영단어만 보며 의미를 떠올려 본다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문단 속에 문장 넣기</span>
+    <span>1 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 지문 1 단어 (1~30) ============ -->
+<section class="page">
+
+  <h2>지문 1 — 스키마를 이용한 정보 처리와 이해</h2>
+  <p>
+    <span class="code-badge">26005-0084</span>
+    <span class="passage-badge">p.102 · Ex 1 (01)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="word">schema</td><td class="pos">n.</td><td>스키마, 인지 틀</td></tr>
+      <tr><td>2</td><td class="word">framework</td><td class="pos">n.</td><td>틀, 구조</td></tr>
+      <tr><td>3</td><td class="word">organize</td><td class="pos">v.</td><td>정리하다, 조직하다</td></tr>
+      <tr><td>4</td><td class="word">interpret</td><td class="pos">v.</td><td>해석하다</td></tr>
+      <tr><td>5</td><td class="word">cognitive</td><td class="pos">a.</td><td>인지적인</td></tr>
+      <tr><td>6</td><td class="word">encounter</td><td class="pos">v.</td><td>마주치다, 접하다</td></tr>
+      <tr><td>7</td><td class="word">prior</td><td class="pos">a.</td><td>이전의, 사전의</td></tr>
+      <tr><td>8</td><td class="word">expectation</td><td class="pos">n.</td><td>기대, 예상</td></tr>
+      <tr><td>9</td><td class="word">assimilate</td><td class="pos">v.</td><td>동화하다, 흡수하다</td></tr>
+      <tr><td>10</td><td class="word">existing</td><td class="pos">a.</td><td>기존의, 현재의</td></tr>
+      <tr><td>11</td><td class="word">accommodate</td><td class="pos">v.</td><td>수용하다, 적응시키다</td></tr>
+      <tr><td>12</td><td class="word">modify</td><td class="pos">v.</td><td>수정하다, 변경하다</td></tr>
+      <tr><td>13</td><td class="word">contradictory</td><td class="pos">a.</td><td>모순되는</td></tr>
+      <tr><td>14</td><td class="word">perception</td><td class="pos">n.</td><td>인식, 지각</td></tr>
+      <tr><td>15</td><td class="word">selective</td><td class="pos">a.</td><td>선택적인</td></tr>
+      <tr><td>16</td><td class="word">filter</td><td class="pos">v.</td><td>걸러내다, 여과하다</td></tr>
+      <tr><td>17</td><td class="word">relevant</td><td class="pos">a.</td><td>관련 있는, 적절한</td></tr>
+      <tr><td>18</td><td class="word">disregard</td><td class="pos">v.</td><td>무시하다</td></tr>
+      <tr><td>19</td><td class="word">consistent</td><td class="pos">a.</td><td>일관된, 일치하는</td></tr>
+      <tr><td>20</td><td class="word">stereotype</td><td class="pos">n.</td><td>고정관념</td></tr>
+      <tr><td>21</td><td class="word">bias</td><td class="pos">n.</td><td>편견, 편향</td></tr>
+      <tr><td>22</td><td class="word">reinforce</td><td class="pos">v.</td><td>강화하다</td></tr>
+      <tr><td>23</td><td class="word">assumption</td><td class="pos">n.</td><td>가정, 추정</td></tr>
+      <tr><td>24</td><td class="word">categorize</td><td class="pos">v.</td><td>분류하다</td></tr>
+      <tr><td>25</td><td class="word">abstract</td><td class="pos">a.</td><td>추상적인</td></tr>
+      <tr><td>26</td><td class="word">concrete</td><td class="pos">a.</td><td>구체적인</td></tr>
+      <tr><td>27</td><td class="word">generalize</td><td class="pos">v.</td><td>일반화하다</td></tr>
+      <tr><td>28</td><td class="word">revise</td><td class="pos">v.</td><td>수정하다, 개정하다</td></tr>
+      <tr><td>29</td><td class="word">absorb</td><td class="pos">v.</td><td>흡수하다</td></tr>
+      <tr><td>30</td><td class="word">mental</td><td class="pos">a.</td><td>정신적인, 마음의</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문단 속에 문장 넣기</span>
+    <span>2 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 지문 1 (31~50) + 지문 2 시작 ============ -->
+<section class="page">
+
+  <h2>지문 1 — 스키마를 이용한 정보 처리와 이해 (계속)</h2>
+  <p>
+    <span class="code-badge">26005-0084</span>
+    <span class="passage-badge">p.102 · Ex 1 (01)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>31</td><td class="word">represent</td><td class="pos">v.</td><td>나타내다, 표상하다</td></tr>
+      <tr><td>32</td><td class="word">structure</td><td class="pos">n.</td><td>구조, 체계</td></tr>
+      <tr><td>33</td><td class="word">process</td><td class="pos">v.</td><td>처리하다</td></tr>
+      <tr><td>34</td><td class="word">comprehension</td><td class="pos">n.</td><td>이해, 이해력</td></tr>
+      <tr><td>35</td><td class="word">prediction</td><td class="pos">n.</td><td>예측</td></tr>
+      <tr><td>36</td><td class="word">distort</td><td class="pos">v.</td><td>왜곡하다</td></tr>
+      <tr><td>37</td><td class="word">confirmation</td><td class="pos">n.</td><td>확인, 확증</td></tr>
+      <tr><td>38</td><td class="word">overlook</td><td class="pos">v.</td><td>간과하다, 놓치다</td></tr>
+      <tr><td>39</td><td class="word">contradict</td><td class="pos">v.</td><td>모순되다, 반박하다</td></tr>
+      <tr><td>40</td><td class="word">subsequent</td><td class="pos">a.</td><td>후속의, 이후의</td></tr>
+      <tr><td>41</td><td class="word">retrieve</td><td class="pos">v.</td><td>회수하다, 검색하다</td></tr>
+      <tr><td>42</td><td class="word">recall</td><td class="pos">v.</td><td>회상하다, 기억해 내다</td></tr>
+      <tr><td>43</td><td class="word">stored</td><td class="pos">a.</td><td>저장된</td></tr>
+      <tr><td>44</td><td class="word">classify</td><td class="pos">v.</td><td>분류하다</td></tr>
+      <tr><td>45</td><td class="word">simplify</td><td class="pos">v.</td><td>단순화하다</td></tr>
+      <tr><td>46</td><td class="word">incoming</td><td class="pos">a.</td><td>들어오는, 수신되는</td></tr>
+      <tr><td>47</td><td class="word">shortcut</td><td class="pos">n.</td><td>지름길, 간편법</td></tr>
+      <tr><td>48</td><td class="word">efficiency</td><td class="pos">n.</td><td>효율성</td></tr>
+      <tr><td>49</td><td class="word">drawback</td><td class="pos">n.</td><td>단점, 결점</td></tr>
+      <tr><td>50</td><td class="word">preconceive</td><td class="pos">v.</td><td>미리 생각하다, 선입견을 갖다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">TIP</span>
+    <strong>con- / com-</strong> 접두사는 '함께'를 뜻한다: <strong>confirm</strong>(확인하다), <strong>contradict</strong>(반박하다), <strong>comprehend</strong>(이해하다).
+    <br>비슷한 패턴: <strong>consistent</strong>(일관된), <strong>concrete</strong>(구체적인) — 모두 라틴어 <em>con-</em>에서 유래.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문단 속에 문장 넣기</span>
+    <span>3 / 4</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 지문 2 단어 ============ -->
+<section class="page">
+
+  <h2>지문 2 — 소비자 선택의 역설과 결정 마비</h2>
+  <p>
+    <span class="code-badge">26005-0085</span>
+    <span class="passage-badge">p.102 · Ex 2 (02)</span>
+  </p>
+
+  <table class="vocab-table">
+    <colgroup>
+      <col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean">
+    </colgroup>
+    <thead>
+      <tr><th>#</th><th>단어</th><th>품사</th><th>뜻</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td class="word">paradox</td><td class="pos">n.</td><td>역설, 모순</td></tr>
+      <tr><td>2</td><td class="word">consumer</td><td class="pos">n.</td><td>소비자</td></tr>
+      <tr><td>3</td><td class="word">overwhelm</td><td class="pos">v.</td><td>압도하다</td></tr>
+      <tr><td>4</td><td class="word">abundance</td><td class="pos">n.</td><td>풍부함, 과잉</td></tr>
+      <tr><td>5</td><td class="word">option</td><td class="pos">n.</td><td>선택지, 옵션</td></tr>
+      <tr><td>6</td><td class="word">paralysis</td><td class="pos">n.</td><td>마비, 무력감</td></tr>
+      <tr><td>7</td><td class="word">rational</td><td class="pos">a.</td><td>합리적인, 이성적인</td></tr>
+      <tr><td>8</td><td class="word">decision-making</td><td class="pos">n.</td><td>의사 결정</td></tr>
+      <tr><td>9</td><td class="word">assume</td><td class="pos">v.</td><td>가정하다, 추정하다</td></tr>
+      <tr><td>10</td><td class="word">autonomy</td><td class="pos">n.</td><td>자율성</td></tr>
+      <tr><td>11</td><td class="word">satisfaction</td><td class="pos">n.</td><td>만족(감)</td></tr>
+      <tr><td>12</td><td class="word">diminish</td><td class="pos">v.</td><td>줄어들다, 감소하다</td></tr>
+      <tr><td>13</td><td class="word">regret</td><td class="pos">n.</td><td>후회</td></tr>
+      <tr><td>14</td><td class="word">anticipate</td><td class="pos">v.</td><td>예상하다</td></tr>
+      <tr><td>15</td><td class="word">evaluate</td><td class="pos">v.</td><td>평가하다</td></tr>
+      <tr><td>16</td><td class="word">alternative</td><td class="pos">n.</td><td>대안, 선택지</td></tr>
+      <tr><td>17</td><td class="word">sacrifice</td><td class="pos">v.</td><td>희생하다, 포기하다</td></tr>
+      <tr><td>18</td><td class="word">opportunity cost</td><td class="pos">n.</td><td>기회비용</td></tr>
+      <tr><td>19</td><td class="word">maximize</td><td class="pos">v.</td><td>극대화하다</td></tr>
+      <tr><td>20</td><td class="word">optimal</td><td class="pos">a.</td><td>최적의</td></tr>
+      <tr><td>21</td><td class="word">anxiety</td><td class="pos">n.</td><td>불안(감)</td></tr>
+      <tr><td>22</td><td class="word">inevitable</td><td class="pos">a.</td><td>불가피한</td></tr>
+      <tr><td>23</td><td class="word">trade-off</td><td class="pos">n.</td><td>상충 관계, 절충</td></tr>
+      <tr><td>24</td><td class="word">burden</td><td class="pos">n.</td><td>부담, 짐</td></tr>
+      <tr><td>25</td><td class="word">dissatisfaction</td><td class="pos">n.</td><td>불만족</td></tr>
+      <tr><td>26</td><td class="word">reverse</td><td class="pos">v.</td><td>뒤집다, 역전시키다</td></tr>
+      <tr><td>27</td><td class="word">welfare</td><td class="pos">n.</td><td>복지, 안녕</td></tr>
+      <tr><td>28</td><td class="word">well-being</td><td class="pos">n.</td><td>행복, 안녕</td></tr>
+      <tr><td>29</td><td class="word">variety</td><td class="pos">n.</td><td>다양성</td></tr>
+      <tr><td>30</td><td class="word">excessive</td><td class="pos">a.</td><td>과도한, 지나친</td></tr>
+      <tr><td>31</td><td class="word">threshold</td><td class="pos">n.</td><td>한계점, 문턱</td></tr>
+      <tr><td>32</td><td class="word">paralyze</td><td class="pos">v.</td><td>마비시키다</td></tr>
+      <tr><td>33</td><td class="word">accumulate</td><td class="pos">v.</td><td>축적하다, 쌓이다</td></tr>
+      <tr><td>34</td><td class="word">deliberate</td><td class="pos">v.</td><td>숙고하다</td></tr>
+      <tr><td>35</td><td class="word">attribute</td><td class="pos">n.</td><td>속성, 특성</td></tr>
+      <tr><td>36</td><td class="word">comparison</td><td class="pos">n.</td><td>비교</td></tr>
+      <tr><td>37</td><td class="word">compound</td><td class="pos">v.</td><td>악화시키다, 가중시키다</td></tr>
+      <tr><td>38</td><td class="word">frustration</td><td class="pos">n.</td><td>좌절감, 실망</td></tr>
+      <tr><td>39</td><td class="word">outcome</td><td class="pos">n.</td><td>결과</td></tr>
+      <tr><td>40</td><td class="word">expectation</td><td class="pos">n.</td><td>기대</td></tr>
+      <tr><td>41</td><td class="word">escalate</td><td class="pos">v.</td><td>확대되다, 심화되다</td></tr>
+      <tr><td>42</td><td class="word">prospect</td><td class="pos">n.</td><td>전망, 가능성</td></tr>
+      <tr><td>43</td><td class="word">inferior</td><td class="pos">a.</td><td>열등한, 하위의</td></tr>
+      <tr><td>44</td><td class="word">counterintuitive</td><td class="pos">a.</td><td>직관에 어긋나는</td></tr>
+      <tr><td>45</td><td class="word">abundant</td><td class="pos">a.</td><td>풍부한</td></tr>
+      <tr><td>46</td><td class="word">restrict</td><td class="pos">v.</td><td>제한하다</td></tr>
+      <tr><td>47</td><td class="word">deliberately</td><td class="pos">ad.</td><td>의도적으로, 신중하게</td></tr>
+      <tr><td>48</td><td class="word">liberate</td><td class="pos">v.</td><td>해방시키다</td></tr>
+      <tr><td>49</td><td class="word">constrain</td><td class="pos">v.</td><td>제약하다, 한정하다</td></tr>
+      <tr><td>50</td><td class="word">hinder</td><td class="pos">v.</td><td>방해하다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">TIP</span>
+    <strong>dis- / in-</strong> 접두사로 반의어 만들기: <strong>satisfaction → dissatisfaction</strong>(불만족).
+    <br>비슷한 패턴: <strong>evitable → inevitable</strong>(불가피한), <strong>ferior → inferior</strong>(열등한, 라틴어 비교급 어미)
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문단 속에 문장 넣기</span>
+    <span>4 / 4</span>
+  </div>
+</section>
+
+</body>
+</html>
