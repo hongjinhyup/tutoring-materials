@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>II 확률 대단원 마무리 풀이</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 23pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 4px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.example {
+  border: 1px solid var(--accent-line); border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0; break-inside: avoid;
+}
+.example .label {
+  font-size: 9pt; font-weight: 700; color: #fff; background: var(--accent);
+  border-radius: 4px; padding: 1px 8px; display: inline-block; margin-bottom: 8px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.problem { margin: 12px 0; break-inside: avoid; }
+.problem .q { font-weight: 700; }
+.problem .answer-space {
+  border-bottom: 1px dashed var(--accent-line); height: 26px; margin-top: 6px;
+}
+
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 7px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .concept, .example, .tip, .problem, .eq { break-inside: avoid; }
+}
+
+.m { font-family: 'Times New Roman', Georgia, serif; font-style: italic; }
+.eq {
+  text-align: center; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 12pt;
+  line-height: 1.6; break-inside: avoid;
+}
+.eq.boxed {
+  display: block; border: 1.6px solid var(--accent); border-radius: 6px;
+  padding: 8px 4px; background: #fbfcfe; font-weight: 600;
+}
+.frac { display: inline-block; vertical-align: middle; text-align: center; margin: 0 .12em; }
+.frac > span { display: block; padding: 0 .45em; line-height: 1.25; }
+.frac > .den { border-top: 1.3px solid currentColor; }
+.sqrt { white-space: nowrap; }
+.sqrt > .rad { border-top: 1.3px solid currentColor; padding: 0 .18em 0 .08em; }
+.sqrt::before { content: "\221A"; padding-right: .02em; }
+.ov { display: inline-block; line-height: 1; border-top: 1.4px solid currentColor; padding-top: .5px; }
+
+/* ---- 추가: 답 강조 ---- */
+.ans {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 11pt;
+  margin-top: 4px;
+}
+/* ---- 풀이패턴 태그 ---- */
+.pattern-tag {
+  display: inline-block; background: #e8f0fe; color: var(--accent);
+  border-radius: 3px; padding: 1px 8px; font-size: 9.5pt; font-weight: 600;
+  margin-bottom: 6px;
+}
+/* ---- 문제번호 뱃지 ---- */
+.qnum {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 22px; height: 22px; text-align: center;
+  line-height: 22px; font-size: 10pt; font-weight: 700; margin-right: 6px;
+}
+/* ---- 구분선 ---- */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+/* ---- 작은 테이블 (분포표) ---- */
+.dist-table { width: auto; margin: 8px auto; }
+.dist-table th, .dist-table td { text-align: center; padding: 5px 14px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 핵심 공식 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">확률과통계 · II. 확률</div>
+    <h1>대단원 마무리 풀이 학습자료</h1>
+    <p class="subtitle">교과서 p.71~73 | 종합 13 + 서술형 4 = 총 17문항</p>
+    <div class="meta">고3 · 2026</div>
+  </div>
+
+  <h2>핵심 공식 모음</h2>
+
+  <div class="concept">
+    <span class="label">확률 핵심 공식 총정리</span>
+    <table>
+      <tr><th style="width:30%">공식</th><th>내용</th></tr>
+      <tr>
+        <td>수학적 확률</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A</span>) =
+          <span class="frac"><span class="num"><span class="m">n</span>(<span class="m">A</span>)</span><span class="den"><span class="m">n</span>(<span class="m">S</span>)</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td>덧셈정리</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>) =
+          <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>) − <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>여사건</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A<sup>c</sup></span>) = 1 − <span class="m">P</span>(<span class="m">A</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>조건부확률</td>
+        <td>
+          <span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>) =
+          <span class="frac"><span class="num"><span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)</span><span class="den"><span class="m">P</span>(<span class="m">A</span>)</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td>곱셈정리</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) =
+          <span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>독립</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) =
+          <span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>독립시행</td>
+        <td>
+          <sub><span class="m">n</span></sub>C<sub><span class="m">r</span></sub>
+          <span class="m">p<sup>r</sup></span> (1 − <span class="m">p</span>)<sup><span class="m">n</span>−<span class="m">r</span></sup>
+        </td>
+      </tr>
+      <tr>
+        <td>드모르간</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A<sup>c</sup></span> ∩ <span class="m">B<sup>c</sup></span>) =
+          1 − <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>베이즈</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A</span>|<span class="m">B</span>) =
+          <span class="frac"><span class="num"><span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>)</span><span class="den"><span class="m">P</span>(<span class="m">B</span>)</span></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 1</span></div>
+</section>
+
+<!-- ============ PAGE 2 — 문항별 필수 개념 안내 ============ -->
+<section class="page">
+  <h2>문항별 필수 개념 안내</h2>
+  <p style="color:var(--muted);font-size:10.5pt;margin-top:0;">각 문항을 풀기 위해 반드시 알아야 하는 개념을 정리하였다. 개념을 먼저 확인한 뒤 풀이에 들어간다.</p>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❶ 수학적 확률과 배열 &ensp;→ 종합 1 · 종합 2 · 종합 3 (p.71)</span>
+    <p style="margin:4px 0;">순열·조합·부분집합으로 경우의 수를 세고 전체로 나눈다. <strong>양 끝 배열</strong>, <strong>부분집합 포함 조건</strong>, <strong>정수해 부등식</strong> 등 다양한 유형이 출제된다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❷ 배반사건과 덧셈정리·드모르간 &ensp;→ 종합 4 · 종합 6 (p.71)</span>
+    <p style="margin:4px 0;">배반이면 <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>). 드모르간 법칙으로
+      <span class="m">P</span>(<span class="m">A<sup>c</sup></span> ∩ <span class="m">B<sup>c</sup></span>) = 1 − <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>)를 이용한다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❸ 조건부확률과 분할표 &ensp;→ 종합 5 · 종합 7 (p.71)</span>
+    <p style="margin:4px 0;">표에서 "~일 때"가 새로운 분모가 된다. <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B<sup>c</sup></span>) = <span class="m">P</span>(<span class="m">A</span>) − <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)를 활용한다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❹ 독립의 곱셈과 역산 &ensp;→ 종합 8 · 종합 11 (p.72)</span>
+    <p style="margin:4px 0;">독립이면 <span class="m">P</span>(둘 다) = <span class="m">P</span>(<span class="m">A</span>)<span class="m">P</span>(<span class="m">B</span>). 역으로 <span class="m">P</span>(<span class="m">B</span>)를 구하는 문제가 자주 출제된다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❺ 비복원 추출과 곱셈정리 &ensp;→ 종합 9 (p.72)</span>
+    <p style="margin:4px 0;">순차 비복원은 곱셈정리를 적용한다. <span class="m">ab</span> = 값, <span class="m">a</span> + <span class="m">b</span> = 합 조건에서 이차방정식을 세운다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❻ 베이즈 정리 &ensp;→ 종합 10 (p.72)</span>
+    <p style="margin:4px 0;">확률나무를 그린 뒤 사후확률을 구한다. 분자·분모의 경로를 정확히 파악하는 것이 핵심이다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❼ 직병렬 회로와 독립 &ensp;→ 종합 12 (p.72)</span>
+    <p style="margin:4px 0;">직렬 = AND (곱), 병렬 = OR (여사건). 전류가 <strong>안 흐를 확률</strong>을 여사건으로 구하면 편리하다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❽ 독립시행(이항분포) &ensp;→ 종합 13 · 서술형 17 (p.72~73)</span>
+    <p style="margin:4px 0;"><sub><span class="m">n</span></sub>C<sub><span class="m">r</span></sub> <span class="m">p<sup>r</sup> q</span><sup><span class="m">n</span>−<span class="m">r</span></sup>. 복귀 조건은 mod로 판단한다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❾ 판별식과 확률 &ensp;→ 서술형 14 (p.73)</span>
+    <p style="margin:4px 0;"><span class="m">D</span> = <span class="m">a</span><sup>2</sup> − 4<span class="m">b</span> ≥ 0 → <span class="m">a</span> 값별로 <span class="m">b</span>의 범위를 세는 경우의 수 문제이다.</p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 2</span></div>
+</section>
+
+<!-- ============ PAGE 3 — 종합 1, 2, 3 ============ -->
+<section class="page">
+  <h2>종합 (1~13)</h2>
+
+  <div class="example">
+    <span class="label">종합 1</span>
+    <h3>양 끝 배열</h3>
+    <p><strong>문제:</strong>
+      4명을 일렬로 세울 때, 준영이와 하선이가 양 끝에 서는 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 전체 배열 → 조건 배열 → 확률</span>
+    <div class="eq">
+      전체: 4! = 24
+    </div>
+    <div class="eq">
+      양 끝(준영·하선): 2! × 나머지 2! = 2 × 2 = 4
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">4</span><span class="den">24</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">1</span><span class="den">6</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 2</span>
+    <h3>부분집합에 5 미포함</h3>
+    <p><strong>문제:</strong>
+      <span class="m">A</span> = {1, 2, 3, 4, 5}의 부분집합을 임의로 택할 때, 원소 5를 포함하지 않을 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 전체 부분집합 → 5 없는 부분집합</span>
+    <div class="eq">
+      전체 부분집합: 2<sup>5</sup> = 32
+    </div>
+    <div class="eq">
+      5를 포함하지 않는 부분집합: {1, 2, 3, 4}의 부분집합 = 2<sup>4</sup> = 16
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">16</span><span class="den">32</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">1</span><span class="den">2</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 3</span>
+    <h3>정수해 조건과 확률</h3>
+    <p><strong>문제:</strong>
+      <span class="m">x</span> + <span class="m">y</span> = 100을 만족시키는 양의 정수 순서쌍 (<span class="m">x</span>, <span class="m">y</span>) 중 하나를 택할 때,
+      <span class="m">xy</span> ≥ 2400일 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 부등식 → 범위 세기</span>
+    <div class="eq">
+      전체: <span class="m">x</span> = 1, 2, …, 99 → 99가지
+    </div>
+    <p><span class="m">xy</span> = <span class="m">x</span>(100 − <span class="m">x</span>) ≥ 2400</p>
+    <div class="eq">
+      <span class="m">x</span><sup>2</sup> − 100<span class="m">x</span> + 2400 ≤ 0
+      &ensp;⇒&ensp;
+      (<span class="m">x</span> − 40)(<span class="m">x</span> − 60) ≤ 0
+    </div>
+    <div class="eq">
+      40 ≤ <span class="m">x</span> ≤ 60 &ensp;→&ensp; 21개
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">21</span><span class="den">99</span></span> =
+      <span class="frac"><span class="num">7</span><span class="den">33</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">7</span><span class="den">33</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 3</span></div>
+</section>
+
+<!-- ============ PAGE 4 — 종합 4, 5, 6 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 4</span>
+    <h3>배반 + 드모르간</h3>
+    <p><strong>문제:</strong>
+      사건 <span class="m">A</span>, <span class="m">B</span>가 배반이고
+      <span class="m">P</span>(<span class="m">A</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span>,
+      <span class="m">P</span>(<span class="m">A<sup>c</sup></span> ∩ <span class="m">B<sup>c</sup></span>) =
+      <span class="frac"><span class="num">1</span><span class="den">8</span></span>일 때
+      <span class="m">P</span>(<span class="m">B</span>)를 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 드모르간 → P(A∪B) 구하기 → 배반 이용</span>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">A<sup>c</sup></span> ∩ <span class="m">B<sup>c</sup></span>) =
+      1 − <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>)
+    </div>
+    <div class="eq">
+      <span class="frac"><span class="num">1</span><span class="den">8</span></span> =
+      1 − <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>)
+      &ensp;⇒&ensp;
+      <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>) =
+      <span class="frac"><span class="num">7</span><span class="den">8</span></span>
+    </div>
+    <p>배반이므로 <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>)</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">B</span>) =
+      <span class="frac"><span class="num">7</span><span class="den">8</span></span> −
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> =
+      <span class="frac"><span class="num">7</span><span class="den">8</span></span> −
+      <span class="frac"><span class="num">2</span><span class="den">8</span></span> =
+      <span class="frac"><span class="num">5</span><span class="den">8</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">5</span><span class="den">8</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 5</span>
+    <h3>분할표 조건부확률</h3>
+    <p><strong>문제:</strong>
+      320명 학생 중 중국어(남 90, 여 70)와 일본어(남 75, 여 85)를 수강한다.
+      중국어를 수강하는 학생 중 남학생일 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 조건부확률 — "~일 때"가 새 분모</span>
+    <table class="dist-table">
+      <tr><th></th><th>남</th><th>여</th><th>합</th></tr>
+      <tr><td>중국어</td><td>90</td><td>70</td><td>160</td></tr>
+      <tr><td>일본어</td><td>75</td><td>85</td><td>160</td></tr>
+      <tr><td>합</td><td>165</td><td>155</td><td>320</td></tr>
+    </table>
+    <div class="eq">
+      <span class="m">P</span>(남 | 중국어) =
+      <span class="frac"><span class="num">90</span><span class="den">160</span></span> =
+      <span class="frac"><span class="num">9</span><span class="den">16</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">9</span><span class="den">16</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 6</span>
+    <h3>배반·여사건 성질 (옳지 않은 것)</h3>
+    <p><strong>문제:</strong>
+      <span class="m">A</span>, <span class="m">B</span>가 배반이고 <span class="m">C</span> = <span class="m">A<sup>c</sup></span>일 때, 옳지 않은 것은?
+    </p>
+    <span class="pattern-tag">풀이 패턴: 배반 + 여사건 성질 하나씩 검증</span>
+    <p>① <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) = 0 &ensp;→ 배반이므로 <strong>참</strong></p>
+    <p>② <span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">C</span>) = 1 &ensp;→ <span class="m">C</span> = <span class="m">A<sup>c</sup></span>이므로 <span class="m">A</span> ∪ <span class="m">A<sup>c</sup></span> = <span class="m">S</span>, <strong>참</strong></p>
+    <p>③ <span class="m">P</span>(<span class="m">B</span>) ≤ <span class="m">P</span>(<span class="m">C</span>) &ensp;→ <span class="m">B</span> ⊆ <span class="m">A<sup>c</sup></span> = <span class="m">C</span>이므로 <strong>참</strong></p>
+    <p>④ 0 &lt; <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) &lt; 1 &ensp;→ <span class="m">A</span> ∩ <span class="m">B</span> = ∅이므로 <span class="m">P</span> = 0, <strong>거짓</strong></p>
+    <p>⑤ <span class="m">P</span>(<span class="m">C</span> | <span class="m">B</span>) = 1 &ensp;→ <span class="m">B</span> ⊆ <span class="m">C</span>이므로 <strong>참</strong></p>
+    <p><span class="ans">④</span></p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 4</span></div>
+</section>
+
+<!-- ============ PAGE 5 — 종합 7, 8, 9 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 7</span>
+    <h3>P(A ∩ B<sup>c</sup>) 구하기</h3>
+    <p><strong>문제:</strong>
+      <span class="m">P</span>(<span class="m">A</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>,
+      <span class="m">P</span>(<span class="m">B<sup>c</sup></span>) =
+      <span class="frac"><span class="num">3</span><span class="den">4</span></span>,
+      <span class="m">P</span>(<span class="m">B</span> | <span class="m">A</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>일 때
+      <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B<sup>c</sup></span>)를 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 곱셈정리 → P(A∩B) → 차집합</span>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) =
+      <span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span> | <span class="m">A</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> ×
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">9</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B<sup>c</sup></span>) =
+      <span class="m">P</span>(<span class="m">A</span>) − <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> −
+      <span class="frac"><span class="num">1</span><span class="den">9</span></span> =
+      <span class="frac"><span class="num">3</span><span class="den">9</span></span> −
+      <span class="frac"><span class="num">1</span><span class="den">9</span></span> =
+      <span class="frac"><span class="num">2</span><span class="den">9</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">2</span><span class="den">9</span></span></span></p>
+    <div class="tip"><span class="label">함정</span>
+      <span class="m">P</span>(<span class="m">B<sup>c</sup></span>) = <span class="frac"><span class="num">3</span><span class="den">4</span></span>는 이 풀이에서 <strong>사용하지 않는 미끼 조건</strong>이다. 주어진 조건을 모두 써야 한다는 선입견에 빠지지 말 것.</div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 8</span>
+    <h3>독립 두 경기</h3>
+    <p><strong>문제:</strong>
+      축구 승률
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span>,
+      농구 승률 <span class="m">r</span>이고 두 경기가 독립일 때,
+      둘 다 이길 확률이
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>이면
+      <span class="m">r</span>을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 독립 → P(둘다) = P(A)·P(B)</span>
+    <div class="eq">
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span> × <span class="m">r</span> =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>
+      &ensp;⇒&ensp;
+      <span class="m">r</span> =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> ÷
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">1</span><span class="den">2</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 9</span>
+    <h3>비복원 순차 추출</h3>
+    <p><strong>문제:</strong>
+      빨간 공과 파란 공이 합쳐 7개인 주머니에서
+      갑이 빨간 공 1개, 을이 파란 공 1개를 비복원으로 뽑을 확률이
+      <span class="frac"><span class="num">2</span><span class="den">7</span></span>이고,
+      파란 공이 빨간 공보다 많을 때 파란 공의 수를 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 곱셈정리 → ab = 값, a+b = 합 → 이차방정식</span>
+    <p>빨간 <span class="m">a</span>개, 파란 <span class="m">b</span>개라 하면 <span class="m">a</span> + <span class="m">b</span> = 7</p>
+    <div class="eq">
+      <span class="frac"><span class="num"><span class="m">a</span></span><span class="den">7</span></span> ×
+      <span class="frac"><span class="num"><span class="m">b</span></span><span class="den">6</span></span> =
+      <span class="frac"><span class="num">2</span><span class="den">7</span></span>
+      &ensp;⇒&ensp;
+      <span class="frac"><span class="num"><span class="m">ab</span></span><span class="den">42</span></span> =
+      <span class="frac"><span class="num">2</span><span class="den">7</span></span>
+      &ensp;⇒&ensp;
+      <span class="m">ab</span> = 12
+    </div>
+    <p><span class="m">a</span> + <span class="m">b</span> = 7, &ensp; <span class="m">ab</span> = 12 &ensp;→&ensp; <span class="m">a</span> = 3, <span class="m">b</span> = 4 &ensp;(파랑 > 빨강)</p>
+    <p><span class="ans">4개</span></p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 5</span></div>
+</section>
+
+<!-- ============ PAGE 6 — 종합 10, 11 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 10</span>
+    <h3>베이즈 정리 — 주머니 판별</h3>
+    <p><strong>문제:</strong>
+      주머니 A(검정 3, 흰 2), 주머니 B(검정 2, 흰 1).
+      임의로 하나를 택해 2개를 꺼냈더니 모두 검정이었다. 주머니 B일 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 베이즈 — 확률나무 → 사후확률</span>
+
+    <p><strong>[사전]</strong> <span class="m">P</span>(A) = <span class="m">P</span>(B) =
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+    </p>
+
+    <p><strong>[우도]</strong></p>
+    <div class="eq">
+      <span class="m">P</span>(검검 | A) =
+      <span class="frac"><span class="num"><sub>3</sub>C<sub>2</sub></span><span class="den"><sub>5</sub>C<sub>2</sub></span></span> =
+      <span class="frac"><span class="num">3</span><span class="den">10</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(검검 | B) =
+      <span class="frac"><span class="num"><sub>2</sub>C<sub>2</sub></span><span class="den"><sub>3</sub>C<sub>2</sub></span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>
+    </div>
+
+    <p><strong>[베이즈]</strong></p>
+    <div class="eq">
+      <span class="m">P</span>(B | 검검) =
+      <span class="frac"><span class="num"><span class="frac"><span class="num">1</span><span class="den">2</span></span> × <span class="frac"><span class="num">1</span><span class="den">3</span></span></span><span class="den"><span class="frac"><span class="num">1</span><span class="den">2</span></span> × <span class="frac"><span class="num">3</span><span class="den">10</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span> × <span class="frac"><span class="num">1</span><span class="den">3</span></span></span></span>
+      =
+      <span class="frac"><span class="num"><span class="frac"><span class="num">1</span><span class="den">6</span></span></span><span class="den"><span class="frac"><span class="num">3</span><span class="den">20</span></span> + <span class="frac"><span class="num">1</span><span class="den">6</span></span></span></span>
+    </div>
+    <p>통분(분모 60):
+      <span class="frac"><span class="num">3</span><span class="den">20</span></span> =
+      <span class="frac"><span class="num">9</span><span class="den">60</span></span>, &ensp;
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span> =
+      <span class="frac"><span class="num">10</span><span class="den">60</span></span>
+    </p>
+    <div class="eq">
+      <span class="m">P</span>(B | 검검) =
+      <span class="frac"><span class="num"><span class="frac"><span class="num">10</span><span class="den">60</span></span></span><span class="den"><span class="frac"><span class="num">19</span><span class="den">60</span></span></span></span> =
+      <span class="frac"><span class="num">10</span><span class="den">19</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">10</span><span class="den">19</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 11</span>
+    <h3>독립 + 배반 혼합</h3>
+    <p><strong>문제:</strong>
+      <span class="m">A</span>, <span class="m">B</span>는 독립,
+      <span class="m">B</span>, <span class="m">C</span>는 배반이고
+      <span class="m">P</span>(<span class="m">A</span>) = 0.4,
+      <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) = 0.3,
+      <span class="m">P</span>(<span class="m">B</span> ∪ <span class="m">C</span>) = 0.9일 때
+      <span class="m">P</span>(<span class="m">C</span>)를 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 독립 → P(B) 역산 → 배반 → P(C)</span>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>)
+      &ensp;⇒&ensp;
+      0.3 = 0.4 × <span class="m">P</span>(<span class="m">B</span>)
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">B</span>) =
+      <span class="frac"><span class="num">0.3</span><span class="den">0.4</span></span> = 0.75
+    </div>
+    <p><span class="m">B</span>, <span class="m">C</span> 배반이므로</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">B</span> ∪ <span class="m">C</span>) = <span class="m">P</span>(<span class="m">B</span>) + <span class="m">P</span>(<span class="m">C</span>)
+      &ensp;⇒&ensp;
+      <span class="m">P</span>(<span class="m">C</span>) = 0.9 − 0.75 = 0.15
+    </div>
+    <p><span class="ans">0.15</span></p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 6</span></div>
+</section>
+
+<!-- ============ PAGE 7 — 종합 12, 13 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">종합 12</span>
+    <h3>직병렬 회로</h3>
+    <p><strong>문제:</strong>
+      윗가지에 스위치 A(작동 확률 0.9), 아랫가지에 B(0.8)와 C(0.7)가 직렬 연결되어 있다.
+      두 가지는 병렬로 연결되어 있을 때, 전류가 흐를 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 여사건 — 전류 안 흐를 확률</span>
+    <div class="eq">
+      아랫가지 = <span class="m">P</span>(B) × <span class="m">P</span>(C) = 0.8 × 0.7 = 0.56
+    </div>
+    <div class="eq">
+      전류 안 흐름 = (1 − 0.9) × (1 − 0.56) = 0.1 × 0.44 = 0.044
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(전류 흐름) = 1 − 0.044 = 0.956
+    </div>
+    <div class="tip">
+      <span class="label">포인트</span>
+      병렬 = "적어도 하나가 흐르면 OK"이므로 여사건(둘 다 안 흐름)이 더 편리하다.
+    </div>
+    <p><span class="ans">0.956</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">종합 13</span>
+    <h3>정사각형 점 이동 (독립시행)</h3>
+    <p><strong>문제:</strong>
+      정사각형 ABCD의 꼭짓점 A에서 출발. 주사위를 던져
+      1 또는 2 → 반시계 1칸, 3~6 → 시계 1칸 이동한다.
+      4번 던진 후 A에 있을 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 독립시행 + mod 4 복귀 조건</span>
+    <p><span class="m">p</span>(반시계) =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>, &ensp;
+      <span class="m">q</span>(시계) =
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span>
+    </p>
+    <p>반시계 <span class="m">k</span>번이면 시계 (4 − <span class="m">k</span>)번. 변위 = −<span class="m">k</span> + (4 − <span class="m">k</span>) = 4 − 2<span class="m">k</span></p>
+    <p>A 복귀 조건: 4 − 2<span class="m">k</span> ≡ 0 (mod 4) → <span class="m">k</span> = 0, 2, 4</p>
+
+    <div class="eq">
+      <span class="m">k</span> = 0: <sub>4</sub>C<sub>0</sub>
+      (<span class="frac"><span class="num">1</span><span class="den">3</span></span>)<sup>0</sup>
+      (<span class="frac"><span class="num">2</span><span class="den">3</span></span>)<sup>4</sup> =
+      <span class="frac"><span class="num">16</span><span class="den">81</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">k</span> = 2: <sub>4</sub>C<sub>2</sub>
+      (<span class="frac"><span class="num">1</span><span class="den">3</span></span>)<sup>2</sup>
+      (<span class="frac"><span class="num">2</span><span class="den">3</span></span>)<sup>2</sup> = 6 ×
+      <span class="frac"><span class="num">1</span><span class="den">9</span></span> ×
+      <span class="frac"><span class="num">4</span><span class="den">9</span></span> =
+      <span class="frac"><span class="num">24</span><span class="den">81</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">k</span> = 4: <sub>4</sub>C<sub>4</sub>
+      (<span class="frac"><span class="num">1</span><span class="den">3</span></span>)<sup>4</sup> =
+      <span class="frac"><span class="num">1</span><span class="den">81</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">16 + 24 + 1</span><span class="den">81</span></span> =
+      <span class="frac"><span class="num">41</span><span class="den">81</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">41</span><span class="den">81</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 7</span></div>
+</section>
+
+<!-- ============ PAGE 8 — 서술형 14, 15 ============ -->
+<section class="page">
+  <h2>서술형 (14~17)</h2>
+
+  <div class="example">
+    <span class="label">서술형 14</span>
+    <h3>이차방정식의 실근 확률</h3>
+    <p><strong>문제:</strong>
+      주사위를 두 번 던져 나온 눈을 차례로 <span class="m">a</span>, <span class="m">b</span>라 할 때,
+      이차방정식 <span class="m">x</span><sup>2</sup> + <span class="m">ax</span> + <span class="m">b</span> = 0이 실근을 가질 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 판별식 D = a² − 4b ≥ 0 → a별로 b 세기</span>
+    <div class="eq">
+      전체: 6 × 6 = 36
+    </div>
+    <p><span class="m">a</span><sup>2</sup> − 4<span class="m">b</span> ≥ 0 &ensp;⇒&ensp;
+      <span class="m">b</span> ≤
+      <span class="frac"><span class="num"><span class="m">a</span><sup>2</sup></span><span class="den">4</span></span>
+    </p>
+    <table class="dist-table">
+      <tr><th><span class="m">a</span></th><th><span class="m">a</span><sup>2</sup>/4</th><th><span class="m">b</span> 범위</th><th>개수</th></tr>
+      <tr><td>1</td><td>0.25</td><td>없음</td><td>0</td></tr>
+      <tr><td>2</td><td>1</td><td><span class="m">b</span> = 1</td><td>1</td></tr>
+      <tr><td>3</td><td>2.25</td><td><span class="m">b</span> = 1, 2</td><td>2</td></tr>
+      <tr><td>4</td><td>4</td><td><span class="m">b</span> = 1, 2, 3, 4</td><td>4</td></tr>
+      <tr><td>5</td><td>6.25</td><td><span class="m">b</span> = 1, 2, 3, 4, 5, 6</td><td>6</td></tr>
+      <tr><td>6</td><td>9</td><td><span class="m">b</span> = 1, 2, 3, 4, 5, 6</td><td>6</td></tr>
+    </table>
+    <div class="eq">
+      합 = 0 + 1 + 2 + 4 + 6 + 6 = 19
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">19</span><span class="den">36</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">19</span><span class="den">36</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">서술형 15</span>
+    <h3>동전 금액 합 ≥ 100원</h3>
+    <p><strong>문제:</strong>
+      10원짜리 1개, 100원짜리 2개, 500원짜리 3개(총 6개)를 동시에 던질 때,
+      앞면이 나온 동전의 금액 합이 100원 이상일 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 여사건 — 합 &lt; 100원인 경우 세기</span>
+    <div class="eq">
+      전체: 2<sup>6</sup> = 64
+    </div>
+    <p>합 &lt; 100원이 되려면: 100원짜리 2개와 500원짜리 3개가 <strong>모두 뒷면</strong>이어야 한다.</p>
+    <p style="margin-left:16px;">→ 10원짜리만 앞/뒤 자유: 2가지 (합 = 0원 또는 10원)</p>
+    <div class="eq">
+      <span class="m">P</span>(합 &lt; 100) =
+      <span class="frac"><span class="num">2</span><span class="den">64</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">32</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(합 ≥ 100) = 1 −
+      <span class="frac"><span class="num">1</span><span class="den">32</span></span> =
+      <span class="frac"><span class="num">31</span><span class="den">32</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">31</span><span class="den">32</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 8</span></div>
+</section>
+
+<!-- ============ PAGE 9 — 서술형 16, 17 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">서술형 16</span>
+    <h3>독립 판정</h3>
+    <p><strong>문제:</strong>
+      <span class="m">P</span>(<span class="m">A</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span>,
+      <span class="m">P</span>(<span class="m">B</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>,
+      <span class="m">P</span>(<span class="m">A</span> | <span class="m">B</span>) + <span class="m">P</span>(<span class="m">B</span> | <span class="m">A</span>) =
+      <span class="frac"><span class="num">5</span><span class="den">6</span></span>일 때,
+      <span class="m">A</span>와 <span class="m">B</span>가 독립인지 판정하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: P(A∩B) = x로 놓고 조건부확률 역산</span>
+    <p><span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) = <span class="m">x</span>로 놓으면</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">A</span> | <span class="m">B</span>) =
+      <span class="frac"><span class="num"><span class="m">x</span></span><span class="den"><span class="frac"><span class="num">1</span><span class="den">3</span></span></span></span> = 3<span class="m">x</span>, &emsp;
+      <span class="m">P</span>(<span class="m">B</span> | <span class="m">A</span>) =
+      <span class="frac"><span class="num"><span class="m">x</span></span><span class="den"><span class="frac"><span class="num">1</span><span class="den">2</span></span></span></span> = 2<span class="m">x</span>
+    </div>
+    <div class="eq">
+      3<span class="m">x</span> + 2<span class="m">x</span> = 5<span class="m">x</span> =
+      <span class="frac"><span class="num">5</span><span class="den">6</span></span>
+      &ensp;⇒&ensp;
+      <span class="m">x</span> =
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span>
+    </div>
+    <p>독립 검증:</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> ×
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span> =
+      <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)
+    </div>
+    <p><span class="m">P</span>(<span class="m">A</span>)<span class="m">P</span>(<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)이므로</p>
+    <p><span class="ans">A와 B는 독립이다</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">서술형 17</span>
+    <h3>좌석 부족 확률 (독립시행)</h3>
+    <p><strong>문제:</strong>
+      좌석이 3개인 식당에 5명이 예약했다. 각 예약자가 독립적으로 취소할 확률이
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span>일 때,
+      좌석이 부족할 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 독립시행 B(5, 1/4), 부족 = 취소 ≤ 1명</span>
+    <p>취소 횟수 <span class="m">X</span> ~ <span class="m">B</span>(5,
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span>)
+    </p>
+    <p>좌석 부족: 방문자 ≥ 4명 → 취소 ≤ 1명</p>
+
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> = 0) =
+      (<span class="frac"><span class="num">3</span><span class="den">4</span></span>)<sup>5</sup> =
+      <span class="frac"><span class="num">243</span><span class="den">1024</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> = 1) =
+      <sub>5</sub>C<sub>1</sub> ×
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> ×
+      (<span class="frac"><span class="num">3</span><span class="den">4</span></span>)<sup>4</sup> =
+      5 ×
+      <span class="frac"><span class="num">1</span><span class="den">4</span></span> ×
+      <span class="frac"><span class="num">81</span><span class="den">256</span></span> =
+      <span class="frac"><span class="num">405</span><span class="den">1024</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> ≤ 1) =
+      <span class="frac"><span class="num">243 + 405</span><span class="den">1024</span></span> =
+      <span class="frac"><span class="num">648</span><span class="den">1024</span></span> =
+      <span class="frac"><span class="num">81</span><span class="den">128</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">81</span><span class="den">128</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 대단원 마무리 풀이</span><span>p. 9</span></div>
+</section>
+
+</body>
+</html>

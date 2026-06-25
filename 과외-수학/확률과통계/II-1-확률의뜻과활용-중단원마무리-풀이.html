@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>II-1 확률의 뜻과 활용 중단원 마무리 풀이</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 23pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 4px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.example {
+  border: 1px solid var(--accent-line); border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0; break-inside: avoid;
+}
+.example .label {
+  font-size: 9pt; font-weight: 700; color: #fff; background: var(--accent);
+  border-radius: 4px; padding: 1px 8px; display: inline-block; margin-bottom: 8px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.problem { margin: 12px 0; break-inside: avoid; }
+.problem .q { font-weight: 700; }
+.problem .answer-space {
+  border-bottom: 1px dashed var(--accent-line); height: 26px; margin-top: 6px;
+}
+
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 7px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .concept, .example, .tip, .problem, .eq { break-inside: avoid; }
+}
+
+.m { font-family: 'Times New Roman', Georgia, serif; font-style: italic; }
+.eq {
+  text-align: center; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 12pt;
+  line-height: 1.6; break-inside: avoid;
+}
+.eq.boxed {
+  display: block; border: 1.6px solid var(--accent); border-radius: 6px;
+  padding: 8px 4px; background: #fbfcfe; font-weight: 600;
+}
+.frac { display: inline-block; vertical-align: middle; text-align: center; margin: 0 .12em; }
+.frac > span { display: block; padding: 0 .45em; line-height: 1.25; }
+.frac > .den { border-top: 1.3px solid currentColor; }
+.sqrt { white-space: nowrap; }
+.sqrt > .rad { border-top: 1.3px solid currentColor; padding: 0 .18em 0 .08em; }
+.sqrt::before { content: "\221A"; padding-right: .02em; }
+.ov { display: inline-block; line-height: 1; border-top: 1.4px solid currentColor; padding-top: .5px; }
+
+/* ---- 추가: 답 강조 ---- */
+.ans {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 11pt;
+  margin-top: 4px;
+}
+/* ---- 풀이패턴 태그 ---- */
+.pattern-tag {
+  display: inline-block; background: #e8f0fe; color: var(--accent);
+  border-radius: 3px; padding: 1px 8px; font-size: 9.5pt; font-weight: 600;
+  margin-bottom: 6px;
+}
+/* ---- 문제번호 뱃지 ---- */
+.qnum {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 22px; height: 22px; text-align: center;
+  line-height: 22px; font-size: 10pt; font-weight: 700; margin-right: 6px;
+}
+/* ---- 구분선 ---- */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+/* ---- 작은 테이블 (분포표) ---- */
+.dist-table { width: auto; margin: 8px auto; }
+.dist-table th, .dist-table td { text-align: center; padding: 5px 14px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">확률과통계 · II-1 확률의 뜻과 활용</div>
+    <h1>중단원 마무리 풀이 학습자료</h1>
+    <p class="subtitle">교과서 p.54~56 | 기본 5 + 표준 5 + 발전 5 = 총 15문항</p>
+    <div class="meta">고3 · 2026</div>
+  </div>
+
+  <h2>핵심 공식 모음</h2>
+
+  <div class="concept">
+    <span class="label">확률 필수 공식 7선</span>
+    <table>
+      <tr><th style="width:30%">공식</th><th>내용</th></tr>
+      <tr>
+        <td>수학적 확률</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A</span>) =
+          <span class="frac"><span class="num"><span class="m">n</span>(<span class="m">A</span>)</span><span class="den"><span class="m">n</span>(<span class="m">S</span>)</span></span>
+        </td>
+      </tr>
+      <tr>
+        <td>확률의 범위</td>
+        <td>0 ≤ <span class="m">P</span>(<span class="m">A</span>) ≤ 1</td>
+      </tr>
+      <tr>
+        <td>덧셈정리</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) =
+          <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>) − <span class="m">P</span>(<span class="m">A</span>∩<span class="m">B</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>배반사건</td>
+        <td>
+          <span class="m">A</span>∩<span class="m">B</span> = ∅ &ensp;→&ensp;
+          <span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) =
+          <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>여사건</td>
+        <td>
+          <span class="m">P</span>(<span class="m">A<sup>c</sup></span>) = 1 − <span class="m">P</span>(<span class="m">A</span>)
+        </td>
+      </tr>
+      <tr>
+        <td>통계적 확률</td>
+        <td>
+          <span class="frac"><span class="num"><span class="m">r</span></span><span class="den"><span class="m">n</span></span></span>
+          → <span class="m">p</span> &ensp;(시행 횟수가 충분히 크면)
+        </td>
+      </tr>
+      <tr>
+        <td>조합</td>
+        <td>
+          <sub><span class="m">n</span></sub>C<sub><span class="m">r</span></sub> =
+          <span class="frac"><span class="num"><span class="m">n</span>!</span><span class="den"><span class="m">r</span>! (<span class="m">n</span>−<span class="m">r</span>)!</span></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 1</span></div>
+</section>
+
+<!-- ============ PAGE 2 — 문항별 필수 개념 안내 ============ -->
+<section class="page">
+  <h2>문항별 필수 개념 안내</h2>
+  <p style="color:var(--muted);font-size:10.5pt;margin-top:0;">각 문항을 풀기 위해 반드시 알아야 하는 개념을 정리하였다. 개념을 먼저 확인한 뒤 풀이에 들어간다.</p>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❶ 사건과 집합 &ensp;→ 기본 1 (p.54)</span>
+    <p style="margin:4px 0;">사건은 표본공간의 부분집합이다. <span class="m">A</span>∩<span class="m">B</span>는 두 조건을 동시에 만족하는 사건, <span class="m">A<sup>c</sup></span>는 <span class="m">A</span>의 여사건이다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❷ 통계적 확률 &ensp;→ 기본 2 (p.54)</span>
+    <p style="margin:4px 0;">시행 횟수가 충분히 클 때 상대도수 <span class="frac"><span class="num"><span class="m">r</span></span><span class="den"><span class="m">n</span></span></span>으로 확률을 추정한다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❸ 수학적 확률과 경우의 수 &ensp;→ 기본 3 · 표준 6 · 표준 7 (p.54~55)</span>
+    <p style="margin:4px 0;">모든 경우가 같은 정도로 기대될 때
+      <span class="m">P</span>(<span class="m">A</span>) =
+      <span class="frac"><span class="num"><span class="m">n</span>(<span class="m">A</span>)</span><span class="den"><span class="m">n</span>(<span class="m">S</span>)</span></span>이다.
+      "동시에 뽑기"는 조합, "나열하기"는 순열을 사용한다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❹ 덧셈정리 &ensp;→ 기본 4 · 표준 9 · 발전 12 (p.54~56)</span>
+    <p style="margin:4px 0;"><span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>) − <span class="m">P</span>(<span class="m">A</span>∩<span class="m">B</span>)이다. 배반사건이면 교집합 확률이 0이다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❺ 여사건 &ensp;→ 기본 5 · 표준 10 · 발전 11 · 발전 14 · 발전 15 (p.54~56)</span>
+    <p style="margin:4px 0;">"적어도", "~이상"이 포함된 문제는 반대 경우를 세고 1에서 빼면 쉽다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❻ 배반사건의 확률 범위 &ensp;→ 표준 8 (p.55)</span>
+    <p style="margin:4px 0;">배반이면 <span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>) ≤ 1이므로 <span class="m">P</span>(<span class="m">B</span>)의 상한을 구할 수 있다.</p>
+  </div>
+
+  <div class="concept" style="padding:10px 14px; margin:10px 0;">
+    <span class="label">❼ 기하적 확률 (원·정다각형) &ensp;→ 발전 13 (p.56)</span>
+    <p style="margin:4px 0;">원에 내접한 직각삼각형의 빗변은 반드시 지름이다(탈레스 정리). 정<span class="m">n</span>각형에서 지름의 개수와 나머지 꼭짓점을 세는 것이 핵심이다.</p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 2</span></div>
+</section>
+
+<!-- ============ PAGE 3 — 기본 1, 2 ============ -->
+<section class="page">
+  <h2>기본 (1~5)</h2>
+
+  <div class="example">
+    <span class="label">기본 1</span>
+    <h3>카드에서 사건 A∩B와 여사건</h3>
+    <p><strong>문제:</strong>
+      1부터 7까지의 자연수가 하나씩 적힌 7장의 카드에서 한 장을 뽑을 때,
+      <span class="m">A</span> = 짝수, <span class="m">B</span> = 3의 배수이다.
+      (1) <span class="m">A</span>∩<span class="m">B</span> &ensp; (2) <span class="m">A<sup>c</sup></span>
+    </p>
+    <span class="pattern-tag">풀이 패턴: 사건 = 표본공간의 부분집합</span>
+    <div class="eq">
+      <span class="m">S</span> = {1, 2, 3, 4, 5, 6, 7}
+    </div>
+    <div class="eq">
+      <span class="m">A</span> = {2, 4, 6}, &emsp;
+      <span class="m">B</span> = {3, 6}
+    </div>
+    <p>(1) <span class="m">A</span>∩<span class="m">B</span> = 짝수이면서 3의 배수 = <strong>{6}</strong></p>
+    <p>(2) <span class="m">A<sup>c</sup></span> = 짝수가 아닌 카드 = <strong>{1, 3, 5, 7}</strong></p>
+    <p><span class="ans">(1) {6} &ensp; (2) {1, 3, 5, 7}</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">기본 2</span>
+    <h3>통계적 확률 (자유투)</h3>
+    <p><strong>문제:</strong>
+      농구 선수가 자유투를 1000번 던져 920번 성공하였다. 이 선수의 자유투 성공 확률을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 통계적 확률 = r/n</span>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">920</span><span class="den">1000</span></span> =
+      <span class="frac"><span class="num">23</span><span class="den">25</span></span>
+      = 0.92
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">23</span><span class="den">25</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 3</span></div>
+</section>
+
+<!-- ============ PAGE 4 — 기본 3, 4 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">기본 3</span>
+    <h3>주사위 2개의 합</h3>
+    <p><strong>문제:</strong>
+      두 개의 주사위를 동시에 던질 때, 두 눈의 합이
+      (1) 4 이하 &ensp; (2) 12 &ensp; (3) 1일 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 전체 36가지, 순서쌍으로 센다</span>
+    <p>(1) 합이 4 이하인 경우:</p>
+    <p style="margin-left:16px;">
+      합 2: (1,1) = 1가지<br>
+      합 3: (1,2), (2,1) = 2가지<br>
+      합 4: (1,3), (2,2), (3,1) = 3가지
+    </p>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">1 + 2 + 3</span><span class="den">36</span></span> =
+      <span class="frac"><span class="num">6</span><span class="den">36</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span>
+    </div>
+    <p>(2) 합이 12: (6, 6) = 1가지</p>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">1</span><span class="den">36</span></span>
+    </div>
+    <p>(3) 합이 1: 최솟값이 2이므로 <strong>불가능한 사건</strong></p>
+    <div class="eq">
+      <span class="m">P</span> = 0
+    </div>
+    <p><span class="ans">(1) <span class="frac"><span class="num">1</span><span class="den">6</span></span> &ensp; (2) <span class="frac"><span class="num">1</span><span class="den">36</span></span> &ensp; (3) 0</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">기본 4</span>
+    <h3>덧셈정리</h3>
+    <p><strong>문제:</strong>
+      <span class="m">P</span>(<span class="m">A</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span>,&ensp;
+      <span class="m">P</span>(<span class="m">B</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span>,&ensp;
+      <span class="m">P</span>(<span class="m">A</span>∩<span class="m">B</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span>일 때
+      <span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>)
+    </p>
+    <span class="pattern-tag">풀이 패턴: 덧셈정리 P(A∪B) = P(A)+P(B)-P(A∩B)</span>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> +
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> −
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span> =
+      <span class="frac"><span class="num">2 + 3 − 1</span><span class="den">6</span></span> =
+      <span class="frac"><span class="num">4</span><span class="den">6</span></span> =
+      <span class="frac"><span class="num">2</span><span class="den">3</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">2</span><span class="den">3</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 4</span></div>
+</section>
+
+<!-- ============ PAGE 5 — 기본 5 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">기본 5</span>
+    <h3>적어도 1개 빨강 (여사건)</h3>
+    <p><strong>문제:</strong>
+      빨간 공 4개, 파란 공 3개가 들어 있는 주머니에서 2개를 동시에 꺼낼 때, 빨간 공이 적어도 1개 포함될 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 여사건 — 둘 다 파랑일 확률을 빼기</span>
+    <div class="eq">
+      전체: <sub>7</sub>C<sub>2</sub> = 21
+    </div>
+    <div class="eq">
+      둘 다 파랑: <sub>3</sub>C<sub>2</sub> = 3
+    </div>
+    <div class="eq">
+      <span class="m">P</span> = 1 −
+      <span class="frac"><span class="num">3</span><span class="den">21</span></span> =
+      1 − <span class="frac"><span class="num">1</span><span class="den">7</span></span> =
+      <span class="frac"><span class="num">6</span><span class="den">7</span></span>
+    </div>
+    <div class="tip">
+      <span class="label">TIP</span>
+      "적어도"가 보이면 여사건을 먼저 떠올린다. 직접 세면 빨1파1 + 빨2파0 = 두 경우를 더해야 하지만,
+      여사건은 "둘 다 파랑" 한 가지만 세면 된다.
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">6</span><span class="den">7</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <h2>표준 (6~10)</h2>
+
+  <div class="example">
+    <span class="label">표준 6</span>
+    <h3>네 자리 수 4300 이상</h3>
+    <p><strong>문제:</strong>
+      1, 2, 3, 4, 5에서 중복 없이 4개를 택해 네 자리 자연수를 만들 때, 4300 이상일 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 자릿수별 경우 나누기</span>
+    <div class="eq">
+      전체: <sub>5</sub>P<sub>4</sub> = 120
+    </div>
+    <p><strong>경우 1) 천의 자리 = 5</strong></p>
+    <p style="margin-left:16px;">
+      나머지 3자리: {1,2,3,4}에서 <sub>4</sub>P<sub>3</sub> = <strong>24</strong>가지
+    </p>
+    <p><strong>경우 2) 천의 자리 = 4, 백의 자리 ≥ 3</strong></p>
+    <p style="margin-left:16px;">
+      백의 자리 = 3 또는 5 (2가지) × 나머지 2자리: <sub>3</sub>P<sub>2</sub> = 6 → <strong>12</strong>가지
+    </p>
+    <div class="eq">
+      합 = 24 + 12 = 36
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">36</span><span class="den">120</span></span> =
+      <span class="frac"><span class="num">3</span><span class="den">10</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">3</span><span class="den">10</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 5</span></div>
+</section>
+
+<!-- ============ PAGE 6 — 표준 7, 8 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">표준 7</span>
+    <h3>가위바위보 — 2명이 이길 확률</h3>
+    <p><strong>문제:</strong>
+      5명이 가위바위보를 1회 할 때, 정확히 2명만 이길 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 이기는 2명 선택 × 이기는 모양 선택</span>
+    <div class="eq">
+      전체: 3<sup>5</sup> = 243
+    </div>
+    <p>이기는 2명 선택: <sub>5</sub>C<sub>2</sub> = 10</p>
+    <p>이기는 모양(가위/바위/보) 선택: 3가지</p>
+    <p style="margin-left:16px;">
+      이긴 2명은 같은 것을 내고, 진 3명도 그에 대응하는 같은 것을 낸다.
+    </p>
+    <div class="eq">
+      유리한 경우 = 10 × 3 = 30
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">30</span><span class="den">243</span></span> =
+      <span class="frac"><span class="num">10</span><span class="den">81</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">10</span><span class="den">81</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">표준 8</span>
+    <h3>배반사건에서 P(B)의 범위</h3>
+    <p><strong>문제:</strong>
+      <span class="m">A</span>와 <span class="m">B</span>가 배반사건이고
+      <span class="m">P</span>(<span class="m">A</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">5</span></span>일 때,
+      <span class="m">P</span>(<span class="m">B</span>)의 범위
+    </p>
+    <span class="pattern-tag">풀이 패턴: 배반 → P(A)+P(B) ≤ 1</span>
+    <p>배반이면 <span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>) ≤ 1이므로</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">B</span>) ≤ 1 −
+      <span class="frac"><span class="num">1</span><span class="den">5</span></span> =
+      <span class="frac"><span class="num">4</span><span class="den">5</span></span>
+    </div>
+    <p>확률의 기본 성질에 의해 <span class="m">P</span>(<span class="m">B</span>) ≥ 0이므로</p>
+    <div class="eq">
+      0 ≤ <span class="m">P</span>(<span class="m">B</span>) ≤
+      <span class="frac"><span class="num">4</span><span class="den">5</span></span>
+    </div>
+    <p><span class="ans">0 ≤ <span class="m">P</span>(<span class="m">B</span>) ≤ <span class="frac"><span class="num">4</span><span class="den">5</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 6</span></div>
+</section>
+
+<!-- ============ PAGE 7 — 표준 9, 10 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">표준 9</span>
+    <h3>만족도 표 — 배반사건의 빈도합</h3>
+    <p><strong>문제:</strong>
+      학생 200명의 급식 만족도 조사 결과이다.
+    </p>
+    <table class="dist-table">
+      <tr><th>매우 불만</th><th>불만</th><th>보통</th><th>만족</th><th>매우 만족</th><th>합계</th></tr>
+      <tr>
+        <td>13</td><td>26</td><td>49</td><td>65</td><td>47</td><td>200</td>
+      </tr>
+    </table>
+    <p>임의로 1명을 선택할 때, "만족" 또는 "매우 만족"이라고 답할 확률을 구하여라.</p>
+    <span class="pattern-tag">풀이 패턴: 배반사건의 빈도합 / 전체</span>
+    <p>"만족"과 "매우 만족"은 동시에 해당할 수 없으므로 배반이다.</p>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">65 + 47</span><span class="den">200</span></span> =
+      <span class="frac"><span class="num">112</span><span class="den">200</span></span> =
+      <span class="frac"><span class="num">14</span><span class="den">25</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">14</span><span class="den">25</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">표준 10</span>
+    <h3>두 자루 같은 색 (배반사건의 합)</h3>
+    <p><strong>문제:</strong>
+      빨간 펜 5자루, 검정 펜 3자루에서 2자루를 동시에 꺼낼 때, 같은 색일 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: (둘 다 빨강) + (둘 다 검정), 배반</span>
+    <div class="eq">
+      전체: <sub>8</sub>C<sub>2</sub> = 28
+    </div>
+    <div class="eq">
+      둘 다 빨강: <sub>5</sub>C<sub>2</sub> = 10, &emsp;
+      둘 다 검정: <sub>3</sub>C<sub>2</sub> = 3
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">10 + 3</span><span class="den">28</span></span> =
+      <span class="frac"><span class="num">13</span><span class="den">28</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">13</span><span class="den">28</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 7</span></div>
+</section>
+
+<!-- ============ PAGE 8 — 발전 11, 12 ============ -->
+<section class="page">
+  <h2>발전 (11~15)</h2>
+
+  <div class="example">
+    <span class="label">발전 11</span>
+    <h3>꽃다발 — 노란 장미 2송이 이상</h3>
+    <p><strong>문제:</strong>
+      빨간 장미 5송이, 노란 장미 4송이에서 4송이를 뽑아 꽃다발을 만들 때, 노란 장미가 2송이 이상 포함될 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 여사건 — 노랑 0송이 or 1송이</span>
+    <div class="eq">
+      전체: <sub>9</sub>C<sub>4</sub> = 126
+    </div>
+    <p><strong>여사건</strong> (노랑 0송이 + 노랑 1송이):</p>
+    <div class="eq">
+      노랑 0: <sub>5</sub>C<sub>4</sub> = 5
+    </div>
+    <div class="eq">
+      노랑 1: <sub>4</sub>C<sub>1</sub> × <sub>5</sub>C<sub>3</sub> = 4 × 10 = 40
+    </div>
+    <div class="eq">
+      여사건 합 = 5 + 40 = 45
+    </div>
+    <div class="eq">
+      <span class="m">P</span> = 1 −
+      <span class="frac"><span class="num">45</span><span class="den">126</span></span> =
+      <span class="frac"><span class="num">81</span><span class="den">126</span></span> =
+      <span class="frac"><span class="num">9</span><span class="den">14</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">9</span><span class="den">14</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">발전 12</span>
+    <h3>6과 서로소인 수</h3>
+    <p><strong>문제:</strong>
+      1부터 100까지의 자연수 중 임의로 하나를 택할 때, 6과 서로소일 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 여사건(2의 배수 or 3의 배수) + 덧셈정리</span>
+    <p>6 = 2 × 3이므로, 6과 서로소가 <strong>아닌</strong> 수 = 2의 배수 또는 3의 배수이다.</p>
+    <p style="margin-left:16px;">
+      <span class="m">A</span> = 2의 배수: 50개<br>
+      <span class="m">B</span> = 3의 배수: 33개<br>
+      <span class="m">A</span>∩<span class="m">B</span> = 6의 배수: 16개
+    </p>
+    <div class="eq">
+      <span class="m">n</span>(<span class="m">A</span>∪<span class="m">B</span>) = 50 + 33 − 16 = 67
+    </div>
+    <div class="eq">
+      6과 서로소인 수 = 100 − 67 = 33
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">33</span><span class="den">100</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">33</span><span class="den">100</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 8</span></div>
+</section>
+
+<!-- ============ PAGE 9 — 발전 13, 14 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">발전 13</span>
+    <h3>원 위 6등분점 — 직각삼각형</h3>
+    <p><strong>문제:</strong>
+      원 위에 6등분점이 있다. 이 중 3개를 택해 삼각형을 만들 때, 직각삼각형이 될 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 탈레스 정리 — 빗변이 지름</span>
+    <div class="eq">
+      전체: <sub>6</sub>C<sub>3</sub> = 20
+    </div>
+    <p>원에 내접하는 직각삼각형 ⟺ 한 변이 <strong>지름</strong>이다. (탈레스 정리)</p>
+    <p>정육각형의 지름(대각선) = <strong>3개</strong></p>
+    <p>각 지름을 빗변으로 잡으면, 나머지 4개의 점 중 1개를 꼭짓점으로 선택한다.</p>
+    <div class="eq">
+      직각삼각형 = 3 × 4 = 12
+    </div>
+    <div class="eq">
+      <span class="m">P</span> =
+      <span class="frac"><span class="num">12</span><span class="den">20</span></span> =
+      <span class="frac"><span class="num">3</span><span class="den">5</span></span>
+    </div>
+    <div class="tip">
+      <span class="label">포인트</span>
+      "원에 내접 + 직각" → 탈레스 정리를 즉시 떠올린다. 빗변 = 지름이 핵심이다.
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">3</span><span class="den">5</span></span></span></p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="example">
+    <span class="label">발전 14</span>
+    <h3>당첨 제비 r 구하기</h3>
+    <p><strong>문제:</strong>
+      당첨 제비 <span class="m">r</span>개를 포함한 10개의 제비에서 2개를 뽑을 때,
+      적어도 1개가 당첨일 확률이
+      <span class="frac"><span class="num">13</span><span class="den">15</span></span>이다.
+      <span class="m">r</span>의 값을 구하여라.
+    </p>
+    <span class="pattern-tag">풀이 패턴: 여사건(둘 다 꽝) → 방정식</span>
+    <div class="eq">
+      둘 다 꽝일 확률 = 1 −
+      <span class="frac"><span class="num">13</span><span class="den">15</span></span> =
+      <span class="frac"><span class="num">2</span><span class="den">15</span></span>
+    </div>
+    <div class="eq">
+      <span class="frac"><span class="num"><sub>(10−<span class="m">r</span>)</sub>C<sub>2</sub></span><span class="den"><sub>10</sub>C<sub>2</sub></span></span> =
+      <span class="frac"><span class="num">2</span><span class="den">15</span></span>
+    </div>
+    <div class="eq">
+      <sub>10</sub>C<sub>2</sub> = 45이므로 &ensp;
+      <sub>(10−<span class="m">r</span>)</sub>C<sub>2</sub> = 45 ×
+      <span class="frac"><span class="num">2</span><span class="den">15</span></span> = 6
+    </div>
+    <div class="eq">
+      <span class="frac"><span class="num">(10−<span class="m">r</span>)(9−<span class="m">r</span>)</span><span class="den">2</span></span> = 6
+      &ensp;⇒&ensp;
+      (10−<span class="m">r</span>)(9−<span class="m">r</span>) = 12
+    </div>
+    <p style="margin-left:16px;">
+      4 × 3 = 12 &ensp;→&ensp; 10 − <span class="m">r</span> = 4 &ensp;→&ensp; <span class="m">r</span> = <strong>6</strong>
+    </p>
+    <p><span class="ans"><span class="m">r</span> = 6</span></p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 9</span></div>
+</section>
+
+<!-- ============ PAGE 10 — 발전 15 ============ -->
+<section class="page">
+
+  <div class="example">
+    <span class="label">발전 15</span> &ensp;<span style="font-size:9pt;color:var(--muted);">서술형</span>
+    <h3>연속하는 자연수 2개 이상 포함</h3>
+    <p><strong>문제:</strong>
+      1부터 8까지의 자연수가 하나씩 적힌 공 8개에서 3개를 동시에 꺼낼 때,
+      연속하는 자연수가 2개 이상 포함될 확률
+    </p>
+    <span class="pattern-tag">풀이 패턴: 여사건(이웃 없이 뽑기) + gap 공식</span>
+    <div class="eq">
+      전체: <sub>8</sub>C<sub>3</sub> = 56
+    </div>
+    <p><strong>여사건</strong>: 뽑은 3개의 수가 모두 이웃하지 않는 경우</p>
+    <p style="margin-left:16px;">
+      <span class="m">n</span>개에서 <span class="m">k</span>개를 뽑되 이웃하지 않게 뽑는 경우의 수:
+      <sub>(<span class="m">n</span>−<span class="m">k</span>+1)</sub>C<sub><span class="m">k</span></sub>
+    </p>
+    <div class="eq">
+      <sub>(8−3+1)</sub>C<sub>3</sub> = <sub>6</sub>C<sub>3</sub> = 20
+    </div>
+    <div class="tip">
+      <span class="label">TIP</span>
+      gap 공식의 원리: 8개에서 선택하지 않은 5개 사이사이(양끝 포함)에 6개의 자리가 생긴다.
+      여기에 3개를 배치하면 자동으로 이웃하지 않게 된다 → <sub>6</sub>C<sub>3</sub>.
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(연속 2개 이상) = 1 −
+      <span class="frac"><span class="num">20</span><span class="den">56</span></span> =
+      <span class="frac"><span class="num">36</span><span class="den">56</span></span> =
+      <span class="frac"><span class="num">9</span><span class="den">14</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">9</span><span class="den">14</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>II-1 확률의 뜻과 활용 — 중단원 마무리 풀이</span><span>p. 10</span></div>
+</section>
+
+</body>
+</html>

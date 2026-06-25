@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>II. 확률 — 개념 정리</title>
+<style>
+/* =========================================================
+   design-edu-materials — LOCKED A4 STYLE (do not change the
+   numbers below; only add page content). Mirrors the proven
+   report-design-prompt A4 spec: A4 page, print color-keep,
+   break-inside guards, web-safe offline fonts, fixed sizes.
+   ========================================================= */
+
+/* ---- A4 / 인쇄 ---- */
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 23pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 4px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.example {
+  border: 1px solid var(--accent-line); border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0; break-inside: avoid;
+}
+.example .label {
+  font-size: 9pt; font-weight: 700; color: #fff; background: var(--accent);
+  border-radius: 4px; padding: 1px 8px; display: inline-block; margin-bottom: 8px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.problem { margin: 12px 0; break-inside: avoid; }
+.problem .q { font-weight: 700; }
+.problem .answer-space {
+  border-bottom: 1px dashed var(--accent-line); height: 26px; margin-top: 6px;
+}
+
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 7px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  h2, h3, table, .concept, .example, .tip, .problem { break-inside: avoid; }
+}
+
+/* =========================================================
+   ADDITIVE: 수식 조판 헬퍼 (오프라인 self-contained, CDN 없음)
+   잠긴 값(A4·폰트·사이즈·액센트)은 건드리지 않음.
+   ========================================================= */
+.m { font-family: 'Times New Roman', Georgia, serif; font-style: italic; }
+.eq {
+  text-align: center; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 12.5pt;
+  line-height: 1.5; break-inside: avoid;
+}
+.eq .roman { font-style: normal; }
+.eq.boxed {
+  display: block; border: 1.6px solid var(--accent); border-radius: 6px;
+  padding: 8px 4px; background: #fbfcfe; font-weight: 600;
+}
+sup, sub { font-size: .72em; }
+.frac { display: inline-block; vertical-align: middle; text-align: center; margin: 0 .12em; }
+.frac > span { display: block; padding: 0 .45em; line-height: 1.25; }
+.frac > .den { border-top: 1.3px solid currentColor; }
+.sqrt { white-space: nowrap; }
+.sqrt > .rad { border-top: 1.3px solid currentColor; padding: 0 .18em 0 .08em; }
+.sqrt::before { content: "√"; padding-right: .02em; }
+.ov { display: inline-block; line-height: 1; border-top: 1.4px solid currentColor; padding-top: .5px; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">확률과통계 · II. 확률</div>
+    <h1>II. 확률 — 개념 정리</h1>
+    <p class="subtitle">수학적 확률부터 독립시행까지, 처음 배우는 학생을 위한 핵심 흐름 정리</p>
+    <div class="meta">좋은책신사고 교과서 II단원 기반 · 고등 「확률과 통계」</div>
+  </div>
+
+  <h2>0. 이 단원에서 무엇을 배우나</h2>
+  <p>2단원 확률은 크게 <strong>두 개의 중단원</strong>으로 이루어져 있습니다. 큰 그림을 먼저 잡고 시작하세요.</p>
+
+  <div class="concept">
+    <span class="label">단원 한눈에 보기</span>
+    <table style="margin:6px 0 2px;">
+      <tr><th style="width:34%;">중단원</th><th>핵심 주제와 한 줄 의미</th></tr>
+      <tr>
+        <td><b>1. 확률의 뜻과 활용</b></td>
+        <td>시행·표본공간·사건 | 수학적 확률·통계적 확률 | 확률의 기본 성질 | 덧셈정리 | 여사건의 확률</td>
+      </tr>
+      <tr>
+        <td><b>2. 조건부확률</b></td>
+        <td>조건부확률의 뜻 | 확률의 곱셈정리 | 독립과 종속 | 독립시행의 확률</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">한 문장 요약</span>
+    우연 현상의 경우를 세어 확률을 구하고(<strong>수학적 확률</strong>) → 더하거나 빼서 원하는 확률을 구한 다음(<strong>덧셈정리·여사건</strong>) → 조건이 붙으면 분모를 바꾸고(<strong>조건부확률</strong>) → 반복되면 거듭제곱(<strong>독립시행</strong>)하는 단원입니다.
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 1</span></div>
+</section>
+
+<!-- ============ PAGE 2 — 1-1, 1-2 ============ -->
+<section class="page">
+  <h2>중단원 1. 확률의 뜻과 활용</h2>
+  <h3>1-1. 시행·표본공간·사건</h3>
+  <ul>
+    <li><strong>시행</strong>: 같은 조건에서 반복할 수 있고, 그 결과가 우연에 의해 결정되는 관찰이나 실험</li>
+    <li><strong>표본공간 <span class="m">S</span></strong>: 한 시행에서 일어날 수 있는 <strong>모든 결과의 집합</strong></li>
+    <li><strong>사건</strong>: 표본공간의 부분집합. 예) 주사위에서 짝수가 나오는 사건 <span class="m">A</span> = {2, 4, 6}</li>
+    <li><strong>근원사건</strong>: 더 이상 쪼갤 수 없는 한 가지 결과 (원소가 1개인 사건)</li>
+  </ul>
+
+  <div class="concept">
+    <span class="label">사건의 연산 — 집합과 똑같이 생각</span>
+    <table style="margin:6px 0 2px;">
+      <tr><th style="width:30%;">용어</th><th>기호</th><th>의미</th></tr>
+      <tr><td>합사건</td><td><span class="m">A</span> ∪ <span class="m">B</span></td><td><span class="m">A</span> 또는 <span class="m">B</span> 중 적어도 하나가 일어나는 사건</td></tr>
+      <tr><td>곱사건</td><td><span class="m">A</span> ∩ <span class="m">B</span></td><td><span class="m">A</span> 와 <span class="m">B</span> 가 동시에 일어나는 사건</td></tr>
+      <tr><td>배반사건</td><td><span class="m">A</span> ∩ <span class="m">B</span> = ∅</td><td><span class="m">A</span> 와 <span class="m">B</span> 가 동시에 일어날 수 없는 관계</td></tr>
+      <tr><td>여사건</td><td><span class="m">A<sup>c</sup></span></td><td><span class="m">A</span> 가 일어나지 않는 사건</td></tr>
+    </table>
+  </div>
+
+  <h3>1-2. 수학적 확률</h3>
+  <p>표본공간 <span class="m">S</span> 의 각 근원사건이 <strong>같은 정도로 기대될 때</strong>(동등한 가능성), 사건 <span class="m">A</span> 의 확률은 다음과 같다.</p>
+  <div class="eq boxed"><span class="m">P</span>(<span class="m">A</span>) =
+    <span class="frac"><span class="num"><span class="m">n</span>(<span class="m">A</span>)</span><span class="den"><span class="m">n</span>(<span class="m">S</span>)</span></span>
+    = <span class="frac"><span class="num">(사건 <span class="m">A</span> 의 원소 수)</span><span class="den">(표본공간의 원소 수)</span></span></div>
+
+  <div class="concept">
+    <span class="label">확률의 기본 성질</span>
+    <div class="eq" style="margin:8px 0;">① &nbsp; 0 ≤ <span class="m">P</span>(<span class="m">A</span>) ≤ 1</div>
+    <div class="eq" style="margin:8px 0;">② &nbsp; <span class="m">P</span>(<span class="m">S</span>) = 1 &nbsp;&nbsp;(반드시 일어나는 사건)</div>
+    <div class="eq" style="margin:8px 0;">③ &nbsp; <span class="m">P</span>(∅) = 0 &nbsp;&nbsp;(절대 일어나지 않는 사건)</div>
+  </div>
+
+  <div class="example">
+    <span class="label">예제 — 조합으로 세기</span>
+    <p>빨강 공 3개, 파랑 공 4개가 든 주머니에서 <strong>2개를 동시에</strong> 꺼낼 때, 둘 다 빨강일 확률을 구하라.</p>
+    <p>"동시에 꺼낸다" = 순서 없음 → <strong>조합</strong></p>
+    <div class="eq" style="font-size:11.5pt;">분모: <sub class="m">7</sub><span class="m">C</span><sub class="m">2</sub> =
+      <span class="frac"><span class="num">7 × 6</span><span class="den">2</span></span> = 21, &ensp;
+      분자: <sub class="m">3</sub><span class="m">C</span><sub class="m">2</sub> = 3</div>
+    <div class="eq" style="font-size:11.5pt;"><span class="m">P</span> =
+      <span class="frac"><span class="num">3</span><span class="den">21</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">7</span></span></div>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 2</span></div>
+</section>
+
+<!-- ============ PAGE 3 — 1-3, 1-4 ============ -->
+<section class="page">
+  <h3>1-3. 확률의 덧셈정리</h3>
+  <p>두 사건 <span class="m">A</span>, <span class="m">B</span> 가 동시에 일어날 수 있을 때 (배반이 아닐 때),</p>
+  <div class="eq boxed"><span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>) =
+    <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>) − <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)</div>
+  <p>두 사건이 <strong>배반</strong>이면 <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) = 0 이므로,</p>
+  <div class="eq"><span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>)</div>
+
+  <div class="example">
+    <span class="label">예제 — 덧셈정리</span>
+    <p>1부터 10까지 적힌 공에서 1개를 뽑을 때, <strong>2의 배수 또는 3의 배수</strong>일 확률을 구하라.</p>
+    <p><span class="m">A</span> = {2,4,6,8,10} → 5개, &ensp; <span class="m">B</span> = {3,6,9} → 3개, &ensp; <span class="m">A</span>∩<span class="m">B</span> = {6} → 1개</p>
+    <div class="eq" style="font-size:11.5pt;"><span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) =
+      <span class="frac"><span class="num">5</span><span class="den">10</span></span> +
+      <span class="frac"><span class="num">3</span><span class="den">10</span></span> −
+      <span class="frac"><span class="num">1</span><span class="den">10</span></span> =
+      <span class="frac"><span class="num">7</span><span class="den">10</span></span></div>
+  </div>
+
+  <div class="tip"><span class="label">주의</span>
+    "배반이 아닌데 겹치는 부분을 안 빼고" <span class="m">P</span>(<span class="m">A</span>)+<span class="m">P</span>(<span class="m">B</span>) 로 쓰는 실수가 가장 흔합니다. 배반인지 <strong>반드시 확인</strong>하세요.</div>
+
+  <h3>1-4. 여사건의 확률</h3>
+  <div class="eq boxed"><span class="m">P</span>(<span class="m">A<sup>c</sup></span>) = 1 − <span class="m">P</span>(<span class="m">A</span>)</div>
+  <p>"<strong>적어도</strong>", "<strong>~이상</strong>", "<strong>~아닌</strong>" 이란 표현이 보이면 <strong>여사건</strong>을 먼저 떠올리세요.
+     직접 세면 경우가 많지만, 반대쪽(여사건)은 경우가 적어 훨씬 쉽습니다.</p>
+
+  <div class="example">
+    <span class="label">예제 — 여사건 활용</span>
+    <p>동전 3개를 던질 때, <strong>적어도 1번 앞면</strong>이 나올 확률을 구하라.</p>
+    <p>"적어도 1번 앞면" 의 여사건 = "모두 뒷면"</p>
+    <div class="eq" style="font-size:11.5pt;"><span class="m">P</span>(모두 뒷면) =
+      (<span class="frac"><span class="num">1</span><span class="den">2</span></span>)<sup>3</sup> =
+      <span class="frac"><span class="num">1</span><span class="den">8</span></span></div>
+    <div class="eq" style="font-size:11.5pt;"><span class="m">P</span>(적어도 1번 앞면) = 1 −
+      <span class="frac"><span class="num">1</span><span class="den">8</span></span> =
+      <span class="frac"><span class="num">7</span><span class="den">8</span></span></div>
+  </div>
+
+  <div class="concept">
+    <span class="label">신호 단어 → 도구 매칭</span>
+    <table style="margin:6px 0 2px;">
+      <tr><th style="width:40%;">신호 단어</th><th>도구</th></tr>
+      <tr><td>동시에 꺼낸다</td><td>조합 <sub class="m">n</sub><span class="m">C</span><sub class="m">r</sub></td></tr>
+      <tr><td>또는 (∪)</td><td>덧셈정리</td></tr>
+      <tr><td>적어도 / 이상</td><td>여사건 1 − <span class="m">P</span>(<span class="m">A<sup>c</sup></span>)</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 3</span></div>
+</section>
+
+<!-- ============ PAGE 4 — 1-5 ============ -->
+<section class="page">
+  <h3>1-5. 통계적 확률</h3>
+  <p>수학적 확률은 "동등한 가능성"을 전제로 하므로, 모든 상황에 쓸 수는 없습니다.
+     예를 들어 "내일 비가 올 확률" 같은 것은 동전처럼 경우를 셀 수 없습니다.</p>
+  <p>같은 시행을 <span class="m">n</span> 번 반복할 때 사건 <span class="m">A</span> 가 <span class="m">r</span> 번 일어났다면,</p>
+  <div class="eq"><span class="roman">통계적 확률</span> =
+    <span class="frac"><span class="num"><span class="m">r</span></span><span class="den"><span class="m">n</span></span></span>
+    &nbsp;&nbsp;(상대도수)</div>
+  <p><span class="m">n</span> 이 <strong>충분히 크면</strong> 상대도수는 일정한 값에 가까워지는데, 이 값을 <strong>통계적 확률</strong>이라 합니다.</p>
+
+  <div class="concept">
+    <span class="label">수학적 확률 vs 통계적 확률</span>
+    <table style="margin:6px 0 2px;">
+      <tr><th style="width:30%;">구분</th><th>수학적 확률</th><th>통계적 확률</th></tr>
+      <tr><td>방법</td><td>경우의 수를 세어 계산</td><td>반복 실험의 상대도수</td></tr>
+      <tr><td>전제</td><td>동등한 가능성</td><td>충분히 많은 시행</td></tr>
+      <tr><td>관계</td><td colspan="2">시행 횟수 <span class="m">n</span> → ∞ 이면 통계적 확률은 수학적 확률에 수렴</td></tr>
+    </table>
+  </div>
+
+  <div class="example">
+    <span class="label">예제 — 통계적 확률</span>
+    <p>자유투를 200번 던져 150번 성공했다면, 이 선수의 성공 확률은 약 얼마로 볼 수 있는가?</p>
+    <div class="eq" style="font-size:11.5pt;"><span class="m">P</span> ≈
+      <span class="frac"><span class="num">150</span><span class="den">200</span></span> = 0.75</div>
+  </div>
+
+  <div class="tip"><span class="label">포인트</span>
+    시험에서 통계적 확률 자체를 묻는 문제는 많지 않지만, "상대도수의 극한이 수학적 확률과 같다"는 관계를 서술형으로 묻는 경우가 있습니다.</div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 4</span></div>
+</section>
+
+<!-- ============ PAGE 5 — 2-1 ============ -->
+<section class="page">
+  <h2>중단원 2. 조건부확률</h2>
+  <h3>2-1. 조건부확률의 뜻</h3>
+  <p>사건 <span class="m">A</span> 가 일어났다는 조건 아래에서 사건 <span class="m">B</span> 가 일어날 확률을 <strong>조건부확률</strong>이라 하며,
+     <span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>) 로 쓴다.</p>
+  <div class="eq boxed"><span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>) =
+    <span class="frac"><span class="num"><span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)</span><span class="den"><span class="m">P</span>(<span class="m">A</span>)</span></span>
+    &nbsp;&nbsp;(<span class="m">P</span>(<span class="m">A</span>) &gt; 0)</div>
+  <p>핵심은 <strong>분모가 전체(S)에서 사건 A로 바뀐다</strong>는 것이다. "~중에서", "~일 때" 라는 표현이 나오면 조건부확률을 의심하라.</p>
+
+  <div class="concept">
+    <span class="label">표 문제는 2×2 표로 정리</span>
+    <p>분류가 두 가지(예: 남/여, 합격/불합격)인 문제는 아래처럼 2×2 표를 먼저 만들면 조건부확률의 분모·분자를 바로 읽을 수 있다.</p>
+    <table style="margin:6px 0 2px; width:auto;">
+      <tr><th></th><th>사건 <span class="m">B</span></th><th>사건 <span class="m">B<sup>c</sup></span></th><th>합계</th></tr>
+      <tr><td><b>사건 <span class="m">A</span></b></td><td><span class="m">a</span></td><td><span class="m">b</span></td><td><span class="m">a</span>+<span class="m">b</span></td></tr>
+      <tr><td><b>사건 <span class="m">A<sup>c</sup></span></b></td><td><span class="m">c</span></td><td><span class="m">d</span></td><td><span class="m">c</span>+<span class="m">d</span></td></tr>
+      <tr><td><b>합계</b></td><td><span class="m">a</span>+<span class="m">c</span></td><td><span class="m">b</span>+<span class="m">d</span></td><td><span class="m">n</span></td></tr>
+    </table>
+  </div>
+
+  <div class="example">
+    <span class="label">예제 — 조건부확률</span>
+    <p>어느 학교에서 안경을 쓴 학생이 40명, 그중 남학생이 25명이다. 안경을 쓴 학생 중에서 임의로 1명을 뽑을 때 남학생일 확률을 구하라.</p>
+    <p>"안경을 쓴 학생 <strong>중에서</strong>" → 조건부확률, 분모 = 40</p>
+    <div class="eq" style="font-size:11.5pt;"><span class="m">P</span>(남학생|안경) =
+      <span class="frac"><span class="num">25</span><span class="den">40</span></span> =
+      <span class="frac"><span class="num">5</span><span class="den">8</span></span></div>
+  </div>
+
+  <div class="tip"><span class="label">함정</span>
+    조건부확률에서 분모를 <strong>전체 학생 수</strong>로 잡는 실수가 매우 많습니다. "~중에서"라는 조건이 붙으면 분모는 반드시 <strong>조건에 해당하는 수</strong>입니다.</div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 5</span></div>
+</section>
+
+<!-- ============ PAGE 6 — 2-2 ============ -->
+<section class="page">
+  <h3>2-2. 확률의 곱셈정리 (비복원 문제의 핵심)</h3>
+  <p>조건부확률 공식을 변형하면 <strong>두 사건이 동시에 일어나는 확률</strong>을 구할 수 있다.</p>
+  <div class="eq boxed"><span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) =
+    <span class="m">P</span>(<span class="m">A</span>) × <span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>)</div>
+  <p>이 공식이 특히 빛을 발하는 곳은 <strong>비복원추출</strong>(뽑은 것을 되돌려 넣지 않는 경우)이다.
+     두 번째 뽑을 때 전체 개수가 1 줄어들기 때문에, 두 번째 확률은 조건부확률이 된다.</p>
+
+  <div class="example">
+    <span class="label">예제 — 비복원 곱셈정리</span>
+    <p>주머니에 빨간 공 3개, 파란 공 4개가 들어 있다. 공을 하나씩 두 번 꺼낼 때(비복원), 두 개 모두 빨간 공일 확률을 구하라.</p>
+    <p>첫 번째: 빨강 확률 = <span class="frac"><span class="num">3</span><span class="den">7</span></span></p>
+    <p>두 번째: 빨강 하나 빠졌으므로 = <span class="frac"><span class="num">2</span><span class="den">6</span></span></p>
+    <div class="eq" style="font-size:11.5pt;"><span class="m">P</span>(둘 다 빨강) =
+      <span class="frac"><span class="num">3</span><span class="den">7</span></span> ×
+      <span class="frac"><span class="num">2</span><span class="den">6</span></span> =
+      <span class="frac"><span class="num">6</span><span class="den">42</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">7</span></span></div>
+  </div>
+
+  <div class="tip"><span class="label">TIP</span>
+    비복원에서는 두 번째 분모가 <strong>반드시 1 줄어든다</strong>. 복원이면 분모가 그대로이므로 단순 곱셈이 된다.</div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 6</span></div>
+</section>
+
+<!-- ============ PAGE 7 — 2-3 ============ -->
+<section class="page">
+  <h3>2-3. 독립과 종속</h3>
+  <p>두 사건 <span class="m">A</span>, <span class="m">B</span> 가 서로 영향을 주지 않으면 <strong>독립</strong>, 영향을 주면 <strong>종속</strong>이라 한다.</p>
+
+  <div class="concept">
+    <span class="label">독립의 세 가지 동치 조건 — 어느 것이든 하나만 확인</span>
+    <div class="eq" style="margin:8px 0;">① &nbsp; <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>)</div>
+    <div class="eq" style="margin:8px 0;">② &nbsp; <span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>) = <span class="m">P</span>(<span class="m">B</span>) &nbsp;&nbsp;(A가 일어나든 말든 B 확률 불변)</div>
+    <div class="eq" style="margin:8px 0;">③ &nbsp; <span class="m">P</span>(<span class="m">A</span>|<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>)</div>
+    <p style="margin:6px 0 2px;">위 세 조건 중 <strong>어느 하나가 성립하면 나머지도 모두 성립</strong>한다.</p>
+  </div>
+
+  <p><strong>종속</strong>: 위 조건이 성립하지 않으면 두 사건은 종속이다.</p>
+
+  <div class="example">
+    <span class="label">예제 — 독립 판정</span>
+    <p><span class="m">P</span>(<span class="m">A</span>) = <span class="frac"><span class="num">1</span><span class="den">2</span></span>,
+       <span class="m">P</span>(<span class="m">B</span>) = <span class="frac"><span class="num">1</span><span class="den">3</span></span>,
+       <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) = <span class="frac"><span class="num">1</span><span class="den">6</span></span>
+       일 때 <span class="m">A</span> 와 <span class="m">B</span> 는 독립인가?</p>
+    <div class="eq" style="font-size:11.5pt;"><span class="m">P</span>(<span class="m">A</span>) × <span class="m">P</span>(<span class="m">B</span>) =
+      <span class="frac"><span class="num">1</span><span class="den">2</span></span> ×
+      <span class="frac"><span class="num">1</span><span class="den">3</span></span> =
+      <span class="frac"><span class="num">1</span><span class="den">6</span></span> =
+      <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) &nbsp;&nbsp;⟹&nbsp;&nbsp; <strong>독립</strong></div>
+  </div>
+
+  <div class="tip"><span class="label">함정 — 독립 ≠ 배반</span>
+    <ul style="margin:4px 0;">
+      <li><strong>배반</strong>: <span class="m">A</span> ∩ <span class="m">B</span> = ∅ → 둘이 <strong>동시에 일어나지 않는다</strong></li>
+      <li><strong>독립</strong>: <span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>)<span class="m">P</span>(<span class="m">B</span>) → 한쪽이 다른 쪽에 <strong>영향을 주지 않는다</strong></li>
+      <li>두 사건이 배반이면서 동시에 독립인 경우는 <span class="m">P</span>(<span class="m">A</span>)=0 또는 <span class="m">P</span>(<span class="m">B</span>)=0 일 때뿐이다.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 7</span></div>
+</section>
+
+<!-- ============ PAGE 8 — 2-4 ============ -->
+<section class="page">
+  <h3>2-4. 독립시행의 확률</h3>
+  <p>같은 시행을 <strong>독립적으로 <span class="m">n</span> 번 반복</strong>할 때, 어떤 사건이 <strong>정확히 <span class="m">r</span> 번</strong> 일어날 확률이다.
+     (한 번의 성공 확률 <span class="m">p</span>, 실패 확률 1−<span class="m">p</span>)</p>
+
+  <div class="eq boxed"><sub class="m" style="font-size:.85em;">n</sub><span class="m">C</span><sub class="m" style="font-size:.85em;">r</sub>
+    · <span class="m">p</span><sup class="m">r</sup> · (1−<span class="m">p</span>)<sup class="m">n−r</sup></div>
+
+  <div class="concept">
+    <span class="label">공식의 의미 — 세 부분으로 나누어 보기</span>
+    <ul style="margin:4px 0;">
+      <li><sub class="m">n</sub><span class="m">C</span><sub class="m">r</sub> : <span class="m">n</span> 번 중 어디서 <span class="m">r</span> 번 성공할지 <strong>자리 선택</strong></li>
+      <li><span class="m">p</span><sup class="m">r</sup> : 성공 <span class="m">r</span> 번의 확률</li>
+      <li>(1−<span class="m">p</span>)<sup class="m">n−r</sup> : 실패 (<span class="m">n</span>−<span class="m">r</span>) 번의 확률</li>
+    </ul>
+  </div>
+
+  <div class="example">
+    <span class="label">예제 — 독립시행</span>
+    <p>주사위를 4번 던질 때, 6의 눈이 <strong>정확히 2번</strong> 나올 확률을 구하라.</p>
+    <p><span class="m">n</span> = 4, <span class="m">r</span> = 2,
+       <span class="m">p</span> = <span class="frac"><span class="num">1</span><span class="den">6</span></span>,
+       1−<span class="m">p</span> = <span class="frac"><span class="num">5</span><span class="den">6</span></span></p>
+    <div class="eq" style="font-size:11.5pt;"><sub class="m">4</sub><span class="m">C</span><sub class="m">2</sub> ·
+      (<span class="frac"><span class="num">1</span><span class="den">6</span></span>)<sup>2</sup> ·
+      (<span class="frac"><span class="num">5</span><span class="den">6</span></span>)<sup>2</sup> =
+      6 × <span class="frac"><span class="num">1</span><span class="den">36</span></span> ×
+      <span class="frac"><span class="num">25</span><span class="den">36</span></span> =
+      <span class="frac"><span class="num">150</span><span class="den">1296</span></span> =
+      <span class="frac"><span class="num">25</span><span class="den">216</span></span></div>
+  </div>
+
+  <div class="concept">
+    <span class="label">"적어도 1번" 이면 여사건 활용</span>
+    <div class="eq boxed"><span class="m">P</span>(적어도 1번) = 1 − (1−<span class="m">p</span>)<sup class="m">n</sup></div>
+    <p style="margin:6px 0 2px;">모두 실패할 확률을 빼는 것이 훨씬 빠르다.</p>
+  </div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 8</span></div>
+</section>
+
+<!-- ============ PAGE 9 — 공식 정리 ============ -->
+<section class="page">
+  <h2>핵심 공식 한눈 정리</h2>
+  <table>
+    <tr><th style="width:34%;">주제</th><th>공식</th></tr>
+    <tr>
+      <td>수학적 확률</td>
+      <td><span class="m">P</span>(<span class="m">A</span>) =
+        <span class="frac"><span class="num"><span class="m">n</span>(<span class="m">A</span>)</span><span class="den"><span class="m">n</span>(<span class="m">S</span>)</span></span></td>
+    </tr>
+    <tr>
+      <td>확률 범위</td>
+      <td>0 ≤ <span class="m">P</span>(<span class="m">A</span>) ≤ 1</td>
+    </tr>
+    <tr>
+      <td>덧셈정리</td>
+      <td><span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>) − <span class="m">P</span>(<span class="m">A</span>∩<span class="m">B</span>)</td>
+    </tr>
+    <tr>
+      <td>배반사건</td>
+      <td><span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>)</td>
+    </tr>
+    <tr>
+      <td>여사건</td>
+      <td><span class="m">P</span>(<span class="m">A<sup>c</sup></span>) = 1 − <span class="m">P</span>(<span class="m">A</span>)</td>
+    </tr>
+    <tr>
+      <td>조건부확률</td>
+      <td><span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>) =
+        <span class="frac"><span class="num"><span class="m">P</span>(<span class="m">A</span>∩<span class="m">B</span>)</span><span class="den"><span class="m">P</span>(<span class="m">A</span>)</span></span></td>
+    </tr>
+    <tr>
+      <td>곱셈정리</td>
+      <td><span class="m">P</span>(<span class="m">A</span>∩<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>)</td>
+    </tr>
+    <tr>
+      <td>독립 조건</td>
+      <td><span class="m">P</span>(<span class="m">A</span>∩<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>)</td>
+    </tr>
+    <tr>
+      <td>독립시행</td>
+      <td><sub class="m">n</sub><span class="m">C</span><sub class="m">r</sub> · <span class="m">p</span><sup class="m">r</sup> · (1−<span class="m">p</span>)<sup class="m">n−r</sup></td>
+    </tr>
+    <tr>
+      <td>적어도 1번 (독립시행)</td>
+      <td>1 − (1−<span class="m">p</span>)<sup class="m">n</sup></td>
+    </tr>
+  </table>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 9</span></div>
+</section>
+
+<!-- ============ PAGE 10 — 공부 순서 + 자주 틀리는 부분 ============ -->
+<section class="page">
+  <h2>공부 순서 제안</h2>
+  <ol>
+    <li><strong>표본공간·사건</strong>을 집합으로 나타내는 연습 — 합사건(∪), 곱사건(∩), 여사건을 정확히 쓰기</li>
+    <li><strong>수학적 확률</strong>: 경우의 수를 세는 도구(순열·조합)를 먼저 복습한 뒤, <span class="m">P</span>(<span class="m">A</span>) = <span class="frac"><span class="num"><span class="m">n</span>(<span class="m">A</span>)</span><span class="den"><span class="m">n</span>(<span class="m">S</span>)</span></span> 에 넣는 연습</li>
+    <li><strong>덧셈정리</strong>: 배반인지 아닌지 구분 → 배반이면 그냥 더하고, 아니면 겹치는 부분 빼기</li>
+    <li><strong>여사건</strong>: "적어도", "이상" 이 보이면 자동으로 1 − (반대) 를 쓰는 습관 기르기</li>
+    <li><strong>조건부확률</strong>: "~중에서" → 분모 바꾸기, 표 문제는 2×2 표로 정리</li>
+    <li><strong>곱셈정리</strong>: 비복원 문제는 두 번째 분모가 줄어드는 것을 확인</li>
+    <li><strong>독립시행</strong>: <sub class="m">n</sub><span class="m">C</span><sub class="m">r</sub> × <span class="m">p</span><sup class="m">r</sup> × (1−<span class="m">p</span>)<sup class="m">n−r</sup> 공식 외우고, "적어도"는 여사건으로</li>
+  </ol>
+
+  <h2>자주 틀리는 부분 — 시험 직전 체크</h2>
+  <div class="concept">
+    <span class="label">아래 5가지만 안 틀려도 점수가 오릅니다</span>
+    <ol style="margin:4px 0;">
+      <li><strong>"동시에 꺼냄"인데 순열(P)로 세는 실수</strong> — 순서 없이 꺼내는 것이므로 <strong>조합(C)</strong>을 써야 한다.</li>
+      <li><strong>배반이 아닌데 <span class="m">P</span>(<span class="m">A</span>∪<span class="m">B</span>) = <span class="m">P</span>(<span class="m">A</span>)+<span class="m">P</span>(<span class="m">B</span>) 로 쓰는 실수</strong> — 배반이 아니면 <span class="m">P</span>(<span class="m">A</span>∩<span class="m">B</span>) 를 빼야 한다.</li>
+      <li><strong>조건부확률에서 분모를 전체로 잡는 실수</strong> — "~중에서"가 있으면 분모는 조건에 해당하는 수이다.</li>
+      <li><strong>독립과 배반을 혼동하는 실수</strong> — 배반은 "동시에 안 일어남", 독립은 "영향 없음". 완전히 다른 개념이다.</li>
+      <li><strong>독립시행에서 <sub class="m">n</sub><span class="m">C</span><sub class="m">r</sub> 을 빠뜨리는 실수</strong> — 자리 선택 조합 없이 <span class="m">p</span><sup class="m">r</sup>(1−<span class="m">p</span>)<sup class="m">n−r</sup> 만 쓰면 틀린다.</li>
+    </ol>
+  </div>
+
+  <div class="tip"><span class="label">마무리</span>
+    확률 단원은 "경우를 세고 → 공식에 넣고 → 더하거나 빼는" 흐름이 80 %입니다. 문제를 읽고
+    <strong>어떤 도구(조합, 덧셈정리, 여사건, 조건부확률, 독립시행)를 쓸지 판단하는 연습</strong>이 가장 중요합니다.</div>
+
+  <div class="page-footer"><span>II. 확률 — 개념 정리</span><span>p. 10</span></div>
+</section>
+
+</body>
+</html>
