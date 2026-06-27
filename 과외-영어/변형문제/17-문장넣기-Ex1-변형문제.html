@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>17. 문장 넣기 Ex 1 — 변형문제</title>
 <style>
-@page { size: A4; margin: 18mm 16mm; }
+@page { size: A4; margin: 8mm; }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
@@ -319,10 +319,13 @@ tr:nth-child(even) td { background: #f6f8fb; }
 @media print {
   body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .page {
-    width: auto; min-height: auto; margin: 0; padding: 0;
-    box-shadow: none; page-break-after: always;
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
   }
-  .page:last-of-type { page-break-after: auto; }
+  .page + .page { break-before: page; page-break-before: always; }
+  .question-block, .answer-reveal, .explain-box, .tip, .word-bank,
+  .model-answer, .rubric, .writing-area, .memo-area, .dist-table,
+  table, tr, .choice-list li, h2, h3 { break-inside: avoid; }
   h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
 }
 
@@ -401,7 +404,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 Ex 1 변형문제</span>
-    <span>1 / 5</span>
+    <span>1 / 8</span>
   </div>
 </section>
 
@@ -430,7 +433,15 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
 
-  <hr class="divider">
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 Ex 1 변형문제</span>
+    <span>2 / 8</span>
+  </div>
+</section>
+
+<!-- PAGE 3 — 변형 2 문제 -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2><span class="q-badge">2</span> 변형 2 — 요지 파악 <span class="type-tag">요지</span></h2>
 
@@ -455,7 +466,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 Ex 1 변형문제</span>
-    <span>2 / 5</span>
+    <span>3 / 8</span>
   </div>
 </section>
 
@@ -511,7 +522,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 Ex 1 변형문제</span>
-    <span>3 / 5</span>
+    <span>4 / 8</span>
   </div>
 </section>
 
@@ -571,7 +582,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 Ex 1 변형문제</span>
-    <span>4 / 5</span>
+    <span>5 / 8</span>
   </div>
 </section>
 
@@ -628,7 +639,15 @@ tr:nth-child(even) td { background: #f6f8fb; }
     중간의 양보/부연(②④)을 요지로 착각하지 않도록 주의한다.
   </div>
 
-  <hr class="divider">
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 Ex 1 변형문제</span>
+    <span>6 / 8</span>
+  </div>
+</section>
+
+<!-- PAGE 7 — 서술형 해설 (모범답안+어형변환) -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2><span class="q-badge">3</span> 서술형 해설 — 핵심 문장 영작</h2>
 
@@ -654,6 +673,16 @@ tr:nth-child(even) td { background: #f6f8fb; }
       <tr><td>effort</td><td><strong>effort</strong></td><td>명사 원형 그대로 — our experienced effort</td></tr>
     </table>
   </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 Ex 1 변형문제</span>
+    <span>7 / 8</span>
+  </div>
+</section>
+
+<!-- PAGE 8 — 채점 기준 + 학습정리 -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <div class="rubric">
     <span class="label">채점 기준 (10점 만점)</span>
@@ -719,7 +748,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
   <div class="page-footer">
     <span>EBS 2027 수능특강 영어 · 17. 문장 넣기 Ex 1 변형문제</span>
-    <span>5 / 5</span>
+    <span>8 / 8</span>
   </div>
 </section>
 
