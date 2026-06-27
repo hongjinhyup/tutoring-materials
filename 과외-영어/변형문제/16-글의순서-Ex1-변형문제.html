@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16. 글의 순서 Ex 1 — 변형문제</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+/* 주어진 문장 박스 */
+.given-sentence {
+  background: var(--purple-bg); border: 2px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.given-sentence .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* 삽입 위치 표시 */
+.insert-mark {
+  display: inline-block;
+  font-weight: 700; color: var(--accent);
+  margin: 0 2px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 10pt;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 원문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 변형문제</div>
+    <h1>16. 글의 순서 Ex 1 — 변형문제</h1>
+    <p class="subtitle">학술적 글쓰기 vs 온라인 글쓰기 — 같은 지문, 다른 유형으로 실전 연습</p>
+    <p class="meta">
+      <span class="code-badge">26005-0077</span>
+      <span class="passage-badge">원문: p.94 · Ex 1</span>
+      <span class="transform-badge">변형 3문항</span>
+    </p>
+  </div>
+
+  <h2>변형문제 구성</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>원래 유형</th><th>변형 유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>글의 순서</td>
+        <td>문장 삽입</td>
+        <td><span class="ans-badge">③</span></td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>글의 순서</td>
+        <td>내용 일치/불일치</td>
+        <td><span class="ans-badge">②</span></td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>글의 순서</td>
+        <td>서술형 — 핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">학습 가이드</span>
+    이 자료는 분석노트에서 공부한 <strong>16-글의순서-Ex1</strong> 지문을 다른 유형으로 변형한 연습문제이다.
+    분석노트로 지문을 충분히 이해한 뒤, 아래 문제를 직접 풀어 보자.
+    <strong>문제 페이지를 먼저 풀고, 해설 페이지에서 확인</strong>하는 순서로 학습한다.
+  </div>
+
+  <h2>원문 지문 (복습용)</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;In academia, you are taught to write up your results thus: "I came up with a hypothesis, then I did this experiment, and then I did another experiment, then I tested my ideas some more, and so on until [dramatic fanfare] ta-da! I proved this." If you wrote this way online, very few of your readers would make it to your dramatic conclusion, no matter how exciting or groundbreaking it was. Online, we don't have the patience to wait for your big reveal at the end. Instead, you need to tell us up front: "I proved this! And here's how I know it..." Your readership may still dwindle and trail off over the course of your writing, but at least the vast majority know what it is you've achieved from the very beginning. A few more of them may stay along for the ride if the opening line — the "hook," in journalistic terms — is particularly interesting. If you grab their attention early, you can more likely convince more readers to stay for the whole story.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* dwindle: (점점) 줄어들다</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 1 변형문제</span>
+    <span>1 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 변형 1: 문장 삽입 + 변형 2: 내용 일치/불일치 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 — 문장 삽입 <span class="type-tag">문장삽입</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 주어진 문장이 들어가기에 가장 적절한 곳을 고르시오.</p>
+
+    <div class="given-sentence">
+      <span class="label">주어진 문장</span>
+      Your readership may still dwindle and trail off over the course of your writing, but at least the vast majority know what it is you've achieved from the very beginning.
+    </div>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;In academia, you are taught to write up your results thus: "I came up with a hypothesis, then I did this experiment, and then I did another experiment, then I tested my ideas some more, and so on until [dramatic fanfare] ta-da! I proved this." <span class="insert-mark">( ① )</span> If you wrote this way online, very few of your readers would make it to your dramatic conclusion, no matter how exciting or groundbreaking it was. Online, we don't have the patience to wait for your big reveal at the end. <span class="insert-mark">( ② )</span> Instead, you need to tell us up front: "I proved this! And here's how I know it..." <span class="insert-mark">( ③ )</span> A few more of them may stay along for the ride if the opening line — the "hook," in journalistic terms — is particularly interesting. <span class="insert-mark">( ④ )</span> If you grab their attention early, you can more likely convince more readers to stay for the whole story. <span class="insert-mark">( ⑤ )</span>
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* dwindle: (점점) 줄어들다</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span></li>
+      <li><span class="num">②</span></li>
+      <li><span class="num">③</span></li>
+      <li><span class="num">④</span></li>
+      <li><span class="num">⑤</span></li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">2</span> 변형 2 — 내용 일치/불일치 <span class="type-tag">내용 불일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 <strong>일치하지 않는 것</strong>은?</p>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;In academia, you are taught to write up your results thus: "I came up with a hypothesis, then I did this experiment, and then I did another experiment, then I tested my ideas some more, and so on until [dramatic fanfare] ta-da! I proved this." If you wrote this way online, very few of your readers would make it to your dramatic conclusion, no matter how exciting or groundbreaking it was. Online, we don't have the patience to wait for your big reveal at the end. Instead, you need to tell us up front: "I proved this! And here's how I know it..." Your readership may still dwindle and trail off over the course of your writing, but at least the vast majority know what it is you've achieved from the very beginning. A few more of them may stay along for the ride if the opening line — the "hook," in journalistic terms — is particularly interesting. If you grab their attention early, you can more likely convince more readers to stay for the whole story.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* dwindle: (점점) 줄어들다</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> 학계에서는 가설, 실험, 결론의 순서로 결과를 작성하도록 가르친다.</li>
+      <li><span class="num">②</span> 온라인에서 결론을 먼저 제시하면 독자가 줄어드는 것을 완전히 방지할 수 있다.</li>
+      <li><span class="num">③</span> 온라인 독자들은 글의 마지막에 나오는 결론까지 기다릴 인내심이 없다.</li>
+      <li><span class="num">④</span> 저널리즘에서는 독자의 관심을 끄는 첫 문장을 '훅(hook)'이라고 부른다.</li>
+      <li><span class="num">⑤</span> 초반에 독자의 주의를 끌면 더 많은 독자가 글 전체에 머무를 가능성이 높아진다.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 1 변형문제</span>
+    <span>2 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 서술형 문제 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">3</span> 서술형 — 핵심 문장 영작 <span class="type-tag">서술형</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 빈칸에 들어갈 문장을 주어진 단어를 활용하여 영작하시오.</p>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;In academia, you are taught to write up your results thus: "I came up with a hypothesis, then I did this experiment, and then I did another experiment, then I tested my ideas some more, and so on until [dramatic fanfare] ta-da! I proved this." If you wrote this way online, very few of your readers would make it to your dramatic conclusion, no matter how exciting or groundbreaking it was. Online, we don't have the patience to wait for your big reveal at the end. Instead, you need to tell us up front: "I proved this! And here's how I know it..." Your readership may still dwindle and trail off over the course of your writing, but at least the vast majority know what it is you've achieved from the very beginning.<br><br>
+      <span style="display:block; width:100%; height:24px; border-bottom:2.5px solid var(--accent); margin-top:4px;"></span>
+      <br>If you grab their attention early, you can more likely convince more readers to stay for the whole story.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* dwindle: (점점) 줄어들다</p>
+
+    <p style="font-size:10pt; color:var(--muted); margin:8px 0 4px;">
+      [해석 힌트] 첫 문장이 — 저널리즘 용어로 '훅(hook)'이 — 특히 흥미롭다면 그들 중 몇 명 더가 끝까지 함께할 수 있다.
+    </p>
+
+    <div class="word-bank">
+      <span class="label">제시어 (원형) — 필요시 어형을 변환하여 사용할 것</span>
+      <div class="words">
+        <span class="word">stay</span>
+        <span class="word">ride</span>
+        <span class="word">open</span>
+        <span class="word">line</span>
+        <span class="word">hook</span>
+        <span class="word">journalist</span>
+        <span class="word">term</span>
+        <span class="word">particular</span>
+        <span class="word">interest</span>
+      </div>
+    </div>
+
+    <p style="margin:10px 0 6px;">
+      <span class="condition-tag">조건 1</span> 제시어를 <strong>모두</strong> 사용하되, 문맥에 맞게 어형을 변환할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 2</span> 글의 흐름에 이어지는 <strong>문장 1개</strong>를 완성할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 3</span> 해석 힌트의 의미를 담되, 단어를 <strong>그대로 영한 직역하지 말 것</strong>
+    </p>
+  </div>
+
+  <div class="writing-area">
+    <div class="guide">Write the key sentence below (use ALL 9 given words)</div>
+    <div class="lines"></div>
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 1 변형문제</span>
+    <span>3 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 변형 1 해설: 문장 삽입 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 해설 — 문장 삽입</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ③</p>
+    <p style="margin:4px 0; font-size:10.5pt;">Instead, you need to tell us up front: "I proved this! And here's how I know it..." <strong>( ③ 주어진 문장 )</strong> A few more of them may stay along for the ride...</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      주어진 문장은 <strong>"결론 먼저 제시" 방식의 양보적 한계</strong>를 언급한다:
+      독자층이 줄어들 수 있지만(<strong>dwindle and trail off</strong>), 적어도 대다수는 처음부터 핵심을 안다(<strong>the vast majority know</strong>).
+      이 문장은 반드시 <strong>"up front"으로 결론 제시</strong>를 제안한 직후(③ 앞문장)에 위치해야 하며,
+      바로 다음 문장의 <strong>"A few more of them"</strong>에서 "them"이 주어진 문장의 <strong>"Your readership"</strong>을 이어받는다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span>
+      <span class="reason">학술적 글쓰기 방식을 소개한 직후이다. 아직 온라인 글쓰기의 문제점이나 대안이 제시되지 않았으므로, "결론 먼저 제시"의 양보적 한계를 말하는 것은 시기상조이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span>
+      <span class="reason">온라인 독자의 인내심 부족을 언급한 직후이다. "Instead"로 대안을 제시하기 전에 양보 문장이 오면 문제 제기 → 양보 → 대안이라는 비논리적 흐름이 된다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">③</span>
+      <span class="reason">"Instead, you need to tell us up front"(대안 제시) 직후에 위치한다. 대안의 한계를 양보하면서도 핵심 이점을 강조하고, 다음 문장의 "them"(= readership)과 자연스럽게 연결된다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span>
+      <span class="reason">"훅(hook)"이 흥미롭다면 독자가 더 머무른다는 내용과 마지막 문장 사이에 삽입되면, "hook → readership dwindle"이라는 역행적 흐름이 되어 논리가 깨진다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span>
+      <span class="reason">글의 마지막에 위치하면, 긍정적 결론("more readers to stay") 이후에 독자 이탈이라는 부정적 양보가 오므로 글의 전체 흐름을 약화시킨다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    문장 삽입의 핵심: <strong>대명사와 지시어의 선행사</strong>를 추적한다.
+    이 문제에서는 삽입 문장의 <strong>"Your readership"</strong>이 다음 문장 <strong>"A few more of them"</strong>의
+    선행사가 된다는 점이 결정적 단서이다.
+    또한 <strong>"양보(but at least)"</strong> 구조는 대안 제시 직후에 오는 것이 자연스럽다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 1 변형문제</span>
+    <span>4 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 변형 2 해설 + 서술형 해설 + 학습 정리 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">2</span> 변형 2 해설 — 내용 일치/불일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ②</p>
+    <p style="margin:4px 0; font-size:10.5pt;">온라인에서 결론을 먼저 제시하면 독자가 줄어드는 것을 완전히 방지할 수 있다. → 불일치</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 근거</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      글에서 "Your readership <strong>may still dwindle</strong> and trail off"라고 하여,
+      결론을 먼저 제시하더라도 독자층은 <strong>여전히 줄어들 수 있다</strong>고 명시한다.
+      ② 선지의 <strong>"완전히 방지"</strong>는 원문의 "may still dwindle"과 정면 배치된다.
+    </p>
+  </div>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> 학계에서는 가설, 실험, 결론의 순서로 결과를 작성하도록 가르친다.
+      <span class="reason">일치 — "I came up with a hypothesis, then I did this experiment... I proved this."에 부합한다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">②</span> 온라인에서 결론을 먼저 제시하면 독자가 줄어드는 것을 완전히 방지할 수 있다.
+      <span class="reason">불일치 — 글은 "may still dwindle"이라 하여 독자 이탈이 여전히 가능하다고 한다. "완전히 방지"는 과장된 왜곡이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> 온라인 독자들은 글의 마지막에 나오는 결론까지 기다릴 인내심이 없다.
+      <span class="reason">일치 — "we don't have the patience to wait for your big reveal at the end."에 부합한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span> 저널리즘에서는 독자의 관심을 끄는 첫 문장을 '훅(hook)'이라고 부른다.
+      <span class="reason">일치 — "the opening line — the 'hook,' in journalistic terms"에 부합한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> 초반에 독자의 주의를 끌면 더 많은 독자가 글 전체에 머무를 가능성이 높아진다.
+      <span class="reason">일치 — "If you grab their attention early, you can more likely convince more readers to stay for the whole story."에 부합한다.</span>
+    </li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">3</span> 서술형 해설 — 핵심 문장 영작</h2>
+
+  <div class="model-answer">
+    <span class="label">모범답안 (Model Answer)</span>
+    <p style="margin:6px 0; font-size:11pt; line-height:2; font-family:'Times New Roman',Georgia,serif;">
+      A few more of them may <strong>stay</strong> along for the <strong>ride</strong> if the <strong>opening</strong> <strong>line</strong> — the "<strong>hook</strong>," in <strong>journalistic</strong> <strong>terms</strong> — is <strong>particularly</strong> <strong>interesting</strong>.
+    </p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">어형 변환 포인트</span>
+    <table>
+      <tr><th style="width:20%;">제시어 (원형)</th><th style="width:25%;">사용 형태</th><th>변환 근거</th></tr>
+      <tr><td>stay</td><td><strong>stay</strong></td><td>동사 원형 그대로 — may stay (조동사 뒤)</td></tr>
+      <tr><td>ride</td><td><strong>ride</strong></td><td>명사 원형 그대로 — for the ride (관용구)</td></tr>
+      <tr><td>open</td><td><strong>opening</strong></td><td>동사/형용사 → 현재분사(형용사): "첫 번째" line을 수식</td></tr>
+      <tr><td>line</td><td><strong>line</strong></td><td>명사 원형 그대로 — the opening line</td></tr>
+      <tr><td>hook</td><td><strong>hook</strong></td><td>명사 원형 그대로 — 저널리즘 용어 그대로 사용</td></tr>
+      <tr><td>journalist</td><td><strong>journalistic</strong></td><td>명사 → 형용사: "저널리즘의" terms를 수식 (-ic 접미사)</td></tr>
+      <tr><td>term</td><td><strong>terms</strong></td><td>명사 → 복수형: in journalistic terms (관용구)</td></tr>
+      <tr><td>particular</td><td><strong>particularly</strong></td><td>형용사 → 부사: "특히" interesting을 수식 (-ly 접미사)</td></tr>
+      <tr><td>interest</td><td><strong>interesting</strong></td><td>명사/동사 → 현재분사(형용사): "흥미로운" 보어 역할</td></tr>
+    </table>
+  </div>
+
+  <div class="rubric">
+    <span class="label">채점 기준 (10점 만점)</span>
+    <table>
+      <tr><th style="width:12%;">배점</th><th style="width:30%;">항목</th><th>기준</th></tr>
+      <tr>
+        <td>4점</td>
+        <td><span class="condition-tag">조건 1</span> 제시어 전체 사용</td>
+        <td>9개 모두 사용 (4점). 1개 누락마다 -1점. 5개 이하 사용 시 0점</td>
+      </tr>
+      <tr>
+        <td>3점</td>
+        <td><span class="condition-tag">조건 2</span> 어형 변환 정확성</td>
+        <td>opening(현재분사), journalistic(형용사화), particularly(부사화), interesting(현재분사) 4개 핵심 변환. 각 오류 -1점</td>
+      </tr>
+      <tr>
+        <td>2점</td>
+        <td><span class="condition-tag">조건 3</span> 의미 완성도</td>
+        <td>해석 힌트의 의미를 정확히 전달하는 완결된 문장 (2점). 의미 누락/왜곡 시 감점</td>
+      </tr>
+      <tr>
+        <td>1점</td>
+        <td>문법 · 형식</td>
+        <td>1문장 완성, 문법 오류 1개당 -0.5점</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">영작 전략</span>
+    <strong>Step 1:</strong> 해석 힌트에서 문장 뼈대를 잡는다 — "~라면 ... 할 수 있다" (if 조건절 + 주절).
+    <strong>Step 2:</strong> 제시어 9개를 배치한다 — 원형 그대로 쓸 것(stay, ride, line, hook)과 변환이 필요한 것(open→?, journalist→?, particular→?, interest→?)을 구분한다.
+    <strong>Step 3:</strong> 핵심 변환 체크리스트 — ① 명사 앞 수식은 <strong>-ing형</strong>(opening) ② 명사→형용사는 <strong>-ic</strong>(journalistic) ③ 형용사→부사는 <strong>-ly</strong>(particularly) ④ 보어 자리 형용사는 <strong>-ing형</strong>(interesting).
+  </div>
+
+  <hr class="divider">
+
+  <h2>변형문제 학습 정리</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>변형 유형</th><th>정답</th><th>핵심 포인트</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>문장삽입</td>
+        <td><span class="ans-badge">③</span></td>
+        <td>"Your readership" → "them" 대명사 연결 + 대안 제시 직후의 양보 구조</td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>내용 불일치</td>
+        <td><span class="ans-badge">②</span></td>
+        <td>"may still dwindle" ≠ "완전히 방지" — 양보 표현의 정확한 이해</td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+        <td>제시어 9개 + 한국어 힌트 → 핵심 문장 복원. opening/journalistic/particularly/interesting 어형 변환 핵심</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 1 변형문제</span>
+    <span>5 / 5</span>
+  </div>
+</section>
+
+</body>
+</html>

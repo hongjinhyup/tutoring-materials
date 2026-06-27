@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15. 무관한 문장 Ex 2 — 변형문제</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+/* 주어진 문장 강조 박스 */
+.given-sentence {
+  background: var(--warn-bg); border: 2px solid var(--warn-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.given-sentence .label {
+  font-size: 9pt; font-weight: 700; color: #9a6b00;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 원문 안내 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 변형문제</div>
+    <h1>15. 무관한 문장 Ex 2 — 변형문제</h1>
+    <p class="subtitle">측정 장치의 정밀도 — 같은 지문, 다른 유형으로 실전 연습</p>
+    <p class="meta">
+      <span class="code-badge">26005-0073</span>
+      <span class="passage-badge">원문: p.90 · Ex 2</span>
+      <span class="transform-badge">변형 3문항</span>
+    </p>
+  </div>
+
+  <h2>변형문제 구성</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>원래 유형</th><th>변형 유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>무관한 문장</td>
+        <td>문장 삽입</td>
+        <td><span class="ans-badge">③</span></td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>무관한 문장</td>
+        <td>주제</td>
+        <td><span class="ans-badge">③</span></td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>무관한 문장</td>
+        <td>서술형 — 핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">학습 가이드</span>
+    이 자료는 분석노트에서 공부한 <strong>15-무관한문장-Ex2</strong> 지문을 다른 유형으로 변형한 연습문제이다.
+    분석노트로 지문을 충분히 이해한 뒤, 아래 문제를 직접 풀어 보자.
+    <strong>문제 페이지를 먼저 풀고, 해설 페이지에서 확인</strong>하는 순서로 학습한다.
+  </div>
+
+  <h2>원문 지문 (복습용)</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;The most fundamental rule regarding the use of any measuring device is that the device should always be read to its optimum capability with regard to precision. Precision is reflected in the number of digits in a measurement; the more digits this measurement has, the more precise it is. For example, the measurement 345.2 inches is more precise than the measurement 345 inches. If it is possible to obtain the first digit to the right of the decimal point from a device, then that digit should be recorded; if it is possible to obtain the second digit to the right of a decimal point, then that digit should be recorded, and so on. Thus, a laboratory worker should endeavor to obtain the most digits possible from whatever device is being used whether it is a ruler, thermometer, barometer, or any other measuring device.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">※ 원문에서 무관한 문장(③)을 제거한 지문이다. 변형문제는 이 지문을 기반으로 출제한다.</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 2 변형문제</span>
+    <span>1 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 변형 1: 문장 삽입 + 변형 2: 주제 (문제) ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 — 문장 삽입 <span class="type-tag">문장삽입</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳은?</p>
+
+    <div class="given-sentence">
+      <span class="label">주어진 문장</span>
+      <strong>For example</strong>, the measurement 345.2 inches is more precise than the measurement 345 inches.
+    </div>
+
+    <div class="passage">
+      &nbsp;&nbsp;( ① ) The most fundamental rule regarding the use of any measuring device is that the device should always be read to its optimum capability with regard to precision. ( ② ) Precision is reflected in the number of digits in a measurement; the more digits this measurement has, the more precise it is. ( ③ ) If it is possible to obtain the first digit to the right of the decimal point from a device, then that digit should be recorded; if it is possible to obtain the second digit to the right of a decimal point, then that digit should be recorded, and so on. ( ④ ) Thus, a laboratory worker should endeavor to obtain the most digits possible from whatever device is being used whether it is a ruler, thermometer, barometer, or any other measuring device. ( ⑤ )
+    </div>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span></li>
+      <li><span class="num">②</span></li>
+      <li><span class="num">③</span></li>
+      <li><span class="num">④</span></li>
+      <li><span class="num">⑤</span></li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">2</span> 변형 2 — 주제 <span class="type-tag">주제</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 주제로 가장 적절한 것은?</p>
+
+    <div class="passage">
+      &nbsp;&nbsp;The most fundamental rule regarding the use of any measuring device is that the device should always be read to its optimum capability with regard to precision. Precision is reflected in the number of digits in a measurement; the more digits this measurement has, the more precise it is. For example, the measurement 345.2 inches is more precise than the measurement 345 inches. If it is possible to obtain the first digit to the right of the decimal point from a device, then that digit should be recorded; if it is possible to obtain the second digit to the right of a decimal point, then that digit should be recorded, and so on. Thus, a laboratory worker should endeavor to obtain the most digits possible from whatever device is being used whether it is a ruler, thermometer, barometer, or any other measuring device.
+    </div>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> the history and development of modern measuring instruments</li>
+      <li><span class="num">②</span> the relationship between measurement errors and scientific accuracy</li>
+      <li><span class="num">③</span> the importance of recording measurements to the maximum precision of the device</li>
+      <li><span class="num">④</span> how to calibrate measuring devices for laboratory experiments</li>
+      <li><span class="num">⑤</span> the advantages of digital devices over analog measuring tools</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 2 변형문제</span>
+    <span>2 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 서술형 문제 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">3</span> 서술형 — 핵심 문장 영작 <span class="type-tag">서술형</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 빈칸에 들어갈 문장을 주어진 단어를 활용하여 영작하시오.</p>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;The most fundamental rule regarding the use of any measuring device is that the device should always be read to its optimum capability with regard to precision. Precision is reflected in the number of digits in a measurement; the more digits this measurement has, the more precise it is. For example, the measurement 345.2 inches is more precise than the measurement 345 inches. If it is possible to obtain the first digit to the right of the decimal point from a device, then that digit should be recorded; if it is possible to obtain the second digit to the right of a decimal point, then that digit should be recorded, and so on.<br><br>
+      <span style="display:block; width:100%; height:24px; border-bottom:2.5px solid var(--accent); margin-top:4px;"></span>
+    </div>
+
+    <p style="font-size:10pt; color:var(--muted); margin:8px 0 4px;">
+      [해석 힌트] 따라서, 실험실 작업자는 자, 온도계, 기압계, 또는 다른 어떤 측정 장치이든 사용하고 있는 장치로부터 가능한 한 가장 많은 자릿수를 얻기 위해 노력해야 한다.
+    </p>
+
+    <div class="word-bank">
+      <span class="label">제시어 (원형) — 필요시 어형을 변환하여 사용할 것</span>
+      <div class="words">
+        <span class="word">laboratory</span>
+        <span class="word">work</span>
+        <span class="word">endeavor</span>
+        <span class="word">obtain</span>
+        <span class="word">digit</span>
+        <span class="word">possible</span>
+        <span class="word">device</span>
+        <span class="word">use</span>
+        <span class="word">measure</span>
+      </div>
+    </div>
+
+    <p style="margin:10px 0 6px;">
+      <span class="condition-tag">조건 1</span> 제시어를 <strong>모두</strong> 사용하되, 문맥에 맞게 어형을 변환할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 2</span> 글의 흐름에 이어지는 <strong>결론 문장 1개</strong>를 완성할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 3</span> 해석 힌트의 의미를 담되, 단어를 <strong>그대로 영한 직역하지 말 것</strong>
+    </p>
+  </div>
+
+  <div class="writing-area">
+    <div class="guide">Write the key sentence below (use ALL 9 given words)</div>
+    <div class="lines"></div>
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 2 변형문제</span>
+    <span>3 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 변형 1 해설: 문장 삽입 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 해설 — 문장 삽입</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ③</p>
+    <p style="margin:4px 0; font-size:10.5pt;">정밀도와 자릿수의 관계를 정의한 직후, "For example"로 구체적 수치 예시를 제시하는 위치</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      주어진 문장은 <strong>"For example"</strong>로 시작한다. 이 연결사는 앞 내용의 <strong>구체적 예시</strong>를 제공한다.
+      ③ 바로 앞 문장은 "자릿수가 많을수록 더 정밀하다(<strong>the more digits, the more precise</strong>)"라는
+      <strong>정의/원칙</strong>을 제시한다. 주어진 문장은 345.2 vs 345라는 구체적 수치 비교로
+      이 원칙을 <strong>예증</strong>하므로, ③ 위치에서 "원칙 → 예시"라는 논리 구조가 완벽하게 성립한다.
+      또한 예시 뒤에 ④의 "기록 방법"이 이어져, "원칙 → 예시 → 실천 방법"이라는 자연스러운 흐름이 형성된다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span>
+      <span class="reason">글 시작 전에 예시가 오면 맥락이 없다. 무엇에 대한 예시인지 독자가 알 수 없다. "For example"이 참조할 선행 진술이 부재하다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span>
+      <span class="reason">주제문(측정 장치의 규칙)과 정밀도 정의(자릿수) 사이이다. 정밀도의 정의가 아직 나오기 전이므로, 345.2 vs 345의 비교가 무엇을 예시하는지 불분명하다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">③</span>
+      <span class="reason">"the more digits, the more precise" 직후에 345.2(4자릿수) vs 345(3자릿수)라는 구체적 수치 예시가 온다. "For example"의 기능과 완벽하게 부합하며, 이후 기록 방법(④)으로 자연스럽게 이어진다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span>
+      <span class="reason">자릿수 기록 방법과 결론 사이이다. 이 위치에서 예시가 오면, 기록 방법을 예시하는 것인지 정밀도 원칙을 예시하는 것인지 혼란을 준다. 논리적 거리가 멀다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span>
+      <span class="reason">"Thus"로 시작하는 결론 뒤에 예시가 오면, 이미 마무리된 논의에 부가 정보를 덧붙이는 격이 되어 글 구조가 어색해진다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    문장 삽입에서 <strong>"For example"</strong>이 있으면, 그 예시가 <strong>어떤 원칙/주장을 구체화</strong>하는지 파악한다.
+    이 글에서는 "자릿수가 많을수록 정밀하다"라는 원칙의 예시이므로, 해당 원칙 <strong>직후</strong>에 위치해야 한다.
+    예시 문장은 항상 <strong>일반 진술 → 구체적 사례</strong>의 순서를 따른다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 2 변형문제</span>
+    <span>4 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 변형 2 해설 + 서술형 해설 + 정리 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">2</span> 변형 2 해설 — 주제</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ③</p>
+    <p style="margin:4px 0; font-size:10.5pt;">the importance of recording measurements to the maximum precision of the device</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      글은 측정 장치를 사용할 때 <strong>정밀도(precision)</strong>를 최대화해야 한다는 규칙을 제시한다.
+      정밀도는 자릿수에 반영되며, 가능한 한 많은 자릿수를 기록해야 한다는 구체적 방법과
+      결론(어떤 장치든 최대한 정밀하게 읽을 것)으로 마무리된다. 따라서 주제는
+      <strong>"측정값을 장치의 최대 정밀도로 기록하는 것의 중요성"</strong>이다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> the history and development of modern measuring instruments
+      <span class="reason">측정 기기의 역사나 발전 과정은 글에서 전혀 다루지 않는다. 완전히 다른 주제이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> the relationship between measurement errors and scientific accuracy
+      <span class="reason">"measurement errors(측정 오류)"는 글에서 언급되지 않는다. 글은 오류가 아닌 정밀도의 극대화를 다룬다. 인접하지만 다른 주제이다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">③</span> the importance of recording measurements to the maximum precision of the device
+      <span class="reason">글 전체가 "장치의 최대 정밀도로 측정값을 기록해야 한다"는 내용이다. 주제문, 정의, 예시, 기록 방법, 결론 모두 이 주제를 뒷받침한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span> how to calibrate measuring devices for laboratory experiments
+      <span class="reason">"calibrate(보정)"는 글의 주제가 아니다. 글은 장치의 보정이 아닌 읽기/기록 방법을 다룬다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> the advantages of digital devices over analog measuring tools
+      <span class="reason">디지털 vs 아날로그 비교는 글에서 이루어지지 않는다. 글은 장치의 종류와 무관하게 정밀도 극대화를 논한다.</span>
+    </li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">3</span> 서술형 해설 — 핵심 문장 영작</h2>
+
+  <div class="model-answer">
+    <span class="label">모범답안 (Model Answer)</span>
+    <p style="margin:6px 0; font-size:11pt; line-height:2; font-family:'Times New Roman',Georgia,serif;">
+      Thus, a <strong>laboratory</strong> <strong>worker</strong> should <strong>endeavor</strong> to <strong>obtain</strong> the most <strong>digits</strong> <strong>possible</strong> from whatever <strong>device</strong> is being <strong>used</strong> whether it is a ruler, thermometer, barometer, or any other <strong>measuring</strong> <strong>device</strong>.
+    </p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">어형 변환 포인트</span>
+    <table>
+      <tr><th style="width:20%;">제시어 (원형)</th><th style="width:25%;">사용 형태</th><th>변환 근거</th></tr>
+      <tr><td>laboratory</td><td><strong>laboratory</strong></td><td>형용사 원형 그대로 — laboratory worker 수식</td></tr>
+      <tr><td>work</td><td><strong>worker</strong></td><td>동사/명사 → 행위자 명사: -er 접미사로 "작업자"</td></tr>
+      <tr><td>endeavor</td><td><strong>endeavor</strong></td><td>동사 원형 그대로 — should endeavor (조동사 뒤)</td></tr>
+      <tr><td>obtain</td><td><strong>obtain</strong></td><td>동사 원형 그대로 — to obtain (to부정사)</td></tr>
+      <tr><td>digit</td><td><strong>digits</strong></td><td>단수 → 복수: the most digits (최상급 + 복수)</td></tr>
+      <tr><td>possible</td><td><strong>possible</strong></td><td>형용사 원형 그대로 — digits possible (후치 수식)</td></tr>
+      <tr><td>device</td><td><strong>device</strong></td><td>명사 원형 그대로 — whatever device, measuring device</td></tr>
+      <tr><td>use</td><td><strong>used</strong></td><td>동사 → 과거분사: 수동 진행형 "is being used"</td></tr>
+      <tr><td>measure</td><td><strong>measuring</strong></td><td>동사 → 현재분사: 형용사 "measuring device"</td></tr>
+    </table>
+  </div>
+
+  <div class="rubric">
+    <span class="label">채점 기준 (10점 만점)</span>
+    <table>
+      <tr><th style="width:12%;">배점</th><th style="width:30%;">항목</th><th>기준</th></tr>
+      <tr>
+        <td>4점</td>
+        <td><span class="condition-tag">조건 1</span> 제시어 전체 사용</td>
+        <td>9개 모두 사용 (4점). 1개 누락마다 -1점. 5개 이하 사용 시 0점</td>
+      </tr>
+      <tr>
+        <td>3점</td>
+        <td><span class="condition-tag">조건 2</span> 어형 변환 정확성</td>
+        <td>worker(-er 파생), digits(복수), used(과거분사), measuring(현재분사) 4개 핵심 변환. 각 오류 -1점</td>
+      </tr>
+      <tr>
+        <td>2점</td>
+        <td><span class="condition-tag">조건 3</span> 의미 완성도</td>
+        <td>해석 힌트의 의미를 정확히 전달하는 완결된 문장 (2점). 의미 누락/왜곡 시 감점</td>
+      </tr>
+      <tr>
+        <td>1점</td>
+        <td>문법 · 형식</td>
+        <td>1문장 완성, 문법 오류 1개당 -0.5점</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">영작 전략</span>
+    <strong>Step 1:</strong> 해석 힌트를 읽고 "따라서(Thus)" 결론 문장의 뼈대를 잡는다 — "~해야 한다(should endeavor to ~)".
+    <strong>Step 2:</strong> 제시어를 배치한다 — work→worker(-er 파생), digit→digits(복수), measure→measuring(분사 형용사), use→used(수동).
+    <strong>Step 3:</strong> 핵심 변환 체크 — ① 행위자는 <strong>-er</strong>(worker) ② 최상급 뒤 명사는 <strong>복수</strong>(digits) ③ 수동 진행형은 "is being <strong>used</strong>" ④ 명사 앞 수식은 <strong>현재분사</strong>(measuring).
+  </div>
+
+  <hr class="divider">
+
+  <h2>변형문제 학습 정리</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>변형 유형</th><th>정답</th><th>핵심 포인트</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>문장삽입</td>
+        <td><span class="ans-badge">③</span></td>
+        <td>For example의 예시 기능 — 정밀도 정의(원칙) 직후에 수치 비교(예시) 배치</td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>주제</td>
+        <td><span class="ans-badge">③</span></td>
+        <td>장치의 최대 정밀도로 기록 — 오류·보정·디지털 등 인접 주제 함정 주의</td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+        <td>제시어 9개 + 한국어 힌트 → 결론 문장 복원. worker·digits·used·measuring 변환 핵심</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 2 변형문제</span>
+    <span>5 / 5</span>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15. 무관한 문장 Ex 1 — 변형문제</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+/* 주어진 문장 강조 박스 */
+.given-sentence {
+  background: var(--warn-bg); border: 2px solid var(--warn-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.given-sentence .label {
+  font-size: 9pt; font-weight: 700; color: #9a6b00;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 원문 안내 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 변형문제</div>
+    <h1>15. 무관한 문장 Ex 1 — 변형문제</h1>
+    <p class="subtitle">운동 지도에서 감정 활용 — 같은 지문, 다른 유형으로 실전 연습</p>
+    <p class="meta">
+      <span class="code-badge">26005-0072</span>
+      <span class="passage-badge">원문: p.90 · Ex 1</span>
+      <span class="transform-badge">변형 3문항</span>
+    </p>
+  </div>
+
+  <h2>변형문제 구성</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>원래 유형</th><th>변형 유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>무관한 문장</td>
+        <td>문장 삽입</td>
+        <td><span class="ans-badge">④</span></td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>무관한 문장</td>
+        <td>주제</td>
+        <td><span class="ans-badge">②</span></td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>무관한 문장</td>
+        <td>서술형 — 핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">학습 가이드</span>
+    이 자료는 분석노트에서 공부한 <strong>15-무관한문장-Ex1</strong> 지문을 다른 유형으로 변형한 연습문제이다.
+    분석노트로 지문을 충분히 이해한 뒤, 아래 문제를 직접 풀어 보자.
+    <strong>문제 페이지를 먼저 풀고, 해설 페이지에서 확인</strong>하는 순서로 학습한다.
+  </div>
+
+  <h2>원문 지문 (복습용)</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;The use of emotion may be important in exercise, particularly among exercise instructors. It has been established that exercise enjoyment is associated with increased exercise adherence. An instructor might aim to foster enjoyment in his participants as a means of increasing their program adherence. An instructor also might use emotion to elicit greater effort from her students. Cuing participants to feelings of anger and frustration during a cardio kickboxing class might lead to more effortful punches and stronger kicks. Conversely, a yoga instructor could use positive emotions or emotion-related states such as compassion to get her students in the proper mindset for their practice. Evidently, there are a number of ways emotions could be used to enhance performance in sport and exercise.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* adherence: 지속성, 고수 &nbsp; ** elicit: 이끌어 내다 &nbsp; *** cardio kickboxing: 유산소 킥복싱</p>
+  <p style="font-size:9pt; color:var(--muted);">※ 원문에서 무관한 문장(③)을 제거한 지문이다. 변형문제는 이 지문을 기반으로 출제한다.</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 1 변형문제</span>
+    <span>1 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 변형 1: 문장 삽입 + 변형 2: 주제 (문제) ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 — 문장 삽입 <span class="type-tag">문장삽입</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳은?</p>
+
+    <div class="given-sentence">
+      <span class="label">주어진 문장</span>
+      <strong>Conversely</strong>, a yoga instructor could use positive emotions or emotion-related states such as compassion to get her students in the proper mindset for their practice.
+    </div>
+
+    <div class="passage">
+      &nbsp;&nbsp;( ① ) The use of emotion may be important in exercise, particularly among exercise instructors. It has been established that exercise enjoyment is associated with increased exercise adherence. ( ② ) An instructor might aim to foster enjoyment in his participants as a means of increasing their program adherence. An instructor also might use emotion to elicit greater effort from her students. ( ③ ) Cuing participants to feelings of anger and frustration during a cardio kickboxing class might lead to more effortful punches and stronger kicks. ( ④ ) Evidently, there are a number of ways emotions could be used to enhance performance in sport and exercise. ( ⑤ )
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* adherence: 지속성, 고수 &nbsp; ** elicit: 이끌어 내다 &nbsp; *** cardio kickboxing: 유산소 킥복싱</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span></li>
+      <li><span class="num">②</span></li>
+      <li><span class="num">③</span></li>
+      <li><span class="num">④</span></li>
+      <li><span class="num">⑤</span></li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">2</span> 변형 2 — 주제 <span class="type-tag">주제</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 주제로 가장 적절한 것은?</p>
+
+    <div class="passage">
+      &nbsp;&nbsp;The use of emotion may be important in exercise, particularly among exercise instructors. It has been established that exercise enjoyment is associated with increased exercise adherence. An instructor might aim to foster enjoyment in his participants as a means of increasing their program adherence. An instructor also might use emotion to elicit greater effort from her students. Cuing participants to feelings of anger and frustration during a cardio kickboxing class might lead to more effortful punches and stronger kicks. Conversely, a yoga instructor could use positive emotions or emotion-related states such as compassion to get her students in the proper mindset for their practice. Evidently, there are a number of ways emotions could be used to enhance performance in sport and exercise.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* adherence: 지속성, 고수 &nbsp; ** elicit: 이끌어 내다 &nbsp; *** cardio kickboxing: 유산소 킥복싱</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> the importance of physical fitness in preventing sports injuries</li>
+      <li><span class="num">②</span> the role of emotions in exercise instruction for improving performance and adherence</li>
+      <li><span class="num">③</span> the benefits of combining positive and negative emotions in daily life</li>
+      <li><span class="num">④</span> the impact of instructor personality on student motivation in sports</li>
+      <li><span class="num">⑤</span> strategies for increasing student enrollment in fitness programs</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 1 변형문제</span>
+    <span>2 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 서술형 문제 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">3</span> 서술형 — 핵심 문장 영작 <span class="type-tag">서술형</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 빈칸에 들어갈 문장을 주어진 단어를 활용하여 영작하시오.</p>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;The use of emotion may be important in exercise, particularly among exercise instructors. It has been established that exercise enjoyment is associated with increased exercise adherence. An instructor might aim to foster enjoyment in his participants as a means of increasing their program adherence. An instructor also might use emotion to elicit greater effort from her students. Cuing participants to feelings of anger and frustration during a cardio kickboxing class might lead to more effortful punches and stronger kicks. Conversely, a yoga instructor could use positive emotions or emotion-related states such as compassion to get her students in the proper mindset for their practice.<br><br>
+      <span style="display:block; width:100%; height:24px; border-bottom:2.5px solid var(--accent); margin-top:4px;"></span>
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* adherence: 지속성, 고수 &nbsp; ** elicit: 이끌어 내다 &nbsp; *** cardio kickboxing: 유산소 킥복싱</p>
+
+    <p style="font-size:10pt; color:var(--muted); margin:8px 0 4px;">
+      [해석 힌트] 분명히, 스포츠와 운동에서 수행을 향상하기 위해 감정을 사용할 수 있는 여러 가지 방법이 있다.
+    </p>
+
+    <div class="word-bank">
+      <span class="label">제시어 (원형) — 필요시 어형을 변환하여 사용할 것</span>
+      <div class="words">
+        <span class="word">evident</span>
+        <span class="word">number</span>
+        <span class="word">way</span>
+        <span class="word">emotion</span>
+        <span class="word">use</span>
+        <span class="word">enhance</span>
+        <span class="word">performance</span>
+        <span class="word">sport</span>
+        <span class="word">exercise</span>
+      </div>
+    </div>
+
+    <p style="margin:10px 0 6px;">
+      <span class="condition-tag">조건 1</span> 제시어를 <strong>모두</strong> 사용하되, 문맥에 맞게 어형을 변환할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 2</span> 글의 흐름에 이어지는 <strong>결론 문장 1개</strong>를 완성할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 3</span> 해석 힌트의 의미를 담되, 단어를 <strong>그대로 영한 직역하지 말 것</strong>
+    </p>
+  </div>
+
+  <div class="writing-area">
+    <div class="guide">Write the key sentence below (use ALL 9 given words)</div>
+    <div class="lines"></div>
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 1 변형문제</span>
+    <span>3 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 변형 1 해설: 문장 삽입 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 해설 — 문장 삽입</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ④</p>
+    <p style="margin:4px 0; font-size:10.5pt;">킥복싱(부정적 감정) 예시 직후, "Conversely"로 전환하여 요가(긍정적 감정) 예시를 제시하는 위치</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      주어진 문장은 <strong>"Conversely"</strong>로 시작한다. 이 연결사는 앞 내용과의 <strong>대비</strong>를 나타낸다.
+      ④ 바로 앞 문장은 킥복싱에서 <strong>분노와 좌절</strong>(부정적 감정)을 활용하는 예시이다.
+      주어진 문장은 요가에서 <strong>연민</strong>(긍정적 감정)을 활용하는 예시이므로,
+      "부정적 감정 → <strong>Conversely</strong> → 긍정적 감정"이라는 <strong>대비 구조</strong>가
+      ④ 위치에서 완벽하게 성립한다. 또한 주어진 문장 뒤의 결론("Evidently, there are a number of ways...")이
+      부정적·긍정적 감정 활용 <strong>양쪽 모두를 포괄하여</strong> 마무리하므로, 논리적으로 완결된다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span>
+      <span class="reason">글 시작 전에 "Conversely"가 올 수 없다. 대비할 앞선 내용이 전혀 없으므로, 연결사의 기능이 작동하지 않는다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span>
+      <span class="reason">이 위치는 운동 즐거움과 지속성을 논한 직후이다. 부정적 감정 활용 예시가 아직 나오지 않았으므로, "Conversely"의 대비 대상이 부재하다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span>
+      <span class="reason">"더 큰 노력을 이끌어 내다"라는 일반 진술 직후이다. 구체적 부정적 감정 예시(킥복싱)가 아직 제시되지 않았으므로, 긍정적 감정과의 대비가 성립하지 않는다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">④</span>
+      <span class="reason">킥복싱 예시(anger, frustration) 직후 → "Conversely"로 전환 → 요가(compassion). 부정-긍정 감정의 대비 구조가 완벽하게 성립한다. 뒤이어 결론이 양쪽을 포괄한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span>
+      <span class="reason">"Evidently..."는 글 전체의 결론이다. 결론 뒤에 구체적 예시를 추가하면 요약 → 상세로 역행하여 논리 흐름이 깨진다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    문장 삽입에서 <strong>연결사</strong>(Conversely, However, Therefore 등)가 있는 문장은 그 연결사의 기능이 작동하는 위치를 찾는다.
+    <strong>"Conversely"는 대비</strong>이므로, 반드시 대비 대상이 바로 앞에 와야 한다.
+    이 글에서는 "부정적 감정(anger, frustration) → Conversely → 긍정적 감정(compassion)"이라는 구조를 파악하는 것이 핵심이다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 1 변형문제</span>
+    <span>4 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 변형 2 해설 + 서술형 해설 + 정리 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">2</span> 변형 2 해설 — 주제</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ②</p>
+    <p style="margin:4px 0; font-size:10.5pt;">the role of emotions in exercise instruction for improving performance and adherence</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      글은 운동 강사들이 <strong>감정</strong>을 어떻게 활용할 수 있는지를 다룬다.
+      (1) 즐거움으로 <strong>지속성</strong>을 높이고, (2) 분노·좌절로 더 큰 <strong>노력</strong>을 이끌어 내며,
+      (3) 연민으로 적절한 <strong>마음가짐</strong>을 형성하는 등 다양한 감정 활용법을 제시한다.
+      따라서 주제는 "운동 지도에서 감정이 수행과 지속성 향상에 기여하는 역할"이다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> the importance of physical fitness in preventing sports injuries
+      <span class="reason">"체력"이나 "부상 예방"은 글에서 전혀 다루지 않는다. 완전히 다른 주제이다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">②</span> the role of emotions in exercise instruction for improving performance and adherence
+      <span class="reason">글 전체가 운동 강사가 감정을 활용하여 수행(performance)과 지속성(adherence)을 높이는 방법을 논한다. 완벽한 주제 요약이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> the benefits of combining positive and negative emotions in daily life
+      <span class="reason">"daily life(일상생활)"는 글의 범위를 벗어난다. 글은 운동/스포츠 상황에 한정되어 있다. 또한 "combining(결합)"이 아니라 각각의 활용을 논한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span> the impact of instructor personality on student motivation in sports
+      <span class="reason">"personality(성격)"은 글에서 다루지 않는다. 글의 핵심은 강사의 성격이 아닌 감정의 전략적 활용이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> strategies for increasing student enrollment in fitness programs
+      <span class="reason">"enrollment(등록)"은 글의 주제가 아니다. 글은 등록이 아닌 이미 참여 중인 학생의 수행과 지속성을 다룬다.</span>
+    </li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">3</span> 서술형 해설 — 핵심 문장 영작</h2>
+
+  <div class="model-answer">
+    <span class="label">모범답안 (Model Answer)</span>
+    <p style="margin:6px 0; font-size:11pt; line-height:2; font-family:'Times New Roman',Georgia,serif;">
+      <strong>Evidently</strong>, there are a <strong>number</strong> of <strong>ways</strong> <strong>emotions</strong> could be <strong>used</strong> to <strong>enhance</strong> <strong>performance</strong> in <strong>sport</strong> and <strong>exercise</strong>.
+    </p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">어형 변환 포인트</span>
+    <table>
+      <tr><th style="width:20%;">제시어 (원형)</th><th style="width:25%;">사용 형태</th><th>변환 근거</th></tr>
+      <tr><td>evident</td><td><strong>Evidently</strong></td><td>형용사 → 부사: -ly 추가. 문장 부사로 "분명히"</td></tr>
+      <tr><td>number</td><td><strong>number</strong></td><td>명사 원형 그대로 — a number of (여러)</td></tr>
+      <tr><td>way</td><td><strong>ways</strong></td><td>단수 → 복수: a number of 뒤 복수형</td></tr>
+      <tr><td>emotion</td><td><strong>emotions</strong></td><td>단수 → 복수: 다양한 감정</td></tr>
+      <tr><td>use</td><td><strong>used</strong></td><td>동사 → 과거분사: 수동태 "could be used"</td></tr>
+      <tr><td>enhance</td><td><strong>enhance</strong></td><td>동사 원형 그대로 — to부정사 "to enhance"</td></tr>
+      <tr><td>performance</td><td><strong>performance</strong></td><td>명사 원형 그대로</td></tr>
+      <tr><td>sport</td><td><strong>sport</strong></td><td>명사 원형 그대로 — in sport (불가산 용법)</td></tr>
+      <tr><td>exercise</td><td><strong>exercise</strong></td><td>명사 원형 그대로 — and exercise</td></tr>
+    </table>
+  </div>
+
+  <div class="rubric">
+    <span class="label">채점 기준 (10점 만점)</span>
+    <table>
+      <tr><th style="width:12%;">배점</th><th style="width:30%;">항목</th><th>기준</th></tr>
+      <tr>
+        <td>4점</td>
+        <td><span class="condition-tag">조건 1</span> 제시어 전체 사용</td>
+        <td>9개 모두 사용 (4점). 1개 누락마다 -1점. 5개 이하 사용 시 0점</td>
+      </tr>
+      <tr>
+        <td>3점</td>
+        <td><span class="condition-tag">조건 2</span> 어형 변환 정확성</td>
+        <td>Evidently(부사화), ways(복수), emotions(복수), used(과거분사) 4개 핵심 변환. 각 오류 -1점</td>
+      </tr>
+      <tr>
+        <td>2점</td>
+        <td><span class="condition-tag">조건 3</span> 의미 완성도</td>
+        <td>해석 힌트의 의미를 정확히 전달하는 완결된 문장 (2점). 의미 누락/왜곡 시 감점</td>
+      </tr>
+      <tr>
+        <td>1점</td>
+        <td>문법 · 형식</td>
+        <td>1문장 완성, 문법 오류 1개당 -0.5점</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">영작 전략</span>
+    <strong>Step 1:</strong> 해석 힌트를 읽고 문장의 뼈대를 잡는다 — "분명히, ~가 있다(there are)"라는 존재 구문.
+    <strong>Step 2:</strong> 제시어를 배치한다 — evident→부사(Evidently), a number of ways, emotions could be used, to enhance performance, in sport and exercise.
+    <strong>Step 3:</strong> 핵심 변환 체크 — ① 문장 부사는 <strong>-ly</strong>(Evidently) ② "a number of" 뒤는 <strong>복수</strong>(ways) ③ 수동태 "could be <strong>used</strong>"(과거분사) ④ 주어가 복수이면 emotions.
+  </div>
+
+  <hr class="divider">
+
+  <h2>변형문제 학습 정리</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>변형 유형</th><th>정답</th><th>핵심 포인트</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>문장삽입</td>
+        <td><span class="ans-badge">④</span></td>
+        <td>Conversely의 대비 기능 — 부정적 감정(킥복싱) 직후에 긍정적 감정(요가) 배치</td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>주제</td>
+        <td><span class="ans-badge">②</span></td>
+        <td>감정의 전략적 활용이 핵심 — 부분 주제(체력, 성격, 등록) 함정 주의</td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+        <td>제시어 9개 + 한국어 힌트 → 결론 문장 복원. Evidently·ways·emotions·used 변환 핵심</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 15. 무관한 문장 Ex 1 변형문제</span>
+    <span>5 / 5</span>
+  </div>
+</section>
+
+</body>
+</html>

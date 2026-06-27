@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>19. 장문 독해 (1) Ex 2 — 변형문제</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 원문 안내 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 변형문제</div>
+    <h1>19. 장문 독해 (1) Ex 2 — 변형문제</h1>
+    <p class="subtitle">인터넷 기반 뉴스의 양면성 — 같은 지문, 다른 유형으로 실전 연습</p>
+    <p class="meta">
+      <span class="code-badge">26005-0099 / 0100</span>
+      <span class="passage-badge">원문: p.115 · Ex 2 (03~04)</span>
+      <span class="transform-badge">변형 3문항</span>
+    </p>
+  </div>
+
+  <h2>변형문제 구성</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>원래 유형</th><th>변형 유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>장문 독해 (제목 + 어휘)</td>
+        <td>빈칸 내용 추론</td>
+        <td><span class="ans-badge">④</span></td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>장문 독해 (제목 + 어휘)</td>
+        <td>어법 판단</td>
+        <td><span class="ans-badge">④ (d)</span></td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>장문 독해 (제목 + 어휘)</td>
+        <td>서술형 — 핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">학습 가이드</span>
+    이 자료는 분석노트에서 공부한 <strong>19-장문독해(1)-Ex2</strong> 지문을 다른 유형으로 변형한 연습문제이다.
+    분석노트로 지문을 충분히 이해한 뒤, 아래 문제를 직접 풀어 보자.
+    <strong>문제 페이지를 먼저 풀고, 해설 페이지에서 확인</strong>하는 순서로 학습한다.
+  </div>
+
+  <h2>원문 지문 (복습용)</h2>
+
+  <div class="passage" style="font-size:10pt;">
+    &nbsp;&nbsp;The rise of internet-based technologies means that news is produced, distributed, and consumed faster than ever before. However, the reliability of this news is questionable. Not all organizations or individuals putting out information spend time checking the details or putting the facts into a wider context.
+    <br><br>
+    &nbsp;&nbsp;People are confronted with overwhelming amounts of information not just on a daily basis, but via minute-by-minute updates transmitted to audiences around the globe. More than ever before, people are involved in organizing and managing the amount and type of news they receive. The internet means that irrespective of where we are in the world or what time of the day it is, news can be accessed from broadcasters located anywhere on the planet. As "new media" such as mobile phones, computers, and other portable devices have become more affordable, compact, and embedded in everyday life, they have come to replace television and newspapers. For younger people, advances in technology form part of the world they were born into. But the ease of use and affordability of new media means that they are an integral feature of the lives of people of all ages.
+    <br><br>
+    &nbsp;&nbsp;For US sociologist Matthew Hindman, technological advances have made news more "democratic," meaning that now people of all ages and from all social backgrounds can access it. Others fear that new media poses a threat. Information on the internet is often unregulated, so while it is more accessible than ever before, its reliability is difficult to discern.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* embed: 깊숙이 자리 잡게 하다 &nbsp; ** discern: 분별하다</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) Ex 2 변형문제</span>
+    <span>1 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 변형 1: 빈칸 내용 추론 + 변형 2: 어법 (문제) ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 — 빈칸 내용 추론 <span class="type-tag">빈칸추론</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 빈칸에 들어갈 말로 가장 적절한 것을 고르시오.</p>
+
+    <div class="passage" style="font-size:9.5pt;">
+      &nbsp;&nbsp;The rise of internet-based technologies means that news is produced, distributed, and consumed faster than ever before. However, the reliability of this news is questionable. Not all organizations or individuals putting out information spend time checking the details or putting the facts into a wider context.
+      <br><br>
+      &nbsp;&nbsp;People are confronted with overwhelming amounts of information not just on a daily basis, but via minute-by-minute updates transmitted to audiences around the globe. More than ever before, people are involved in organizing and managing the amount and type of news they receive. The internet means that irrespective of where we are in the world or what time of the day it is, news can be accessed from broadcasters located anywhere on the planet. As "new media" such as mobile phones, computers, and other portable devices have become more affordable, compact, and embedded in everyday life, they have come to replace television and newspapers. For younger people, advances in technology form part of the world they were born into. But the ease of use and affordability of new media means that they are an integral feature of the lives of people of all ages.
+      <br><br>
+      &nbsp;&nbsp;For US sociologist Matthew Hindman, technological advances have made news more "democratic," meaning that now people of all ages and from all social backgrounds can access it. Others fear that new media poses a threat. Information on the internet is often unregulated, so while it is more accessible than ever before, <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* embed: 깊숙이 자리 잡게 하다 &nbsp; ** discern: 분별하다</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> people can verify the accuracy of news more easily</li>
+      <li><span class="num">②</span> the traditional media industry has fully recovered its influence</li>
+      <li><span class="num">③</span> the amount of available information continues to decrease</li>
+      <li><span class="num">④</span> its reliability is difficult to discern</li>
+      <li><span class="num">⑤</span> all news organizations have adopted strict ethical standards</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">2</span> 변형 2 — 어법 판단 <span class="type-tag">어법</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 밑줄 친 (a)~(e) 중에서 어법상 틀린 것은?</p>
+
+    <div class="passage" style="font-size:9.5pt;">
+      &nbsp;&nbsp;The rise of internet-based technologies means that news is (a) <span class="ul-word">produced</span>, distributed, and consumed faster than ever before. However, the reliability of this news is questionable. Not all organizations or individuals (b) <span class="ul-word">putting</span> out information spend time checking the details or putting the facts into a wider context.
+      <br><br>
+      &nbsp;&nbsp;People are confronted with overwhelming amounts of information not just on a daily basis, but via minute-by-minute updates (c) <span class="ul-word">transmitted</span> to audiences around the globe. More than ever before, people are involved in organizing and managing the amount and type of news they receive. The internet means that irrespective of where we are in the world or what time of the day it is, news can be accessed from broadcasters located anywhere on the planet. As "new media" such as mobile phones, computers, and other portable devices have become more affordable, compact, and embedded in everyday life, they have come to replace television and newspapers. For younger people, advances in technology (d) <span class="ul-word">forms</span> part of the world they were born into. But the ease of use and affordability of new media means that they are an integral feature of the lives of people of all ages.
+      <br><br>
+      &nbsp;&nbsp;For US sociologist Matthew Hindman, technological advances have made news more "democratic," (e) <span class="ul-word">meaning</span> that now people of all ages and from all social backgrounds can access it. Others fear that new media poses a threat. Information on the internet is often unregulated, so while it is more accessible than ever before, its reliability is difficult to discern.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* embed: 깊숙이 자리 잡게 하다</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> (a)</li>
+      <li><span class="num">②</span> (b)</li>
+      <li><span class="num">③</span> (c)</li>
+      <li><span class="num">④</span> (d)</li>
+      <li><span class="num">⑤</span> (e)</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) Ex 2 변형문제</span>
+    <span>2 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 서술형 문제 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">3</span> 서술형 — 핵심 문장 영작 <span class="type-tag">서술형</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 빈칸에 들어갈 문장을 주어진 단어를 활용하여 영작하시오.</p>
+
+    <div class="passage" style="font-size:10pt;">
+      &nbsp;&nbsp;<span style="display:block; width:100%; height:24px; border-bottom:2.5px solid var(--accent); margin-bottom:8px;"></span> However, the reliability of this news is questionable. Not all organizations or individuals putting out information spend time checking the details or putting the facts into a wider context.
+      <br><br>
+      &nbsp;&nbsp;People are confronted with overwhelming amounts of information not just on a daily basis, but via minute-by-minute updates transmitted to audiences around the globe.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* embed: 깊숙이 자리 잡게 하다</p>
+
+    <p style="font-size:10pt; color:var(--muted); margin:8px 0 4px;">
+      [해석 힌트] 인터넷 기반 기술의 부상은 뉴스가 이전보다 더 빠르게 생산되고, 배포되고, 소비된다는 것을 의미한다.
+    </p>
+
+    <div class="word-bank">
+      <span class="label">제시어 (원형) — 필요시 어형을 변환하여 사용할 것</span>
+      <div class="words">
+        <span class="word">rise</span>
+        <span class="word">internet-based</span>
+        <span class="word">technology</span>
+        <span class="word">mean</span>
+        <span class="word">news</span>
+        <span class="word">produce</span>
+        <span class="word">distribute</span>
+        <span class="word">consume</span>
+        <span class="word">fast</span>
+      </div>
+    </div>
+
+    <p style="margin:10px 0 6px;">
+      <span class="condition-tag">조건 1</span> 제시어를 <strong>모두</strong> 사용하되, 문맥에 맞게 어형을 변환할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 2</span> 글의 첫 문장으로 적절한 <strong>1개의 완결된 문장</strong>을 작성할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 3</span> 해석 힌트의 의미를 담되, 단어를 <strong>그대로 영한 직역하지 말 것</strong>
+    </p>
+  </div>
+
+  <div class="writing-area">
+    <div class="guide">Write the key sentence below (use ALL 9 given words)</div>
+    <div class="lines"></div>
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) Ex 2 변형문제</span>
+    <span>3 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 변형 1 해설: 빈칸 내용 추론 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 해설 — 빈칸 내용 추론</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ④ its reliability is difficult to discern</p>
+    <p style="margin:4px 0; font-size:10.5pt;">그것의 신뢰성은 분별하기 어렵다</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      빈칸이 있는 마지막 문장은 <strong>"so while ~ , ___"</strong> 구조로, <strong>while</strong>이 양보("접근하기 쉽지만")를 나타내고
+      빈칸은 그에 대비되는 <strong>부정적 결과</strong>를 담아야 한다. 앞서 <strong>"unregulated(규제되지 않는)"</strong>라는
+      원인이 제시되었으므로, 접근성이 높지만 <strong>"신뢰성을 분별하기 어렵다"</strong>는 대조적 결론이 자연스럽다.
+      이는 글 전체의 주제인 <strong>인터넷 뉴스의 양면성(접근성 vs 신뢰성)</strong>을 완결짓는 문장이기도 하다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> people can verify the accuracy of news more easily (사람들이 뉴스의 정확성을 더 쉽게 확인할 수 있다)
+      <span class="reason">글의 논지와 정반대. "unregulated"한 정보 환경에서 정확성 확인이 더 어려워졌다는 것이 글의 취지이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> the traditional media industry has fully recovered its influence (전통 매체 산업이 영향력을 완전히 회복했다)
+      <span class="reason">본문은 뉴미디어가 TV/신문을 대체했다고 서술한다. "회복"은 본문과 반대되는 내용이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> the amount of available information continues to decrease (이용 가능한 정보의 양이 계속 감소하고 있다)
+      <span class="reason">"overwhelming amounts of information" 등 정보 과잉이 언급된 글과 정면으로 모순된다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">④</span> its reliability is difficult to discern (그것의 신뢰성은 분별하기 어렵다)
+      <span class="reason">"so while(양보) + 빈칸(대조)" 구조를 완성한다. 접근성↑이지만 신뢰성↓이라는 양면성 결론과 정확히 일치한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> all news organizations have adopted strict ethical standards (모든 뉴스 조직이 엄격한 윤리 기준을 채택했다)
+      <span class="reason">"Not all organizations spend time checking the details"라는 앞 문장과 직접 모순된다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    빈칸추론의 핵심: <strong>"so while A, B"</strong> 구조에서 B는 A와 <strong>대조</strong>되어야 한다.
+    A = "more accessible than ever before"(긍정) → B = 부정적 내용이 와야 한다.
+    또한 글의 도입부("reliability is questionable")에서 제기한 문제가 결론에서 <strong>회귀</strong>하는 구조이다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) Ex 2 변형문제</span>
+    <span>4 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 변형 2 해설 + 서술형 해설 + 정리 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">2</span> 변형 2 해설 — 어법 판단</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ④ (d) forms → form</p>
+    <p style="margin:4px 0; font-size:10.5pt;">주어 advances(복수)에 단수 동사 forms를 사용 — 수일치 오류</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">밑줄 (a)~(e) 어법 분석</span>
+    <table>
+      <tr><th style="width:8%;">기호</th><th style="width:15%;">밑줄 표현</th><th style="width:15%;">어법 포인트</th><th>판정 및 근거</th></tr>
+      <tr>
+        <td>(a)</td>
+        <td><strong>produced</strong></td>
+        <td>수동태 과거분사</td>
+        <td style="color:#2e7d32; font-weight:600;">O — "news is produced, distributed, and consumed": 뉴스는 생산되는 대상이므로 수동태 과거분사. 세 단어가 병렬 구조로 연결되어 모두 과거분사형이 적절.</td>
+      </tr>
+      <tr>
+        <td>(b)</td>
+        <td><strong>putting</strong></td>
+        <td>현재분사 (수식)</td>
+        <td style="color:#2e7d32; font-weight:600;">O — "organizations or individuals putting out information": 현재분사가 앞의 명사를 뒤에서 수식. "정보를 내놓는 조직이나 개인들"이라는 능동적 의미이므로 현재분사 적절.</td>
+      </tr>
+      <tr>
+        <td>(c)</td>
+        <td><strong>transmitted</strong></td>
+        <td>과거분사 (수식)</td>
+        <td style="color:#2e7d32; font-weight:600;">O — "updates transmitted to audiences": 업데이트는 전달되는 대상(수동)이므로 과거분사. "시청자에게 전달된 업데이트"라는 의미로 적절.</td>
+      </tr>
+      <tr>
+        <td>(d)</td>
+        <td><strong>forms</strong></td>
+        <td>주어-동사 수일치</td>
+        <td style="color:#c62828; font-weight:600;">X — 주어 "advances in technology"에서 핵심 명사는 advances(복수). 따라서 동사는 복수형 <strong>form</strong>이어야 한다. 단수 동사 forms는 수일치 오류.</td>
+      </tr>
+      <tr>
+        <td>(e)</td>
+        <td><strong>meaning</strong></td>
+        <td>분사구문 (부연)</td>
+        <td style="color:#2e7d32; font-weight:600;">O — "have made news more 'democratic,' meaning that ~": 콤마 뒤 현재분사 meaning은 앞 절을 부연 설명하는 분사구문. "이는 ~을 의미하는데"라는 결과/부연 용법으로 적절.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">어법 포인트</span>
+    <strong>주어-동사 수일치 판별법:</strong> "A of B" 구조에서 동사의 수는 <strong>A(핵심 명사)</strong>에 일치시킨다.
+    "advances in technology"에서 전치사구 "in technology"는 수식어이며, 핵심 주어는 <strong>advances(복수)</strong>이다.
+    따라서 동사는 <strong>form</strong>(복수 동사)이어야 한다.
+  </div>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">3</span> 서술형 해설 — 핵심 문장 영작</h2>
+
+  <div class="model-answer">
+    <span class="label">모범답안 (Model Answer)</span>
+    <p style="margin:6px 0; font-size:11pt; line-height:2; font-family:'Times New Roman',Georgia,serif;">
+      The <strong>rise</strong> of <strong>internet-based</strong> <strong>technologies</strong> <strong>means</strong> that <strong>news</strong> is <strong>produced</strong>, <strong>distributed</strong>, and <strong>consumed</strong> <strong>faster</strong> than ever before.
+    </p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">어형 변환 포인트</span>
+    <table>
+      <tr><th style="width:20%;">제시어 (원형)</th><th style="width:25%;">사용 형태</th><th>변환 근거</th></tr>
+      <tr><td>rise</td><td><strong>rise</strong></td><td>명사 원형 그대로 — The rise of ~</td></tr>
+      <tr><td>internet-based</td><td><strong>internet-based</strong></td><td>복합 형용사 원형 그대로 — technologies 수식</td></tr>
+      <tr><td>technology</td><td><strong>technologies</strong></td><td>명사 → 복수형: 인터넷 기반 기술들</td></tr>
+      <tr><td>mean</td><td><strong>means</strong></td><td>동사 → 3인칭 단수 현재: 주어 The rise(단수) 수일치</td></tr>
+      <tr><td>news</td><td><strong>news</strong></td><td>불가산명사 원형 그대로 — that절의 주어</td></tr>
+      <tr><td>produce</td><td><strong>produced</strong></td><td>동사 → 과거분사: 수동태 is produced</td></tr>
+      <tr><td>distribute</td><td><strong>distributed</strong></td><td>동사 → 과거분사: 수동 병렬 distributed</td></tr>
+      <tr><td>consume</td><td><strong>consumed</strong></td><td>동사 → 과거분사: 수동 병렬 consumed</td></tr>
+      <tr><td>fast</td><td><strong>faster</strong></td><td>형용사/부사 → 비교급: than ever before와 호응</td></tr>
+    </table>
+  </div>
+
+  <div class="rubric">
+    <span class="label">채점 기준 (10점 만점)</span>
+    <table>
+      <tr><th style="width:12%;">배점</th><th style="width:30%;">항목</th><th>기준</th></tr>
+      <tr>
+        <td>4점</td>
+        <td><span class="condition-tag">조건 1</span> 제시어 전체 사용</td>
+        <td>9개 모두 사용 (4점). 1개 누락마다 -1점. 5개 이하 사용 시 0점</td>
+      </tr>
+      <tr>
+        <td>3점</td>
+        <td><span class="condition-tag">조건 2</span> 어형 변환 정확성</td>
+        <td>technologies(복수), means(수일치), produced/distributed/consumed(수동태 과거분사), faster(비교급) 6개 핵심 변환. 각 오류 -0.5점</td>
+      </tr>
+      <tr>
+        <td>2점</td>
+        <td><span class="condition-tag">조건 3</span> 의미 완성도</td>
+        <td>해석 힌트의 의미를 정확히 전달하는 완결된 문장 (2점). 의미 누락/왜곡 시 감점</td>
+      </tr>
+      <tr>
+        <td>1점</td>
+        <td>문법 · 형식</td>
+        <td>1문장 완성, 문법 오류 1개당 -0.5점</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">영작 전략</span>
+    <strong>Step 1:</strong> 해석 힌트를 읽고 문장의 뼈대를 잡는다 — "~의 부상은 ~을 의미한다" (The rise of ~ means that ~).
+    <strong>Step 2:</strong> that절 내부는 수동태 병렬 — "뉴스가 생산되고, 배포되고, 소비된다" → is produced, distributed, and consumed.
+    <strong>Step 3:</strong> 핵심 변환 체크리스트 — ① 복수형(technologies) ② 수일치(means) ③ 수동태 3개(produced, distributed, consumed) ④ 비교급(faster).
+  </div>
+
+  <hr class="divider">
+
+  <h2>변형문제 학습 정리</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>변형 유형</th><th>정답</th><th>핵심 포인트</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>빈칸추론</td>
+        <td><span class="ans-badge">④</span></td>
+        <td>"so while A, B" 대조 구조 — 접근성(긍정) vs 신뢰성(부정)의 양면성 결론</td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>어법</td>
+        <td><span class="ans-badge">④ (d)</span></td>
+        <td>주어-동사 수일치: advances(복수) → form. 전치사구(in technology)에 현혹 주의</td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+        <td>제시어 9개 → 도입 문장 복원. technologies/means/produced·distributed·consumed/faster 어형 변환 핵심</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 19. 장문 독해 (1) Ex 2 변형문제</span>
+    <span>5 / 5</span>
+  </div>
+</section>
+
+</body>
+</html>
