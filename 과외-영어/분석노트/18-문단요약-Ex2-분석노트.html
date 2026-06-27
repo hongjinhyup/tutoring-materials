@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>18. 문단 요약 — Ex 2 분석노트</title>
 <style>
-@page { size: A4; margin: 0; }
+@page { size: A4; margin: 18mm 16mm; }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
@@ -230,12 +230,10 @@ tr:nth-child(even) td { background: #f6f8fb; }
 @media print {
   body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .page {
-    width: 210mm; height: 297mm; min-height: 297mm;
-    margin: 0; padding: 18mm 16mm 14mm;
-    box-shadow: none; overflow: hidden;
-    page-break-after: always; break-after: page;
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
   }
-  .page:last-of-type { page-break-after: auto; break-after: auto; }
+  .page:last-of-type { page-break-after: auto; }
   h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
 }
 
