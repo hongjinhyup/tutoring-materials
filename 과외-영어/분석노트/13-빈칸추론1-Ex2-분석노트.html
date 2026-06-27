@@ -231,12 +231,24 @@ tr:nth-child(even) td { background: #f6f8fb; }
   .page:last-of-type { page-break-after: auto; }
   h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
 }
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
 </style>
 </head>
 <body>
 
 <!-- ============ PAGE 1 — 표지 + 지문 ============ -->
 <section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a><a class="nav-btn vocab" href="../단어/13-빈칸추론1-Ex1-2-단어정리.html">📖 단어정리</a><a class="nav-btn" href="../변형문제/13-빈칸추론1-Ex2-변형문제.html">📝 변형문제</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
   <div class="author-bar">
     <span>작성자: <b>홍진협</b></span>
     <span>Email: <b>hongjinhyup@gmail.com</b></span>
@@ -275,6 +287,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
 <!-- ============ PAGE 2 — 구문 분석 + 전문 해석 ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2>구문 분석 — 핵심 문장 끊어읽기</h2>
 
@@ -331,6 +344,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
 <!-- ============ PAGE 3 — 논리 구조 + 문제 풀이 ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2>논리 구조 — 글의 흐름</h2>
 
@@ -409,6 +423,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
 <!-- ============ PAGE 4 — 연결어/신호어 정리 ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2>연결어/신호어 정리</h2>
 

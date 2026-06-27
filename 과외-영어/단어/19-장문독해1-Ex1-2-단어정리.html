@@ -192,6 +192,17 @@ body.hide-mean .vocab-table td:nth-child(4) {
 body.hide-mean .vocab-table td:nth-child(4):hover { color: var(--ink); background: none; }
 
 @media print { .quiz-bar { display: none; } }
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
 </style>
 </head>
 <body>
@@ -203,6 +214,7 @@ body.hide-mean .vocab-table td:nth-child(4):hover { color: var(--ink); backgroun
 
 <!-- ============ PAGE 1 — 표지 ============ -->
 <section class="page first">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a><a class="nav-btn" href="../분석노트/19-장문독해1-Ex1-분석노트.html">📘 분석 Ex1</a><a class="nav-btn" href="../분석노트/19-장문독해1-Ex2-분석노트.html">📘 분석 Ex2</a><a class="nav-btn" href="../변형문제/19-장문독해1-Ex1-변형문제.html">📝 변형 Ex1</a><a class="nav-btn" href="../변형문제/19-장문독해1-Ex2-변형문제.html">📝 변형 Ex2</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
   <div class="author-bar">
     <span>작성자: <b>홍진협</b></span>
     <span>Email: <b>hongjinhyup@gmail.com</b></span>
@@ -271,6 +283,7 @@ body.hide-mean .vocab-table td:nth-child(4):hover { color: var(--ink); backgroun
 
 <!-- ============ PAGE 2 — 지문 1 단어 (1~30) ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2>지문 1 — 18세기 여성 드레스의 재활용</h2>
   <p>
@@ -327,6 +340,7 @@ body.hide-mean .vocab-table td:nth-child(4):hover { color: var(--ink); backgroun
 
 <!-- ============ PAGE 3 — 지문 1 단어 (31~50) ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2>지문 1 — 18세기 여성 드레스의 재활용 (계속)</h2>
   <p>
@@ -408,6 +422,7 @@ body.hide-mean .vocab-table td:nth-child(4):hover { color: var(--ink); backgroun
 
 <!-- ============ PAGE 4 — 지문 2 단어 (11~50) ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2>지문 2 — 인터넷 기반 뉴스의 부상과 양면성 (계속)</h2>
   <p>
