@@ -339,12 +339,24 @@ tr:nth-child(even) td { background: #f6f8fb; }
   .page:last-of-type { page-break-after: auto; }
   h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
 }
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
 </style>
 </head>
 <body>
 
 <!-- ============ PAGE 1 — 표지 + 원문 안내 ============ -->
 <section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a><a class="nav-btn vocab" href="../단어/15-무관한문장-Ex1-2-단어정리.html">📖 단어정리</a><a class="nav-btn" href="../분석노트/15-무관한문장-Ex2-분석노트.html">📘 분석노트</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
   <div class="author-bar">
     <span>작성자: <b>홍진협</b></span>
     <span>Email: <b>hongjinhyup@gmail.com</b></span>
@@ -409,6 +421,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
 <!-- ============ PAGE 2 — 변형 1: 문장 삽입 + 변형 2: 주제 (문제) ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2><span class="q-badge">1</span> 변형 1 — 문장 삽입 <span class="type-tag">문장삽입</span></h2>
 
@@ -465,6 +478,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
 <!-- ============ PAGE 3 — 서술형 문제 ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2><span class="q-badge">3</span> 서술형 — 핵심 문장 영작 <span class="type-tag">서술형</span></h2>
 
@@ -519,6 +533,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
 <!-- ============ PAGE 4 — 변형 1 해설: 문장 삽입 ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2><span class="q-badge">1</span> 변형 1 해설 — 문장 삽입</h2>
 
@@ -578,6 +593,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
 
 <!-- ============ PAGE 5 — 변형 2 해설 + 서술형 해설 + 정리 ============ -->
 <section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
 
   <h2><span class="q-badge">2</span> 변형 2 해설 — 주제</h2>
 
