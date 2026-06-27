@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>13. 빈칸 내용 추론 (1) Ex 2 — 변형문제</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 원문 안내 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 변형문제</div>
+    <h1>13. 빈칸 내용 추론 (1) Ex 2 — 변형문제</h1>
+    <p class="subtitle">AI 브레인스토밍 — 창의적 성과는 아이디어 수량에서 나온다</p>
+    <p class="meta">
+      <span class="code-badge">26005-0063</span>
+      <span class="passage-badge">원문: p.79 · Ex 2</span>
+      <span class="transform-badge">변형 3문항</span>
+    </p>
+  </div>
+
+  <h2>변형문제 구성</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>원래 유형</th><th>변형 유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>빈칸 내용 추론</td>
+        <td>주제 파악</td>
+        <td><span class="ans-badge">④</span></td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>빈칸 내용 추론</td>
+        <td>어휘 (밑줄 친 단어)</td>
+        <td><span class="ans-badge">②</span></td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>빈칸 내용 추론</td>
+        <td>서술형 — 핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">학습 가이드</span>
+    이 자료는 분석노트에서 공부한 <strong>13-빈칸추론1-Ex2</strong> 지문을 다른 유형으로 변형한 연습문제이다.
+    분석노트로 지문을 충분히 이해한 뒤, 아래 문제를 직접 풀어 보자.
+    <strong>문제 페이지를 먼저 풀고, 해설 페이지에서 확인</strong>하는 순서로 학습한다.
+  </div>
+
+  <h2>원문 지문 (복습용)</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;AI is a prolific idea generator. Human brainstorming groups tend to focus on the quality of creative ideas and almost immediately lean into variations of first suggestions, but good ideas are more likely when groups focus first on quantity. As Linus Pauling put it, "The best way to have a good idea is to have lots of ideas." Psychologist Dean Keith Simonton called this the "equal odds rule" arguing that creative success is correlated to the total number of works created. Many studies have confirmed that creative quality comes from quantity of ideas (what Bob Sutton at a design and innovation consulting company called "idea ratio"), and one Stanford study pegged the number of ideas that distinguish a successful product from a failure at more than two thousand. This is why design thinking and innovation are so focused on the processes (what Utley and Klebahn call "idea flow") of creating possibilities without judgment.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* prolific: 많이 만들어 내는, 다작의 &nbsp; ** peg: 못박다</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) Ex 2 변형문제</span>
+    <span>1 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 변형 1: 주제 + 변형 2: 어휘 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 — 주제 파악 <span class="type-tag">주제</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 주제로 가장 적절한 것을 고르시오.</p>
+
+    <div class="passage">
+      &nbsp;&nbsp;AI is a prolific idea generator. Human brainstorming groups tend to focus on the quality of creative ideas and almost immediately lean into variations of first suggestions, but good ideas are more likely when groups focus first on quantity. As Linus Pauling put it, "The best way to have a good idea is to have lots of ideas." Psychologist Dean Keith Simonton called this the "equal odds rule" arguing that creative success is correlated to the total number of works created. Many studies have confirmed that creative quality comes from quantity of ideas (what Bob Sutton at a design and innovation consulting company called "idea ratio"), and one Stanford study pegged the number of ideas that distinguish a successful product from a failure at more than two thousand. This is why design thinking and innovation are so focused on the processes (what Utley and Klebahn call "idea flow") of creating possibilities without judgment.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* prolific: 많이 만들어 내는, 다작의 &nbsp; ** peg: 못박다</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> the superiority of artificial intelligence over humans in creative thinking</li>
+      <li><span class="num">②</span> the need for quality evaluation in the early stages of brainstorming</li>
+      <li><span class="num">③</span> research methods used to measure the effectiveness of creative output</li>
+      <li><span class="num">④</span> the significance of idea quantity in driving creative success</li>
+      <li><span class="num">⑤</span> how successful companies organize their innovation processes</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">2</span> 변형 2 — 어휘 <span class="type-tag">어휘</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">밑줄 친 <strong>lean</strong>의 문맥적 의미와 가장 가까운 것은?</p>
+
+    <div class="passage">
+      &nbsp;&nbsp;AI is a prolific idea generator. Human brainstorming groups tend to focus on the quality of creative ideas and almost immediately <span class="ul-word">lean</span> into variations of first suggestions, but good ideas are more likely when groups focus first on quantity. As Linus Pauling put it, "The best way to have a good idea is to have lots of ideas." Psychologist Dean Keith Simonton called this the "equal odds rule" arguing that creative success is correlated to the total number of works created. Many studies have confirmed that creative quality comes from quantity of ideas (what Bob Sutton at a design and innovation consulting company called "idea ratio"), and one Stanford study pegged the number of ideas that distinguish a successful product from a failure at more than two thousand. This is why design thinking and innovation are so focused on the processes (what Utley and Klebahn call "idea flow") of creating possibilities without judgment.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* prolific: 많이 만들어 내는, 다작의 &nbsp; ** peg: 못박다</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> become thinner or more slender</li>
+      <li><span class="num">②</span> incline toward or gravitate to</li>
+      <li><span class="num">③</span> carefully hold back from</li>
+      <li><span class="num">④</span> physically bend one's body forward</li>
+      <li><span class="num">⑤</span> systematically organize or arrange</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) Ex 2 변형문제</span>
+    <span>2 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 서술형 문제 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">3</span> 서술형 — 핵심 문장 영작 <span class="type-tag">서술형</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 빈칸에 들어갈 문장을 주어진 단어를 활용하여 영작하시오.</p>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;AI is a prolific idea generator. Human brainstorming groups tend to focus on the quality of creative ideas and almost immediately lean into variations of first suggestions, but good ideas are more likely when groups focus first on quantity. As Linus Pauling put it, "The best way to have a good idea is to have lots of ideas." Psychologist Dean Keith Simonton called this the "equal odds rule" arguing that creative success is correlated to the total number of works created. Many studies have confirmed that creative quality comes from quantity of ideas (what Bob Sutton at a design and innovation consulting company called "idea ratio"), and one Stanford study pegged the number of ideas that distinguish a successful product from a failure at more than two thousand.<br><br>
+      <span style="display:block; width:100%; height:24px; border-bottom:2.5px solid var(--accent); margin-top:4px;"></span>
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* prolific: 많이 만들어 내는, 다작의 &nbsp; ** peg: 못박다</p>
+
+    <p style="font-size:10pt; color:var(--muted); margin:8px 0 4px;">
+      [해석 힌트] 이것이 디자인 사고와 혁신이 판단 없이 가능성을 만들어 내는 과정에 그토록 집중하는 이유이다.
+    </p>
+
+    <div class="word-bank">
+      <span class="label">제시어 (원형) — 필요시 어형을 변환하여 사용할 것</span>
+      <div class="words">
+        <span class="word">design</span>
+        <span class="word">think</span>
+        <span class="word">innovation</span>
+        <span class="word">focus</span>
+        <span class="word">process</span>
+        <span class="word">create</span>
+        <span class="word">possibility</span>
+        <span class="word">judge</span>
+      </div>
+    </div>
+
+    <p style="margin:10px 0 6px;">
+      <span class="condition-tag">조건 1</span> 제시어를 <strong>모두</strong> 사용하되, 문맥에 맞게 어형을 변환할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 2</span> 글의 흐름에 이어지는 <strong>결론 문장 1개</strong>를 완성할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 3</span> 해석 힌트의 의미를 담되, 단어를 <strong>그대로 영한 직역하지 말 것</strong>
+    </p>
+  </div>
+
+  <div class="writing-area">
+    <div class="guide">Write the key sentence below (use ALL 8 given words)</div>
+    <div class="lines"></div>
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) Ex 2 변형문제</span>
+    <span>3 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 변형 1 해설: 주제 파악 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 해설 — 주제 파악</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ④ the significance of idea quantity in driving creative success</p>
+    <p style="margin:4px 0; font-size:10.5pt;">창의적 성공을 이끄는 데 있어 아이디어 수량의 중요성</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      글은 인간이 <strong>질(quality)</strong>에 집중하는 경향을 지적한 뒤, <strong>양(quantity)</strong>이 좋은 아이디어를 낳는다는
+      주장을 일관되게 전개한다. Linus Pauling의 인용("많은 아이디어를 가져라"), Simonton의 <strong>"equal odds rule"</strong>(창의적
+      성공 = 작품 총수에 비례), Stanford 연구(2,000개 이상), 그리고 결론("판단 없이 가능성을 만들어 내는 과정에 집중")까지
+      모두 <strong>"양이 질을 낳는다"</strong>는 하나의 주제를 뒷받침한다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> the superiority of artificial intelligence over humans in creative thinking
+      <span class="reason">AI는 첫 문장에서 도입부로만 언급된다. 글의 핵심은 AI의 우월성이 아니라 "양 → 질"이라는 창의성 원리이다. 부분 정보 함정이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> the need for quality evaluation in the early stages of brainstorming
+      <span class="reason">글의 논지와 <strong>정반대</strong>이다. 인간이 "질에 초점을 맞추는 경향"을 비판하고 "양 우선"을 주장하므로, 초기 단계에서 질 평가를 해야 한다는 것은 글의 메시지와 충돌한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> research methods used to measure the effectiveness of creative output
+      <span class="reason">Simonton의 법칙과 Stanford 연구는 주장을 뒷받침하는 근거로 사용되었을 뿐, "연구 방법론" 자체가 글의 주제가 아니다. 지나치게 좁은 선지이다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">④</span> the significance of idea quantity in driving creative success
+      <span class="reason">글 전체의 핵심 메시지이다: "양이 질을 낳는다" → Pauling 인용, equal odds rule, Stanford 연구, idea flow가 모두 이 주제를 뒷받침한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> how successful companies organize their innovation processes
+      <span class="reason">"기업의 혁신 과정 조직 방법"은 구체적으로 다루어지지 않는다. Bob Sutton, Utley & Klebahn의 이름이 나오지만, 그들의 회사 운영 방식이 아니라 아이디어 생성 원리가 논점이다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    주제 파악의 핵심: <strong>반복되는 키워드</strong>를 추적한다. 이 글에서는 <strong>quantity, number, lots of, ratio, two thousand</strong> 등
+    "양"과 관련된 어휘가 반복적으로 등장하며, 모두 <strong>창의적 성공</strong>과 연결된다.
+    첫 문장(AI)이나 중간 사례(Stanford)를 주제로 착각하지 않도록 주의한다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) Ex 2 변형문제</span>
+    <span>4 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 변형 2 해설 + 서술형 해설 + 정리 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">2</span> 변형 2 해설 — 어휘</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ② incline toward or gravitate to</p>
+    <p style="margin:4px 0; font-size:10.5pt;">"~로 기울다, 경도되다" — 인간 그룹이 첫 제안의 변형에 <strong>빠져드는</strong> 맥락</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      "almost immediately <strong>lean</strong> into variations of first suggestions"에서 lean은 <strong>"(어떤 방향으로) 기울다, 경도되다"</strong>는 의미이다.
+      lean의 대표적 의미("마른", "기댄")와 다른, <strong>비유적·추상적 용법</strong>이다.
+      "lean into"는 "~에 몰입하다, ~로 빠져들다"라는 관용적 표현으로, 여기서는 인간 그룹이 처음 나온 아이디어의 변형에 <strong>즉각적으로 빠져드는</strong> 경향을 비판적으로 묘사한다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> become thinner or more slender (더 마른 상태가 되다)
+      <span class="reason">lean의 형용사 의미("마른, 기름기 없는")에서 파생된 해석이다. 이 문맥에서 lean은 동사로 쓰였으므로 형용사 의미와 무관하다. 사전적 의미 함정이다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">②</span> incline toward or gravitate to (~로 기울다, 경도되다)
+      <span class="reason">"lean into"는 비유적으로 "~에 빠져들다, ~로 경도되다"는 뜻이다. 인간 그룹이 첫 제안의 변형에 "거의 즉시 기울어진다"는 문맥과 정확히 일치한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> carefully hold back from (조심스럽게 자제하다)
+      <span class="reason">문맥상 <strong>반대 의미</strong>이다. "almost immediately"가 보여주듯, 인간 그룹은 자제하는 것이 아니라 즉각적으로 첫 제안에 빠져든다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span> physically bend one's body forward (물리적으로 몸을 앞으로 구부리다)
+      <span class="reason">lean의 문자적·물리적 의미("몸을 기울이다")이지만, 이 문맥은 브레인스토밍 과정에 대한 추상적 묘사이므로 물리적 동작과 무관하다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> systematically organize or arrange (체계적으로 정리하다)
+      <span class="reason">lean과 의미적으로 무관한 선지이다. "정리하다"는 뜻은 lean의 어떤 용법에서도 도출되지 않는다.</span>
+    </li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">3</span> 서술형 해설 — 핵심 문장 영작</h2>
+
+  <div class="model-answer">
+    <span class="label">모범답안 (Model Answer)</span>
+    <p style="margin:6px 0; font-size:11pt; line-height:2; font-family:'Times New Roman',Georgia,serif;">
+      This is why <strong>design</strong> <strong>thinking</strong> and <strong>innovation</strong> are so <strong>focused</strong> on the <strong>processes</strong> of <strong>creating</strong> <strong>possibilities</strong> without <strong>judgment</strong>.
+    </p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">어형 변환 포인트</span>
+    <table>
+      <tr><th style="width:20%;">제시어 (원형)</th><th style="width:25%;">사용 형태</th><th>변환 근거</th></tr>
+      <tr><td>design</td><td><strong>design</strong></td><td>명사 원형 그대로 — design thinking (복합명사)</td></tr>
+      <tr><td>think</td><td><strong>thinking</strong></td><td>동사 → 동명사: design thinking (복합명사의 일부)</td></tr>
+      <tr><td>innovation</td><td><strong>innovation</strong></td><td>명사 원형 그대로 — and innovation</td></tr>
+      <tr><td>focus</td><td><strong>focused</strong></td><td>동사 → 과거분사(형용사): are so focused on (수동/상태)</td></tr>
+      <tr><td>process</td><td><strong>processes</strong></td><td>단수 → 복수: the processes of ~</td></tr>
+      <tr><td>create</td><td><strong>creating</strong></td><td>동사 → 동명사: of creating (전치사 뒤 동명사)</td></tr>
+      <tr><td>possibility</td><td><strong>possibilities</strong></td><td>단수 → 복수: creating possibilities (가능성들)</td></tr>
+      <tr><td>judge</td><td><strong>judgment</strong></td><td>동사 → 명사: without judgment (전치사 뒤 명사)</td></tr>
+    </table>
+  </div>
+
+  <div class="rubric">
+    <span class="label">채점 기준 (10점 만점)</span>
+    <table>
+      <tr><th style="width:12%;">배점</th><th style="width:30%;">항목</th><th>기준</th></tr>
+      <tr>
+        <td>4점</td>
+        <td><span class="condition-tag">조건 1</span> 제시어 전체 사용</td>
+        <td>8개 모두 사용 (4점). 1개 누락마다 -1점. 4개 이하 사용 시 0점</td>
+      </tr>
+      <tr>
+        <td>3점</td>
+        <td><span class="condition-tag">조건 2</span> 어형 변환 정확성</td>
+        <td>thinking(동명사), focused(과거분사), creating(동명사), possibilities(복수), judgment(명사화) 5개 핵심 변환. 각 오류 -0.5점</td>
+      </tr>
+      <tr>
+        <td>2점</td>
+        <td><span class="condition-tag">조건 3</span> 의미 완성도</td>
+        <td>해석 힌트의 의미를 정확히 전달하는 완결된 문장 (2점). 의미 누락·왜곡 시 감점</td>
+      </tr>
+      <tr>
+        <td>1점</td>
+        <td>문법 · 형식</td>
+        <td>1문장 완성, 문법 오류 1개당 -0.5점</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">영작 전략</span>
+    <strong>Step 1:</strong> 해석 힌트를 읽고 문장의 뼈대를 잡는다 — "이것이 ~인 이유이다(This is why) + 디자인 사고와 혁신이(design thinking and innovation) + 집중하는(are focused on) + 과정(processes)."
+    <strong>Step 2:</strong> 제시어 8개를 배치한다 — 원형 그대로(design, innovation)와 변환 필요(think→?, focus→?, process→?, create→?, possibility→?, judge→?)를 구분한다.
+    <strong>Step 3:</strong> 핵심 변환 체크리스트 — ① 복합명사 <strong>think→thinking</strong> ② 수동 상태 <strong>focus→focused</strong> ③ 전치사 뒤 동명사 <strong>create→creating</strong> ④ 복수 <strong>possibility→possibilities</strong> ⑤ 동사→명사 <strong>judge→judgment</strong>.
+  </div>
+
+  <hr class="divider">
+
+  <h2>변형문제 학습 정리</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>변형 유형</th><th>정답</th><th>핵심 포인트</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>주제</td>
+        <td><span class="ans-badge">④</span></td>
+        <td>반복 키워드(quantity, number, lots of) 추적 — 부분 정보(AI, Stanford) 함정 주의</td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>어휘</td>
+        <td><span class="ans-badge">②</span></td>
+        <td>lean의 비유적 용법 = "기울다, 경도되다" — 형용사 의미(마른) 함정 주의</td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+        <td>제시어 8개 + 한국어 힌트 → 결론 문장 복원. thinking·focused·creating·possibilities·judgment 어형 변환 핵심</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 13. 빈칸 내용 추론 (1) Ex 2 변형문제</span>
+    <span>5 / 5</span>
+  </div>
+</section>
+
+</body>
+</html>

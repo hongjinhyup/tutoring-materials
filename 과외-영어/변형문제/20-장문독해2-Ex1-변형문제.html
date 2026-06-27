@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20. 장문 독해 (2) Ex 1 — 변형문제</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+/* 번호 태그 (무관한 문장용) */
+.sent-num {
+  display: inline-block; font-weight: 700; color: var(--accent);
+  margin-right: 2px; font-size: 11pt;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 원문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 변형문제</div>
+    <h1>20. 장문 독해 (2) Ex 1 — 변형문제</h1>
+    <p class="subtitle">동물 보호소의 Elaine — 같은 지문, 다른 유형으로 실전 연습</p>
+    <p class="meta">
+      <span class="code-badge">26005-0108 / 0109 / 0110</span>
+      <span class="passage-badge">원문: pp.120–121 · Ex 1</span>
+      <span class="transform-badge">변형 3문항</span>
+    </p>
+  </div>
+
+  <h2>변형문제 구성</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>원래 유형</th><th>변형 유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>장문 독해</td>
+        <td>문단 요약</td>
+        <td><span class="ans-badge">②</span></td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>장문 독해</td>
+        <td>무관한 문장</td>
+        <td><span class="ans-badge">③</span></td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>장문 독해</td>
+        <td>서술형 — 핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">학습 가이드</span>
+    이 자료는 분석노트에서 공부한 <strong>20-장문독해(2)-Ex1</strong> 지문을 다른 유형으로 변형한 연습문제이다.
+    분석노트로 지문을 충분히 이해한 뒤, 아래 문제를 직접 풀어 보자.
+    <strong>문제 페이지를 먼저 풀고, 해설 페이지에서 확인</strong>하는 순서로 학습한다.
+  </div>
+
+  <h2>원문 지문 (복습용)</h2>
+
+  <div class="passage" style="font-size:10pt;">
+    &nbsp;&nbsp;The manager of the Humane Society was out of town for two weeks, and Elaine was placed in charge. Since she had taken on this responsibility before, she was familiar with the challenges she might encounter — impounding stray animals, reuniting pets with their owners, informing people their pet hadn't been found, accepting animals from those who could no longer care for them, or turning animals away when the shelter was full. Though she found the work demanding, she handled these situations with confidence and calm.
+    <br><br>
+    &nbsp;&nbsp;On the first day of the manager's absence, everything was running smoothly until a woman arrived with a cat and asked to leave it at the shelter. Elaine's first question was whether the cat was a stray or not, since the shelter was obligated to take in strays but could refuse owned pets. The woman said it was her cat and explained that she was moving and couldn't take it with her — a common excuse. Although the shelter sometimes accepted pets in such cases, it was already housing over ninety cats, nearly double its capacity of fifty, so Elaine had to politely refuse.
+    <br><br>
+    &nbsp;&nbsp;Elaine calmly explained that there was no space available, but the woman became visibly upset and said, "If you don't take this cat, I'll just have to let it go somewhere." Although such statements were sadly not unusual, they always troubled Elaine. Still, she maintained professionalism, offered contact information for other shelters, and tried to help. The woman complained the alternatives were too far and repeated she had no other choice. Elaine then suggested the shelter might find a volunteer to transport the cat. In response, the woman, showing her frustration toward her, placed the cat's kennel in front of her, raised her voice, and left the shelter.
+    <br><br>
+    &nbsp;&nbsp;Elaine could no longer hold it in. She gently put the cat in a kennel and brought it to the back isolation area. Then she went to the back room and called the absent manager, who encouraged her to let it all out. Elaine shared what happened and released her emotions while the manager listened. She felt much better afterward and was relieved to have someone she could talk to without fear of judgment. Since then, the manager has encouraged staff to come to her if they need to release emotions kept in at work — and she listens.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* impound: 수용하다, 가둬 두다 &nbsp; ** stray: 길 잃은 &nbsp; *** kennel: 이동장 &nbsp; **** obligate: 의무를 지우다</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) Ex 1 변형문제</span>
+    <span>1 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 변형 1 + 변형 2 (문제) ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 — 문단 요약 <span class="type-tag">문단요약</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A)와 (B)에 들어갈 말로 가장 적절한 것은?</p>
+
+    <div class="passage" style="font-size:10pt; line-height:1.75;">
+      &nbsp;&nbsp;The manager of the Humane Society was out of town for two weeks, and Elaine was placed in charge. Since she had taken on this responsibility before, she was familiar with the challenges she might encounter — impounding stray animals, reuniting pets with their owners, informing people their pet hadn't been found, accepting animals from those who could no longer care for them, or turning animals away when the shelter was full. Though she found the work demanding, she handled these situations with confidence and calm.
+      <br>
+      &nbsp;&nbsp;On the first day of the manager's absence, everything was running smoothly until a woman arrived with a cat and asked to leave it at the shelter. Elaine's first question was whether the cat was a stray or not, since the shelter was obligated to take in strays but could refuse owned pets. The woman said it was her cat and explained that she was moving and couldn't take it with her — a common excuse. Although the shelter sometimes accepted pets in such cases, it was already housing over ninety cats, nearly double its capacity of fifty, so Elaine had to politely refuse.
+      <br>
+      &nbsp;&nbsp;Elaine calmly explained that there was no space available, but the woman became visibly upset and said, "If you don't take this cat, I'll just have to let it go somewhere." Although such statements were sadly not unusual, they always troubled Elaine. Still, she maintained professionalism, offered contact information for other shelters, and tried to help. The woman complained the alternatives were too far and repeated she had no other choice. Elaine then suggested the shelter might find a volunteer to transport the cat. In response, the woman, showing her frustration toward her, placed the cat's kennel in front of her, raised her voice, and left the shelter.
+      <br>
+      &nbsp;&nbsp;Elaine could no longer hold it in. She gently put the cat in a kennel and brought it to the back isolation area. Then she went to the back room and called the absent manager, who encouraged her to let it all out. Elaine shared what happened and released her emotions while the manager listened. She felt much better afterward and was relieved to have someone she could talk to without fear of judgment. Since then, the manager has encouraged staff to come to her if they need to release emotions kept in at work — and she listens.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* impound: 수용하다, 가둬 두다 &nbsp; ** stray: 길 잃은 &nbsp; *** kennel: 이동장 &nbsp; **** obligate: 의무를 지우다</p>
+
+    <p style="font-size:10.5pt; margin:12px 0 6px; line-height:1.8; text-align:center; font-style:italic;">
+      Despite handling a &ensp;<span class="blank">&ensp;(A)&ensp;</span>&ensp; confrontation with a pet owner professionally, the animal shelter worker eventually felt overwhelmed but found emotional &ensp;<span class="blank">&ensp;(B)&ensp;</span>&ensp; by confiding in her supportive manager.
+    </p>
+
+    <table style="width:80%; margin:10px auto;">
+      <thead><tr><th style="width:12%; text-align:center;">번호</th><th style="width:44%; text-align:center;">(A)</th><th style="width:44%; text-align:center;">(B)</th></tr></thead>
+      <tbody>
+        <tr><td style="text-align:center; font-weight:700;">①</td><td style="text-align:center;">stressful</td><td style="text-align:center;">isolation</td></tr>
+        <tr><td style="text-align:center; font-weight:700;">②</td><td style="text-align:center;">stressful</td><td style="text-align:center;">comfort</td></tr>
+        <tr><td style="text-align:center; font-weight:700;">③</td><td style="text-align:center;">delightful</td><td style="text-align:center;">guilt</td></tr>
+        <tr><td style="text-align:center; font-weight:700;">④</td><td style="text-align:center;">predictable</td><td style="text-align:center;">comfort</td></tr>
+        <tr><td style="text-align:center; font-weight:700;">⑤</td><td style="text-align:center;">productive</td><td style="text-align:center;">despair</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">2</span> 변형 2 — 무관한 문장 <span class="type-tag">무관한문장</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글에서 전체 흐름과 관계 없는 문장은?</p>
+
+    <div class="passage" style="font-size:10pt; line-height:1.75;">
+      &nbsp;&nbsp;Elaine calmly explained that there was no space available, but the woman became visibly upset and said, "If you don't take this cat, I'll just have to let it go somewhere."
+      <span class="sent-num">①</span> Although such statements were sadly not unusual, they always troubled Elaine.
+      <span class="sent-num">②</span> Still, she maintained professionalism, offered contact information for other shelters, and tried to help.
+      <span class="sent-num">③</span> Studies indicate that employees in animal welfare organizations often develop stronger empathy skills through regular interactions with diverse pet owners.
+      <span class="sent-num">④</span> The woman complained the alternatives were too far and repeated she had no other choice.
+      <span class="sent-num">⑤</span> Elaine then suggested the shelter might find a volunteer to transport the cat.
+      In response, the woman, showing her frustration toward her, placed the cat's kennel in front of her, raised her voice, and left the shelter.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* kennel: 이동장</p>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) Ex 1 변형문제</span>
+    <span>2 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 서술형 문제 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">3</span> 서술형 — 핵심 문장 영작 <span class="type-tag">서술형</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 빈칸에 들어갈 문장을 주어진 단어를 활용하여 영작하시오.</p>
+
+    <div class="passage" style="font-size:10pt; line-height:1.75;">
+      &nbsp;&nbsp;The manager of the Humane Society was out of town for two weeks, and Elaine was placed in charge. Since she had taken on this responsibility before, she was familiar with the challenges she might encounter — impounding stray animals, reuniting pets with their owners, informing people their pet hadn't been found, accepting animals from those who could no longer care for them, or turning animals away when the shelter was full. Though she found the work demanding, she handled these situations with confidence and calm.
+      <br>
+      &nbsp;&nbsp;On the first day of the manager's absence, everything was running smoothly until a woman arrived with a cat and asked to leave it at the shelter. Elaine's first question was whether the cat was a stray or not, since the shelter was obligated to take in strays but could refuse owned pets. The woman said it was her cat and explained that she was moving and couldn't take it with her — a common excuse. Although the shelter sometimes accepted pets in such cases, it was already housing over ninety cats, nearly double its capacity of fifty, so Elaine had to politely refuse.
+      <br>
+      &nbsp;&nbsp;Elaine calmly explained that there was no space available, but the woman became visibly upset and said, "If you don't take this cat, I'll just have to let it go somewhere." Although such statements were sadly not unusual, they always troubled Elaine. Still, she maintained professionalism, offered contact information for other shelters, and tried to help. The woman complained the alternatives were too far and repeated she had no other choice. Elaine then suggested the shelter might find a volunteer to transport the cat. In response, the woman, showing her frustration toward her, placed the cat's kennel in front of her, raised her voice, and left the shelter.
+      <br>
+      &nbsp;&nbsp;Elaine could no longer hold it in. She gently put the cat in a kennel and brought it to the back isolation area. Then she went to the back room and called the absent manager, who encouraged her to let it all out. Elaine shared what happened and released her emotions while the manager listened.
+      <br>
+      <span style="display:block; width:100%; height:24px; border-bottom:2.5px solid var(--accent); margin-top:4px;"></span>
+      <br>
+      Since then, the manager has encouraged staff to come to her if they need to release emotions kept in at work — and she listens.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* impound: 수용하다, 가둬 두다 &nbsp; ** stray: 길 잃은 &nbsp; *** kennel: 이동장 &nbsp; **** obligate: 의무를 지우다</p>
+
+    <p style="font-size:10pt; color:var(--muted); margin:8px 0 4px;">
+      [해석 힌트] 그녀는 그 후 훨씬 나아졌고, 판단받을 두려움 없이 이야기할 수 있는 누군가가 있어서 안도했다.
+    </p>
+
+    <div class="word-bank">
+      <span class="label">제시어 (원형) — 필요시 어형을 변환하여 사용할 것</span>
+      <div class="words">
+        <span class="word">feel</span>
+        <span class="word">well</span>
+        <span class="word">afterward</span>
+        <span class="word">relieve</span>
+        <span class="word">someone</span>
+        <span class="word">talk</span>
+        <span class="word">without</span>
+        <span class="word">fear</span>
+        <span class="word">judgment</span>
+      </div>
+    </div>
+
+    <p style="margin:10px 0 6px;">
+      <span class="condition-tag">조건 1</span> 제시어를 <strong>모두</strong> 사용하되, 문맥에 맞게 어형을 변환할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 2</span> 글의 흐름에 이어지는 <strong>결론 문장 1개</strong>를 완성할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 3</span> 해석 힌트의 의미를 담되, 단어를 <strong>그대로 영한 직역하지 말 것</strong>
+    </p>
+  </div>
+
+  <div class="writing-area">
+    <div class="guide">Write the key sentence below (use ALL 9 given words)</div>
+    <div class="lines"></div>
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) Ex 1 변형문제</span>
+    <span>3 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 변형 1 해설: 문단 요약 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 해설 — 문단 요약</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ② (A) stressful — (B) comfort</p>
+    <p style="margin:4px 0; font-size:10.5pt;">스트레스를 주는 대립에도 전문성을 유지했지만, 결국 감정적으로 압도되어 관리자에게 의지하여 위안을 찾았다.</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      이 글은 동물 보호소 직원 Elaine이 <strong>반려동물 주인과의 스트레스를 주는 대립</strong>(여성이 화를 내며 고양이를 놓고 떠남)을 겪은 후,
+      부재중인 관리자에게 전화하여 감정을 털어놓고 <strong>위안(comfort)</strong>을 찾는 이야기이다.
+      요약문은 이 전체 흐름 — <strong>스트레스 상황 → 전문적 대응 → 감정적 과부하 → 관리자의 지지로 회복</strong> — 을 정확히 반영해야 한다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> (A) stressful — (B) isolation
+      <span class="reason">(A)는 적절하지만, (B) isolation(고립)은 글의 내용과 반대이다. Elaine은 관리자에게 전화하여 감정을 나누었으므로 고립이 아닌 '연결/위안'을 찾았다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">②</span> (A) stressful — (B) comfort
+      <span class="reason">(A) 여성이 화를 내고 고양이를 놓고 떠난 상황은 stressful(스트레스를 주는)하다. (B) 관리자에게 전화하여 감정을 털어놓고 "felt much better"한 것은 comfort(위안)이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> (A) delightful — (B) guilt
+      <span class="reason">(A) delightful(기쁜)은 대립 상황과 정반대이다. (B) guilt(죄책감)도 글에서 Elaine이 느낀 감정이 아니다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span> (A) predictable — (B) comfort
+      <span class="reason">(B)는 적절하지만, (A) predictable(예측 가능한)은 함정이다. Elaine이 이전 경험이 있어 '익숙하다'고 했지만, 이 특정 대립은 그녀를 압도할 만큼 감정적이었으므로 단순히 예측 가능한 것이 아니었다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> (A) productive — (B) despair
+      <span class="reason">(A) productive(생산적인)은 대립 상황의 성격과 무관하다. (B) despair(절망)은 글의 결말(회복)과 반대이다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    문단 요약의 핵심: <strong>글 전체의 흐름</strong>을 하나의 문장으로 압축한 것이 요약문이다.
+    (A)는 대립의 성격, (B)는 결과를 묻는다. 부분 정보(예: "이전 경험 있음" → predictable)에 끌리지 않고,
+    글의 <strong>핵심 전개(스트레스 → 위안)</strong>에 집중해야 한다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) Ex 1 변형문제</span>
+    <span>4 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 변형 2 + 서술형 해설 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">2</span> 변형 2 해설 — 무관한 문장</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ③</p>
+    <p style="margin:4px 0; font-size:10.5pt;">Studies indicate that employees in animal welfare organizations often develop stronger empathy skills through regular interactions with diverse pet owners.</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      이 부분은 Elaine이 여성의 위협적 발언에 괴로워하면서도 전문성을 유지하고 대안을 제시하는 <strong>구체적 서사</strong>이다.
+      ③번 문장은 "동물 복지 조직 직원의 공감 능력 발달"에 관한 <strong>일반적 연구 결과</strong>를 서술하여,
+      이 이야기의 서사 흐름(Elaine의 구체적 대응)과 무관하다.
+    </p>
+  </div>
+
+  <h3>문장별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">적절</span> <span class="num">①</span> Although such statements were sadly not unusual, they always troubled Elaine.
+      <span class="reason">여성의 위협적 발언("놓아줄 수밖에 없다")이 Elaine을 항상 괴롭혔다는 내용으로, 감정적 반응을 서술하여 서사 흐름에 부합한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">적절</span> <span class="num">②</span> Still, she maintained professionalism, offered contact information for other shelters, and tried to help.
+      <span class="reason">괴롭힘에도 불구하고 전문성을 유지하고 대안을 제시하는 Elaine의 대응으로, ①의 감정과 대조되며 서사를 이어간다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">무관</span> <span class="num">③</span> Studies indicate that employees in animal welfare organizations often develop stronger empathy skills through regular interactions with diverse pet owners.
+      <span class="reason">"animal welfare", "employees", "pet owners" 등 관련 어휘를 사용하지만, 이것은 <strong>학술적 연구 결과</strong>이지 Elaine의 구체적 서사가 아니다. 이야기 흐름을 끊는다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">적절</span> <span class="num">④</span> The woman complained the alternatives were too far and repeated she had no other choice.
+      <span class="reason">여성이 대안(다른 보호소)이 너무 멀다고 불평하는 내용으로, ②에서 제시한 대안에 대한 반응이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">적절</span> <span class="num">⑤</span> Elaine then suggested the shelter might find a volunteer to transport the cat.
+      <span class="reason">Elaine이 추가 대안(자원봉사자 운송)을 제안하는 내용으로, ④의 불평에 대한 대응이다.</span>
+    </li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">3</span> 서술형 해설 — 핵심 문장 영작</h2>
+
+  <div class="model-answer">
+    <span class="label">모범답안 (Model Answer)</span>
+    <p style="margin:6px 0; font-size:11pt; line-height:2; font-family:'Times New Roman',Georgia,serif;">
+      She <strong>felt</strong> much <strong>better</strong> <strong>afterward</strong> and was <strong>relieved</strong> to have <strong>someone</strong> she could <strong>talk</strong> to <strong>without</strong> <strong>fear</strong> of <strong>judgment</strong>.
+    </p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">어형 변환 포인트</span>
+    <table>
+      <tr><th style="width:20%;">제시어 (원형)</th><th style="width:25%;">사용 형태</th><th>변환 근거</th></tr>
+      <tr><td>feel</td><td><strong>felt</strong></td><td>동사 → 과거시제: 이야기 시제(과거)에 맞춤</td></tr>
+      <tr><td>well</td><td><strong>better</strong></td><td>부사 → 비교급: "much better"로 회복 정도 표현</td></tr>
+      <tr><td>afterward</td><td><strong>afterward</strong></td><td>부사 원형 그대로 — 시간 부사</td></tr>
+      <tr><td>relieve</td><td><strong>relieved</strong></td><td>동사 → 과거분사(형용사): "was relieved" 상태 표현</td></tr>
+      <tr><td>someone</td><td><strong>someone</strong></td><td>대명사 원형 그대로 — to have someone</td></tr>
+      <tr><td>talk</td><td><strong>talk</strong></td><td>동사 원형 그대로 — she could talk to</td></tr>
+      <tr><td>without</td><td><strong>without</strong></td><td>전치사 원형 그대로 — without fear of</td></tr>
+      <tr><td>fear</td><td><strong>fear</strong></td><td>명사 원형 그대로 — fear of judgment</td></tr>
+      <tr><td>judgment</td><td><strong>judgment</strong></td><td>명사 원형 그대로 — fear of judgment</td></tr>
+    </table>
+  </div>
+
+  <div class="rubric">
+    <span class="label">채점 기준 (10점 만점)</span>
+    <table>
+      <tr><th style="width:12%;">배점</th><th style="width:30%;">항목</th><th>기준</th></tr>
+      <tr>
+        <td>4점</td>
+        <td><span class="condition-tag">조건 1</span> 제시어 전체 사용</td>
+        <td>9개 모두 사용 (4점). 1개 누락마다 -1점. 5개 이하 사용 시 0점</td>
+      </tr>
+      <tr>
+        <td>3점</td>
+        <td><span class="condition-tag">조건 2</span> 어형 변환 정확성</td>
+        <td>felt(과거시제), better(비교급), relieved(과거분사) 3개 핵심 변환. 각 오류 -1점</td>
+      </tr>
+      <tr>
+        <td>2점</td>
+        <td><span class="condition-tag">조건 3</span> 의미 완성도</td>
+        <td>해석 힌트의 의미를 정확히 전달하는 완결된 문장 (2점). 의미 누락/왜곡 시 감점</td>
+      </tr>
+      <tr>
+        <td>1점</td>
+        <td>문법 · 형식</td>
+        <td>1문장 완성, 문법 오류 1개당 -0.5점</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">영작 전략</span>
+    <strong>Step 1:</strong> 해석 힌트의 뼈대를 먼저 파악한다 — "그녀는 나아졌다 + 안도했다(누군가가 있어서)".
+    <strong>Step 2:</strong> 변환이 필요한 단어를 식별한다 — feel→felt(과거), well→better(비교급), relieve→relieved(분사).
+    <strong>Step 3:</strong> "was relieved to have someone (whom) she could talk to"의 관계절 구조에 주의한다. talk to의 전치사 to를 빠뜨리지 않는다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>변형문제 학습 정리</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>변형 유형</th><th>정답</th><th>핵심 포인트</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>문단요약</td>
+        <td><span class="ans-badge">②</span></td>
+        <td>글 전체 흐름(스트레스 대립 → 관리자 지지로 위안) 파악 — predictable 함정 주의</td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>무관한문장</td>
+        <td><span class="ans-badge">③</span></td>
+        <td>서사 흐름 속 학술적 일반론 삽입 — 관련 어휘 사용 함정 주의</td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+        <td>제시어 9개 + 해석 힌트 → 감정 회복 문장 복원. felt·better·relieved 어형 변환 핵심</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 20. 장문 독해 (2) Ex 1 변형문제</span>
+    <span>5 / 5</span>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>16. 글의 순서 Ex 2 — 변형문제</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+/* 주어진 문장 박스 */
+.given-sentence {
+  background: var(--purple-bg); border: 2px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.given-sentence .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* 삽입 위치 표시 */
+.insert-mark {
+  display: inline-block;
+  font-weight: 700; color: var(--accent);
+  margin: 0 2px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 10pt;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 원문 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 변형문제</div>
+    <h1>16. 글의 순서 Ex 2 — 변형문제</h1>
+    <p class="subtitle">인간 지각 체계의 대리 기능 — 같은 지문, 다른 유형으로 실전 연습</p>
+    <p class="meta">
+      <span class="code-badge">26005-0078</span>
+      <span class="passage-badge">원문: p.95 · Ex 2</span>
+      <span class="transform-badge">변형 3문항</span>
+    </p>
+  </div>
+
+  <h2>변형문제 구성</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>원래 유형</th><th>변형 유형</th><th>정답</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>글의 순서</td>
+        <td>문장 삽입</td>
+        <td><span class="ans-badge">②</span></td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>글의 순서</td>
+        <td>내용 일치/불일치</td>
+        <td><span class="ans-badge">④</span></td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>글의 순서</td>
+        <td>서술형 — 핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <span class="label">학습 가이드</span>
+    이 자료는 분석노트에서 공부한 <strong>16-글의순서-Ex2</strong> 지문을 다른 유형으로 변형한 연습문제이다.
+    분석노트로 지문을 충분히 이해한 뒤, 아래 문제를 직접 풀어 보자.
+    <strong>문제 페이지를 먼저 풀고, 해설 페이지에서 확인</strong>하는 순서로 학습한다.
+  </div>
+
+  <h2>원문 지문 (복습용)</h2>
+
+  <div class="passage">
+    &nbsp;&nbsp;The human perceptual system is designed to recognize objects under changing illuminations, situations, and contexts. It is extraordinarily adapted to a constantly changing world. To deal with this uncertainty, the brain uses not one, but multiple routes. If one is blocked, it takes another route. This immense flexibility of the brain to rely on changing cues, according to whatever is available, is known as vicarious functioning. It can be found in most biological systems. In extreme cases, only a few lines are sufficient, as when we recognize the face of a celebrity in caricatures made with just a few pencil strokes. Face recognition also functions even when parts of a face are covered and internal features such as eyes are hardly visible. In this case, the brain relies on external features such as hair and head shape. For instance, migrating birds fly thousands of miles and may rely on the stars to navigate. But if it's a cloudy day, they may instead rely on landmarks or their magnetic sense. Similarly, the brain can recognize a face by the shape of the eyes, nose, and mouth.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* illumination: (불)빛, 조명 &nbsp; ** vicarious: 대리의</p>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 2 변형문제</span>
+    <span>1 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 변형 1: 문장 삽입 + 변형 2: 내용 일치/불일치 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 — 문장 삽입 <span class="type-tag">문장삽입</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 주어진 문장이 들어가기에 가장 적절한 곳을 고르시오.</p>
+
+    <div class="given-sentence">
+      <span class="label">주어진 문장</span>
+      This immense flexibility of the brain to rely on changing cues, according to whatever is available, is known as vicarious functioning.
+    </div>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;The human perceptual system is designed to recognize objects under changing illuminations, situations, and contexts. It is extraordinarily adapted to a constantly changing world. <span class="insert-mark">( ① )</span> To deal with this uncertainty, the brain uses not one, but multiple routes. If one is blocked, it takes another route. <span class="insert-mark">( ② )</span> It can be found in most biological systems. <span class="insert-mark">( ③ )</span> In extreme cases, only a few lines are sufficient, as when we recognize the face of a celebrity in caricatures made with just a few pencil strokes. Face recognition also functions even when parts of a face are covered and internal features such as eyes are hardly visible. <span class="insert-mark">( ④ )</span> In this case, the brain relies on external features such as hair and head shape. For instance, migrating birds fly thousands of miles and may rely on the stars to navigate. <span class="insert-mark">( ⑤ )</span> But if it's a cloudy day, they may instead rely on landmarks or their magnetic sense. Similarly, the brain can recognize a face by the shape of the eyes, nose, and mouth.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* illumination: (불)빛, 조명 &nbsp; ** vicarious: 대리의</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span></li>
+      <li><span class="num">②</span></li>
+      <li><span class="num">③</span></li>
+      <li><span class="num">④</span></li>
+      <li><span class="num">⑤</span></li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">2</span> 변형 2 — 내용 일치/불일치 <span class="type-tag">내용 불일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 <strong>일치하지 않는 것</strong>은?</p>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;The human perceptual system is designed to recognize objects under changing illuminations, situations, and contexts. It is extraordinarily adapted to a constantly changing world. To deal with this uncertainty, the brain uses not one, but multiple routes. If one is blocked, it takes another route. This immense flexibility of the brain to rely on changing cues, according to whatever is available, is known as vicarious functioning. It can be found in most biological systems. In extreme cases, only a few lines are sufficient, as when we recognize the face of a celebrity in caricatures made with just a few pencil strokes. Face recognition also functions even when parts of a face are covered and internal features such as eyes are hardly visible. In this case, the brain relies on external features such as hair and head shape. For instance, migrating birds fly thousands of miles and may rely on the stars to navigate. But if it's a cloudy day, they may instead rely on landmarks or their magnetic sense. Similarly, the brain can recognize a face by the shape of the eyes, nose, and mouth.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* illumination: (불)빛, 조명 &nbsp; ** vicarious: 대리의</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> 인간의 지각 체계는 변화하는 환경에 적응하도록 설계되어 있다.</li>
+      <li><span class="num">②</span> 뇌는 하나의 경로가 차단되면 다른 경로를 사용한다.</li>
+      <li><span class="num">③</span> 이동하는 새들은 흐린 날에 별 대신 지형지물이나 자기 감각에 의존한다.</li>
+      <li><span class="num">④</span> 대리 기능(vicarious functioning)은 인간의 뇌에서만 발견되는 고유한 특성이다.</li>
+      <li><span class="num">⑤</span> 얼굴의 일부가 가려져도 뇌는 외부 특징을 이용하여 얼굴을 인식할 수 있다.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 2 변형문제</span>
+    <span>2 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 서술형 문제 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">3</span> 서술형 — 핵심 문장 영작 <span class="type-tag">서술형</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글을 읽고, 빈칸에 들어갈 문장을 주어진 단어를 활용하여 영작하시오.</p>
+
+    <div class="passage" style="font-size:10.5pt;">
+      &nbsp;&nbsp;The human perceptual system is designed to recognize objects under changing illuminations, situations, and contexts. It is extraordinarily adapted to a constantly changing world. To deal with this uncertainty, the brain uses not one, but multiple routes. If one is blocked, it takes another route. This immense flexibility of the brain to rely on changing cues, according to whatever is available, is known as vicarious functioning. It can be found in most biological systems. In extreme cases, only a few lines are sufficient, as when we recognize the face of a celebrity in caricatures made with just a few pencil strokes.<br><br>
+      <span style="display:block; width:100%; height:24px; border-bottom:2.5px solid var(--accent); margin-top:4px;"></span>
+      <br>In this case, the brain relies on external features such as hair and head shape.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* illumination: (불)빛, 조명 &nbsp; ** vicarious: 대리의</p>
+
+    <p style="font-size:10pt; color:var(--muted); margin:8px 0 4px;">
+      [해석 힌트] 얼굴의 일부가 가려져 있고 눈과 같은 내부 특징이 거의 보이지 않을 때에도 얼굴 인식은 작동한다.
+    </p>
+
+    <div class="word-bank">
+      <span class="label">제시어 (원형) — 필요시 어형을 변환하여 사용할 것</span>
+      <div class="words">
+        <span class="word">face</span>
+        <span class="word">recognize</span>
+        <span class="word">function</span>
+        <span class="word">part</span>
+        <span class="word">cover</span>
+        <span class="word">internal</span>
+        <span class="word">feature</span>
+        <span class="word">eye</span>
+        <span class="word">hard</span>
+      </div>
+    </div>
+
+    <p style="margin:10px 0 6px;">
+      <span class="condition-tag">조건 1</span> 제시어를 <strong>모두</strong> 사용하되, 문맥에 맞게 어형을 변환할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 2</span> 글의 흐름에 이어지는 <strong>문장 1개</strong>를 완성할 것
+    </p>
+    <p style="margin:6px 0;">
+      <span class="condition-tag">조건 3</span> 해석 힌트의 의미를 담되, 단어를 <strong>그대로 영한 직역하지 말 것</strong>
+    </p>
+  </div>
+
+  <div class="writing-area">
+    <div class="guide">Write the key sentence below (use ALL 9 given words)</div>
+    <div class="lines"></div>
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 2 변형문제</span>
+    <span>3 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 변형 1 해설: 문장 삽입 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">1</span> 변형 1 해설 — 문장 삽입</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ②</p>
+    <p style="margin:4px 0; font-size:10.5pt;">If one is blocked, it takes another route. <strong>( ② 주어진 문장 )</strong> It can be found in most biological systems.</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 논리</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      주어진 문장은 <strong>"대리 기능(vicarious functioning)"의 정의</strong>로, 뇌가 이용 가능한 단서에 따라
+      유연하게 의존 대상을 바꾸는 특성에 이름을 부여한다. 이 문장은 반드시 <strong>"하나가 막히면 다른 경로를 택한다"</strong>(② 앞문장)라는
+      현상 설명 직후에 위치하여 해당 현상에 개념명을 부여해야 한다. 또한 바로 다음 문장의 <strong>"It"</strong>이
+      주어진 문장의 <strong>"vicarious functioning"</strong>을 지칭하므로 ②가 유일한 정답이다.
+    </p>
+  </div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span>
+      <span class="reason">아직 "multiple routes"나 경로 전환이 설명되지 않았다. 대리 기능의 정의가 "constantly changing world" 직후에 오면 맥락이 없다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">②</span>
+      <span class="reason">"If one is blocked, it takes another route" 직후에 위치한다. 경로 전환 현상을 설명한 뒤 그 현상에 "vicarious functioning"이라는 이름을 붙이는 자연스러운 흐름이다. 다음 문장 "It can be found..."의 "It"이 vicarious functioning을 가리킨다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span>
+      <span class="reason">"It can be found in most biological systems" 다음에 위치하면 "It"의 선행사가 없어진다. 정의가 예시보다 뒤에 오는 비논리적 구조가 된다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span>
+      <span class="reason">얼굴 인식의 구체적 예시 사이에 일반적 정의가 삽입되면 흐름이 끊긴다. "In this case"가 가리키는 대상도 모호해진다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span>
+      <span class="reason">철새 항해 예시 중간에 뇌의 유연성 정의가 오면 맥락이 맞지 않는다. 이미 구체적 예시 단계이므로 개념 정의의 위치가 아니다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    문장 삽입의 핵심: <strong>주어진 문장이 "정의/명명"</strong>하는 문장일 때, 해당 현상이 <strong>먼저 묘사된 직후</strong>에 위치한다.
+    또한 다음 문장의 대명사 <strong>"It"</strong>이 주어진 문장의 핵심 개념(<strong>vicarious functioning</strong>)을
+    가리키는지 확인하면 정답을 확정할 수 있다.
+  </div>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 2 변형문제</span>
+    <span>4 / 5</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 변형 2 해설 + 서술형 해설 + 학습 정리 ============ -->
+<section class="page">
+
+  <h2><span class="q-badge">2</span> 변형 2 해설 — 내용 일치/불일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ④</p>
+    <p style="margin:4px 0; font-size:10.5pt;">대리 기능(vicarious functioning)은 인간의 뇌에서만 발견되는 고유한 특성이다. → 불일치</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 근거</span>
+    <p style="margin:4px 0; font-size:10.5pt;">
+      글에서 "<strong>It can be found in most biological systems</strong>"이라고 하여,
+      대리 기능은 <strong>대부분의 생물학적 체계</strong>에서 발견된다고 명시한다.
+      ④ 선지의 <strong>"인간의 뇌에서만"</strong>은 원문의 "most biological systems"와 정면 배치된다.
+      실제로 (A) 문단에서 철새의 항해 사례를 대리 기능의 유추로 들고 있어 인간 고유의 특성이 아님을 뒷받침한다.
+    </p>
+  </div>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> 인간의 지각 체계는 변화하는 환경에 적응하도록 설계되어 있다.
+      <span class="reason">일치 — "designed to recognize objects under changing illuminations, situations, and contexts" + "extraordinarily adapted to a constantly changing world"에 부합한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> 뇌는 하나의 경로가 차단되면 다른 경로를 사용한다.
+      <span class="reason">일치 — "If one is blocked, it takes another route."에 정확히 부합한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> 이동하는 새들은 흐린 날에 별 대신 지형지물이나 자기 감각에 의존한다.
+      <span class="reason">일치 — "But if it's a cloudy day, they may instead rely on landmarks or their magnetic sense."에 부합한다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">④</span> 대리 기능(vicarious functioning)은 인간의 뇌에서만 발견되는 고유한 특성이다.
+      <span class="reason">불일치 — 글은 "most biological systems"에서 발견된다고 하며, 철새 예시도 이를 뒷받침한다. "인간의 뇌에서만"은 범위를 축소한 왜곡이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> 얼굴의 일부가 가려져도 뇌는 외부 특징을 이용하여 얼굴을 인식할 수 있다.
+      <span class="reason">일치 — "Face recognition also functions even when parts of a face are covered... the brain relies on external features such as hair and head shape."에 부합한다.</span>
+    </li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2><span class="q-badge">3</span> 서술형 해설 — 핵심 문장 영작</h2>
+
+  <div class="model-answer">
+    <span class="label">모범답안 (Model Answer)</span>
+    <p style="margin:6px 0; font-size:11pt; line-height:2; font-family:'Times New Roman',Georgia,serif;">
+      <strong>Face</strong> <strong>recognition</strong> also <strong>functions</strong> even when <strong>parts</strong> of a <strong>face</strong> are <strong>covered</strong> and <strong>internal</strong> <strong>features</strong> such as <strong>eyes</strong> are <strong>hardly</strong> visible.
+    </p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">어형 변환 포인트</span>
+    <table>
+      <tr><th style="width:20%;">제시어 (원형)</th><th style="width:25%;">사용 형태</th><th>변환 근거</th></tr>
+      <tr><td>face</td><td><strong>Face / face</strong></td><td>명사 원형 그대로 — "Face recognition" + "a face" (2회 사용)</td></tr>
+      <tr><td>recognize</td><td><strong>recognition</strong></td><td>동사 → 명사: "얼굴 인식" (Face recognition = 주어)</td></tr>
+      <tr><td>function</td><td><strong>functions</strong></td><td>명사/동사 → 동사 3인칭 단수: 주어 Face recognition에 일치</td></tr>
+      <tr><td>part</td><td><strong>parts</strong></td><td>명사 → 복수형: "얼굴의 일부분들"</td></tr>
+      <tr><td>cover</td><td><strong>covered</strong></td><td>동사 → 과거분사(수동태): "가려져 있는" (are covered)</td></tr>
+      <tr><td>internal</td><td><strong>internal</strong></td><td>형용사 원형 그대로 — internal features 수식</td></tr>
+      <tr><td>feature</td><td><strong>features</strong></td><td>명사 → 복수형: "내부 특징들" (such as eyes)</td></tr>
+      <tr><td>eye</td><td><strong>eyes</strong></td><td>명사 → 복수형: "눈들" (예시로 제시)</td></tr>
+      <tr><td>hard</td><td><strong>hardly</strong></td><td>형용사 → 부사: "거의 ~않게" (hardly visible)</td></tr>
+    </table>
+  </div>
+
+  <div class="rubric">
+    <span class="label">채점 기준 (10점 만점)</span>
+    <table>
+      <tr><th style="width:12%;">배점</th><th style="width:30%;">항목</th><th>기준</th></tr>
+      <tr>
+        <td>4점</td>
+        <td><span class="condition-tag">조건 1</span> 제시어 전체 사용</td>
+        <td>9개 모두 사용 (4점). 1개 누락마다 -1점. 5개 이하 사용 시 0점</td>
+      </tr>
+      <tr>
+        <td>3점</td>
+        <td><span class="condition-tag">조건 2</span> 어형 변환 정확성</td>
+        <td>recognition(명사화), covered(과거분사/수동태), hardly(부사화) 3개 핵심 변환 + functions(3인칭 단수). 각 오류 -1점</td>
+      </tr>
+      <tr>
+        <td>2점</td>
+        <td><span class="condition-tag">조건 3</span> 의미 완성도</td>
+        <td>해석 힌트의 의미를 정확히 전달하는 완결된 문장 (2점). 의미 누락/왜곡 시 감점</td>
+      </tr>
+      <tr>
+        <td>1점</td>
+        <td>문법 · 형식</td>
+        <td>1문장 완성, 문법 오류 1개당 -0.5점</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tip">
+    <span class="label">영작 전략</span>
+    <strong>Step 1:</strong> 해석 힌트에서 문장 뼈대를 잡는다 — "~일 때에도 ... 작동한다" (even when 양보절 + 주절).
+    <strong>Step 2:</strong> 제시어 9개를 배치한다 — 원형 그대로 쓸 것(face, internal)과 변환이 필요한 것(recognize→?, function→?, cover→?, hard→?)을 구분한다.
+    <strong>Step 3:</strong> 핵심 변환 체크리스트 — ① 동사→명사는 <strong>-tion</strong>(recognition) ② 수동태는 <strong>be+p.p.</strong>(are covered) ③ 형용사→부사는 <strong>-ly</strong>(hardly). 단, <strong>hard와 hardly는 의미가 완전히 다르다</strong>(hard: 열심히/hardly: 거의 ~않다)는 점을 반드시 기억한다.
+  </div>
+
+  <hr class="divider">
+
+  <h2>변형문제 학습 정리</h2>
+
+  <table>
+    <thead><tr><th>문항</th><th>변형 유형</th><th>정답</th><th>핵심 포인트</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>변형 1</td>
+        <td>문장삽입</td>
+        <td><span class="ans-badge">②</span></td>
+        <td>현상 묘사 직후 정의/명명 문장 삽입 — "It" = vicarious functioning 대명사 연결</td>
+      </tr>
+      <tr>
+        <td>변형 2</td>
+        <td>내용 불일치</td>
+        <td><span class="ans-badge">④</span></td>
+        <td>"most biological systems" ≠ "인간의 뇌에서만" — 범위 축소 왜곡 포착</td>
+      </tr>
+      <tr>
+        <td>서술형</td>
+        <td>핵심 문장 영작</td>
+        <td><span class="ans-badge">모범답안</span></td>
+        <td>제시어 9개 + 한국어 힌트 → 핵심 문장 복원. recognition/covered/hardly 어형 변환 핵심</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>EBS 2027 수능특강 영어 · 16. 글의 순서 Ex 2 변형문제</span>
+    <span>5 / 5</span>
+  </div>
+</section>
+
+</body>
+</html>
