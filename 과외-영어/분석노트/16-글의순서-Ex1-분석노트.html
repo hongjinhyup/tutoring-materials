@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>16. 문단 내 글의 순서 파악 — Ex 1 분석노트</title>
 <style>
-@page { size: A4; margin: 18mm 16mm; }
+@page { size: A4; margin: 8mm; }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
@@ -215,10 +215,12 @@ tr:nth-child(even) td { background: #f6f8fb; }
 @media print {
   body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .page {
-    width: auto; min-height: auto; margin: 0; padding: 0;
-    box-shadow: none; page-break-after: always;
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
   }
-  .page:last-of-type { page-break-after: auto; }
+  .page + .page { break-before: page; page-break-before: always; }
+  tr, .choice-list li, .concept, .tip, .explain-box, .syntax-box,
+  .translation, .flow-step, .given-sentence, h2, h3 { break-inside: avoid; }
   h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
 }
 
