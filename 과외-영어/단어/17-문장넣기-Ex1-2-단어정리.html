@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>17. 문단 속에 문장 넣기 — Exercise 1·2 단어 정리</title>
 <style>
-@page { size: A4; margin: 18mm 16mm; }
+@page { size: A4; margin: 8mm; }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
@@ -155,10 +155,14 @@ tr:nth-child(even) td { background: #f6f8fb; }
 @media print {
   body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .page {
-    width: auto; min-height: auto; margin: 0; padding: 0;
-    box-shadow: none; page-break-after: always;
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
   }
-  .page:last-of-type { page-break-after: auto; }
+  .page + .page { break-before: page; page-break-before: always; }
+  thead { display: table-header-group; }
+  tr, .concept, .tip, h2, h3 { break-inside: avoid; }
+  .vocab-table td, .vocab-table th { padding: 1.5px 9px !important; font-size: 8.6pt !important; line-height: 1.22 !important; }
+  .summary-table td, .summary-table th { padding: 3px 9px !important; }
   h2, h3, table, .concept, .tip { break-inside: avoid; }
 }
 
