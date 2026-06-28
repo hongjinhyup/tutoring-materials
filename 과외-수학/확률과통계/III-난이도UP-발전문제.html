@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>III 통계 난이도UP — 발전문제 모음</title>
+<style>
+@page { size: A4; margin: 7mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 23pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 4px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.example {
+  border: 1px solid var(--accent-line); border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0; break-inside: avoid;
+}
+.example .label {
+  font-size: 9pt; font-weight: 700; color: #fff; background: var(--accent);
+  border-radius: 4px; padding: 1px 8px; display: inline-block; margin-bottom: 8px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.problem { margin: 12px 0; break-inside: avoid; }
+.problem .q { font-weight: 700; }
+.problem .answer-space {
+  border-bottom: 1px dashed var(--accent-line); height: 26px; margin-top: 6px;
+}
+
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 7px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  tr, .example, .problem, .concept, .tip, .eq, .dist-table, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .concept, .example, .tip, .problem, .eq { break-inside: avoid; }
+  .noprint { display: none !important; }
+}
+
+.m { font-family: 'Times New Roman', Georgia, serif; font-style: italic; }
+.eq {
+  text-align: center; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 12pt;
+  line-height: 1.6; break-inside: avoid;
+}
+.eq.boxed {
+  display: block; border: 1.6px solid var(--accent); border-radius: 6px;
+  padding: 8px 4px; background: #fbfcfe; font-weight: 600;
+}
+.frac { display: inline-block; vertical-align: middle; text-align: center; margin: 0 .12em; }
+.frac > span { display: block; padding: 0 .45em; line-height: 1.25; }
+.frac > .den { border-top: 1.3px solid currentColor; }
+.sqrt { white-space: nowrap; }
+.sqrt > .rad { border-top: 1.3px solid currentColor; padding: 0 .18em 0 .08em; }
+.sqrt::before { content: "\221A"; padding-right: .02em; }
+.ov { display: inline-block; line-height: 1; border-top: 1.4px solid currentColor; padding-top: .5px; }
+
+/* ---- 추가: 답 강조 ---- */
+.ans {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'Times New Roman', Georgia, serif; font-size: 11pt;
+  margin-top: 4px;
+}
+/* ---- 풀이패턴 태그 ---- */
+.pattern-tag {
+  display: inline-block; background: #e8f0fe; color: var(--accent);
+  border-radius: 3px; padding: 1px 8px; font-size: 9.5pt; font-weight: 600;
+  margin-bottom: 6px;
+}
+/* ---- 문제번호 뱃지 ---- */
+.qnum {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 22px; height: 22px; text-align: center;
+  line-height: 22px; font-size: 10pt; font-weight: 700; margin-right: 6px;
+}
+/* ---- 구분선 ---- */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+/* ---- 작은 테이블 (분포표) ---- */
+.dist-table { width: auto; margin: 8px auto; }
+.dist-table th, .dist-table td { text-align: center; padding: 5px 14px; }
+/* ---- 단계 소제목 ---- */
+.step { color: var(--accent); font-size: 11pt; font-weight: 700; margin: 14px 0 4px; }
+/* ---- 상단 돌아가기 링크 ---- */
+.back-link {
+  display: inline-block; font-size: 10pt; color: var(--accent);
+  text-decoration: none; font-weight: 600; margin-bottom: 10px;
+}
+.back-link:hover { text-decoration: underline; }
+.src-tag { font-size: 9pt; color: var(--muted); margin-left: 6px; }
+
+/* 난이도UP 인쇄 압축 — 상세 풀이 밀도 조정 */
+@media print {
+  .example { padding: 9px 13px !important; margin: 8px 0 !important; }
+  .eq { margin: 4px 0 !important; }
+  .tip { padding: 6px 11px !important; margin: 6px 0 !important; }
+  .step, h3 { margin: 7px 0 3px !important; }
+  p { margin: 5px 0 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 + 발전 11, 12 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <a class="back-link noprint" href="3단원-통계.html">← 3단원 목록으로</a>
+
+  <div class="doc-header">
+    <div class="eyebrow">확률과통계 · 3단원 통계</div>
+    <h1>난이도 UP — 발전문제 모음</h1>
+    <p class="subtitle">III-1 확률분포 · III-2 통계적추정 중단원 발전문제 8선 쉬운 풀이</p>
+    <div class="meta">고3 · 2026 | 단계를 잘게 쪼개 천천히 따라가는 풀이</div>
+  </div>
+
+  <div class="tip">
+    <span class="label">이 자료의 사용법</span>
+    각 문제마다 <strong>① 개념 먼저</strong>로 필요한 공식을 복습하고, <strong>② 단계별 풀이</strong>에서
+    한 줄씩 이유를 확인하며 따라간다. 자주 틀리는 부분은 <strong>함정</strong> 박스로 표시하였다.
+    모든 정답은 교과서 발전문제의 정답과 일치한다.
+  </div>
+
+  <h2>발전 11 ~ 15 · 확률분포 (III-1)</h2>
+
+  <!-- ===== 발전 11 ===== -->
+  <div class="example">
+    <span class="label">발전 11</span><span class="src-tag">확률분포 · 정규분포</span>
+    <h3>정규분포 실생활 — 단위 통일에 주의</h3>
+    <p><strong>문제:</strong>
+      어느 집단의 한 달 통화량 <span class="m">X</span>가 정규분포
+      <span class="m">N</span>(150, 15<sup>2</sup>)(분)을 따른다.
+      임의로 뽑은 1명이 <strong>2시간 이상</strong> 통화할 확률을 구하시오.
+      (단, <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 2) = 0.4772)
+    </p>
+
+    <div class="tip">
+      <span class="label">개념 먼저</span>
+      정규분포 <span class="m">X</span> ~ <span class="m">N</span>(<span class="m">m</span>, σ<sup>2</sup>)는
+      <span class="m">Z</span> = <span class="frac"><span class="num"><span class="m">X</span> − <span class="m">m</span></span><span class="den">σ</span></span>
+      로 <strong>표준화</strong>한다. 여기서 <span class="m">m</span> = 150, σ = 15이다.
+      또한 대칭성에 의해 <span class="m">P</span>(<span class="m">Z</span> ≥ −2) = 0.5 + <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 2)이다.
+    </div>
+
+    <span class="pattern-tag">풀이 흐름: 단위 통일(2시간 → 120분) → 표준화 → 표준정규분포표</span>
+
+    <div class="step">[1단계] 단위를 분으로 통일한다</div>
+    <p>분포의 단위가 <strong>분</strong>이므로, 문제의 "2시간"을 분으로 바꾸어야 한다.</p>
+    <div class="eq">2시간 = 2 × 60 = 120 (분)</div>
+    <div class="tip">
+      <span class="label">함정</span>
+      "2시간"을 그대로 2로 쓰면 안 된다. 분포가 분 단위이므로 <strong>반드시 120분으로 통일</strong>한 뒤 표준화한다.
+    </div>
+
+    <div class="step">[2단계] X = 120을 표준화한다</div>
+    <p>구하는 것은 <span class="m">P</span>(<span class="m">X</span> ≥ 120)이다. 경계값 120을 표준화한다.</p>
+    <div class="eq">
+      <span class="m">Z</span> =
+      <span class="frac"><span class="num">120 − 150</span><span class="den">15</span></span> =
+      <span class="frac"><span class="num">−30</span><span class="den">15</span></span> = −2
+    </div>
+
+    <div class="step">[3단계] 표준정규분포표를 이용해 확률을 구한다</div>
+    <p>표준화하면 <span class="m">P</span>(<span class="m">X</span> ≥ 120) = <span class="m">P</span>(<span class="m">Z</span> ≥ −2)이다.
+       <span class="m">Z</span> = −2의 오른쪽 넓이는 0보다 작은 부분(0.5)과 0~2 부분을 더한 것이다.</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">Z</span> ≥ −2)
+      = 0.5 + <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 2)
+      = 0.5 + 0.4772 = 0.9772
+    </div>
+    <p><span class="ans">0.9772</span></p>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 1</span></div>
+</section>
+
+<section class="page">
+
+  <div class="example">
+    <span class="label">발전 12</span><span class="src-tag">확률분포 · 이항분포의 정규근사</span>
+    <h3>이항분포를 정규분포로 근사하기</h3>
+    <p><strong>문제:</strong>
+      확률변수 <span class="m">X</span>가 이항분포
+      <span class="m">B</span>(<span class="m">n</span>, <span class="frac"><span class="num">1</span><span class="den">6</span></span>)을 따르고
+      <span class="m">E</span>(<span class="m">X</span>) = 30일 때,
+      <span class="m">P</span>(<span class="frac"><span class="num"><span class="m">n</span></span><span class="den">12</span></span> ≤ <span class="m">X</span> ≤ <span class="frac"><span class="num"><span class="m">n</span></span><span class="den">6</span></span>)
+      을 구하시오. (단, <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 3) = 0.4987)
+    </p>
+
+    <div class="tip">
+      <span class="label">개념 먼저</span>
+      <span class="m">X</span> ~ <span class="m">B</span>(<span class="m">n</span>, <span class="m">p</span>)이면
+      <span class="m">E</span>(<span class="m">X</span>) = <span class="m">np</span>,
+      <span class="m">V</span>(<span class="m">X</span>) = <span class="m">npq</span> (<span class="m">q</span> = 1 − <span class="m">p</span>)이다.
+      <span class="m">n</span>이 충분히 크면
+      <span class="m">B</span>(<span class="m">n</span>, <span class="m">p</span>) ≈ <span class="m">N</span>(<span class="m">np</span>, <span class="m">npq</span>)로 근사하여 표준화한다.
+    </div>
+
+    <span class="pattern-tag">풀이 흐름: E = np 로 n 결정 → m·σ 계산 → 정규근사 → 표준화</span>
+
+    <div class="step">[1단계] E(X) = np 를 이용해 n을 구한다</div>
+    <p>평균이 30이고 성공 확률이 <span class="frac"><span class="num">1</span><span class="den">6</span></span>이므로</p>
+    <div class="eq">
+      <span class="m">n</span> × <span class="frac"><span class="num">1</span><span class="den">6</span></span> = 30
+      &ensp;⇒&ensp; <span class="m">n</span> = 30 × 6 = 180
+    </div>
+
+    <div class="step">[2단계] 평균 m과 표준편차 σ를 구한다</div>
+    <p>분산은 <span class="m">npq</span>이다. <span class="m">p</span> = <span class="frac"><span class="num">1</span><span class="den">6</span></span>,
+       <span class="m">q</span> = <span class="frac"><span class="num">5</span><span class="den">6</span></span>이므로</p>
+    <div class="eq">
+      <span class="m">m</span> = 30, &emsp;
+      <span class="m">V</span>(<span class="m">X</span>) = 180 × <span class="frac"><span class="num">1</span><span class="den">6</span></span> × <span class="frac"><span class="num">5</span><span class="den">6</span></span>
+      = 25
+    </div>
+    <div class="eq">
+      σ = <span class="sqrt"><span class="rad">25</span></span> = 5
+    </div>
+
+    <div class="step">[3단계] 구간의 양 끝을 숫자로 바꾼다</div>
+    <p><span class="m">n</span> = 180을 대입하면 구간 경계가 정해진다.</p>
+    <div class="eq">
+      <span class="frac"><span class="num"><span class="m">n</span></span><span class="den">12</span></span> =
+      <span class="frac"><span class="num">180</span><span class="den">12</span></span> = 15, &emsp;
+      <span class="frac"><span class="num"><span class="m">n</span></span><span class="den">6</span></span> =
+      <span class="frac"><span class="num">180</span><span class="den">6</span></span> = 30
+    </div>
+    <p>즉 구하는 확률은 <span class="m">P</span>(15 ≤ <span class="m">X</span> ≤ 30)이다.</p>
+
+    <div class="step">[4단계] 정규근사 후 표준화하여 확률을 구한다</div>
+    <p><span class="m">X</span> ≈ <span class="m">N</span>(30, 5<sup>2</sup>)로 보고 두 경계 15, 30을 각각 표준화한다.</p>
+    <div class="eq">
+      15 → <span class="frac"><span class="num">15 − 30</span><span class="den">5</span></span> = −3, &emsp;
+      30 → <span class="frac"><span class="num">30 − 30</span><span class="den">5</span></span> = 0
+    </div>
+    <div class="eq">
+      <span class="m">P</span>(15 ≤ <span class="m">X</span> ≤ 30)
+      = <span class="m">P</span>(−3 ≤ <span class="m">Z</span> ≤ 0)
+      = <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 3) = 0.4987
+    </div>
+    <p style="margin:2px 0;font-size:10pt;color:var(--muted);">
+      (대칭성: <span class="m">P</span>(−3 ≤ <span class="m">Z</span> ≤ 0) = <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 3))</p>
+    <p><span class="ans">0.4987</span></p>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 2</span></div>
+</section>
+
+<!-- ============ PAGE 2 — 발전 13, 14 ============ -->
+<section class="page">
+
+  <!-- ===== 발전 13 ===== -->
+  <div class="example">
+    <span class="label">발전 13</span><span class="src-tag">확률분포 · 연속확률변수</span>
+    <h3>대칭인 확률밀도함수</h3>
+    <p><strong>문제:</strong>
+      0 ≤ <span class="m">X</span> ≤ 4에서 정의된 연속확률변수 <span class="m">X</span>의 확률밀도함수 <span class="m">f</span>(<span class="m">x</span>)가
+      모든 <span class="m">x</span>에 대하여 <span class="m">f</span>(2 − <span class="m">x</span>) = <span class="m">f</span>(2 + <span class="m">x</span>)를 만족한다.
+      <span class="m">P</span>(0 ≤ <span class="m">X</span> ≤ 1) = <span class="frac"><span class="num">1</span><span class="den">6</span></span>일 때
+      <span class="m">P</span>(2 ≤ <span class="m">X</span> ≤ 3)을 구하시오.
+    </p>
+
+    <div class="tip">
+      <span class="label">개념 먼저</span>
+      확률밀도함수에서 <strong>전체 넓이는 1</strong>이고, <strong>구간의 넓이가 곧 확률</strong>이다.
+      <span class="m">f</span>(<span class="m">a</span> − <span class="m">x</span>) = <span class="m">f</span>(<span class="m">a</span> + <span class="m">x</span>)이면 그래프는
+      <span class="m">x</span> = <span class="m">a</span>에 대하여 <strong>좌우 대칭</strong>이므로, <span class="m">a</span>를 기준으로 대칭인 두 구간의 확률은 같다.
+    </div>
+
+    <span class="pattern-tag">풀이 흐름: 대칭축 x=2 찾기 → 대칭 구간 확률 같음 → 전체 1에서 빼기 → 절반</span>
+
+    <div class="step">[1단계] 대칭축을 찾는다</div>
+    <p>조건 <span class="m">f</span>(2 − <span class="m">x</span>) = <span class="m">f</span>(2 + <span class="m">x</span>)는
+       <span class="m">x</span> = 2에서 같은 거리만큼 떨어진 두 점의 함숫값이 같다는 뜻이다.
+       따라서 그래프는 <strong><span class="m">x</span> = 2</strong>에 대하여 대칭이다.</p>
+
+    <div class="step">[2단계] 대칭을 이용해 양 끝 구간의 확률을 옮긴다</div>
+    <p>구간 [0, 1]을 <span class="m">x</span> = 2에 대하여 접으면 [3, 4]가 된다. 대칭이므로 두 구간의 넓이(확률)는 같다.</p>
+    <div class="eq">
+      <span class="m">P</span>(0 ≤ <span class="m">X</span> ≤ 1) = <span class="m">P</span>(3 ≤ <span class="m">X</span> ≤ 4)
+      = <span class="frac"><span class="num">1</span><span class="den">6</span></span>
+    </div>
+
+    <div class="step">[3단계] 전체 넓이 1에서 양 끝을 빼 가운데 구간을 구한다</div>
+    <p>전체 [0, 4]의 확률은 1이다. 여기서 양 끝 [0,1]과 [3,4]를 빼면 가운데 [1, 3]이 남는다.</p>
+    <div class="eq">
+      <span class="m">P</span>(1 ≤ <span class="m">X</span> ≤ 3)
+      = 1 − <span class="frac"><span class="num">1</span><span class="den">6</span></span> − <span class="frac"><span class="num">1</span><span class="den">6</span></span>
+      = 1 − <span class="frac"><span class="num">2</span><span class="den">6</span></span>
+      = <span class="frac"><span class="num">2</span><span class="den">3</span></span>
+    </div>
+
+    <div class="step">[4단계] 가운데 구간도 대칭이므로 절반을 취한다</div>
+    <p>구간 [1, 3]은 대칭축 <span class="m">x</span> = 2를 중심으로 [1,2]와 [2,3]으로 나뉘고, 둘은 서로 대칭이므로 넓이가 같다.
+       따라서 [2, 3]은 [1, 3]의 <strong>절반</strong>이다.</p>
+    <div class="eq">
+      <span class="m">P</span>(2 ≤ <span class="m">X</span> ≤ 3)
+      = <span class="frac"><span class="num">1</span><span class="den">2</span></span> × <span class="frac"><span class="num">2</span><span class="den">3</span></span>
+      = <span class="frac"><span class="num">1</span><span class="den">3</span></span>
+    </div>
+    <p><span class="ans"><span class="frac"><span class="num">1</span><span class="den">3</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 3</span></div>
+</section>
+
+<section class="page">
+
+  <div class="example">
+    <span class="label">발전 14</span><span class="src-tag">확률분포 · 독립 시행의 합</span>
+    <h3>주사위로 움직이는 바둑돌의 평균과 표준편차</h3>
+    <p><strong>문제:</strong>
+      수직선의 원점에 바둑돌이 있다. 주사위를 한 번 던져 <strong>짝수</strong>가 나오면 +2,
+      <strong>홀수</strong>가 나오면 −1만큼 바둑돌을 이동시킨다. 주사위를 <strong>3번</strong> 던진 후
+      바둑돌의 위치를 <span class="m">X</span>라 할 때, <span class="m">X</span>의 평균과 표준편차를 구하시오.
+    </p>
+
+    <div class="tip">
+      <span class="label">개념 먼저</span>
+      한 번 던질 때의 이동량을 <span class="m">T</span>라 하면
+      <span class="m">X</span> = <span class="m">T</span><sub>1</sub> + <span class="m">T</span><sub>2</sub> + <span class="m">T</span><sub>3</sub>이다.
+      독립인 확률변수의 합에서는
+      <span class="m">E</span>(<span class="m">X</span>) = 3<span class="m">E</span>(<span class="m">T</span>),
+      <span class="m">V</span>(<span class="m">X</span>) = 3<span class="m">V</span>(<span class="m">T</span>)가 성립한다.
+      (분산은 평균처럼 그대로 더해지지만, 표준편차는 더해지지 않고 <span class="m">V</span>를 구한 뒤 √를 씌운다.)
+    </div>
+
+    <span class="pattern-tag">풀이 흐름: 1회 T의 분포표 → E(T), V(T) → ×3 → σ(X)=√V(X)</span>
+
+    <div class="step">[1단계] 한 번 던질 때 이동량 T의 분포표를 만든다</div>
+    <p>주사위에서 짝수(2,4,6)와 홀수(1,3,5)가 나올 확률은 각각
+       <span class="frac"><span class="num">3</span><span class="den">6</span></span> = <span class="frac"><span class="num">1</span><span class="den">2</span></span>이다.</p>
+    <table class="dist-table">
+      <tr><th><span class="m">T</span></th><th>+2 (짝수)</th><th>−1 (홀수)</th><th>합</th></tr>
+      <tr>
+        <td><span class="m">P</span></td>
+        <td><span class="frac"><span class="num">1</span><span class="den">2</span></span></td>
+        <td><span class="frac"><span class="num">1</span><span class="den">2</span></span></td>
+        <td>1</td>
+      </tr>
+    </table>
+
+    <div class="step">[2단계] 1회 이동량의 평균 E(T)를 구한다</div>
+    <p><span class="m">E</span>(<span class="m">T</span>) = Σ(값 × 확률)로 계산한다.</p>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">T</span>) =
+      2 × <span class="frac"><span class="num">1</span><span class="den">2</span></span> + (−1) × <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+      = 1 − <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+      = <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+    </div>
+
+    <div class="step">[3단계] 1회 이동량의 분산 V(T)를 구한다</div>
+    <p>먼저 <span class="m">E</span>(<span class="m">T</span><sup>2</sup>)를 구한 뒤
+       <span class="m">V</span>(<span class="m">T</span>) = <span class="m">E</span>(<span class="m">T</span><sup>2</sup>) − {<span class="m">E</span>(<span class="m">T</span>)}<sup>2</sup>를 적용한다.</p>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">T</span><sup>2</sup>) =
+      2<sup>2</sup> × <span class="frac"><span class="num">1</span><span class="den">2</span></span> + (−1)<sup>2</sup> × <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+      = 4 × <span class="frac"><span class="num">1</span><span class="den">2</span></span> + 1 × <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+      = <span class="frac"><span class="num">5</span><span class="den">2</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">V</span>(<span class="m">T</span>) =
+      <span class="frac"><span class="num">5</span><span class="den">2</span></span> −
+      (<span class="frac"><span class="num">1</span><span class="den">2</span></span>)<sup>2</sup>
+      = <span class="frac"><span class="num">5</span><span class="den">2</span></span> − <span class="frac"><span class="num">1</span><span class="den">4</span></span>
+      = <span class="frac"><span class="num">10</span><span class="den">4</span></span> − <span class="frac"><span class="num">1</span><span class="den">4</span></span>
+      = <span class="frac"><span class="num">9</span><span class="den">4</span></span>
+    </div>
+
+    <div class="step">[4단계] 3번 던지므로 ×3 하여 X의 평균·분산을 구한다</div>
+    <p>독립합이므로 평균과 분산을 각각 3배 한다.</p>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">X</span>) = 3 × <span class="frac"><span class="num">1</span><span class="den">2</span></span>
+      = <span class="frac"><span class="num">3</span><span class="den">2</span></span>
+    </div>
+    <div class="eq">
+      <span class="m">V</span>(<span class="m">X</span>) = 3 × <span class="frac"><span class="num">9</span><span class="den">4</span></span>
+      = <span class="frac"><span class="num">27</span><span class="den">4</span></span>
+    </div>
+
+    <div class="step">[5단계] 표준편차는 분산에 √를 씌운다</div>
+    <div class="eq">
+      σ(<span class="m">X</span>) = <span class="sqrt"><span class="rad"><span class="frac"><span class="num">27</span><span class="den">4</span></span></span></span>
+      = <span class="frac"><span class="num"><span class="sqrt"><span class="rad">27</span></span></span><span class="den"><span class="sqrt"><span class="rad">4</span></span></span></span>
+      = <span class="frac"><span class="num">3<span class="sqrt"><span class="rad">3</span></span></span><span class="den">2</span></span>
+    </div>
+    <p style="margin:2px 0;font-size:10pt;color:var(--muted);">
+      (<span class="sqrt"><span class="rad">27</span></span> = <span class="sqrt"><span class="rad">9 × 3</span></span> = 3<span class="sqrt"><span class="rad">3</span></span>)</p>
+    <p><span class="ans"><span class="m">E</span>(<span class="m">X</span>) = <span class="frac"><span class="num">3</span><span class="den">2</span></span>, &ensp;
+       σ(<span class="m">X</span>) = <span class="frac"><span class="num">3<span class="sqrt"><span class="rad">3</span></span></span><span class="den">2</span></span></span></p>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 4</span></div>
+</section>
+
+<!-- ============ PAGE 3 — 발전 15 (2단 구조) ============ -->
+<section class="page">
+
+  <!-- ===== 발전 15 ===== -->
+  <div class="example">
+    <span class="label">발전 15</span><span class="src-tag">확률분포 · 정규분포 → 이항분포 정규근사</span>
+    <h3>정규분포로 p를 구한 뒤 이항분포를 정규근사하는 2단 문제</h3>
+    <p><strong>문제:</strong>
+      어느 학교 학생의 심박수 <span class="m">X</span>가 정규분포 <span class="m">N</span>(80, 10<sup>2</sup>)을 따른다.
+      심박수가 60 이하이면 서맥, 100 이상이면 빈맥이라 한다. 이 학교 학생 <strong>600명</strong> 중
+      서맥 또는 빈맥인 학생 수가 <strong>12명 미만</strong>일 확률을 구하시오.<br>
+      <span style="font-size:10pt;color:var(--muted);">(단, <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 2) = 0.48,
+        <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 2.5) = 0.49)</span>
+    </p>
+
+    <div class="tip">
+      <span class="label">개념 먼저</span>
+      두 단계로 나뉘는 문제이다. <strong>1단계</strong>에서는 정규분포로 "한 학생이 서맥/빈맥일 확률 <span class="m">p</span>"를 구하고,
+      <strong>2단계</strong>에서는 학생 수가
+      <span class="m">B</span>(600, <span class="m">p</span>)를 따르므로 이를
+      <span class="m">N</span>(600<span class="m">p</span>, 600<span class="m">pq</span>)로 정규근사한다.
+    </div>
+
+    <span class="pattern-tag">풀이 흐름: ① 정규분포로 한 명의 확률 p → ② B(600, p)를 정규근사 → 표준화</span>
+
+    <div class="step">[1단계] 한 학생이 서맥 또는 빈맥일 확률 p를 구한다</div>
+    <p>먼저 서맥(<span class="m">X</span> ≤ 60)의 확률이다. 경계 60을 <span class="m">m</span> = 80, σ = 10으로 표준화한다.</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> ≤ 60)
+      = <span class="m">P</span>(<span class="m">Z</span> ≤ <span class="frac"><span class="num">60 − 80</span><span class="den">10</span></span>)
+      = <span class="m">P</span>(<span class="m">Z</span> ≤ −2)
+      = 0.5 − 0.48 = 0.02
+    </div>
+    <p>다음으로 빈맥(<span class="m">X</span> ≥ 100)의 확률이다. 경계 100을 표준화한다.</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> ≥ 100)
+      = <span class="m">P</span>(<span class="m">Z</span> ≥ <span class="frac"><span class="num">100 − 80</span><span class="den">10</span></span>)
+      = <span class="m">P</span>(<span class="m">Z</span> ≥ 2)
+      = 0.5 − 0.48 = 0.02
+    </div>
+    <p>두 사건은 동시에 일어날 수 없으므로 확률을 더한다.</p>
+    <div class="eq">
+      <span class="m">p</span> = 0.02 + 0.02 = 0.04
+    </div>
+
+    <div class="step">[2단계] 학생 수 Y ~ B(600, 0.04)의 평균과 표준편차를 구한다</div>
+    <p>서맥/빈맥 학생 수를 <span class="m">Y</span>라 하면 <span class="m">Y</span> ~ <span class="m">B</span>(600, 0.04)이다.
+       (<span class="m">q</span> = 1 − 0.04 = 0.96)</p>
+    <div class="eq">
+      <span class="m">E</span>(<span class="m">Y</span>) = 600 × 0.04 = 24
+    </div>
+    <div class="eq">
+      <span class="m">V</span>(<span class="m">Y</span>) = 600 × 0.04 × 0.96 = 23.04, &emsp;
+      σ(<span class="m">Y</span>) = <span class="sqrt"><span class="rad">23.04</span></span> = 4.8
+    </div>
+
+    <div class="step">[3단계] 정규근사 후 표준화하여 확률을 구한다</div>
+    <p><span class="m">Y</span> ≈ <span class="m">N</span>(24, 4.8<sup>2</sup>)로 보고 경계 12를 표준화한다.</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">Y</span> &lt; 12)
+      = <span class="m">P</span>(<span class="m">Z</span> &lt; <span class="frac"><span class="num">12 − 24</span><span class="den">4.8</span></span>)
+      = <span class="m">P</span>(<span class="m">Z</span> &lt; −2.5)
+    </div>
+    <p>대칭성에 의해 <span class="m">P</span>(<span class="m">Z</span> &lt; −2.5) = <span class="m">P</span>(<span class="m">Z</span> &gt; 2.5)이다.</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">Z</span> &lt; −2.5)
+      = 0.5 − <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ 2.5)
+      = 0.5 − 0.49 = 0.01
+    </div>
+    <p><span class="ans">0.01</span></p>
+
+    <div class="tip">
+      <span class="label">함정</span>
+      <span class="frac"><span class="num">12 − 24</span><span class="den">4.8</span></span> =
+      <span class="frac"><span class="num">−12</span><span class="den">4.8</span></span> = −2.5이다.
+      나눗셈을 −2.4 등으로 잘못 계산하지 않도록 주의한다. (12 ÷ 4.8 = 2.5)
+    </div>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 5</span></div>
+</section>
+
+<!-- ============ PAGE 4 — [추정] 발전 12, 13 ============ -->
+<section class="page">
+  <h2>발전 12 ~ 14 · 통계적추정 (III-2)</h2>
+
+  <!-- ===== 추정 발전 12 ===== -->
+  <div class="example">
+    <span class="label">발전 12</span><span class="src-tag">통계적추정 · 표본평균</span>
+    <h3>주머니에서 복원추출한 표본평균</h3>
+    <p><strong>문제:</strong>
+      1이 적힌 공 1개와 3이 적힌 공 <span class="m">n</span>개가 들어 있는 주머니에서
+      <strong>복원추출</strong>로 2번 꺼내어 나온 수의 평균을
+      <span class="ov"><span class="m">X</span></span>라 하자.
+      <span class="m">P</span>(<span class="ov"><span class="m">X</span></span> = 2) = <span class="frac"><span class="num">3</span><span class="den">8</span></span>일 때
+      <span class="m">n</span>의 값을 구하시오.
+    </p>
+
+    <div class="tip">
+      <span class="label">개념 먼저</span>
+      두 번 꺼낸 수를 <span class="m">a</span>, <span class="m">b</span>라 하면 평균은
+      <span class="ov"><span class="m">X</span></span> = <span class="frac"><span class="num"><span class="m">a</span> + <span class="m">b</span></span><span class="den">2</span></span>이다.
+      평균이 2가 되려면 <span class="m">a</span> + <span class="m">b</span> = 4, 즉 (1, 3) 또는 (3, 1)이어야 한다.
+      복원추출이므로 매번 1을 뽑을 확률은
+      <span class="frac"><span class="num">1</span><span class="den"><span class="m">n</span> + 1</span></span>,
+      3을 뽑을 확률은
+      <span class="frac"><span class="num"><span class="m">n</span></span><span class="den"><span class="m">n</span> + 1</span></span>이다. (공은 총 <span class="m">n</span> + 1개)
+    </div>
+
+    <span class="pattern-tag">풀이 흐름: X̄=2 되는 경우 → 확률식 세우기 → 이차방정식 풀이</span>
+
+    <div class="step">[1단계] X̄ = 2가 되는 경우를 찾는다</div>
+    <p>평균이 2이려면 두 수의 합이 4여야 한다. 공에 적힌 수는 1과 3뿐이므로
+       (첫 번째, 두 번째) = <strong>(1, 3) 또는 (3, 1)</strong> 두 가지이다.</p>
+
+    <div class="step">[2단계] 각 경우의 확률을 곱하고 더해 확률식을 세운다</div>
+    <p>(1, 3)일 확률은
+       <span class="frac"><span class="num">1</span><span class="den"><span class="m">n</span> + 1</span></span> ×
+       <span class="frac"><span class="num"><span class="m">n</span></span><span class="den"><span class="m">n</span> + 1</span></span>이고,
+       (3, 1)일 확률도 같다. 두 경우를 더하므로 2배 한다.</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="ov"><span class="m">X</span></span> = 2) =
+      2 ×
+      <span class="frac"><span class="num">1</span><span class="den"><span class="m">n</span> + 1</span></span> ×
+      <span class="frac"><span class="num"><span class="m">n</span></span><span class="den"><span class="m">n</span> + 1</span></span> =
+      <span class="frac"><span class="num">2<span class="m">n</span></span><span class="den">(<span class="m">n</span> + 1)<sup>2</sup></span></span>
+    </div>
+
+    <div class="step">[3단계] 주어진 값 3/8과 같다고 놓고 정리한다</div>
+    <div class="eq">
+      <span class="frac"><span class="num">2<span class="m">n</span></span><span class="den">(<span class="m">n</span> + 1)<sup>2</sup></span></span> =
+      <span class="frac"><span class="num">3</span><span class="den">8</span></span>
+    </div>
+    <p>양변을 교차로 곱한다 (8 × 2<span class="m">n</span> = 3 × (<span class="m">n</span>+1)<sup>2</sup>).</p>
+    <div class="eq">
+      16<span class="m">n</span> = 3(<span class="m">n</span> + 1)<sup>2</sup>
+      = 3(<span class="m">n</span><sup>2</sup> + 2<span class="m">n</span> + 1)
+      = 3<span class="m">n</span><sup>2</sup> + 6<span class="m">n</span> + 3
+    </div>
+
+    <div class="step">[4단계] 이차방정식을 풀어 n을 구한다</div>
+    <p>모든 항을 한쪽으로 모은다.</p>
+    <div class="eq">
+      3<span class="m">n</span><sup>2</sup> + 6<span class="m">n</span> + 3 − 16<span class="m">n</span> = 0
+      &ensp;⇒&ensp;
+      3<span class="m">n</span><sup>2</sup> − 10<span class="m">n</span> + 3 = 0
+    </div>
+    <p>인수분해한다.</p>
+    <div class="eq">
+      (3<span class="m">n</span> − 1)(<span class="m">n</span> − 3) = 0
+      &ensp;⇒&ensp;
+      <span class="m">n</span> = <span class="frac"><span class="num">1</span><span class="den">3</span></span> &ensp;또는&ensp; <span class="m">n</span> = 3
+    </div>
+    <p><span class="m">n</span>은 공의 개수이므로 자연수여야 한다.
+       <span class="m">n</span> = <span class="frac"><span class="num">1</span><span class="den">3</span></span>은 부적합하므로 버린다.</p>
+    <p><span class="ans"><span class="m">n</span> = 3</span></p>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 6</span></div>
+</section>
+
+<!-- ============ PAGE 5 — [추정] 발전 13, 14 ============ -->
+<section class="page">
+
+  <!-- ===== 추정 발전 13 ===== -->
+  <div class="example">
+    <span class="label">발전 13</span><span class="src-tag">통계적추정 · 표본평균의 분포</span>
+    <h3>P(X &lt; 110) = P(X̄ ≥ a)를 만족하는 a</h3>
+    <p><strong>문제:</strong>
+      모집단의 확률변수 <span class="m">X</span>가 정규분포 <span class="m">N</span>(100, 5<sup>2</sup>)을 따른다.
+      이 모집단에서 크기 <strong>4</strong>인 표본을 뽑아 표본평균을
+      <span class="ov"><span class="m">X</span></span>라 할 때,
+      <span class="m">P</span>(<span class="m">X</span> &lt; 110) = <span class="m">P</span>(<span class="ov"><span class="m">X</span></span> ≥ <span class="m">a</span>)
+      를 만족시키는 <span class="m">a</span>의 값을 구하시오.
+    </p>
+
+    <div class="tip">
+      <span class="label">개념 먼저</span>
+      모집단이 <span class="m">N</span>(<span class="m">m</span>, σ<sup>2</sup>)이고 표본의 크기가 <span class="m">n</span>이면,
+      표본평균은
+      <span class="ov"><span class="m">X</span></span> ~ <span class="m">N</span>(<span class="m">m</span>,
+      (<span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>)<sup>2</sup>)을 따른다.
+      즉 표본평균의 표준편차는
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>로 줄어든다.
+      또 대칭성에 의해 <span class="m">P</span>(<span class="m">Z</span> &lt; 2) = <span class="m">P</span>(<span class="m">Z</span> ≥ −2)이다.
+    </div>
+
+    <span class="pattern-tag">풀이 흐름: 좌변·우변 각각 표준화 → Z값 대칭으로 연결 → a 계산</span>
+
+    <div class="step">[1단계] 좌변 P(X &lt; 110)을 표준화한다</div>
+    <p><span class="m">X</span> ~ <span class="m">N</span>(100, 5<sup>2</sup>)이므로 <span class="m">m</span> = 100, σ = 5로 표준화한다.</p>
+    <div class="eq">
+      <span class="m">P</span>(<span class="m">X</span> &lt; 110)
+      = <span class="m">P</span>(<span class="m">Z</span> &lt; <span class="frac"><span class="num">110 − 100</span><span class="den">5</span></span>)
+      = <span class="m">P</span>(<span class="m">Z</span> &lt; 2)
+    </div>
+
+    <div class="step">[2단계] 표본평균 X̄의 표준편차를 구한다</div>
+    <p>표본의 크기가 <span class="m">n</span> = 4이므로</p>
+    <div class="eq">
+      σ(<span class="ov"><span class="m">X</span></span>) =
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>
+      = <span class="frac"><span class="num">5</span><span class="den"><span class="sqrt"><span class="rad">4</span></span></span></span>
+      = <span class="frac"><span class="num">5</span><span class="den">2</span></span> = 2.5
+    </div>
+    <p>즉 <span class="ov"><span class="m">X</span></span> ~ <span class="m">N</span>(100, 2.5<sup>2</sup>)이다.</p>
+
+    <div class="step">[3단계] 우변 P(X̄ ≥ a)를 표준화한다</div>
+    <div class="eq">
+      <span class="m">P</span>(<span class="ov"><span class="m">X</span></span> ≥ <span class="m">a</span>)
+      = <span class="m">P</span>(<span class="m">Z</span> ≥ <span class="frac"><span class="num"><span class="m">a</span> − 100</span><span class="den">2.5</span></span>)
+    </div>
+
+    <div class="step">[4단계] 좌변과 우변을 대칭으로 연결해 a를 구한다</div>
+    <p>좌변은 <span class="m">P</span>(<span class="m">Z</span> &lt; 2)이다. 대칭성에 의해 이는
+       <span class="m">P</span>(<span class="m">Z</span> ≥ −2)와 같다. 우변과 비교하면 표준화한 값이 −2이어야 한다.</p>
+    <div class="eq">
+      <span class="frac"><span class="num"><span class="m">a</span> − 100</span><span class="den">2.5</span></span> = −2
+      &ensp;⇒&ensp;
+      <span class="m">a</span> − 100 = −5
+      &ensp;⇒&ensp;
+      <span class="m">a</span> = 95
+    </div>
+    <div class="tip">
+      <span class="label">포인트</span>
+      좌변은 부등호가 &lt;(작다)이고 우변은 ≥(크거나 같다)이다. 방향이 반대이므로
+      <span class="m">P</span>(<span class="m">Z</span> &lt; 2) = <span class="m">P</span>(<span class="m">Z</span> ≥ −2)처럼
+      <strong>부호를 바꾼 대칭값</strong>으로 연결해야 한다.
+    </div>
+    <p><span class="ans"><span class="m">a</span> = 95</span></p>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 7</span></div>
+</section>
+
+<section class="page">
+
+  <div class="example">
+    <span class="label">발전 14</span><span class="src-tag">통계적추정 · 신뢰구간의 길이</span>
+    <h3>신뢰구간의 길이를 절반으로 만드는 표본 크기</h3>
+    <p><strong>문제:</strong>
+      정규분포를 따르는 모집단에서 크기 <strong>50</strong>인 표본으로 모평균 <span class="m">m</span>의
+      95% 신뢰구간 <span class="m">a</span> ≤ <span class="m">m</span> ≤ <span class="m">b</span>를 얻었다.
+      같은 신뢰도로 크기 <span class="m">n</span>인 표본을 사용했더니 신뢰구간이
+      <span class="m">c</span> ≤ <span class="m">m</span> ≤ <span class="m">d</span>이고
+      <span class="m">d</span> − <span class="m">c</span> = <span class="frac"><span class="num">1</span><span class="den">2</span></span>(<span class="m">b</span> − <span class="m">a</span>)였다.
+      <span class="m">n</span>의 값을 구하시오.
+    </p>
+
+    <div class="tip">
+      <span class="label">개념 먼저</span>
+      95% 신뢰구간의 길이는
+      2 × 1.96 ×
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>이다.
+      여기서 신뢰도(1.96)와 모표준편차 σ는 그대로이므로, <strong>길이는
+      <span class="frac"><span class="num">1</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>에만 비례</strong>한다.
+      즉 표본 크기가 커질수록 신뢰구간은 좁아진다.
+    </div>
+
+    <span class="pattern-tag">풀이 흐름: 두 구간의 길이식 → 비(½) 식 세우기 → √n 정리 → n</span>
+
+    <div class="step">[1단계] 두 신뢰구간의 길이를 식으로 쓴다</div>
+    <p>크기 50일 때의 길이 <span class="m">b</span> − <span class="m">a</span>와 크기 <span class="m">n</span>일 때의 길이 <span class="m">d</span> − <span class="m">c</span>를 각각 쓴다.</p>
+    <div class="eq">
+      <span class="m">b</span> − <span class="m">a</span> = 2 × 1.96 ×
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad">50</span></span></span></span>
+    </div>
+    <div class="eq">
+      <span class="m">d</span> − <span class="m">c</span> = 2 × 1.96 ×
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>
+    </div>
+
+    <div class="step">[2단계] "길이가 절반" 조건을 식으로 옮긴다</div>
+    <p><span class="m">d</span> − <span class="m">c</span> = <span class="frac"><span class="num">1</span><span class="den">2</span></span>(<span class="m">b</span> − <span class="m">a</span>)에
+       두 길이식을 대입한다. 공통인 2 × 1.96 × σ는 양변에서 약분된다.</p>
+    <div class="eq">
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>
+      = <span class="frac"><span class="num">1</span><span class="den">2</span></span> ×
+      <span class="frac"><span class="num">σ</span><span class="den"><span class="sqrt"><span class="rad">50</span></span></span></span>
+      &ensp;⇒&ensp;
+      <span class="frac"><span class="num">1</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>
+      = <span class="frac"><span class="num">1</span><span class="den">2<span class="sqrt"><span class="rad">50</span></span></span></span>
+    </div>
+
+    <div class="step">[3단계] √n에 대해 풀고 양변을 제곱한다</div>
+    <p>분모끼리 비교하면 다음을 얻는다.</p>
+    <div class="eq">
+      <span class="sqrt"><span class="rad"><span class="m">n</span></span></span> = 2<span class="sqrt"><span class="rad">50</span></span>
+    </div>
+    <p>양변을 제곱한다. (2<sup>2</sup> = 4, (<span class="sqrt"><span class="rad">50</span></span>)<sup>2</sup> = 50)</p>
+    <div class="eq">
+      <span class="m">n</span> = (2<span class="sqrt"><span class="rad">50</span></span>)<sup>2</sup>
+      = 4 × 50 = 200
+    </div>
+    <div class="tip">
+      <span class="label">포인트</span>
+      길이를 <span class="frac"><span class="num">1</span><span class="den">2</span></span>배로 줄이려면 표본 크기를 <strong>4배</strong>로 늘려야 한다.
+      (길이가 <span class="frac"><span class="num">1</span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span>에 비례하므로, 길이를 <span class="frac"><span class="num">1</span><span class="den"><span class="m">k</span></span></span>배 하려면 <span class="m">n</span>을 <span class="m">k</span><sup>2</sup>배 한다.)
+    </div>
+    <p><span class="ans"><span class="m">n</span> = 200</span></p>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 8</span></div>
+</section>
+
+<!-- ============ PAGE 6 — 표준정규분포표 ============ -->
+<section class="page">
+  <h2>표준정규분포표 (이 자료에서 사용한 값)</h2>
+  <p style="color:var(--muted);font-size:10.5pt;margin-top:0;">
+    각 풀이에서 사용한 <span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ <span class="m">z</span>) 값을 정리하였다.
+    일부 값은 문제에서 직접 제공된 근삿값이다.</p>
+  <table>
+    <tr>
+      <th style="width:18%"><span class="m">z</span></th>
+      <th><span class="m">P</span>(0 ≤ <span class="m">Z</span> ≤ <span class="m">z</span>)</th>
+      <th>사용 문항</th>
+    </tr>
+    <tr><td>2.0</td><td>0.4772</td><td>발전 11 (확률분포)</td></tr>
+    <tr><td>2.0</td><td>0.48 (문제 제공)</td><td>발전 15 (확률분포)</td></tr>
+    <tr><td>2.5</td><td>0.49 (문제 제공)</td><td>발전 15 (확률분포)</td></tr>
+    <tr><td>3.0</td><td>0.4987</td><td>발전 12 (확률분포)</td></tr>
+    <tr><td>1.96</td><td>0.4750</td><td>발전 14 (통계적추정) — 95% 신뢰도 계수</td></tr>
+  </table>
+
+  <div class="concept">
+    <span class="label">정답 한눈에 보기</span>
+    <table>
+      <tr><th style="width:32%">문항</th><th>정답</th></tr>
+      <tr><td>발전 11 · 확률분포</td><td>0.9772</td></tr>
+      <tr><td>발전 12 · 확률분포</td><td>0.4987 (<span class="m">n</span> = 180, <span class="m">m</span> = 30, σ = 5)</td></tr>
+      <tr><td>발전 13 · 확률분포</td><td><span class="frac"><span class="num">1</span><span class="den">3</span></span></td></tr>
+      <tr><td>발전 14 · 확률분포</td><td><span class="m">E</span>(<span class="m">X</span>) = <span class="frac"><span class="num">3</span><span class="den">2</span></span>, &ensp; σ(<span class="m">X</span>) = <span class="frac"><span class="num">3<span class="sqrt"><span class="rad">3</span></span></span><span class="den">2</span></span></td></tr>
+      <tr><td>발전 15 · 확률분포</td><td>0.01 (<span class="m">p</span> = 0.04, <span class="m">E</span> = 24, σ = 4.8)</td></tr>
+      <tr><td>발전 12 · 통계적추정</td><td><span class="m">n</span> = 3</td></tr>
+      <tr><td>발전 13 · 통계적추정</td><td><span class="m">a</span> = 95</td></tr>
+      <tr><td>발전 14 · 통계적추정</td><td><span class="m">n</span> = 200</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer"><span>3단원 난이도UP — 발전문제 모음</span><span>p. 9</span></div>
+</section>
+
+</body>
+</html>
