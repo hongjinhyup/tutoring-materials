@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14. 빈칸 내용 추론 (2) — 일치추론</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  .question-block, .answer-reveal, .explain-box, .tip, .word-bank,
+  .model-answer, .rubric, .writing-area, .memo-area, .dist-table,
+  table, tr, .choice-list li, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — Ex1 문제 (내용 일치) ============ -->
+<section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a><a class="nav-btn vocab" href="../단어/14-빈칸추론2-Ex1-2-단어정리.html">📖 단어정리</a><a class="nav-btn" href="../분석노트/14-빈칸추론2-Ex1-분석노트.html">📘 분석노트</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 일치추론</div>
+    <h1>14. 빈칸 내용 추론 (2) — 일치추론</h1>
+    <p class="subtitle">어른과 유아의 관점 차이 · 과학적 공로 귀속</p>
+    <p class="meta">
+      <span class="code-badge">26005-0067</span>
+      <span class="passage-badge">원문 p.84 · Ex 1</span>
+      <span class="type-tag">難 상</span>
+    </p>
+  </div>
+
+  <h2><span class="q-badge">1</span> Ex 1 — 내용 일치 <span class="type-tag">일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 일치하는 것은?</p>
+
+    <div class="passage" style="font-size:10pt; line-height:1.7;">
+      &nbsp;&nbsp;Sharing meanings and experiences is not a simple, <span class="ul-word">automatic</span> process: whenever two or more people observe or participate in the same ongoing event they experience it from different perspectives, with different histories, with different background knowledge. These differences are most <span class="ul-word">glaring</span> when the individuals involved include an infant or very young child and an adult, although an adult arranging an event for an infant may find it difficult to keep these differences in mind. When giving a bath, for example, a parent whose experience with water play has been fun, whose knowledge about the source of the water and its <span class="ul-word">disposition</span> provides <span class="ul-word">confidence</span>, and whose body control ensures that the baby is safely held and not in <span class="ul-word">danger</span>, expects the infant to enjoy splashing water. Yet the baby may make it clear (perhaps by terrified crying) that her perspective is quite different from that of the adult. The two share an experience, but not a meaning.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* glaring: 두드러진 &nbsp; ** disposition: 성질</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> Sharing experiences with another person is generally an effortless and instinctive process.</li>
+      <li><span class="num">②</span> A parent's knowledge of the water's temperament is what makes the baby feel reassured.</li>
+      <li><span class="num">③</span> Even when an adult and a baby go through the very same event, the significance each attaches to it can diverge.</li>
+      <li><span class="num">④</span> The baby ends up crying because the bathwater is in fact genuinely dangerous to her.</li>
+      <li><span class="num">⑤</span> The gap in perspective between two adults is wider than that between an adult and an infant.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>14. 빈칸추론2 일치추론</span>
+    <span>1 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — Ex1 해설 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">1</span> Ex 1 해설 — 내용 일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ③</p>
+    <p style="margin:4px 0; font-size:10.5pt;">어른과 아기가 똑같은 사건을 함께 겪더라도 각자가 부여하는 <strong>의미</strong>는 서로 달라질 수 있다.</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 어휘 분석</span>
+    <table>
+      <tr><th style="width:24%;">단어 (각주)</th><th style="width:30%;">정확한 뜻</th><th>오독 함정</th></tr>
+      <tr><td><strong>automatic</strong></td><td>자동적인, 무의식적인 — 단, 원문은 <strong>not</strong> automatic</td><td>"not"을 놓치면 "공유는 손쉽고 본능적"으로 정반대 오독 → ①</td></tr>
+      <tr><td><strong>glaring</strong> (두드러진)</td><td>차이가 <strong>유아-어른</strong> 사이에서 가장 두드러짐</td><td>비교 대상을 "어른-어른"으로 뒤바꿔 오독 → ⑤</td></tr>
+      <tr><td><strong>disposition</strong> (성질)</td><td>물의 성질에 대한 지식이 <strong>부모</strong>에게 자신감을 줌</td><td>안심하는 주체를 "아기"로 오독 → ②</td></tr>
+      <tr><td><strong>confidence</strong></td><td>부모의 자신감·확신 (아기의 감정이 아님)</td><td>아기가 reassured 된다고 주체 혼동 → ②</td></tr>
+      <tr><td>not in <strong>danger</strong></td><td>신체 통제로 아기는 <strong>위험하지 않게</strong> 안겨 있음</td><td>아기가 실제로 위험에 처했다고 오독 → ④</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>14. 빈칸추론2 일치추론</span>
+    <span>2 / 6</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> Sharing experiences ... is generally an effortless and instinctive process.
+      <span class="reason">함정 단어 <strong>automatic</strong> — 뉘앙스 반전. 원문은 "is <strong>not</strong> a simple, automatic process"로, 공유가 <strong>자동적이지 않다</strong>고 못 박는다. effortless·instinctive는 automatic의 동의어로, "not"을 놓치면 고르게 되는 정반대 선지.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> A parent's knowledge of the water's temperament is what makes the baby feel reassured.
+      <span class="reason">함정 단어 <strong>disposition/confidence</strong> — 주체 혼동. 물의 성질(temperament=disposition)에 대한 지식은 <strong>부모</strong>에게 confidence를 줄 뿐, 아기를 안심시킨다는 언급은 없다. 오히려 아기는 겁에 질려 운다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">③</span> Even when an adult and a baby go through the very same event, the significance each attaches to it can diverge.
+      <span class="reason">정답. 마지막 문장 "The two <strong>share an experience, but not a meaning</strong>"의 paraphrase. same event = share an experience, significance ... diverge = not a meaning. 첫 문장 "Sharing meanings ... is not automatic"과도 정확히 호응한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span> The baby ends up crying because the bathwater is in fact genuinely dangerous to her.
+      <span class="reason">함정 단어 <strong>danger</strong> — 직역 함정. 원문은 body control이 아기가 "safely held and <strong>not in danger</strong>"임을 보장한다고 한다. 울음은 실제 위험이 아니라 <strong>관점 차이</strong>(perspective is quite different)의 표현이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> The gap ... between two adults is wider than that between an adult and an infant.
+      <span class="reason">함정 단어 <strong>most glaring</strong> — 비교 반전. 원문은 차이가 "infant ... and an adult"를 포함할 때 <strong>가장 두드러진다</strong>고 한다. 어른-어른 비교는 등장하지 않으며, 어른-유아 차이가 가장 크다는 본문과 모순.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    내용 일치 문제는 정답 선지조차 축어(verbatim)가 아니라 <strong>paraphrase</strong>로 제시된다(③의 same event = share an experience). 오답은 핵심어 하나만 비틀어 만든다 — 부정어(<strong>not</strong> automatic) 누락, 주체 혼동(부모↔아기), 직역 함정(not in danger→위험), 비교 반전(most glaring). 선지마다 <strong>근거 문장 한 곳</strong>을 본문에서 직접 찾아 대조하라.
+  </div>
+
+  <div class="page-footer">
+    <span>14. 빈칸추론2 일치추론</span>
+    <span>3 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — Ex2 문제 (내용 불일치) ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> Ex 2 — 내용 불일치 <span class="type-tag">불일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 <strong>일치하지 않는</strong> 것은?</p>
+
+    <div class="passage">
+      &nbsp;&nbsp;A detailed anthropological study of daily scientific practice in the Salk Institute laboratory in La Jolla, California shows how difficult it is to assign credit and dates. Bruno Latour describes how scientists arrived at the elucidation of TRF (thyrotropin-releasing factor), a hormone that is secreted by the <span class="ul-word">brain</span>. He says that his observations led him to &ldquo;the conviction that a body of practices widely regarded by <span class="ul-word">outsiders</span> as well organized, logical, and coherent, <span class="ul-word">in fact</span> consists of a <span class="ul-word">disordered</span> array of observations with which scientists struggle to produce order.&rdquo; The final consensus formulation of TRF (i.e., when it became a scientific &ldquo;fact&rdquo;) emerged some time between January 1968 and January 1970. Half of the Nobel Prize in Medicine for 1977 for this discovery was shared between the Salk group and another competing group in New Orleans (the other half went to Rosalind Yalow for the techniques she developed that were used in these studies), but each of these two competing groups strongly felt that they deserved <span class="ul-word">sole</span> credit and that the other did not deserve even a share of the award.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* elucidation: 규명, 설명 &nbsp; ** secrete: 분비하다 &nbsp; *** array: 배열</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> Latour concluded that scientific practice, though seen as orderly by outsiders, is in reality a disordered set of observations.</li>
+      <li><span class="num">②</span> TRF is a hormone that is released by the thyroid gland.</li>
+      <li><span class="num">③</span> The point at which TRF became an accepted scientific fact cannot be fixed to one precise date.</li>
+      <li><span class="num">④</span> Rosalind Yalow received her share of the prize for techniques she had developed and that were used in the research.</li>
+      <li><span class="num">⑤</span> Despite jointly receiving the award, each rival group believed it alone deserved the credit.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거를 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>14. 빈칸추론2 일치추론</span>
+    <span>4 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — Ex2 해설 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> Ex 2 해설 — 내용 불일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ②</p>
+    <p style="margin:4px 0; font-size:10.5pt;">TRF는 갑상선(thyroid gland)에서 분비되는 호르몬이다. → <strong>일치하지 않음</strong> (원문: secreted by the <strong>brain</strong>)</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 어휘 분석</span>
+    <table>
+      <tr><th style="width:24%;">단어 (각주)</th><th style="width:30%;">정확한 뜻</th><th>오독 함정</th></tr>
+      <tr><td><strong>secrete</strong> (분비하다)</td><td>TRF는 <strong>뇌(brain)</strong>에서 분비됨</td><td><strong>thyro</strong>tropin(갑상선 자극)이라는 이름에 끌려 "갑상선에서 분비"로 오독 → ②</td></tr>
+      <tr><td><strong>in fact</strong></td><td>외부인 인식과 달리 <strong>실제로는</strong> ~이다</td><td>"잘 조직됨"과 "무질서함"의 주체를 뒤섞어 오독</td></tr>
+      <tr><td><strong>disordered</strong> array (배열)</td><td>과학의 <strong>실제 모습</strong> = 무질서한 관찰의 배열</td><td>외부인이 보는 겉모습으로 오해</td></tr>
+      <tr><td>some time <strong>between</strong></td><td>1968.1~1970.1 사이 — <strong>특정 불가</strong></td><td>정확한 단일 날짜로 특정된다고 오독</td></tr>
+      <tr><td><strong>sole</strong> credit</td><td>각 그룹이 <strong>단독</strong> 공로를 주장</td><td>공동 공로에 만족했다고 오독</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>14. 빈칸추론2 일치추론</span>
+    <span>5 / 6</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-o">일치</span> <span class="num">①</span> Latour concluded that scientific practice ... is in reality a disordered set of observations.
+      <span class="reason">검증 핵심어 <strong>in fact / disordered array</strong>. 원문 "widely regarded by outsiders as well organized ... <strong>in fact</strong> consists of a <strong>disordered array</strong> of observations"의 정확한 paraphrase. 겉모습(orderly)과 실제(disordered)를 옳게 구분해야 참임을 알 수 있다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-x">불일치</span> <span class="num">②</span> TRF is a hormone that is released by the thyroid gland.
+      <span class="reason">정답(유일한 거짓). 오독 핵심어 <strong>brain</strong>. 원문은 "a hormone that is secreted by the <strong>brain</strong>"으로, TRF는 <strong>뇌</strong>에서 분비된다. <strong>thyro</strong>tropin이라는 명칭이 '갑상선(thyroid)'을 연상시켜 만든 함정으로, 분비 기관을 갑상선으로 비틀어 본문과 모순된다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-o">일치</span> <span class="num">③</span> The point at which TRF became ... fact cannot be fixed to one precise date.
+      <span class="reason">검증 핵심어 <strong>some time between</strong>. 원문 "emerged <strong>some time between</strong> January 1968 and January 1970" — 2년 범위로만 표현되어 정확한 단일 날짜로 특정할 수 없다는 뜻. 글 첫 문장의 "difficult to assign ... <strong>dates</strong>"와도 호응.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-o">일치</span> <span class="num">④</span> Rosalind Yalow received her share ... for techniques she had developed and that were used in the research.
+      <span class="reason">검증 핵심어 <strong>the other half / techniques</strong>. 원문 "the other half went to Rosalind Yalow for the <strong>techniques she developed that were used in these studies</strong>"의 정확한 일치.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-o">일치</span> <span class="num">⑤</span> Despite jointly receiving the award, each rival group believed it alone deserved the credit.
+      <span class="reason">검증 핵심어 <strong>sole credit</strong>. 원문 "each of these two competing groups strongly felt that they deserved <strong>sole credit</strong> and that the other did not deserve even a share"의 paraphrase. 공동 수상(shared) ↔ 단독 공로 주장(sole)의 대비를 옳게 읽어야 참임이 확인된다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    불일치 문제는 참인 선지 4개도 모두 <strong>핵심어를 정확히 이해해야</strong> 참이 확인되도록 비틀려 있다(in fact·some time between·sole credit). 거짓 1개(②)는 자명한 오류가 아니라 <strong>고유명사 속 어근</strong>(thyro-)을 미끼로 분비 기관을 바꾼 함정이다. 의학·과학 지문은 명칭의 어근보다 <strong>본문이 직접 서술한 사실</strong>(secreted by the brain)을 우선하라.
+  </div>
+
+  <div class="page-footer">
+    <span>14. 빈칸추론2 일치추론</span>
+    <span>6 / 6</span>
+  </div>
+</section>
+
+</body>
+</html>

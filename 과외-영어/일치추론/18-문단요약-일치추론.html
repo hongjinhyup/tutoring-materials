@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18. 문단 요약 — 일치추론</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+/* 선지 함정어 밑줄 (지문 밖에서도 적용) */
+.ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px; font-weight: 600;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  .question-block, .answer-reveal, .explain-box, .tip,
+  table, tr, .choice-list li, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+
+/* ===== nav-bar — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — Ex 1 문제: 내용 일치 ============ -->
+<section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a><a class="nav-btn vocab" href="../단어/18-문단요약-Ex1-2-단어정리.html">📖 단어정리</a><a class="nav-btn" href="../분석노트/18-문단요약-Ex1-분석노트.html">📘 분석노트</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 일치추론</div>
+    <h1>18. 문단 요약 — 일치추론</h1>
+    <p class="subtitle">아일랜드 트랙터의 내구성 · 위기 상황 미디어 선택</p>
+    <p class="meta">
+      <span class="code-badge">26005-0091</span>
+      <span class="passage-badge">원문 p.108 · Ex 1</span>
+      <span class="type-tag">難 상</span>
+    </p>
+  </div>
+
+  <h2><span class="q-badge">1</span> Ex 1 — 내용 일치 <span class="type-tag">일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 <strong>일치하는 것</strong>은?</p>
+
+    <div class="passage" style="font-size:10pt; line-height:1.7;">
+      &nbsp;&nbsp;There are estimated to be more than 160,000 farms spread across Northern Ireland and the Republic of Ireland combined. On all of those farms, you will find barns, and in some of those barns, you might be fortunate enough to stumble across a classic tractor like the Massey Ferguson 35. Production of the Massey Ferguson 35 in the UK and the USA stopped in 1964. If you were to strike up a conversation with a farmer who still owns one, she might well give the chassis of her Massey Ferguson 35 an affectionate tap and nostalgically remark, 'They don't make 'em like that anymore.' The fact that the tractor has survived at least fifty-eight years seems to provide evidence of its superior build quality. But wait — how long did the other 388,381 Massey Ferguson 35 tractors produced between 1956 and 1964 last before they went for scrap? Rather than build quality, it might well be the fondness that people in Ireland have for the little red tractor (Harry Ferguson, who developed it, was born in Ireland) that has led farmers there to hold on to their Massey Fergusons and take care of them as well as they have.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* stumble across: ~을 우연히 발견하다 &nbsp; ** chassis: 차대(자동차의 기본 프레임 구조) &nbsp; *** scrap: 폐품</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> Production of the Massey Ferguson 35 in the UK and the USA continued <span class="ul-word">until 1956</span>.</li>
+      <li><span class="num">②</span> <span class="ul-word">All</span> of the 388,381 tractors built between 1956 and 1964 have <span class="ul-word">survived</span> to the present day.</li>
+      <li><span class="num">③</span> The author concludes that the tractor's long survival <span class="ul-word">proves</span> its superior build quality.</li>
+      <li><span class="num">④</span> Irish people's fondness for the little red tractor, rather than its build quality, likely explains why farmers there have kept and cared for it.</li>
+      <li><span class="num">⑤</span> Harry Ferguson, who developed the tractor, was born in <span class="ul-word">the USA</span>.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 일치 근거 문장을 찾아 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>18. 문단요약 일치추론</span>
+    <span>1 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — Ex 1 해설: 내용 일치 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">1</span> Ex 1 해설 — 내용 일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ④</p>
+    <p style="margin:4px 0; font-size:10.5pt;">Irish people's fondness for the little red tractor, rather than its build quality, likely explains why farmers there have kept and cared for it.<br>제작 품질보다는 아일랜드 사람들의 애정이, 농부들이 트랙터를 간직하고 돌봐 온 진짜 이유일 것이다. → 일치</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 어휘 분석</span>
+    <table>
+      <tr><th style="width:30%;">핵심어</th><th style="width:26%;">의미</th><th>일치/함정 포인트</th></tr>
+      <tr><td>Rather than build quality, ~ the fondness ~ that has led farmers ~</td><td>제작 품질이 아니라 ~ 애정이 ~ 농부들을 ~하게 했다</td><td>④의 정답 근거 — 글의 결론(필자의 최종 주장)을 그대로 패러프레이즈</td></tr>
+      <tr><td>stopped in 1964 / produced between 1956 and 1964</td><td>1964년에 (생산이) 중단됨 / 1956~1964년에 생산됨</td><td>①의 함정 — 생산 종료는 1964년, 1956년은 생산 '시작' 연도. 연도를 뒤바꾼 오독</td></tr>
+      <tr><td>the other 388,381 ~ went for scrap</td><td>나머지 38만여 대는 폐품이 되었다</td><td>②의 함정 — 대부분은 폐품 처리됨. "전부 살아남았다"는 정반대</td></tr>
+      <tr><td>seems to provide evidence of ~ build quality</td><td>~제작 품질의 증거를 제공하는 것처럼 '보인다'</td><td>③의 함정 — "seems to(처럼 보인다)"는 표면적 해석. 필자는 "But wait"로 이를 반박</td></tr>
+      <tr><td>Harry Ferguson ~ was born in Ireland</td><td>해리 퍼거슨은 아일랜드에서 태어났다</td><td>⑤의 함정 — 괄호 속 세부 정보. 출생지는 아일랜드이지 미국이 아님</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>18. 문단요약 일치추론</span>
+    <span>2 / 6</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> Production of the Massey Ferguson 35 in the UK and the USA continued <span class="ul-word">until 1956</span>.
+      <span class="reason">불일치 — 원문은 "Production ~ stopped in <strong>1964</strong>"이며, <strong>1956</strong>년은 "produced between <strong>1956</strong> and 1964"에서 보듯 생산이 '시작된' 해이다. 두 연도를 뒤바꿔 읽게 만든 함정이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> <span class="ul-word">All</span> of the 388,381 tractors built between 1956 and 1964 have <span class="ul-word">survived</span> to the present day.
+      <span class="reason">불일치 — 원문은 "how long did the other 388,381 ~ tractors ~ last before they <strong>went for scrap</strong>?"로, 나머지 38만여 대는 폐품이 되었음을 환기시킨다. "전부 살아남았다"는 정반대의 왜곡이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> The author concludes that the tractor's long survival <span class="ul-word">proves</span> its superior build quality.
+      <span class="reason">불일치 — "survived ~ <strong>seems to</strong> provide evidence of its superior build quality"는 필자가 제시한 '표면적' 해석일 뿐이다. 이어 "But wait ~ <strong>Rather than build quality</strong>"로 이를 반박하므로, "증명한다(proves)"는 필자의 최종 주장과 어긋난다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">④</span> Irish people's fondness for the little red tractor, rather than its build quality, likely explains why farmers there have kept and cared for it.
+      <span class="reason">일치 — "<strong>Rather than build quality, it might well be the fondness</strong> that people in Ireland have for the little red tractor that has led farmers there to <strong>hold on to</strong> their Massey Fergusons and <strong>take care of</strong> them." 글의 결론을 정확히 패러프레이즈한 유일한 선지이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> Harry Ferguson, who developed the tractor, was born in <span class="ul-word">the USA</span>.
+      <span class="reason">불일치 — 괄호 속 정보 "Harry Ferguson, who developed it, <strong>was born in Ireland</strong>"에 따르면 출생지는 아일랜드이다. 본문에 등장한 지명(UK·USA)을 끌어다 붙인 세부 정보 함정이다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    일치 문제에서 <strong>"seems to(처럼 보인다)"</strong>로 제시된 진술은 필자의 최종 주장이 아닐 가능성이 높다. 이 글은 <strong>"But wait / Rather than"</strong>이라는 전환 신호 뒤에 진짜 결론(④)이 온다. 표면 해석(③)과 연도·수치(①②), 각주성 세부 정보(⑤)를 사실과 대조해 걸러낸다.
+  </div>
+
+  <div class="page-footer">
+    <span>18. 문단요약 일치추론</span>
+    <span>3 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — Ex 2 문제: 내용 불일치 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> Ex 2 — 내용 불일치 <span class="type-tag">불일치</span></h2>
+
+  <p style="font-size:9.5pt; color:var(--muted); margin:2px 0 0;">
+    <span class="code-badge">26005-0092</span>
+    <span class="passage-badge">원문 p.109 · Ex 2</span>
+    <span class="type-tag">難 상</span>
+  </p>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 <strong>일치하지 않는 것</strong>은?</p>
+
+    <div class="passage">
+      &nbsp;&nbsp;During crises that present immediate danger (e.g., natural disasters, acts of violence or terrorism, transportation crises), people seek trusted and verified sources to ease their immediate concerns, thus turning to traditional sources such as television and radio. For other crisis types, such as public health and political crises, however, people are more likely to turn to social media where they can seek multiple voices and a variety of expert opinions, as, unlike the first set of crises, public health and political crises may be more subjective and less straightforward, and thus necessitate a deeper dive into supplementary information and evidence. In addition to the type of crisis at hand, Liu, a communication scholar, and colleagues argued that traditional and social media have different effects on different audiences regarding the motivation to follow instructions and recommended behaviors during crises. For example, although younger audiences seem to favor social media to traditional media sources during times of crisis, older audiences indicate a preference for traditional media. Thus, both traditional and social media play a prominent role in delivering important scientific information to the public during crises.
+    </div>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> During crises posing immediate danger, people tend to rely on traditional sources such as television and radio.</li>
+      <li><span class="num">②</span> Public health and political crises tend to be more subjective and less clear-cut than immediate-danger crises.</li>
+      <li><span class="num">③</span> Older audiences, <span class="ul-word">much like younger ones, prefer social media</span> during times of crisis.</li>
+      <li><span class="num">④</span> Liu and colleagues argued that traditional and social media affect different audiences differently.</li>
+      <li><span class="num">⑤</span> The author concludes that both traditional and social media play an important role in delivering scientific information during crises.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 모순되는 한 선지의 근거 문장을 찾아 적어 보세요</div>
+
+  <div class="page-footer">
+    <span>18. 문단요약 일치추론</span>
+    <span>4 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — Ex 2 해설: 내용 불일치 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> Ex 2 해설 — 내용 불일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ③ (유일한 거짓)</p>
+    <p style="margin:4px 0; font-size:10.5pt;">Older audiences, much like younger ones, prefer social media during times of crisis.<br>나이 든 수용자도 젊은 층처럼 위기 시 소셜 미디어를 선호한다. → 원문과 모순</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 어휘 분석</span>
+    <table>
+      <tr><th style="width:30%;">핵심어</th><th style="width:26%;">의미</th><th>검증 / 모순 포인트</th></tr>
+      <tr><td>older audiences indicate a preference for traditional media</td><td>나이 든 수용자는 전통 미디어를 선호한다고 나타난다</td><td>③의 거짓 근거 — 나이 든 층은 전통 미디어 선호. "소셜 미디어 선호"는 정반대 오독</td></tr>
+      <tr><td>immediate danger ~ turning to traditional sources (TV, radio)</td><td>즉각적 위험 ~ 전통 매체(TV·라디오)에 의지</td><td>①의 참 근거 — 즉각적 위기에서는 전통 매체 의존</td></tr>
+      <tr><td>more subjective and less straightforward</td><td>더 주관적이고 덜 명확한</td><td>②의 참 근거 — straightforward = clear-cut(명확한)</td></tr>
+      <tr><td>different effects on different audiences</td><td>서로 다른 수용자에게 서로 다른 영향</td><td>④의 참 근거 — Liu와 동료들의 주장 그대로</td></tr>
+      <tr><td>both ~ play a prominent role in delivering ~ scientific information</td><td>양쪽 모두 ~ 과학 정보 전달에 중요한 역할</td><td>⑤의 참 근거 — 글의 결론 문장과 일치</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>18. 문단요약 일치추론</span>
+    <span>5 / 6</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> During crises posing immediate danger, people tend to rely on traditional sources such as television and radio.
+      <span class="reason">일치 — "During crises that present <strong>immediate danger</strong> ~ thus <strong>turning to traditional sources such as television and radio</strong>." 즉각적 위험 상황에서 전통 매체에 의지한다는 진술과 부합한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> Public health and political crises tend to be more subjective and less clear-cut than immediate-danger crises.
+      <span class="reason">일치 — "public health and political crises may be <strong>more subjective and less straightforward</strong>." straightforward(명확한)를 clear-cut으로 바르게 옮긴, 핵심어의 정확한 이해를 요구하는 참 선지이다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">③</span> Older audiences, <span class="ul-word">much like younger ones, prefer social media</span> during times of crisis.
+      <span class="reason">불일치(정답) — 원문은 "younger audiences seem to favor social media ~ <strong>older audiences indicate a preference for traditional media</strong>"로, 젊은 층과 나이 든 층의 선호가 <strong>대비</strong>된다. 나이 든 층까지 소셜 미디어를 선호한다는 것은 정반대의 모순이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span> Liu and colleagues argued that traditional and social media affect different audiences differently.
+      <span class="reason">일치 — "Liu ~ and colleagues argued that traditional and social media have <strong>different effects on different audiences</strong>." 학자들의 주장을 그대로 패러프레이즈한 참 선지이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> The author concludes that both traditional and social media play an important role in delivering scientific information during crises.
+      <span class="reason">일치 — "Thus, <strong>both traditional and social media play a prominent role in delivering important scientific information</strong> to the public during crises." 결론 문장과 정확히 일치한다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    불일치 문제의 핵심은 <strong>대비 구조(contrast)</strong>의 방향 검증이다. 원문은 "younger → social media" vs "older → traditional media"로 <strong>세대별 선호가 정반대</strong>임을 명시한다. ③은 이 대비를 "older도 younger처럼 social media"로 뒤집은 전형적 모순이며, "older audiences indicate a preference for traditional media" 한 문장이 결정적 반증이 된다.
+  </div>
+
+  <div class="page-footer">
+    <span>18. 문단요약 일치추론</span>
+    <span>6 / 6</span>
+  </div>
+</section>
+
+</body>
+</html>

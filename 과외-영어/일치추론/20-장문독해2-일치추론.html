@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20. 장문 독해 (2) — 일치추론</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  .question-block, .answer-reveal, .explain-box, .tip, .word-bank,
+  .model-answer, .rubric, .writing-area, .memo-area, .dist-table,
+  table, tr, .choice-list li, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — Ex 1 지문 ============ -->
+<section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a><a class="nav-btn vocab" href="../단어/20-장문독해2-Ex1-2-단어정리.html">📖 단어정리</a><a class="nav-btn" href="../분석노트/20-장문독해2-Ex1-분석노트.html">📘 분석노트</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 일치추론</div>
+    <h1>20. 장문 독해 (2) — 일치추론</h1>
+    <p class="subtitle">동물 보호소 Elaine의 감정 노동 · 소년 William과 냄새 값</p>
+    <p class="meta">
+      <span class="code-badge">26005-0108~0110</span>
+      <span class="passage-badge">원문 p.120 · Ex 1</span>
+      <span class="type-tag">難 상</span>
+    </p>
+  </div>
+
+  <h2><span class="q-badge">1</span> Ex 1 — 내용 일치 <span class="type-tag">일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 일치하는 것은?</p>
+
+    <div class="passage" style="font-size:10pt; line-height:1.7;">
+      &nbsp;&nbsp;The manager of the Humane Society was out of town for two weeks, and Elaine was placed in charge. Since she had <span class="ul-word">taken on this responsibility before</span>, she was familiar with the challenges she might encounter — impounding stray animals, reuniting pets with their owners, informing people their pet hadn't been found, accepting animals from those who could no longer care for them, or turning animals away when the shelter was full. Though she found the work demanding, she handled these situations with confidence and calm.
+      <br><br>
+      &nbsp;&nbsp;On the first day of the manager's absence, everything was running smoothly until a woman arrived with a cat and asked to leave it at the shelter. Elaine's first question was whether the cat was a stray or not, since the shelter was <span class="ul-word">obligated to take in strays but could refuse owned pets</span>. The woman said it was her cat and explained that she was moving and couldn't take it with her — a common excuse. Although the shelter sometimes accepted pets in such cases, it was already housing <span class="ul-word">over ninety cats, nearly double its capacity of fifty</span>, so Elaine <span class="ul-word">had to politely refuse</span>.
+      <br><br>
+      &nbsp;&nbsp;Elaine calmly explained that there was no space available, but the woman became visibly upset and said, "If you don't take this cat, I'll just have to let it go somewhere." Although such statements were sadly not unusual, they always troubled Elaine. Still, she maintained professionalism, offered contact information for other shelters, and tried to help. The woman complained the alternatives were too far and repeated she had no other choice. Elaine then suggested the shelter might find a volunteer to transport the cat. In response, the woman, showing her frustration toward her, placed the cat's kennel in front of her, raised her voice, and left the shelter.
+      <br><br>
+      &nbsp;&nbsp;Elaine could no longer hold it in. She gently put the cat in a kennel and brought it to the back isolation area. Then she went to the back room and called the absent manager, who encouraged her to <span class="ul-word">let it all out</span>. Elaine shared what happened and released her emotions while the manager listened. She felt much better afterward and was relieved to have someone she could talk to without fear of judgment. Since then, the manager has encouraged staff to come to her if they need to release emotions kept in at work — and she listens.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* impound: 수용하다, 가둬 두다 &nbsp; ** stray: 길 잃은 &nbsp; *** kennel: 이동장 &nbsp; **** obligate: 의무를 지우다</p>
+  </div>
+
+  <div class="page-footer">
+    <span>20. 장문독해2 일치추론</span>
+    <span>1 / 7</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — Ex 1 선지 + memo ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">1</span> Ex 1 — 내용 일치 <span class="type-tag">일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 일치하는 것은? <span style="font-weight:500; color:var(--muted); font-size:10pt;">(지문은 앞 페이지 참조)</span></p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> When the woman first arrived, Elaine immediately agreed to take in her cat.</li>
+      <li><span class="num">②</span> Elaine turned the cat away because she doubted the woman was really moving.</li>
+      <li><span class="num">③</span> The shelter was holding roughly twice the number of cats it was designed for.</li>
+      <li><span class="num">④</span> Elaine kept her distress to herself and spoke to no one about it.</li>
+      <li><span class="num">⑤</span> Over the phone, the manager told Elaine to firmly reject all such requests in the future.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 각 선지가 지문의 어느 문장과 어긋나는지(또는 일치하는지) 근거 문장을 적어 보세요.</div>
+
+  <div class="page-footer">
+    <span>20. 장문독해2 일치추론</span>
+    <span>2 / 7</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — Ex 1 해설 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">1</span> Ex 1 해설 — 내용 일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ③ The shelter was holding roughly twice the number of cats it was designed for.</p>
+    <p style="margin:4px 0; font-size:10.5pt;">보호소는 수용 정원의 약 두 배에 달하는 고양이를 데리고 있었다 — "over ninety cats, nearly double its capacity of fifty"의 정확한 paraphrase.</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 어휘 분석</span>
+    <table>
+      <tr><th style="width:24%;">어휘</th><th style="width:30%;">뜻</th><th>일치추론 포인트</th></tr>
+      <tr><td><strong>capacity</strong></td><td>수용력, 최대 정원</td><td>"nearly double its capacity of fifty" = 정원 50의 두 배 → ③ 정답 근거</td></tr>
+      <tr><td><strong>obligate</strong></td><td>의무를 지우다</td><td>strays는 의무적으로 수용, owned pets는 refuse 가능 — ②의 거절 '이유' 오독 주의</td></tr>
+      <tr><td><strong>politely refuse</strong></td><td>정중히 거절하다</td><td>자리가 없어 거절 → ① "immediately agreed" 모순</td></tr>
+      <tr><td><strong>hold ~ in / let ~ out</strong></td><td>참다 / 표출하다</td><td>감정을 참다가 매니저에게 'let it all out' → ④ "spoke to no one" 모순</td></tr>
+      <tr><td><strong>release emotions</strong></td><td>감정을 풀어놓다</td><td>매니저는 감정 표출을 권유 → ⑤ "reject all requests" 모순</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>20. 장문독해2 일치추론</span>
+    <span>3 / 7</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> When the woman first arrived, Elaine immediately agreed to take in her cat.
+      <span class="reason">정반대. 보호소가 이미 정원의 두 배를 수용 중이어서 Elaine은 <span class="ul-word">"had to politely refuse"</span>했다. "immediately agreed"는 행동 오독 함정.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> Elaine turned the cat away because she doubted the woman was really moving.
+      <span class="reason">거절의 '이유' 오독. 거절 이유는 의심(doubt)이 아니라 <span class="ul-word">공간 부족</span>("no space available", 정원 초과)이다. 이사 이야기는 'a common excuse'로 언급될 뿐 거절 사유가 아니다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">③</span> The shelter was holding roughly twice the number of cats it was designed for.
+      <span class="reason">완전 일치. "over ninety cats, nearly double its capacity of fifty"를 'roughly twice the number it was designed for'로 정확히 paraphrase. 유일하게 본문이 직접 뒷받침한다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">④</span> Elaine kept her distress to herself and spoke to no one about it.
+      <span class="reason">모순. Elaine은 부재중 매니저에게 전화해 감정을 <span class="ul-word">released</span>하고 'let it all out'했다. "spoke to no one"은 인물 행동 오독 함정.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> Over the phone, the manager told Elaine to firmly reject all such requests in the future.
+      <span class="reason">동기 오독. 매니저가 전화로 한 것은 '감정을 다 쏟아내라(let it all out)'는 격려이지, 향후 요청을 거절하라는 지시가 아니다. 매니저는 이후 직원들에게도 감정 표출을 권장한다.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">함정</span>
+    이야기형 지문의 일치추론은 <strong>인물의 '행동'과 '동기'를 바꿔치기</strong>하는 함정이 핵심이다.
+    ①(거절→동의), ②(공간 부족→의심), ⑤(감정 표출 격려→거절 지시)처럼 본문에 등장하는 단어를 그대로 쓰되 <strong>방향만 비튼다</strong>. 각 선지마다 근거 문장을 본문에서 직접 찾아 대조하라.
+  </div>
+
+  <div class="page-footer">
+    <span>20. 장문독해2 일치추론</span>
+    <span>4 / 7</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — Ex 2 문제 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> Ex 2 — 내용 불일치 <span class="type-tag">불일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 일치하지 <strong>않는</strong> 것은?</p>
+
+    <div class="passage" style="font-size:10pt; line-height:1.7;">
+      &nbsp;&nbsp;One evening, little William was on his way home from his friend's. He was passing through the market. On his way, he came across the beautiful aroma of some meatballs sold by an elderly vendor just across the road. The smell was so pleasant that little William <span class="ul-word">had to stop by the stand</span> to purchase some meatballs. However, the meatballs <span class="ul-word">didn't have a listed price</span>, so he decided to head directly home. Just as little William turned to leave, a firm voice stopped him.
+      <br><br>
+      &nbsp;&nbsp;It was the elderly vendor. "Wait! You can't just leave. Before you go, you have to pay," he said. Little William was surprised at the statement made by the elderly vendor. He asked him, "Payment for what, Sir? I didn't purchase any meatballs." The vendor insisted that although little William did not purchase any meatballs, he enjoyed the pleasant smell of his meatballs <span class="ul-word">for quite a long time</span>. He truly believed that little William had to pay for it because smelling was as good as eating.
+      <br><br>
+      &nbsp;&nbsp;Little William was upset about this. He didn't know how merely smelling the meatballs meant that he had to pay for them. After observing the man for a short while, little William dipped his hands in his pocket and <span class="ul-word">jingled a few coins</span>. The elderly vendor was excited to hear the coin sound. He said, "Now hurry up, boy. Pay the money fast." Little William replied, "I have already paid the money, Sir. You didn't understand?"
+      <br><br>
+      &nbsp;&nbsp;The shopkeeper angrily shouted, "When did you pay the money? You reached into your pocket but <span class="ul-word">came out empty-handed</span>!" Little William made it clear that he had just paid, reminding the shopkeeper that he had heard the jingle of the coins from his pocket. He added that if smelling is as good as eating, then hearing the sound of the coins should also be <span class="ul-word">as good as receiving them</span>. He smiled proudly and walked home from there, leaving the man completely surprised.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* jingle: (딸랑거리는) 소리; 딸랑거리다</p>
+
+    <ul class="choice-list">
+      <li><span class="num">①</span> William stopped at the stand because the smell of the meatballs was so pleasant.</li>
+      <li><span class="num">②</span> William started for home without buying anything because the meatballs had no listed price.</li>
+      <li><span class="num">③</span> The vendor demanded payment on the grounds that William had enjoyed the smell for a long time.</li>
+      <li><span class="num">④</span> William took a few coins out of his pocket and handed them to the vendor as payment.</li>
+      <li><span class="num">⑤</span> William claimed that hearing the coins jingle was as good as the vendor receiving them.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 거짓인 선지 하나를 찾고, 그 근거가 되는 본문 문장을 적어 보세요.</div>
+
+  <div class="page-footer">
+    <span>20. 장문독해2 일치추론</span>
+    <span>5 / 7</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — Ex 2 해설 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> Ex 2 해설 — 내용 불일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ④ William took a few coins out of his pocket and handed them to the vendor as payment.</p>
+    <p style="margin:4px 0; font-size:10.5pt;">William은 주머니 속에서 동전을 <strong>딸랑거리기만</strong> 했을 뿐, 동전을 꺼내 건네지 않았다 — "came out empty-handed". 그래서 ④는 본문과 모순(불일치)이다.</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 어휘 분석</span>
+    <table>
+      <tr><th style="width:24%;">어휘</th><th style="width:30%;">뜻</th><th>일치추론 포인트</th></tr>
+      <tr><td><strong>jingle</strong></td><td>(동전이) 딸랑거리다</td><td>'jingled a few coins'는 '소리를 냈다'일 뿐 '건넸다'가 아님 → ④ 거짓의 핵심</td></tr>
+      <tr><td><strong>empty-handed</strong></td><td>빈손의</td><td>"came out empty-handed" — 동전을 실제로 꺼내지 않았다는 결정적 단서</td></tr>
+      <tr><td><strong>listed price</strong></td><td>표시된 가격</td><td>가격 미표시 → 그냥 귀가 결정 → ② 참</td></tr>
+      <tr><td><strong>as good as</strong></td><td>~이나 다름없는</td><td>smelling=eating → hearing=receiving 대구 → ⑤ 참</td></tr>
+      <tr><td><strong>insist / for a long time</strong></td><td>주장하다 / 오랫동안</td><td>오래 냄새를 즐겼다는 이유로 지불 요구 → ③ 참</td></tr>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>20. 장문독해2 일치추론</span>
+    <span>6 / 7</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">일치</span> <span class="num">①</span> William stopped at the stand because the smell of the meatballs was so pleasant.
+      <span class="reason">참. "The smell was so pleasant that little William <span class="ul-word">had to stop by the stand</span>." 멈춘 이유가 향기임을 정확히 반영.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">일치</span> <span class="num">②</span> William started for home without buying anything because the meatballs had no listed price.
+      <span class="reason">참. "the meatballs <span class="ul-word">didn't have a listed price</span>, so he decided to head directly home." 가격 미표시 → 미구매 귀가.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">일치</span> <span class="num">③</span> The vendor demanded payment on the grounds that William had enjoyed the smell for a long time.
+      <span class="reason">참. 노점상은 William이 "enjoyed the pleasant smell ... <span class="ul-word">for quite a long time</span>"이므로 지불해야 한다고 주장했다.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">불일치</span> <span class="num">④</span> William took a few coins out of his pocket and handed them to the vendor as payment.
+      <span class="reason">거짓 = 정답. William은 동전을 <span class="ul-word">jingled</span>(소리만 냄)했을 뿐, "reached into his pocket but <span class="ul-word">came out empty-handed</span>." 동전을 건넨 적 없다. '소리=지불'이라는 그의 논리를 '실제 건넴'으로 오독한 함정.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">일치</span> <span class="num">⑤</span> William claimed that hearing the coins jingle was as good as the vendor receiving them.
+      <span class="reason">참. "if smelling is as good as eating, then hearing the sound of the coins should also be <span class="ul-word">as good as receiving them</span>." William의 반박 논리 그대로.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">포인트</span>
+    불일치 문제에서 거짓 선지는 본문의 핵심어를 그대로 쓰되 <strong>행동의 결과를 한 단계 비튼다</strong>.
+    ④는 'jingled(소리만 냄)'를 'handed(건넴)'로 바꿔 결말을 뒤집은 것 — 결정적 반증은 <strong>"came out empty-handed"</strong> 한 구절이다. 동사 하나의 차이가 정답을 가른다.
+  </div>
+
+  <div class="page-footer">
+    <span>20. 장문독해2 일치추론</span>
+    <span>7 / 7</span>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17. 문단 속 문장 넣기 — 일치추론</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.en { font-family: 'Times New Roman', Georgia, serif; }
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; font-family: 'Pretendard','Apple SD Gothic Neo',sans-serif; }
+.choice-list .reason .q { font-family: 'Times New Roman', Georgia, serif; color: #28344a; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-right: 6px;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+td .en { font-family: 'Times New Roman', Georgia, serif; font-weight: 600; color: var(--accent); }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+.answer-reveal .ans-label .en { font-family: 'Times New Roman', Georgia, serif; }
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  .question-block, .answer-reveal, .explain-box, .tip,
+  table, tr, .choice-list li, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — Ex 1 문제 (내용 일치) ============ -->
+<section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a><a class="nav-btn vocab" href="../단어/17-문장넣기-Ex1-2-단어정리.html">📖 단어정리</a><a class="nav-btn" href="../분석노트/17-문장넣기-Ex1-분석노트.html">📘 분석노트</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 일치추론</div>
+    <h1>17. 문단 속 문장 넣기 — 일치추론</h1>
+    <p class="subtitle">딥 워크 vs 셸로우 워크 · 주관적 현실과 언어</p>
+    <p class="meta">
+      <span class="code-badge">26005-0084</span>
+      <span class="passage-badge">원문 p.102 · Ex 1</span>
+      <span class="type-tag">難 상</span>
+    </p>
+  </div>
+
+  <h2><span class="q-badge">1</span> Ex 1 — 내용 일치 <span class="type-tag">일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 일치하는 것은?</p>
+
+    <div class="passage">
+      &nbsp;&nbsp;Deep work is when you perform an activity with deep concentration that pushes your cognitive capabilities, and by doing so create new value and improve your skills. These efforts are <span class="ul-word">hard to replicate</span>; and to be able to do deep work, we need a distraction-free environment. For many people though, we spend far too much time on the other end of the scale, doing what is referred to as shallow work. This style of working is <span class="ul-word">not cognitively demanding</span> but is rather an execution of logical-type tasks that <span class="ul-word">rarely create new value (although they may still be important)</span>. We often perform these tasks <span class="ul-word">while we are distracted</span>. Shallow work has its place, both because routine-type tasks need to be done and because we <span class="ul-word">cannot spend our entire time doing deep work</span>. The problem with too much shallow work is that we feel busy, maybe even stressed, but we rarely see any output reflecting our experienced effort.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* replicate: 재현하다, 반복하다 &nbsp; ** execution: 실행, 수행</p>
+
+    <ul class="choice-list">
+      <li class="en"><span class="num">①</span> Shallow work demands a high level of cognitive effort because of its logical nature.</li>
+      <li class="en"><span class="num">②</span> The new value produced through deep work can be readily copied by other people.</li>
+      <li class="en"><span class="num">③</span> People tend to carry out deep-work tasks even while they are distracted.</li>
+      <li class="en"><span class="num">④</span> Doing shallow work is partly justified because one cannot spend all of one's time on deep work.</li>
+      <li class="en"><span class="num">⑤</span> Shallow work produces no value whatsoever, so it ought to be eliminated.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 근거 문장을 찾아 표시해 보세요</div>
+
+  <div class="page-footer">
+    <span>17. 문장넣기 일치추론</span>
+    <span>1 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — Ex 1 해설 ============ -->
+<section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">1</span> Ex 1 해설 — 내용 일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답: ④ <span class="en">Doing shallow work is partly justified because one cannot spend all of one's time on deep work.</span></p>
+    <p style="margin:4px 0; font-size:10.5pt;">얕은 작업을 하는 것은, 모든 시간을 깊은 작업에만 쓸 수는 없기 때문에 부분적으로 정당화된다.</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 어휘 분석 — 함정 단어의 정확한 뜻 vs 오독</span>
+    <table>
+      <thead>
+        <tr><th style="width:26%;">단어 (각주)</th><th style="width:32%;">정확한 뜻</th><th>오독하면 빠지는 함정</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="en">replicate</span> (각주)</td><td>재현하다, 반복하다 → <span class="en">hard to replicate</span> = "재현하기 어렵다"</td><td>"쉽게 복제·모방 가능"으로 정반대 오독 → ②</td></tr>
+        <tr><td><span class="en">(not) cognitively demanding</span></td><td>인지적으로 부담을 주지 <strong>않는</strong> (셸로우 워크의 특징)</td><td>"logical-type" 만 보고 "demanding(부담됨)"으로 오독 → ①</td></tr>
+        <tr><td><span class="en">distracted</span></td><td>산만한 — <strong>these tasks</strong>(=셸로우 워크)를 할 때</td><td>주어를 deep work로 바꿔 읽는 함정 → ③</td></tr>
+        <tr><td><span class="en">rarely</span> / <span class="en">may still be important</span></td><td>새 가치를 "거의" 못 만듦 + "그래도 중요할 수 있음"</td><td>"전혀 가치 없음(no value)·없애야 함"으로 과장 오독 → ⑤</td></tr>
+        <tr><td><span class="en">cannot ... entire time ... deep work</span></td><td>모든 시간을 딥 워크에만 쓸 수는 없다 (셸로우 워크의 존재 이유)</td><td>정답 근거 — 정확히 읽으면 ④</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>17. 문장넣기 일치추론</span>
+    <span>2 / 6</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">①</span> <span class="q">Shallow work demands a high level of cognitive effort because of its logical nature.</span>
+      <span class="reason">함정 단어 <strong>demanding</strong> 오독(뉘앙스 반전). 본문은 <span class="q">"This style of working is <strong>not</strong> cognitively demanding"</span>이라고 명시 — 셸로우 워크는 인지적 부담이 <strong>없다</strong>. "logical-type tasks"를 "고도의 인지 노력"으로 오해하면 걸린다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">②</span> <span class="q">The new value produced through deep work can be readily copied by other people.</span>
+      <span class="reason">각주 단어 <strong>replicate</strong> 오독(정반대). 본문 <span class="q">"These efforts are <strong>hard to</strong> replicate"</span> — 재현이 <strong>어렵다</strong>. "readily copied(쉽게 복제됨)"는 정반대 진술이다.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">③</span> <span class="q">People tend to carry out deep-work tasks even while they are distracted.</span>
+      <span class="reason">함정 단어 <strong>distracted</strong> 주어 혼동. 산만하게 수행하는 것은 <span class="q">"these tasks"</span> 즉 <strong>셸로우 워크</strong>이며, 딥 워크는 오히려 <span class="q">"distraction-free environment"</span>를 요구한다. 주어를 바꿔 읽는 함정.</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-o">O</span> <span class="num">④</span> <span class="q">Doing shallow work is partly justified because one cannot spend all of one's time on deep work.</span>
+      <span class="reason">근거: <span class="q">"Shallow work has its place, ... because we <strong>cannot spend our entire time doing deep work</strong>."</span> 셸로우 워크가 나름의 자리를 갖는 이유를 그대로 환언(paraphrase)한 정답.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-x">X</span> <span class="num">⑤</span> <span class="q">Shallow work produces no value whatsoever, so it ought to be eliminated.</span>
+      <span class="reason">함정 단어 <strong>rarely / important</strong> 과장 오독. 본문은 <span class="q">"<strong>rarely</strong> create new value (although they may still be <strong>important</strong>)"</span>이고 <span class="q">"has its place"</span>라고 했다. "거의 없음 ≠ 전혀 없음", "없애야 함"은 본문에 없는 처방.</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    일치 추론은 <strong>핵심어 한 단어의 정확한 뜻</strong>에서 갈린다. ① <strong>not</strong> demanding의 부정, ② <strong>hard to</strong> replicate의 방향, ③ <strong>these tasks</strong>의 지시 대상(셸로우), ⑤ <strong>rarely ≠ never</strong>를 놓치면 함정 선지를 고른다. 정답 ④는 단어를 그대로 베끼지 않고 <strong>의미만 환언</strong>한 선지임에 주목한다.
+  </div>
+
+  <div class="page-footer">
+    <span>17. 문장넣기 일치추론</span>
+    <span>3 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — Ex 2 문제 (내용 불일치) ============ -->
+<section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> Ex 2 — 내용 불일치 <span class="type-tag">불일치</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 내용과 일치하지 <strong>않는</strong> 것은?</p>
+
+    <div class="passage">
+      &nbsp;&nbsp;Symbols are <span class="ul-word">instrumental</span> in helping people derive meanings from social situations. In social encounters, each person's interpretation or definition of a given situation becomes a subjective reality from that person's viewpoint. We often assume that what we consider to be "reality" is shared by others; however, <span class="ul-word">this assumption is often incorrect</span>. Subjective reality is acquired and shared through <span class="ul-word">agreed-upon symbols, especially language</span>. If a person shouts "Fire!" in a crowded movie theater, for example, that language produces the same response (attempting to escape) in all of those who <span class="ul-word">hear and understand it</span>. When people in a group <span class="ul-word">do not share the same meaning</span> for a given symbol, however, confusion results; for example, people who did not know the meaning of the word fire would not know what the commotion was about. How people interpret the messages they receive and the situations they encounter <span class="ul-word">depends largely on their own perception</span>.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* instrumental: 도구적인, 중요한 역할을 하는 &nbsp; ** commotion: 소동, 소란</p>
+
+    <ul class="choice-list">
+      <li class="en"><span class="num">①</span> The belief that everyone shares our own version of reality frequently turns out to be mistaken.</li>
+      <li class="en"><span class="num">②</span> Subjective reality is gained and shared by means of mutually accepted symbols, language in particular.</li>
+      <li class="en"><span class="num">③</span> A shout of "Fire!" prompts the same escape response in everyone who hears it, even those who do not grasp the word's meaning.</li>
+      <li class="en"><span class="num">④</span> When members of a group attach different meanings to the same symbol, confusion arises.</li>
+      <li class="en"><span class="num">⑤</span> The way people make sense of the situations they face rests largely on their individual perception.</li>
+    </ul>
+  </div>
+
+  <div class="memo-area">메모 공간 — 참(T)·거짓(F)을 선지 옆에 표시해 보세요</div>
+
+  <div class="page-footer">
+    <span>17. 문장넣기 일치추론</span>
+    <span>4 / 6</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — Ex 2 해설 ============ -->
+<section class="page">
+  <div class="nav-bar"><div class="nav-group"><a class="nav-btn" href="index.html">← 목록</a></div><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> Ex 2 해설 — 내용 불일치</h2>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답(일치하지 않는 것): ③ <span class="en">A shout of "Fire!" prompts the same escape response in everyone who hears it, even those who do not grasp the word's meaning.</span></p>
+    <p style="margin:4px 0; font-size:10.5pt;">"불(Fire)!"이라는 외침은 단어의 의미를 <strong>이해하지 못하는</strong> 사람에게도 동일한 탈출 반응을 일으킨다 → 본문과 모순.</p>
+  </div>
+
+  <div class="explain-box">
+    <span class="label">핵심 어휘 분석 — 함정 단어의 정확한 뜻 vs 오독</span>
+    <table>
+      <thead>
+        <tr><th style="width:26%;">단어 (각주)</th><th style="width:32%;">정확한 뜻</th><th>참·거짓을 가르는 지점</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="en">hear and understand it</span></td><td>듣고 <strong>그리고</strong> 이해하는 사람 — 두 조건을 <strong>모두</strong> 충족해야 함</td><td>"이해 못 해도(regardless / even those who do not grasp)"로 읽으면 거짓 → ③(정답)</td></tr>
+        <tr><td><span class="en">do not share the same meaning</span></td><td>같은 의미를 공유하지 못하면 → 혼란(confusion) 발생</td><td>"different meanings"로 정확히 환언 → ④(참)</td></tr>
+        <tr><td><span class="en">agreed-upon</span>, <span class="en">especially</span></td><td>합의된 상징, <strong>특히</strong> 언어를 통해</td><td>"mutually accepted ... in particular"로 환언 → ②(참)</td></tr>
+        <tr><td><span class="en">assumption ... often incorrect</span></td><td>현실이 공유된다는 가정은 흔히 틀림</td><td>"frequently turns out to be mistaken"으로 환언 → ①(참)</td></tr>
+        <tr><td><span class="en">depends ... on their own perception</span></td><td>해석은 각자의 인식(지각)에 크게 좌우됨</td><td>"rests largely on their individual perception" → ⑤(참)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="page-footer">
+    <span>17. 문장넣기 일치추론</span>
+    <span>5 / 6</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h3>선지별 분석</h3>
+
+  <ul class="choice-list">
+    <li class="wrong">
+      <span class="tag tag-o">참</span> <span class="num">①</span> <span class="q">The belief that everyone shares our own version of reality frequently turns out to be mistaken.</span>
+      <span class="reason">근거: <span class="q">"We often assume that ... 'reality' is shared by others; however, this <strong>assumption is often incorrect</strong>."</span> 가정이 흔히 틀리다는 내용을 정확히 환언. (참)</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-o">참</span> <span class="num">②</span> <span class="q">Subjective reality is gained and shared by means of mutually accepted symbols, language in particular.</span>
+      <span class="reason">근거: <span class="q">"Subjective reality is acquired and shared through <strong>agreed-upon symbols, especially language</strong>."</span> agreed-upon→mutually accepted, especially→in particular로 환언. (참)</span>
+    </li>
+    <li class="correct">
+      <span class="tag tag-x">거짓</span> <span class="num">③</span> <span class="q">A shout of "Fire!" prompts the same escape response in everyone who hears it, even those who do not grasp the word's meaning.</span>
+      <span class="reason">정답(불일치). 본문은 동일 반응이 나오는 대상을 <span class="q">"all of those who <strong>hear and understand</strong> it"</span>로 한정 — <strong>듣고 이해한</strong> 사람뿐이다. 게다가 바로 뒤 <span class="q">"people who did not know the meaning of the word fire would not know what the commotion was about"</span>이 이를 재확인한다. "이해하지 못해도 동일 반응"은 본문과 정면 모순.</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-o">참</span> <span class="num">④</span> <span class="q">When members of a group attach different meanings to the same symbol, confusion arises.</span>
+      <span class="reason">근거: <span class="q">"When people in a group <strong>do not share the same meaning</strong> for a given symbol, ... confusion results."</span> "같은 의미를 공유하지 않음 = 다른 의미를 부여함"으로 정확히 환언. (참)</span>
+    </li>
+    <li class="wrong">
+      <span class="tag tag-o">참</span> <span class="num">⑤</span> <span class="q">The way people make sense of the situations they face rests largely on their individual perception.</span>
+      <span class="reason">근거: <span class="q">"How people interpret ... the situations they encounter <strong>depends largely on their own perception</strong>."</span> interpret→make sense of, own→individual로 환언. (참)</span>
+    </li>
+  </ul>
+
+  <div class="tip">
+    <span class="label">풀이 전략</span>
+    불일치 추론은 <strong>참 4개를 먼저 소거</strong>하고 남는 1개를 잡는다. ③의 함정은 <span class="en">"hear <strong>and</strong> understand"</span>의 <strong>두 조건</strong>을 한 조건("듣기만")으로 축소한 데 있다. 같은 문단의 반례 문장(불을 모르는 사람은 소동의 이유를 모름)이 바로 그 반증이므로, 예시가 두 번 등장하면 <strong>조건의 범위</strong>를 반드시 대조한다.
+  </div>
+
+  <div class="page-footer">
+    <span>17. 문장넣기 일치추론</span>
+    <span>6 / 6</span>
+  </div>
+</section>
+
+</body>
+</html>
