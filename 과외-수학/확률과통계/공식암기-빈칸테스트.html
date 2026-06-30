@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>확률과통계 2·3단원 — 공식 암기 빈칸 테스트</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+:root {
+  --accent: #1f3a5f; --accent-soft: #eef2f7; --accent-line: #c9d4e2;
+  --ink: #1a1a1a; --muted: #5a6473; --warn-bg: #fff7e6; --warn-line: #e8c97a;
+  --green-bg: #edf7ed; --green-line: #8bc48b;
+}
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink); font-size: 11pt; line-height: 1.7;
+  -webkit-font-smoothing: antialiased; background: #e9edf1;
+}
+.page {
+  position: relative; display: flex; flex-direction: column;
+  width: 210mm; min-height: 297mm; padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm; background: #fff; box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+.author-bar {
+  display: flex; justify-content: flex-end; gap: 16px;
+  font-size: 8.7pt; color: var(--muted); letter-spacing: .2px;
+  padding-bottom: 6px; margin-bottom: 14px; border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+.doc-header { margin: 4px 0 18px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 20px 0 10px; padding-left: 10px; border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 9px 12px; text-align: left; vertical-align: middle; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f8fafc; }
+td.topic { width: 33%; font-weight: 600; color: #28344a; font-size: 10pt; }
+td.formula { font-family: 'Times New Roman', Georgia, serif; font-size: 12pt; }
+.page-footer {
+  margin-top: auto; padding-top: 6px; display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted); border-top: 1px solid var(--accent-line);
+}
+/* 수식 헬퍼 */
+.m { font-family: 'Times New Roman', Georgia, serif; font-style: italic; }
+sup, sub { font-size: .72em; }
+.frac { display: inline-block; vertical-align: middle; text-align: center; margin: 0 .12em; }
+.frac > span { display: block; padding: 0 .4em; line-height: 1.25; }
+.frac > .den { border-top: 1.3px solid currentColor; }
+.sqrt { white-space: nowrap; }
+.sqrt > .rad { border-top: 1.3px solid currentColor; padding: 0 .18em 0 .08em; }
+.sqrt::before { content: "√"; padding-right: .02em; }
+.ov { display: inline-block; line-height: 1; border-top: 1.4px solid currentColor; padding-top: .5px; }
+
+/* ===== 빈칸 (클릭하면 정답 펼침) ===== */
+.blank {
+  display: inline-block; min-width: 40px; padding: 0 7px; margin: 0 1px;
+  text-align: center; color: transparent; cursor: pointer;
+  border-bottom: 1.8px solid var(--accent); border-radius: 3px 3px 0 0;
+  transition: background .1s;
+}
+.blank:hover { background: var(--accent-soft); }
+.blank.on { color: var(--accent); font-weight: 700; background: var(--green-bg); border-bottom-color: var(--green-line); }
+body.show-all .blank { color: var(--accent); font-weight: 700; background: var(--green-bg); border-bottom-color: var(--green-line); }
+
+/* ===== 상단 조작 바 (인쇄 시 숨김) ===== */
+.quiz-bar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: center; align-items: center; gap: 10px;
+  background: var(--accent); padding: 9px 16px; box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  flex-wrap: wrap;
+}
+.quiz-bar span { color: #cdd8e6; font-size: 9.5pt; margin-right: 6px; }
+.quiz-bar button {
+  font-size: 10pt; font-weight: 600; border: 1.5px solid #fff; border-radius: 6px;
+  padding: 5px 16px; cursor: pointer; font-family: inherit;
+  background: transparent; color: #fff; transition: all .12s;
+}
+.quiz-bar button:hover { background: #fff; color: var(--accent); }
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: auto; height: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .page + .page { break-before: page; page-break-before: always; }
+  tr, table, .tip, h2 { break-inside: avoid; }
+  .quiz-bar { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="quiz-bar">
+  <span>정답 확인:</span>
+  <button onclick="document.body.classList.add('show-all')">정답 모두 보기</button>
+  <button onclick="document.body.classList.remove('show-all');document.querySelectorAll('.blank.on').forEach(b=>b.classList.remove('on'))">모두 가리기</button>
+</div>
+
+<!-- ============ PAGE 1 — 표지 + 2단원 ============ -->
+<section class="page">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">확률과통계 · 기말 대비</div>
+    <h1>2·3단원 공식 암기 — 빈칸 테스트</h1>
+    <p class="subtitle">확률 · 통계 필수 공식 21선 | 빈칸을 떠올린 뒤 클릭해 정답 확인</p>
+  </div>
+
+  <div class="tip">
+    <span class="label">사용법</span>
+    각 공식의 <strong>빈칸(밑줄 칸)</strong>에 들어갈 내용을 먼저 떠올린다 → <strong>빈칸을 클릭</strong>하면 정답이 펼쳐진다(다시 클릭하면 가려짐).
+    상단 <strong>「정답 모두 보기 / 모두 가리기」</strong>로 한 번에 전환. <strong>인쇄(⌘P)</strong>하면 빈칸 학습지로 출력된다(정답 보기 상태로 인쇄하면 정답지).
+  </div>
+
+  <h2>2단원 · 확률</h2>
+  <table>
+    <tr><th class="topic">주제 / 상황</th><th>공식 (빈칸을 채워 보세요)</th></tr>
+
+    <tr><td class="topic">수학적 확률</td>
+      <td class="formula"><span class="m">P</span>(<span class="m">A</span>) =
+        <span class="frac"><span class="num"><span class="blank"><span class="m">n</span>(<span class="m">A</span>)</span></span><span class="den"><span class="blank"><span class="m">n</span>(<span class="m">S</span>)</span></span></span>
+        &nbsp;<span style="font-size:9.5pt;color:#5a6473;">(사건 A의 경우의 수 ÷ 전체 경우의 수)</span></td></tr>
+
+    <tr><td class="topic">확률의 기본 성질</td>
+      <td class="formula">0 ≤ <span class="m">P</span>(<span class="m">A</span>) ≤ <span class="blank">1</span> ,&ensp;
+        <span class="m">P</span>(<span class="m">S</span>) = <span class="blank">1</span> ,&ensp;
+        <span class="m">P</span>(∅) = <span class="blank">0</span></td></tr>
+
+    <tr><td class="topic">통계적 확률</td>
+      <td class="formula"><span style="font-style:normal;">상대도수</span> =
+        <span class="frac"><span class="num"><span class="blank"><span class="m">r</span></span></span><span class="den"><span class="blank"><span class="m">n</span></span></span></span>
+        &ensp;→&ensp; <span class="m">n</span> → ∞ 이면 <span class="blank"><span style="font-style:normal;">수학적 확률</span></span>에 수렴</td></tr>
+
+    <tr><td class="topic">덧셈정리</td>
+      <td class="formula"><span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>) =
+        <span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>) −
+        <span class="blank"><span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)</span></td></tr>
+
+    <tr><td class="topic">배반사건 (A∩B=∅)</td>
+      <td class="formula"><span class="m">P</span>(<span class="m">A</span> ∪ <span class="m">B</span>) =
+        <span class="blank"><span class="m">P</span>(<span class="m">A</span>) + <span class="m">P</span>(<span class="m">B</span>)</span></td></tr>
+
+    <tr><td class="topic">여사건</td>
+      <td class="formula"><span class="m">P</span>(<span class="m">A<sup>c</sup></span>) =
+        <span class="blank">1 − <span class="m">P</span>(<span class="m">A</span>)</span>
+        &nbsp;<span style="font-size:9.5pt;color:#5a6473;">('적어도 / 이상' → 여사건)</span></td></tr>
+
+    <tr><td class="topic">조건부확률</td>
+      <td class="formula"><span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>) =
+        <span class="frac"><span class="num"><span class="blank"><span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>)</span></span><span class="den"><span class="blank"><span class="m">P</span>(<span class="m">A</span>)</span></span></span>
+        &nbsp;<span style="font-size:9.5pt;color:#5a6473;">(<span class="m">P</span>(<span class="m">A</span>) &gt; 0)</span></td></tr>
+
+    <tr><td class="topic">확률의 곱셈정리</td>
+      <td class="formula"><span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) =
+        <span class="m">P</span>(<span class="m">A</span>) × <span class="blank"><span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>)</span></td></tr>
+
+    <tr><td class="topic">독립의 조건</td>
+      <td class="formula"><span class="m">P</span>(<span class="m">A</span> ∩ <span class="m">B</span>) =
+        <span class="blank"><span class="m">P</span>(<span class="m">A</span>) · <span class="m">P</span>(<span class="m">B</span>)</span>
+        &ensp;⟺&ensp; <span class="m">P</span>(<span class="m">B</span>|<span class="m">A</span>) = <span class="blank"><span class="m">P</span>(<span class="m">B</span>)</span></td></tr>
+
+    <tr><td class="topic">독립시행 (성공확률 p, n번 중 r번)</td>
+      <td class="formula"><span class="blank"><sub class="m">n</sub><span class="m">C</span><sub class="m">r</sub></span> ·
+        <span class="blank"><span class="m">p</span><sup class="m">r</sup></span> ·
+        <span class="blank">(1−<span class="m">p</span>)<sup class="m">n−r</sup></span></td></tr>
+  </table>
+
+  <div class="page-footer"><span>확률과통계 2·3단원 공식 암기 — 빈칸 테스트</span><span>1 / 2</span></div>
+</section>
+
+<!-- ============ PAGE 2 — 3단원 ============ -->
+<section class="page">
+  <h2>3단원 · 통계</h2>
+  <table>
+    <tr><th class="topic">주제 / 상황</th><th>공식 (빈칸을 채워 보세요)</th></tr>
+
+    <tr><td class="topic">이산확률변수의 평균</td>
+      <td class="formula"><span class="m">E</span>(<span class="m">X</span>) =
+        <span class="blank">∑ <span class="m">x<sub>i</sub> p<sub>i</sub></span></span></td></tr>
+
+    <tr><td class="topic">분산 (정의)</td>
+      <td class="formula"><span class="m">V</span>(<span class="m">X</span>) =
+        <span class="m">E</span>(<span class="blank">(<span class="m">X</span> − <span class="m">m</span>)<sup>2</sup></span>)</td></tr>
+
+    <tr><td class="topic">분산 (계산용, 실전)</td>
+      <td class="formula"><span class="m">V</span>(<span class="m">X</span>) =
+        <span class="blank"><span class="m">E</span>(<span class="m">X</span><sup>2</sup>)</span> −
+        <span class="blank">{<span class="m">E</span>(<span class="m">X</span>)}<sup>2</sup></span></td></tr>
+
+    <tr><td class="topic">표준편차</td>
+      <td class="formula"><span class="m">σ</span>(<span class="m">X</span>) =
+        <span class="blank"><span class="sqrt"><span class="rad"><span class="m">V</span>(<span class="m">X</span>)</span></span></span></td></tr>
+
+    <tr><td class="topic">일차변환 (aX+b)</td>
+      <td class="formula"><span class="m">E</span> = <span class="blank"><span class="m">aE</span>(<span class="m">X</span>) + <span class="m">b</span></span> ,&ensp;
+        <span class="m">V</span> = <span class="blank"><span class="m">a</span><sup>2</sup><span class="m">V</span>(<span class="m">X</span>)</span> ,&ensp;
+        <span class="m">σ</span> = <span class="blank">|<span class="m">a</span>| <span class="m">σ</span>(<span class="m">X</span>)</span></td></tr>
+
+    <tr><td class="topic">표준화</td>
+      <td class="formula"><span class="m">Z</span> =
+        <span class="blank"><span class="frac"><span class="num"><span class="m">X</span> − <span class="m">m</span></span><span class="den"><span class="m">σ</span></span></span></span>
+        &ensp;<span style="font-size:9.5pt;color:#5a6473;">(<span class="m">E</span>(<span class="m">Z</span>)=0, <span class="m">σ</span>(<span class="m">Z</span>)=1)</span></td></tr>
+
+    <tr><td class="topic">이항분포 <span class="m">B</span>(<span class="m">n, p</span>) &nbsp;(q=1−p)</td>
+      <td class="formula"><span class="m">E</span> = <span class="blank"><span class="m">np</span></span> ,&ensp;
+        <span class="m">V</span> = <span class="blank"><span class="m">npq</span></span> ,&ensp;
+        <span class="m">σ</span> = <span class="blank"><span class="sqrt"><span class="rad"><span class="m">npq</span></span></span></span></td></tr>
+
+    <tr><td class="topic">정규분포 근사</td>
+      <td class="formula"><span class="m">B</span>(<span class="m">n, p</span>) ≈
+        <span class="m">N</span>(<span class="blank"><span class="m">np</span></span> ,&ensp; <span class="blank"><span class="m">npq</span></span>)</td></tr>
+
+    <tr><td class="topic">표본평균의 분포</td>
+      <td class="formula"><span class="m"><span class="ov">X</span></span> ~
+        <span class="m">N</span>(<span class="m">m</span> ,&ensp; <span class="blank"><span class="frac"><span class="num"><span class="m">σ</span><sup>2</sup></span><span class="den"><span class="m">n</span></span></span></span>) ,&ensp;
+        <span class="m">σ</span>(<span class="m"><span class="ov">X</span></span>) = <span class="blank"><span class="frac"><span class="num"><span class="m">σ</span></span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span></span></td></tr>
+
+    <tr><td class="topic">모평균 신뢰구간 (95 %)</td>
+      <td class="formula"><span class="m"><span class="ov">x</span></span> ±
+        <span class="blank">1.96</span> ·
+        <span class="frac"><span class="num"><span class="m">σ</span></span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span></td></tr>
+
+    <tr><td class="topic">모평균 신뢰구간 (99 %)</td>
+      <td class="formula"><span class="m"><span class="ov">x</span></span> ±
+        <span class="blank">2.58</span> ·
+        <span class="frac"><span class="num"><span class="m">σ</span></span><span class="den"><span class="sqrt"><span class="rad"><span class="m">n</span></span></span></span></span></td></tr>
+  </table>
+
+  <div class="tip">
+    <span class="label">자주 헷갈리는 점</span>
+    일차변환에서 <strong>표준편차는 |a|배, 분산은 a²배</strong> · 이항분포는 표 없이 바로 <strong>np, npq</strong> ·
+    표본평균의 표준편차는 <strong>σ/√n</strong>(√n으로 나눔) · 신뢰구간 계수 <strong>95%→1.96, 99%→2.58</strong>.
+  </div>
+
+  <div class="page-footer"><span>확률과통계 2·3단원 공식 암기 — 빈칸 테스트</span><span>2 / 2</span></div>
+</section>
+
+</body>
+</html>
