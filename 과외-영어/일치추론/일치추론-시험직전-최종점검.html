@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영어 고난도 일치추론 — 시험 직전 최종 점검</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 18px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 23pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 20px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+ul, ol { margin: 8px 0; padding-left: 22px; }
+li { margin: 4px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 4px;
+}
+
+.example {
+  border: 1px solid var(--accent-line); border-radius: 6px;
+  padding: 12px 16px; margin: 12px 0; break-inside: avoid;
+}
+.example .label {
+  font-size: 9pt; font-weight: 700; color: #fff; background: var(--accent);
+  border-radius: 4px; padding: 1px 8px; display: inline-block; margin-bottom: 8px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 7px 10px; text-align: left; vertical-align: top; }
+th { background: var(--accent); color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* --- 이 자료 전용 소규모 헬퍼 --- */
+.en { font-family: 'Times New Roman', Georgia, serif; }
+.trap-no { font-weight: 700; color: var(--accent); text-align: center; }
+.vocab td { padding: 4px 10px; font-size: 10pt; }
+.vocab .w { font-family: 'Times New Roman', Georgia, serif; font-weight: 600; width: 26%; }
+.vocab .cover { color: #9aa4b0; }
+.pill {
+  display:inline-block; background:var(--accent); color:#fff; font-size:9pt; font-weight:700;
+  border-radius:4px; padding:1px 8px; margin-right:6px;
+}
+
+/* --- 밀집 요약 시트용 밀도 보정 (이 문서 한정) --- */
+h2 { margin: 12px 0 7px; }
+table { margin: 8px 0; }
+th, td { padding: 4.5px 10px; line-height: 1.45; }
+.concept { padding: 10px 16px; margin: 9px 0; }
+.doc-header { margin: 4px 0 12px; }
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; min-height: auto; margin: 0; padding: 0;
+    box-shadow: none; page-break-after: always;
+  }
+  .page:last-of-type { page-break-after: auto; }
+  h2, h3, table, .concept, .example, .tip { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page first">
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 영어 · 기말 전범위 · 유형 13~20</div>
+    <h1>영어 고난도 일치추론 — 시험 직전 최종 점검</h1>
+    <div class="meta">EBS 2027 수능특강 · 유형 13~20 · 시험 직전(D-1) 정리 · 2026-07-02</div>
+  </div>
+
+  <h2>0. 가장 먼저 — 발문 방향부터 확인</h2>
+  <div class="concept">
+    <span class="label">발문 방향 (매년 최다 실수)</span>
+    <p style="margin:2px 0;"><strong>일치</strong>="…일치하는 것은?" → 뒷받침하는 <strong>1개</strong>. &nbsp;|&nbsp; <strong>불일치</strong>="…일치하지 <strong>않는</strong> 것은?" → 어긋난 <strong>1개</strong>. &nbsp;☑ 풀기 전 발문의 <strong>일치/불일치</strong>에 <strong>동그라미</strong>부터(방향 착각하면 정확히 읽고도 틀림).</p>
+  </div>
+
+  <h2>1. 함정 유형 Top 8 — "이 신호가 보이면 의심하라"</h2>
+  <table>
+    <colgroup><col style="width:6%"><col style="width:27%"><col style="width:67%"></colgroup>
+    <thead>
+      <tr><th>#</th><th>함정 패턴 · 신호</th><th>대응</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="trap-no">1</td><td><strong>부정어·방향 반전</strong><br><span class="en">not · rarely · reduce↔increase</span></td><td>"거의(<span class="en">rarely</span>)"→"전혀", <span class="en">quality↔quantity</span>처럼 부정어·주제어를 <strong>정반대</strong>로 뒤집으면 오답. 부정어에 <strong>밑줄</strong>.</td></tr>
+      <tr><td class="trap-no">2</td><td><strong>거부·부정을 긍정으로</strong><br><span class="en">rejects · refuse · deny</span></td><td>글이 <strong>거부·부정</strong>한 내용을 사실처럼 긍정 진술하면 오답 (예: <span class="en">rejects that possibility</span>).</td></tr>
+      <tr><td class="trap-no">3</td><td><strong>주체 혼동</strong><br>누가 한 행동·감정인가</td><td>부모↔아기·매니저↔직원처럼 <strong>주어 바꿔치기</strong>. "누가?"를 본문에서 재확인.</td></tr>
+      <tr><td class="trap-no">4</td><td><strong>조건 축소·확대</strong><br><span class="en">and · only · all · entire</span></td><td>"듣고+이해"→"듣기만"(축소), "일부 가능"→"전원 보장"(확대)이면 오답.</td></tr>
+      <tr><td class="trap-no">5</td><td><strong>각주 어휘·어근 미끼</strong><br>각주(*)·전문용어</td><td>각주 뜻·기능을 뒤집거나(<span class="en">molar</span>=뒤 어금니), <span class="en">thyro-</span>(갑상선) 어근에 낚이면 오답 — 본문은 "<strong>뇌</strong> 분비". <strong>이름보다 본문</strong>.</td></tr>
+      <tr><td class="trap-no">6</td><td><strong>수치·연도 함정</strong><br>연도·개수·날짜</td><td>시작↔종료 연도 뒤바꿈, "사이 어느 때"를 "특정 단일 날짜"로 확정하면 오답.</td></tr>
+      <tr><td class="trap-no">7</td><td><strong>표면 vs 필자 반박</strong><br><span class="en">seems to · appears to</span></td><td>"~처럼 보인다"는 <strong>표면</strong>, 필자가 <span class="en">But</span>으로 뒤집는다. 표면을 결론으로 착각 금지.</td></tr>
+      <tr><td class="trap-no">8</td><td><strong>정답은 환언(paraphrase)</strong><br>단어가 그대로 겹치면 의심</td><td>정답은 대개 <strong>바꿔 말함</strong>(<span class="en">same event=share an experience</span>). 그대로 베낀 선지 의심.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer"><span>영어 고난도 일치추론 · 시험 직전 최종 점검</span><span>p. 1</span></div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page">
+  <h2>2. 유형 13~20 — 지문 소재 &amp; 조심할 함정 한 줄</h2>
+  <table>
+    <colgroup><col style="width:9%"><col style="width:44%"><col style="width:47%"></colgroup>
+    <thead><tr><th>유형</th><th>지문 소재</th><th>이 지문에서 특히 조심할 함정</th></tr></thead>
+    <tbody>
+      <tr><td class="trap-no">13</td><td>아리스토텔레스 목적론(규칙성=목적성) / 아이디어는 <strong>양</strong>이 질을 낳는다</td><td><span class="en">rejects</span>(거부)를 긍정으로 베낌 · <strong>quality↔quantity</strong> 반전</td></tr>
+      <tr><td class="trap-no">14</td><td>어른·유아의 관점 차이(공유는 자동이 아님) / <span class="en">TRF</span>는 <strong>뇌</strong>에서 분비</td><td><span class="en">not</span> automatic 누락 · 주체(부모↔아기) 혼동 · 어근(<span class="en">thyro-</span>) 미끼</td></tr>
+      <tr><td class="trap-no">15</td><td>감정은 여러 방식으로 수행을 높인다 / 자릿수 많을수록 정밀(<span class="en">345 vs 345.2</span>)</td><td>reduce↔increase 방향 · <strong>established</strong>(입증됨) 반전 · 정밀도 비교 뒤집기</td></tr>
+      <tr><td class="trap-no">16</td><td>지각 항상성(대리 기능) / 결론 먼저 줘도 이탈은 <strong>여전히</strong> 가능(온라인 글쓰기)</td><td><span class="en">exclusively</span>(오직 인간 뇌만) 범위 축소 · <span class="en">may still dwindle</span>(완전 차단 아님)</td></tr>
+      <tr><td class="trap-no">17</td><td>셸로우 워크의 존재 이유(딥 워크만 할 순 없다) / "듣고<b>+</b>이해"해야 동일 반응</td><td><span class="en">these tasks</span> 지시 대상 · <span class="en">rarely</span>≠no value · <strong>조건 축소</strong>(hear and understand)</td></tr>
+      <tr><td class="trap-no">18</td><td>트랙터의 생존은 품질이 아닌 <strong>애정</strong> / 위기 상황의 미디어 선택</td><td><span class="en">seems to</span> 표면을 <span class="en">But</span>이 반박 · 연도 뒤바꿈 · 연령별 매체 선호 혼동</td></tr>
+      <tr><td class="trap-no">19</td><td>18세기 드레스 재제작(직물이 귀해 재활용) / 인터넷 뉴스의 접근성 vs 신뢰성</td><td>비용 비교(재제작=원단의 절반) · "모든 기관이 검증"류 <strong>전칭 진술</strong></td></tr>
+      <tr><td class="trap-no">20</td><td>보호소가 정원의 두 배 수용 / 냄새의 값을 <strong>동전 소리</strong>로 지불</td><td><span class="en">politely refuse</span> vs immediately agreed · <span class="en">jingle</span>(소리냄)≠건넴 · 감정 표출 권유</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. 핵심 각주 어휘 빠른 확인</h2>
+  <div class="concept">
+    <span class="label">뜻이 헷갈리면 함정에 걸린다 — 눈으로 빠르게 훑기</span>
+    <p style="margin:2px 0; font-size:10.5pt; line-height:1.9;">
+      <span class="en">reject</span> 거부 · <span class="en">coincidental</span> 우연의 · <span class="en">purposefulness</span> 목적성 · <span class="en">regularity</span> 규칙성 · <span class="en">prolific</span> 다작의 · <span class="en">correlated</span> 비례 · <span class="en">glaring</span> 두드러진 · <span class="en">disposition</span> 성질 · <span class="en">secrete</span> 분비하다 · <span class="en">dwindle</span> 줄어들다 · <span class="en">vicarious</span> 대리의 · <span class="en">replicate</span> 재현하다 · <span class="en">impound</span> 수용하다 · <span class="en">obligate</span> 의무 지우다 · <span class="en">jingle</span> 딸랑거림(소리) · <span class="en">up front</span> 미리
+    </p>
+  </div>
+
+  <div class="tip"><span class="label">시험장 체크리스트</span>
+    <span class="pill">1</span>발문 <strong>일치/불일치</strong>에 동그라미 &nbsp;
+    <span class="pill">2</span>각주(*) 먼저 확인 &nbsp;
+    <span class="pill">3</span>한정어(<span class="en">not·only·all·always·rarely</span>) 밑줄 &nbsp;
+    <span class="pill">4</span>선지마다 <strong>근거 문장</strong> 표시 &nbsp;
+    <span class="pill">5</span>정답은 <strong>환언</strong>일 가능성(단어 겹치는 선지 의심) &nbsp;
+    <span class="pill">6</span>확신 없으면 <strong>표시 후 넘어가고</strong> 시간 배분
+  </div>
+
+  <div class="page-footer"><span>영어 고난도 일치추론 · 시험 직전 최종 점검</span><span>p. 2</span></div>
+</section>
+
+</body>
+</html>
