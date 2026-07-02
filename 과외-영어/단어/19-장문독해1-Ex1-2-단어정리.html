@@ -105,7 +105,7 @@ table {
   width: 100%; border-collapse: collapse; margin: 10px 0;
   font-size: 10pt; break-inside: auto;
 }
-th, td { border: 1px solid var(--accent-line); padding: 5px 10px; text-align: left; }
+th, td { border: 1px solid var(--accent-line); padding: 9px 10px; text-align: left; }
 th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
 tr:nth-child(even) td { background: #f6f8fb; }
 
@@ -161,7 +161,7 @@ tr:nth-child(even) td { background: #f6f8fb; }
   .page + .page { break-before: page; page-break-before: always; }
   thead { display: table-header-group; }
   tr, .concept, .tip, h2, h3 { break-inside: avoid; }
-  .vocab-table td, .vocab-table th { padding: 1.5px 9px !important; font-size: 8.6pt !important; line-height: 1.22 !important; }
+  .vocab-table td, .vocab-table th { padding: 7px 9px !important; font-size: 8.6pt !important; line-height: 1.4 !important; }
   .summary-table td, .summary-table th { padding: 3px 9px !important; }
   h2, h3, table, .concept, .tip { break-inside: avoid; }
 }
@@ -182,16 +182,12 @@ tr:nth-child(even) td { background: #f6f8fb; }
 .quiz-bar button.on { background: #fff; color: var(--accent); }
 
 body.hide-word .vocab-table td.word {
-  color: transparent; background: repeating-linear-gradient(
-    90deg, var(--accent-line) 0 6px, transparent 6px 10px
-  ); border-radius: 2px; user-select: none; transition: color .2s;
+  color: transparent; user-select: none; transition: color .2s;
 }
 body.hide-word .vocab-table td.word:hover { color: var(--accent); background: none; }
 
 body.hide-mean .vocab-table td:nth-child(4) {
-  color: transparent; background: repeating-linear-gradient(
-    90deg, var(--accent-line) 0 6px, transparent 6px 10px
-  ); border-radius: 2px; user-select: none; transition: color .2s;
+  color: transparent; user-select: none; transition: color .2s;
 }
 body.hide-mean .vocab-table td:nth-child(4):hover { color: var(--ink); background: none; }
 
