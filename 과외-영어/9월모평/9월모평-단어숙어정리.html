@@ -166,6 +166,8 @@ body.hide-mean .vocab-table td.mean:hover { color: var(--ink); }
   .nav-bar, .quiz-bar { display: none !important; }
   thead { display: table-header-group; }
   tr, .concept, .tip, .q-head { break-inside: avoid; page-break-inside: avoid; }
+  /* 문항 헤더 + 표 머리 뒤에 최소 4행이 함께 오도록 — 한 줄만 남는 위도우 방지 */
+  .vocab-table tbody tr:nth-child(-n+3) { break-after: avoid; page-break-after: avoid; }
   table { font-size: 8.6pt; }
   th, td { padding: 4px 7px; }
   h2 { margin: 16px 0 8px; }
@@ -205,7 +207,7 @@ body.hide-mean .vocab-table td.mean:hover { color: var(--ink); }
     <div class="eyebrow">9월 모의평가 대비</div>
     <h1>영어 단어 · 숙어 정리</h1>
     <p class="subtitle">2026학년도 수능 9월 모의평가 · 18~45번 (듣기 제외) 전 지문</p>
-    <p class="meta">한국교육과정평가원 | 독해·어법·어휘 28문항 · 25개 지문 | 총 <b>540</b>개 (숙어·구동사 <b>217</b>개 포함)</p>
+    <p class="meta">한국교육과정평가원 | 독해·어법·어휘 28문항 · 25개 지문 | 총 <b>540</b>개 (숙어·구동사 <b>216</b>개 포함)</p>
   </div>
 
   <h2>이 자료 사용법</h2>
