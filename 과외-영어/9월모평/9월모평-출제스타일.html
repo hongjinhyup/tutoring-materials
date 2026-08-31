@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026학년도 9월 모평 영어 — 출제 스타일 분석 (18~45번)</title>
+<style>
+@page { size: A4; margin: 12mm 10mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:      #1f3a5f;
+  --accent-soft: #eef2f7;
+  --accent-line: #c9d4e2;
+  --ink:         #1a1a1a;
+  --muted:       #5a6473;
+  --warn-bg:     #fff7e6;
+  --warn-line:   #e8c97a;
+  --warn-ink:    #8a5d00;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 10.5pt;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.sheet {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 16mm 15mm 14mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+}
+
+.author-bar {
+  display: flex; justify-content: flex-end; gap: 16px;
+  font-size: 8.7pt; color: var(--muted); letter-spacing: .2px;
+  padding-bottom: 6px; margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 20px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 21pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 11.5pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14pt; color: var(--accent); font-weight: 700;
+  margin: 24px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  break-after: avoid; page-break-after: avoid;
+}
+h3 {
+  font-size: 11.5pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; break-after: avoid; page-break-after: avoid;
+}
+p { margin: 7px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 11px 15px; margin: 11px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 3px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 11px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: var(--warn-ink); margin-right: 6px; }
+
+table { width: 100%; border-collapse: collapse; margin: 9px 0; font-size: 9.5pt; }
+th, td { border: 1px solid var(--accent-line); padding: 6px 9px; text-align: left; vertical-align: top; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9pt; }
+tbody tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 어휘 표 */
+.vocab-table col.c-no   { width: 5%; }
+.vocab-table col.c-word { width: 32%; }
+.vocab-table col.c-pos  { width: 7%; }
+.vocab-table col.c-mean { width: 56%; }
+.vocab-table td.word {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; font-size: 10pt; color: var(--accent);
+}
+.vocab-table td.pos { text-align: center; font-size: 8.5pt; color: var(--muted); font-style: italic; }
+.vocab-table tr.is-phr td.word { color: #6b3fa0; }
+
+/* 지문 헤더 블록 */
+.q-head {
+  display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap;
+  margin: 22px 0 6px; padding: 7px 10px;
+  background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 4px;
+  break-after: avoid; page-break-after: avoid; break-inside: avoid;
+}
+.q-head .no {
+  background: var(--accent); color: #fff; border-radius: 4px;
+  padding: 1px 9px; font-weight: 700; font-size: 10pt;
+  font-family: 'SF Mono','Menlo',monospace;
+}
+.q-head .typ { font-weight: 700; color: var(--accent); font-size: 10.5pt; }
+.q-head .topic { color: var(--muted); font-size: 9.5pt; }
+.q-head .ans { margin-left: auto; font-size: 9pt; color: var(--muted); }
+.q-head .ans b { color: #b3261e; }
+.badge3 {
+  background: #fdecea; color: #b3261e; border: 1px solid #f2b8b5;
+  border-radius: 3px; padding: 0 5px; font-size: 8.5pt; font-weight: 700;
+}
+
+.legend { font-size: 9pt; color: var(--muted); margin: 6px 0 0; }
+.legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; vertical-align: -1px; margin-right: 3px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 화면 전용 네비 */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+
+.quiz-bar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: center; gap: 10px;
+  background: var(--accent); padding: 8px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+.quiz-bar button {
+  font-size: 10pt; font-weight: 600; border: 1.5px solid #fff;
+  border-radius: 6px; padding: 5px 16px; cursor: pointer;
+  font-family: inherit; background: transparent; color: #fff; transition: all .15s;
+}
+.quiz-bar button.on { background: #fff; color: var(--accent); }
+body.hide-word .vocab-table td.word { color: transparent; user-select: none; }
+body.hide-word .vocab-table td.word:hover { color: var(--accent); }
+body.hide-mean .vocab-table td.mean { color: transparent; user-select: none; }
+body.hide-mean .vocab-table td.mean:hover { color: var(--ink); }
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 9.3pt; }
+  .sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .nav-bar, .quiz-bar { display: none !important; }
+  thead { display: table-header-group; }
+  tr, .concept, .tip, .q-head { break-inside: avoid; page-break-inside: avoid; }
+  table { font-size: 8.6pt; }
+  th, td { padding: 4px 7px; }
+  h2 { margin: 16px 0 8px; }
+  .page-break { break-before: page; page-break-before: always; }
+}
+
+td.c { text-align: center; white-space: nowrap; }
+.d-hi  { color:#b3261e; font-weight:700; }
+.d-mh  { color:#c96a1b; font-weight:700; }
+.d-mid { color:#5a6473; }
+.d-ml, .d-lo { color:#2e7d32; }
+.style-table col.c1 { width: 8%; }
+.style-table col.c2 { width: 13%; }
+.style-table col.c3 { width: 16%; }
+.style-table col.c4 { width: 6%; }
+.style-table col.c5 { width: 7%; }
+.style-table col.c6 { width: 50%; }
+.time-table col.t1 { width: 16%; }
+.time-table col.t2 { width: 12%; }
+.time-table col.t3 { width: 12%; }
+.time-table col.t4 { width: 60%; }
+.routine { counter-reset: st; margin: 8px 0 12px; padding: 0; list-style: none; }
+.routine li { position: relative; padding-left: 26px; margin: 5px 0; }
+.routine li::before {
+  counter-increment: st; content: counter(st);
+  position: absolute; left: 0; top: 2px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  font-size: 8.5pt; font-weight: 700; text-align: center; line-height: 18px;
+}
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media print { .grid2 { display: block; } }
+.chk { list-style: none; padding: 0; margin: 8px 0; }
+.chk li { padding-left: 22px; position: relative; margin: 4px 0; }
+.chk li::before { content: '☐'; position: absolute; left: 0; font-size: 12pt; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="nav-bar">
+    <div class="nav-group">
+      <a class="nav-btn" href="index.html">← 목록</a>
+      <a class="nav-btn" href="9월모평-단어숙어정리.html">📖 단어 · 숙어 정리</a>
+    </div>
+    <button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button>
+  </div>
+
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">9월 모의평가 대비</div>
+    <h1>영어 출제 스타일 분석</h1>
+    <p class="subtitle">2026학년도 수능 9월 모의평가 · 18~45번 (듣기 제외) 28문항</p>
+    <p class="meta">한국교육과정평가원 | 배점 56점 (3점 7문항 · 2점 21문항) | 권장 풀이 시간 45분</p>
+  </div>
+
+  <div class="tip">
+    <span class="label">이 자료의 목적</span>
+    이번 주 수요일에 볼 <b>9월 모평</b>은 직전 연도 9월 모평과 문항 배치·유형·함정 설계가 거의 동일하게 나온다.
+    그래서 “무슨 지문이 나오나”가 아니라 <b>“각 번호 자리에서 평가원이 무엇을 묻는가”</b>를 몸에 익히는 것이 목표다.
+  </div>
+
+  <h2>1. 시험지 한눈에 보기 (18~45번)</h2>
+
+  <table>
+    <thead><tr><th>구간</th><th>문항</th><th>유형</th><th>배점 합</th><th>특징</th></tr></thead>
+    <tbody>
+      <tr><td class="c">A</td><td class="c">18~20</td><td>목적 · 심경 · 주장</td><td class="c">6점</td><td>전부 2점 · 난이도 하. <b>듣기 시간에 미리 푸는 구간</b></td></tr>
+      <tr><td class="c">B</td><td class="c">21~24</td><td>함의 · 요지 · 주제 · 제목</td><td class="c">10점</td><td>21·24가 <b>3점</b>. 앞쪽인데 어려운 함정 구간</td></tr>
+      <tr><td class="c">C</td><td class="c">25~28</td><td>도표 · 인물 · 실용문 ×2</td><td class="c">8점</td><td>전부 2점 · 난이도 하. <b>가장 빨리 가져올 8점</b></td></tr>
+      <tr><td class="c">D</td><td class="c">29~30</td><td>어법 · 어휘</td><td class="c">5점</td><td>30번이 3점. 지식형이라 <b>모르면 즉시 넘긴다</b></td></tr>
+      <tr><td class="c">E</td><td class="c">31~34</td><td>빈칸 추론 ×4</td><td class="c">10점</td><td>32·34가 3점. <b>등급을 가르는 핵심 구간</b></td></tr>
+      <tr><td class="c">F</td><td class="c">35~39</td><td>무관 · 순서 ×2 · 삽입 ×2</td><td class="c">12점</td><td>37·39가 3점. 논리 연결어·지시어 싸움</td></tr>
+      <tr><td class="c">G</td><td class="c">40</td><td>문단 요약</td><td class="c">2점</td><td>(A)(B) 둘 다 맞아야 정답</td></tr>
+      <tr><td class="c">H</td><td class="c">41~45</td><td>장문 2세트</td><td class="c">10점</td><td>전부 2점. 43~45 서사문은 <b>거저 주는 6점</b></td></tr>
+    </tbody>
+  </table>
+
+  <div class="concept">
+    <span class="label">3점 문항 7개의 위치 — 21 · 24 · 30 · 32 · 34 · 37 · 39</span>
+    이번 회차는 <b>21번(함의)과 24번(제목)</b>에 3점이 걸려 있다. 시험지 앞쪽에서 3점 두 개가 연달아 나오므로,
+    여기서 막히면 뒤쪽 빈칸(31~34)에 쓸 시간이 통째로 날아간다. <b>21·24는 2분 넘기면 표시하고 넘어가는 것</b>이 이번 유형의 핵심 전략이다.
+  </div>
+
+  <h2 class="page-break">2. 문항별 출제 스타일 총괄표</h2>
+  <p>“정답의 근거가 지문 어디에, 어떤 장치로 심어져 있는가”를 한 줄로 정리했다.</p>
+
+  <table class="style-table">
+    <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"><col class="c5"><col class="c6"></colgroup>
+    <thead><tr><th>번호</th><th>유형</th><th>소재 분야</th><th>정답</th><th>난이도</th><th>출제 포인트 — 정답의 근거 장치</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><b>18</b></td><td>글의 목적</td><td>이메일 · 교육 행정</td><td class="c">②</td><td class="c"><span class="d-lo">하</span></td><td>Therefore / So 뒤에 결론. “강의실 502 → 103 변경”이라는 <b>사실 한 줄</b>이 정답</td></tr>
+      <tr><td class="c"><b>19</b></td><td>심경 변화</td><td>서사 · 대학 미술</td><td class="c">③</td><td class="c"><span class="d-lo">하</span></td><td>shook·sweating(전) ↔ smiled brightly·exclaimed(후). <b>대사(“ ”)를 경계로 반전</b></td></tr>
+      <tr><td class="c"><b>20</b></td><td>필자의 주장</td><td>경영 · 조직 행동</td><td class="c">②</td><td class="c"><span class="d-lo">하</span></td><td>must create clear standards and educate — <b>must/should 문장</b>이 곧 주장</td></tr>
+      <tr><td class="c"><b>21</b> <span class="badge3">3점</span></td><td>밑줄 함의</td><td>음악학 · 지각심리</td><td class="c">③</td><td class="c"><span class="d-hi">상</span></td><td>octave = 주파수 2배 → <b>이름은 같고 음높이는 다른</b> 음. “같은 주파수”는 오답</td></tr>
+      <tr><td class="c"><b>22</b></td><td>글의 요지</td><td>미디어 · 사회학</td><td class="c">①</td><td class="c"><span class="d-mid">중</span></td><td>social capital 정의 → Nan Lin 인용 → 마지막 문장이 요지. <b>인용문 뒤</b>를 잡는다</td></tr>
+      <tr><td class="c"><b>23</b></td><td>글의 주제</td><td>문학 이론 · 전기</td><td class="c">①</td><td class="c"><span class="d-mid">중</span></td><td>biographer <b>by contrast</b> life narrator — 두 축 대조. 주제는 “양쪽을 아우르는 말”</td></tr>
+      <tr><td class="c"><b>24</b> <span class="badge3">3점</span></td><td>글의 제목</td><td>역사 · 중세 수도원</td><td class="c">③</td><td class="c"><span class="d-hi">상</span></td><td>“세상과 분리되었으나(apart) 사회를 위해(for the benefit of)” — <b>역설 구조</b> 제목</td></tr>
+      <tr><td class="c"><b>25</b></td><td>도표 일치</td><td>통계 · 소비자 행동</td><td class="c">⑤</td><td class="c"><span class="d-mid">중</span></td><td>more than twice / less than 30% 등 <b>배수·경계 수치</b>를 하나씩 검산</td></tr>
+      <tr><td class="c"><b>26</b></td><td>내용 일치(인물)</td><td>인물 · Claude Shannon</td><td class="c">⑤</td><td class="c"><span class="d-lo">하</span></td><td>1958년 <b>정교수 임용</b> → 선지는 “1958년 퇴임”. <b>연도–사건 짝을 뒤집기</b></td></tr>
+      <tr><td class="c"><b>27</b></td><td>실용문 불일치</td><td>안내문 · 요가 프로그램</td><td class="c">③</td><td class="c"><span class="d-lo">하</span></td><td><b>No</b> private restroom → 선지에서 부정어만 삭제. 괄호 안 단서가 정답 자리</td></tr>
+      <tr><td class="c"><b>28</b></td><td>실용문 일치</td><td>안내문 · 공모전</td><td class="c">⑤</td><td class="c"><span class="d-lo">하</span></td><td>Creativity 50% = 최고 비중. <b>표 안 숫자</b>만 대조하면 소거 완료</td></tr>
+      <tr><td class="c"><b>29</b></td><td>어법</td><td>생활과학 · 꿀 가공</td><td class="c">②</td><td class="c"><span class="d-mid">중</span></td><td>which + <b>완전한 절</b> → in which(=where)여야 함. 나머지는 분사·5형식·수일치·소유격</td></tr>
+      <tr><td class="c"><b>30</b> <span class="badge3">3점</span></td><td>어휘(문맥)</td><td>환경공학 · 하천</td><td class="c">⑤</td><td class="c"><span class="d-hi">상</span></td><td>마지막 문장 “ecologically important” ↔ <b>insignificant</b> 모순. 반의어 치환형</td></tr>
+      <tr><td class="c"><b>31</b></td><td>빈칸(구)</td><td>동물행동학 · 바우어새</td><td class="c">②</td><td class="c"><span class="d-mid">중</span></td><td>첫 문장 manipulate the <b>perceptions</b> → 빈칸은 perceptual biases. <b>어구 재활용</b></td></tr>
+      <tr><td class="c"><b>32</b> <span class="badge3">3점</span></td><td>빈칸(절)</td><td>심리학 · 공감 비판</td><td class="c">③</td><td class="c"><span class="d-hi">상</span></td><td>“공감이 갈등을 악화시킨다”는 근거 나열 → 빈칸은 <b>counterproductive</b></td></tr>
+      <tr><td class="c"><b>33</b></td><td>빈칸(구)</td><td>생태학 · 산림 정책</td><td class="c">⑤</td><td class="c"><span class="d-mh">중상</span></td><td>this process / this activity가 가리키는 것 = <b>습지를 숲으로 전환</b>. 지시어 추적</td></tr>
+      <tr><td class="c"><b>34</b> <span class="badge3">3점</span></td><td>빈칸(절)</td><td>사회선택이론 · 민주주의</td><td class="c">①</td><td class="c"><span class="d-hi">상</span></td><td>두 대안·두 행위자 → 동점 → drawing a lot. <b>lottery</b>가 곧 randomization</td></tr>
+      <tr><td class="c"><b>35</b></td><td>무관한 문장</td><td>조직 · 멘토링</td><td class="c">④</td><td class="c"><span class="d-mid">중</span></td><td>전체는 <b>employee</b>의 이익 → ④만 <b>employer</b>. 주어(대상) 바꿔치기형</td></tr>
+      <tr><td class="c"><b>36</b></td><td>글의 순서</td><td>영어 교육 · 작문 지도</td><td class="c">④</td><td class="c"><span class="d-mid">중</span></td><td>Subsequently(C) → on the other hand(A) → In this way(B). <b>연결어 3개</b>로 확정</td></tr>
+      <tr><td class="c"><b>37</b> <span class="badge3">3점</span></td><td>글의 순서</td><td>수학사 · 글쓰기</td><td class="c">②</td><td class="c"><span class="d-mh">중상</span></td><td>“You would not be the first”가 주어진 글의 경험을 받음 → (B) 우선</td></tr>
+      <tr><td class="c"><b>38</b></td><td>문장 삽입</td><td>식물생리학 · 낙엽</td><td class="c">③</td><td class="c"><span class="d-mid">중</span></td><td>③ 뒤 “It signals to <b>them</b>” — them의 선행사(plants/trees)가 없음</td></tr>
+      <tr><td class="c"><b>39</b> <span class="badge3">3점</span></td><td>문장 삽입</td><td>건축사 · 사료 비판</td><td class="c">②</td><td class="c"><span class="d-hi">상</span></td><td>② 뒤 피라미드 <b>예시</b>가 주어진 문장의 일반 진술을 받는 구조</td></tr>
+      <tr><td class="c"><b>40</b></td><td>문단 요약</td><td>문학·만화 캐릭터론</td><td class="c">④</td><td class="c"><span class="d-mid">중</span></td><td>(A) feature / (B) transformation. <b>(A)만 맞는 선지 ①</b>이 최대 함정</td></tr>
+      <tr><td class="c"><b>41</b></td><td>장문 제목</td><td>커뮤니케이션학 · 매체</td><td class="c">①</td><td class="c"><span class="d-mid">중</span></td><td>결론 “choose the right container” → <b>어떤 채널을 고르냐가 관건</b></td></tr>
+      <tr><td class="c"><b>42</b></td><td>장문 어휘</td><td>커뮤니케이션학 · 매체</td><td class="c">④</td><td class="c"><span class="d-mh">중상</span></td><td>lean media는 <b>more</b> routine한 메시지용 — less가 방향 오류</td></tr>
+      <tr><td class="c"><b>43</b></td><td>장문 순서</td><td>서사 · 야구장 나들이</td><td class="c">③</td><td class="c"><span class="d-lo">하</span></td><td>(A) 차 안 → (C) 경기장 도착 → (D) 파울볼 포구 → (B) 귀가. <b>시간 순</b></td></tr>
+      <tr><td class="c"><b>44</b></td><td>장문 지칭</td><td>서사 · 야구장 나들이</td><td class="c">④</td><td class="c"><span class="d-lo">하</span></td><td>(d) his = <b>Chavez</b>, 나머지는 모두 Mike</td></tr>
+      <tr><td class="c"><b>45</b></td><td>장문 일치</td><td>서사 · 야구장 나들이</td><td class="c">②</td><td class="c"><span class="d-lo">하</span></td><td>본문 “hit a home run and won” → 선지 “홈런을 치지 못했다”. <b>사실 뒤집기</b></td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="page-break">3. 유형별 출제 스타일과 풀이 루틴</h2>
+
+  <h3>A. 목적 · 심경 · 주장 (18~20) — “한 문장만 찾으면 끝”</h3>
+  <p><b>스타일</b> · 세 문항 모두 정답 근거가 지문의 <b>딱 한 문장</b>에 있다. 나머지는 전부 배경 설명이다.</p>
+  <ol class="routine">
+    <li><b>18 목적</b> — Therefore / So / I’m writing to 뒤 한 문장. 이번엔 “강의실을 502에서 103으로 옮긴다”</li>
+    <li><b>19 심경</b> — 대사(“ ”)나 접속사를 경계로 <b>전·후 감정 단어</b>만 각각 하나씩 잡는다 (shook → smiled)</li>
+    <li><b>20 주장</b> — must / should / need to가 들어간 문장이 곧 주장. 그 앞은 전부 반대 상황 서술</li>
+  </ol>
+  <div class="tip"><span class="label">주의</span>
+    19번은 <b>선지가 두 칸(전 → 후)</b>이다. 앞 감정만 맞고 뒤가 틀린 선지(⑤ thrilled → panicked 류)를 반드시 소거할 것.
+  </div>
+
+  <h3>B. 함의 · 요지 · 주제 · 제목 (21~24) — “추상화 단계”가 다르다</h3>
+  <p><b>스타일</b> · 네 문항은 요구하는 <b>추상화 수준</b>이 다르다. 이걸 구분 못 하면 “내용은 맞는데 답이 아닌” 선지에 걸린다.</p>
+  <table>
+    <thead><tr><th>문항</th><th>요구하는 것</th><th>오답의 전형</th></tr></thead>
+    <tbody>
+      <tr><td class="c">21 함의</td><td>밑줄 표현을 <b>지문 안 말로 바꿔 쓰기</b></td><td>밑줄의 <b>글자 그대로</b>의 뜻 (② identical frequency)</td></tr>
+      <tr><td class="c">22 요지</td><td>필자의 <b>주장 한 문장</b> (한글 선지)</td><td>지문에 나오지만 <b>부분</b>인 내용 (② ③)</td></tr>
+      <tr><td class="c">23 주제</td><td>글이 <b>다루는 범위</b> (영어 명사구)</td><td>범위가 <b>너무 좁거나 넓은</b> 선지 (④ ⑤)</td></tr>
+      <tr><td class="c">24 제목</td><td>주제 + <b>비유·역설의 맛</b></td><td>지문의 <b>한쪽 면</b>만 담은 제목 (② ④)</td></tr>
+    </tbody>
+  </table>
+  <div class="concept">
+    <span class="label">24번 제목 유형의 정답 냄새</span>
+    이번 정답 ③ <i>The Grace of Solitude: Detached from but Attached to Society</i>처럼,
+    평가원 제목 정답은 <b>대조·역설을 콜론(:)이나 but으로 묶은 형태</b>가 압도적으로 많다.
+    지문에 “A인 동시에 B” 구조가 보이면 그 구조를 담은 선지를 먼저 의심한다.
+  </div>
+
+  <h3 class="page-break">C. 도표 · 인물 · 실용문 (25~28) — “계산과 대조, 독해 아님”</h3>
+  <p><b>스타일</b> · 이 4문항은 해석력이 아니라 <b>대조 정확도</b>를 본다. 8점을 5분 안에 가져오는 구간.</p>
+  <ol class="routine">
+    <li><b>25 도표</b> — 지문을 읽지 말고 <b>선지 → 그래프</b> 순으로 본다. <b>배수(twice), 비교급, 최상급, less than</b>이 있는 선지가 정답 후보</li>
+    <li><b>26 인물</b> — 선지가 <b>본문 순서 그대로</b> 배열된다. ①부터 차례로 대조하면 ⑤에서 끝난다 (이번에도 ⑤)</li>
+    <li><b>27·28 실용문</b> — <b>괄호 ( ), 표 안 숫자, No/not</b>이 있는 자리가 곧 정답 자리</li>
+  </ol>
+  <div class="tip"><span class="label">불일치 vs 일치 구분</span>
+    27번은 “일치하지 <b>않는</b> 것”, 28번은 “일치하는 것”이다. 매년 이 둘이 붙어 나오므로
+    <b>문제 지시문에 동그라미부터 치고</b> 들어간다. 방향을 착각하면 두 문항을 통째로 잃는다.
+  </div>
+
+  <h3>D. 어법 · 어휘 (29~30) — “출제 포인트가 정해져 있다”</h3>
+  <p><b>29번 어법</b>은 매년 아래 5개 안에서 나온다. 이번 회차도 그대로였다.</p>
+  <table>
+    <thead><tr><th>포인트</th><th>이번 회차</th><th>판단 기준</th></tr></thead>
+    <tbody>
+      <tr><td>관계사 which / in which</td><td class="c"><b>② 정답</b></td><td>뒤 절이 <b>완전</b>하면 in which·where, <b>불완전</b>하면 which</td></tr>
+      <tr><td>분사구문 (능동/수동)</td><td class="c">①</td><td>주어가 <b>불리는</b> 쪽 → referred (과거분사)</td></tr>
+      <tr><td>5형식 목적격보어</td><td class="c">③</td><td>find + O + <b>형용사</b> (strong ○ / strongly ✕)</td></tr>
+      <tr><td>주격 관계대명사 수일치</td><td class="c">④</td><td>선행사 retailers(복수) → feel</td></tr>
+      <tr><td>대명사 / 소유격</td><td class="c">⑤</td><td>its + 명사 (it’s ✕)</td></tr>
+    </tbody>
+  </table>
+  <p><b>30번 어휘</b>는 <b>반의어 치환</b>이 거의 유일한 수법이다. 이번엔 ⑤ <i>insignificant</i> ↔ <i>significant</i>.
+  단어 자체가 어려운 게 아니라, <b>글의 결론 문장과 모순되는 자리</b>를 찾는 문제다.
+  마지막 문장(“생태적으로 중요하다고 <b>추정한다</b>”)을 읽고 거꾸로 올라가면 바로 보인다.</p>
+
+  <h3>E. 빈칸 추론 (31~34) — 등급을 가르는 10점</h3>
+  <p><b>스타일</b> · 이번 회차 4문항은 정확히 <b>두 종류</b>로 갈렸다.</p>
+  <div class="concept">
+    <span class="label">유형 ① 어구 재활용형 (31 · 33) — 답이 지문 안에 있다</span>
+    31번은 첫 문장의 <b>perceptions</b>가 그대로 <b>perceptual biases</b>로,
+    33번은 <b>this process / this activity</b>가 가리키는 “습지를 숲으로 전환”이 그대로 정답이 된다.
+    → <b>빈칸 앞뒤 문장과 첫 문장을 먼저 대조</b>하면 지문 전체를 안 읽어도 풀린다.
+  </div>
+  <div class="concept">
+    <span class="label">유형 ② 추상 명사구형 (32 · 34) — 근거를 요약해야 한다</span>
+    32번은 “공감이 갈등을 악화시킨다”는 근거 나열을 한 단어 <b>counterproductive</b>로,
+    34번은 “두 대안·두 행위자 → 동점 → 제비뽑기”를 <b>randomization / tiebreaking</b>으로 압축해야 한다.
+    → 빈칸에 <b>내 말로 한국어 한 줄</b>을 먼저 써넣고, 그것과 가장 가까운 선지를 고른다.
+  </div>
+  <div class="tip"><span class="label">시간 규칙</span>
+    빈칸 4문항에 <b>10분</b>. 한 문항 3분을 넘기면 표시하고 다음으로 간다.
+    3점짜리 32·34에서 시간을 다 쓰고 2점짜리 31·33을 못 푸는 것이 가장 흔한 실패 패턴이다.
+  </div>
+
+  <h3 class="page-break">F. 무관한 문장 · 순서 · 삽입 (35~39) — “연결 장치만 본다”</h3>
+  <table>
+    <thead><tr><th>문항</th><th>결정적 단서</th><th>이번 회차 적용</th></tr></thead>
+    <tbody>
+      <tr><td class="c">35 무관</td><td><b>주어(대상)가 바뀐 문장</b></td><td>전체는 employee 이야기인데 ④만 <b>employer</b></td></tr>
+      <tr><td class="c">36 순서</td><td>Subsequently / on the other hand / In this way</td><td>연결어 세 개로 <b>(C)-(A)-(B)</b> 확정</td></tr>
+      <tr><td class="c">37 순서</td><td>주어진 글의 <b>경험을 받는 대답</b></td><td>“You would not be the first”가 첫 자리 → <b>(B)</b>부터</td></tr>
+      <tr><td class="c">38 삽입</td><td><b>지시어의 선행사 부재</b></td><td>③ 뒤 “signals to <b>them</b>” — them이 가리킬 말이 앞에 없음</td></tr>
+      <tr><td class="c">39 삽입</td><td><b>일반 진술 → 구체 예시</b> 순서</td><td>② 뒤 피라미드 예시가 주어진 문장(일반)을 받음</td></tr>
+    </tbody>
+  </table>
+  <div class="concept">
+    <span class="label">삽입(38·39) 공통 루틴</span>
+    ① 주어진 문장에서 <b>지시어·연결어·정관사(the)</b>에 동그라미 →
+    ② 그것이 <b>가리킬 말이 없는 자리</b>를 ①~⑤에서 찾는다 →
+    ③ 넣고 앞뒤를 이어 읽어 확인.
+    문장을 “의미상 어울리는 곳”에 넣으려 하면 반드시 틀린다. <b>기계적으로 지시어만 추적</b>할 것.
+  </div>
+
+  <h3>G · H. 요약 (40) · 장문 (41~45) — “안전하게 회수할 12점”</h3>
+  <ol class="routine">
+    <li><b>40 요약</b> — 요약문 (A)(B) <b>둘 다</b> 맞아야 한다. (A)만 맞는 매력적 오답(① resurface…simplification)이 반드시 배치된다. <b>(B)부터 검증</b>하면 빠르다</li>
+    <li><b>41 제목</b> — 장문은 <b>마지막 문단의 결론</b>이 곧 제목. 이번엔 “choose the right container” → ① Which Channel Is What Matters</li>
+    <li><b>42 어휘</b> — 장문 어휘는 <b>less / more, 긍정 / 부정 방향</b>만 뒤집는다. 이번엔 (d) <i>less routine</i> → more routine</li>
+    <li><b>43~45 서사문</b> — 시간 순서대로 배열(③)하고, 지칭은 <b>등장인물이 둘</b>일 때 나머지 하나가 정답(④ Chavez), 일치는 <b>사실 한 개를 뒤집는다</b>(② 홈런)</li>
+  </ol>
+  <div class="tip"><span class="label">43~45는 마지막에 풀지 말 것</span>
+    난이도가 가장 낮은데 시험지 맨 끝에 있어서 시간에 쫓겨 실수하기 쉽다.
+    <b>25~28번을 끝낸 직후에 43~45로 건너뛰어</b> 6점을 먼저 확보하는 순서를 권장한다.
+  </div>
+
+  <h2 class="page-break">4. 이번 회차가 보여준 출제 경향 4가지</h2>
+
+  <div class="grid2">
+    <div class="concept">
+      <span class="label">① 소재가 인문·예술로 크게 기울었다</span>
+      음악학(21) · 문학이론(23) · 중세사(24) · 수학사(37) · 건축사(39) · 만화 캐릭터론(40).
+      과학 지문은 생태(33) · 동물행동(31) · 식물생리(38) 정도.
+      <b>추상 명사가 많은 인문 지문에 대비</b>해야 한다.
+    </div>
+    <div class="concept">
+      <span class="label">② 3점이 앞쪽(21·24)에 배치됐다</span>
+      전통적으로 3점은 빈칸·삽입에 몰렸는데, 이번엔 <b>함의·제목</b>에 걸렸다.
+      앞에서 시간을 뺏기는 설계이므로 <b>“2분 룰”</b>을 반드시 지켜야 한다.
+    </div>
+    <div class="concept">
+      <span class="label">③ 사실 확인형은 전부 “뒤집기”</span>
+      26(연도–사건 순서 뒤집기) · 27(부정어 No 삭제) · 45(홈런을 쳤다 → 못 쳤다).
+      <b>선지의 서술어와 부정어</b>만 집중해서 대조하면 셋 다 1분 안에 끝난다.
+    </div>
+    <div class="concept">
+      <span class="label">④ 어휘 문항은 반의어·방향 치환뿐</span>
+      30번 <i>insignificant</i> ↔ significant, 42번 <i>less</i> ↔ more.
+      새로운 단어를 아는지가 아니라 <b>글의 논리 방향</b>을 아는지를 본다.
+    </div>
+  </div>
+
+  <h2>5. 오답 함정 카탈로그 — 실제 선지로 보는 8가지 수법</h2>
+
+  <table>
+    <thead><tr><th>수법</th><th>사례</th><th>대응</th></tr></thead>
+    <tbody>
+      <tr><td><b>글자 그대로의 뜻</b>로 유인</td><td>21 ② returned to the original note with an <b>identical frequency</b></td><td>옥타브는 주파수가 <b>2배</b>. 밑줄은 비유이므로 문자 그대로 읽으면 오답</td></tr>
+      <tr><td><b>부분 내용</b>을 전체인 척</td><td>22 ② ③ — 지문에 실제로 나오는 문장</td><td>“나왔는가”가 아니라 <b>“필자가 결국 하고 싶은 말인가”</b>로 판단</td></tr>
+      <tr><td><b>연도·사건 순서</b> 뒤집기</td><td>26 ⑤ 1958년 정교수 임용 → “1958년 퇴임”</td><td>숫자 옆의 <b>동사</b>까지 같이 대조</td></tr>
+      <tr><td><b>부정어 삭제</b></td><td>27 ③ “<b>No</b> private restroom” → “개인 화장실이 있다”</td><td>실용문의 <b>괄호 ( ) 안</b>을 절대 건너뛰지 않는다</td></tr>
+      <tr><td><b>반의어 치환</b></td><td>30 ⑤ insignificant (→ significant)</td><td>마지막 문장·결론과 <b>모순되는 단어</b>를 찾는다</td></tr>
+      <tr><td><b>대상(주어) 바꿔치기</b></td><td>35 ④ employees → <b>employers</b></td><td>무관한 문장은 <b>주어가 누구인지</b>부터 확인</td></tr>
+      <tr><td><b>절반만 맞는 선지</b></td><td>40 ① resurface(맞음) … simplification(틀림)</td><td>요약은 <b>(B)부터</b> 검증해 절반짜리를 먼저 잘라낸다</td></tr>
+      <tr><td><b>방향(less/more) 뒤집기</b></td><td>42 (d) <b>less</b> routine (→ more routine)</td><td>비교급·정도 부사는 <b>예시와 맞춰</b> 방향을 확인</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="page-break">6. 시간 배분표 (독해 45분 기준)</h2>
+  <p>총 70분 = 듣기 약 25분 + <b>독해 45분</b>. 마킹은 듣기 시간과 각 구간 끝에 나눠서 한다.</p>
+
+  <table class="time-table">
+    <colgroup><col class="t1"><col class="t2"><col class="t3"><col class="t4"></colgroup>
+    <thead><tr><th>풀이 순서</th><th>문항</th><th>배정 시간</th><th>메모</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><b>1</b></td><td class="c">18~20</td><td class="c">3분</td><td><b>듣기 시간 중</b>에 미리 푼다. 듣기 문제 사이 여백 시간 활용</td></tr>
+      <tr><td class="c"><b>2</b></td><td class="c">25~28</td><td class="c">4분</td><td>도표·인물·실용문. <b>가장 확실한 8점</b>부터 회수</td></tr>
+      <tr><td class="c"><b>3</b></td><td class="c">43~45</td><td class="c">4분</td><td>서사 장문. 쉬운데 뒤에 있어 놓치기 쉬운 <b>6점</b></td></tr>
+      <tr><td class="c"><b>4</b></td><td class="c">41~42</td><td class="c">3분</td><td>장문 제목·어휘. 결론 문단 먼저 읽기</td></tr>
+      <tr><td class="c"><b>5</b></td><td class="c">21~24</td><td class="c">6분</td><td>3점 두 개 포함. <b>한 문항 2분 초과 시 표시하고 넘긴다</b></td></tr>
+      <tr><td class="c"><b>6</b></td><td class="c">29~30</td><td class="c">4분</td><td>어법·어휘. 감이 안 오면 30초 만에 넘긴다</td></tr>
+      <tr><td class="c"><b>7</b></td><td class="c">35~40</td><td class="c">11분</td><td>무관·순서·삽입·요약. 연결어/지시어만 기계적으로 추적</td></tr>
+      <tr><td class="c"><b>8</b></td><td class="c">31~34</td><td class="c">10분</td><td>빈칸 4문항. <b>2점짜리 31·33을 먼저</b>, 3점 32·34는 나중에</td></tr>
+      <tr><td class="c">—</td><td class="c">보류 문항</td><td class="c">4분</td><td>표시해 둔 문항 재검토 + 마킹 최종 확인</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip"><span class="label">왜 번호 순서대로 풀지 않는가</span>
+    18~45번을 순서대로 풀면 <b>21~24번(3점 2개)</b>에서 막힌 채로 시간이 흘러
+    정작 쉬운 43~45번(6점)을 못 푸는 상황이 생긴다.
+    <b>쉬운 점수 → 중간 → 어려운 점수</b> 순서로 회수하는 것이 이번 배치에서는 특히 유리하다.
+    다만 순서를 바꾸는 만큼 <b>마킹 실수</b> 위험이 커지므로, 구간이 끝날 때마다 답안지를 확인한다.
+  </div>
+
+  <h2>7. 수요일 아침 최종 점검 체크리스트</h2>
+
+  <div class="grid2">
+    <div class="concept">
+      <span class="label">전날 밤 (30분)</span>
+      <ul class="chk">
+        <li>단어 자료에서 <b>체크한 단어</b>만 1회 훑기</li>
+        <li>3점 문항 7개 위치(21·24·30·32·34·37·39) 외우기</li>
+        <li>풀이 순서(위 시간 배분표) 한 번 읽고 자기 순서 확정</li>
+        <li>일찍 잘 것 — 듣기 집중력이 곧 독해 시간이다</li>
+      </ul>
+    </div>
+    <div class="concept">
+      <span class="label">시험 직전 (10분)</span>
+      <ul class="chk">
+        <li><b>숙어·구동사 총정리 216선</b>만 빠르게 훑기</li>
+        <li>“27번은 <b>불일치</b>, 28번은 <b>일치</b>” 방향 확인 습관 되새기기</li>
+        <li>“2분 넘으면 넘긴다” 규칙 소리 내어 한 번 확인</li>
+        <li>새 지문·새 문제는 절대 풀지 않는다</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="concept">
+    <span class="label">시험지를 받고 가장 먼저 할 일</span>
+    18~45번을 넘겨 보며 <b>3점 문항 7개에 별표</b>를 친다. 그리고 27·28번 지시문의
+    <b>“않는” / “하는”</b>에 동그라미를 친다. 이 30초가 최소 4점을 지킨다.
+  </div>
+
+  <hr class="divider">
+  <p style="font-size:9pt;color:#5a6473;text-align:center;margin-top:14px;">
+    2026학년도 대학수학능력시험 9월 모의평가 영어 영역 · 18~45번 출제 스타일 분석 · 28문항 56점
+  </p>
+</div>
+</body>
+</html>
