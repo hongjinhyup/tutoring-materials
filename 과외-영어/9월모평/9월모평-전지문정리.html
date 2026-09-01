@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026학년도 9월 모평 영어 — 전 문항 지문 정리</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+.para-label {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 700;
+  font-size: 9.5pt; margin-right: 4px; font-family: sans-serif;
+}
+
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  tr, .choice-list li, .concept, .tip, .explain-box, .syntax-box,
+  .translation, .flow-step, .given-sentence, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
+
+:root { --purple-bg:#f3f0ff; --purple-line:#b0a0d8; }
+.explain-box{background:var(--accent-soft);border:1px solid var(--accent-line);
+  border-left:4px solid var(--accent);border-radius:6px;padding:13px 17px;margin:10px 0;break-inside:avoid;}
+.explain-box .label{font-size:9pt;font-weight:700;color:var(--accent);display:block;margin-bottom:6px;}
+.qh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:16px 0 5px;padding:6px 10px;
+  background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:4px;
+  break-after:avoid;page-break-after:avoid;break-inside:avoid;}
+.qh .no{background:var(--accent);color:#fff;border-radius:4px;padding:1px 9px;font-weight:700;
+  font-size:10pt;font-family:'SF Mono','Menlo',monospace;}
+.qh .typ{font-weight:700;color:#5a3d9e;font-size:10pt;}
+.qh .topic{color:var(--muted);font-size:9.5pt;}
+.qh .ans{margin-left:auto;font-size:9.5pt;color:var(--muted);}
+.qh .ans b{color:#b3261e;font-size:11pt;}
+.passage{font-size:10pt;line-height:1.7;padding:12px 16px;margin:6px 0;}
+.sol{background:var(--green-bg);border:1px solid var(--green-line);border-radius:6px;
+  padding:9px 14px;margin:6px 0 4px;font-size:9.5pt;line-height:1.6;break-inside:avoid;}
+.sol .label{font-size:8.5pt;font-weight:700;color:#2e7d32;margin-right:7px;}
+table.anskey{font-size:10pt;}
+table.anskey td{text-align:center;padding:5px 4px;}
+table.anskey td b{color:var(--accent);margin-right:3px;}
+table.listen{font-size:9.5pt;}
+table.listen td{padding:5px 8px;vertical-align:top;}
+table.listen td.c{text-align:center;}
+table.listen td.c b{color:#b3261e;font-size:11pt;}
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="author-bar"><span>작성자: <b>홍진협</b></span><span>Email: <b>hongjinhyup@gmail.com</b></span></div>
+
+  <div class="doc-header">
+    <div class="eyebrow">2026학년도 9월 모의평가 · 영어 영역</div>
+    <h1>전 문항 지문 정리</h1>
+    <p class="subtitle">듣기 1~17번 + 독해 18~45번 — 유형 · 소재 · 지문 원문 · 정답 · 풀이</p>
+    <p class="meta"><span class="passage-badge">45문항 전체</span> <span class="code-badge">실제 시험지 원문 · 공식 정답</span></p>
+  </div>
+
+  <div class="tip"><span class="label">이 자료의 구성</span>
+    <b>듣기 1~17번</b>은 표로 정리했다. 시험지에 영어 대본이 실리지 않는 유형이라
+    <b>유형 · 정답 · 담화 요약 · 핵심 어휘</b>만 담았다.
+    <b>독해 18~45번</b>은 <b>영어 지문 원문</b>을 그대로 싣고 유형 · 소재 · 정답 · 풀이를 붙였다.
+    지문을 다시 읽으며 감을 잡는 용도다.
+  </div>
+
+  <h2>전체 정답 (1~45)</h2>
+  <table class="anskey">
+    <tr><td><b>1</b> ①</td><td><b>2</b> ②</td><td><b>3</b> ③</td><td><b>4</b> ⑤</td><td><b>5</b> ④</td><td><b>6</b> ④</td><td><b>7</b> ①</td><td><b>8</b> ④</td><td><b>9</b> ⑤</td></tr>
+    <tr><td><b>10</b> ④</td><td><b>11</b> ②</td><td><b>12</b> ①</td><td><b>13</b> ⑤</td><td><b>14</b> ③</td><td><b>15</b> ⑤</td><td><b>16</b> ①</td><td><b>17</b> ③</td><td><b>18</b> ②</td></tr>
+    <tr><td><b>19</b> ③</td><td><b>20</b> ②</td><td><b>21</b> ③</td><td><b>22</b> ①</td><td><b>23</b> ①</td><td><b>24</b> ③</td><td><b>25</b> ⑤</td><td><b>26</b> ⑤</td><td><b>27</b> ③</td></tr>
+    <tr><td><b>28</b> ⑤</td><td><b>29</b> ②</td><td><b>30</b> ⑤</td><td><b>31</b> ②</td><td><b>32</b> ③</td><td><b>33</b> ⑤</td><td><b>34</b> ①</td><td><b>35</b> ④</td><td><b>36</b> ④</td></tr>
+    <tr><td><b>37</b> ②</td><td><b>38</b> ③</td><td><b>39</b> ②</td><td><b>40</b> ④</td><td><b>41</b> ①</td><td><b>42</b> ④</td><td><b>43</b> ③</td><td><b>44</b> ④</td><td><b>45</b> ②</td></tr>
+  </table>
+
+  <div class="explain-box"><span class="label">쓰는 법</span>
+    ① 독해 지문을 <b>정답을 가리고</b> 다시 읽으며 유형별 접근이 몸에 붙었는지 확인한다.<br>
+    ② 막히는 지문은 <b>소재</b>만 보고 무슨 이야기였는지 떠올려 본다. 떠오르지 않으면 다시 읽는다.<br>
+    ③ <b>풀이</b>는 답의 근거만 압축한 것이다. 자기 근거와 다르면 그 지문을 표시해 둔다.<br>
+    ④ 고난도 3문항(34 · 37 · 39)은 <b>별도 지문분석</b> 자료에서 더 자세히 다룬다.
+  </div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 전 문항 지문 정리</span><span>1 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>듣기 1~9번</h2>
+  <table class="listen">
+    <thead><tr><th style="width:38px;">#</th><th style="width:110px;">유형</th><th style="width:38px;">정답</th><th>담화 요약 · 정답 근거</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><b>1</b></td><td>목적 파악</td><td class="c"><b>①</b></td><td>여자가 이번 주말에 있을 스마트워치 특별 할인 행사에 대해 자세히 안내하고 있으므 로, 여자가 하는 말의 목적으로 가장 적절한 것은 ①이다.</td></tr>
+      <tr><td class="c"><b>2</b></td><td>의견 파악</td><td class="c"><b>②</b></td><td>남자는 원하는 만큼 오래 달리지 못한다고 말하는 여자에게 빠른 박자의 음악이 심장 박동을 높여주고 에너지를 북돋아 주며, 달리기에 집중할 수 있게 해준다고 하면서 빠른 박자의 음악을 듣도록 권유하고 있다. 따라서 남자의 의견으로 가장 적절한 것 은 ②이다.</td></tr>
+      <tr><td class="c"><b>3</b></td><td>요지 파악</td><td class="c"><b>③</b></td><td>여자는 다른 사람과 대화를 시작할 때 무슨 말을 해야 할지 몰라 어려움을 겪을 경우 상대방의 패션에 대해 좋은 말을 하는 것이 도움이 된다고 말하고 있다. 따라서 여자 가 하는 말의 요지로 가장 적절한 것은 ③이다.</td></tr>
+      <tr><td class="c"><b>4</b></td><td>그림 내용 일치</td><td class="c"><b>⑤</b></td><td>대화에서는 하트 모양 쿠션이라고 했는데, 그림에서는 네모 모양 쿠션이므로, 그림에 서 대화의 내용과 일치하지 않는 것은 ⑤이다.</td></tr>
+      <tr><td class="c"><b>5</b></td><td>할 일 파악</td><td class="c"><b>④</b></td><td>두 사람이 Motata Island 여행 패키지 상품의 진행 상황에 관한 대화를 나누고 있는 데, 남자가 오후에 현지 여행 가이드에게 연락할 것이라고 했으므로, 남자가 할 일로 가장 적절한 것은 ④이다.</td></tr>
+      <tr><td class="c"><b>6</b></td><td>숫자 정보 파악</td><td class="c"><b>④</b></td><td>여자는 한 봉지에 30달러인 유기농 먹이 두 봉지와 개당 10달러인 공을 두 개 사고, 총구매에서 5달러 할인을 받게 되므로, 여자가 지불할 금액은 ④ ‘75달러’이다.</td></tr>
+      <tr><td class="c"><b>7</b></td><td>이유 파악</td><td class="c"><b>①</b></td><td>남자는 토요일에 엄마와 함께 콘서트에 가기로 해서 Fly Your Paper Airplane Competition에 참가할 수 없다고 말한다. 따라서 남자가 Fly Your Paper Airplane Competition에 참가할 수 없는 이유는 ①이다. 5</td></tr>
+      <tr><td class="c"><b>8</b></td><td>언급 유무 파악</td><td class="c"><b>④</b></td><td>Bookscape Outdoor Library 행사에 관해 목적(to let people read books outdoors while enjoying nature), 장소(Mooni Lake), 대여 물품(items like books, along with…</td></tr>
+      <tr><td class="c"><b>9</b></td><td>담화의 세부 내용 파악</td><td class="c"><b>⑤</b></td><td>축제는 비가 오더라도 열릴 것이라고 했으므로, 담화의 내용과 일치하지 않는 것은 ⑤이다.</td></tr>
+    </tbody>
+  </table>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 듣기 1~9번</span><span>2 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>듣기 10~17번</h2>
+  <table class="listen">
+    <thead><tr><th style="width:38px;">#</th><th style="width:110px;">유형</th><th style="width:38px;">정답</th><th>담화 요약 · 정답 근거</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><b>10</b></td><td>표 내용 파악</td><td class="c"><b>④</b></td><td>여자는 스포츠 가방을 고르기 위해 남자의 도움을 받고 있다. 대화를 통해 가격이 60 달러 이하여야 하고, 크기는 작지 않아야 하며, 주머니는 최소 4개 이상, 그리고 방수 기능이 있어야 함을 알 수 있다. 이러한 조건을 모두 만족하는 가방을 선택한 것으로 보아,…</td></tr>
+      <tr><td class="c"><b>11</b></td><td>적절한 응답 고르기 7</td><td class="c"><b>②</b></td><td>남자는 정기 건강검진을 앞두고 금식 시작 시간을 잊어버려서 다시 알려달라고 하고 있다. 따라서 남자의 마지막 말에 대한 여자의 응답으로 가장 적절한 것은 ② ‘물론 이죠. 오후 9시 이후에는 어떤 음식도 드실 수 없어요.’이다. ① 지난달에 여기 오셨어야 했어요. ③…</td></tr>
+      <tr><td class="c"><b>12</b></td><td>적절한 응답 고르기</td><td class="c"><b>①</b></td><td>여자가 다음 주에도 공항으로 태우러 와 달라고 요청하자, 남자는 그러고 싶지만, 그 날 남자의 차를 사용할 수 없어 여자에게 여자의 차를 사용할 수 있는지 물었고, 여 자는 이에 동의하며 차 키의 위치를 알려주고 있다. 따라서 여자의 마지막 말에 대한 남자의 응답으로…</td></tr>
+      <tr><td class="c"><b>13</b></td><td>적절한 응답 고르기</td><td class="c"><b>⑤</b></td><td>첫 게시물을 올렸던 지난달의 상황과 달리 이번 달에는 자신의 소셜 미디어 채널에 신규 구독자가 없다는 여자의 말에 남자는 무엇을 게시했는지 물었고, 여자는 올린 것이 없으며 한 달에 한 번씩 콘텐츠를 게시하려고 했다는 자신의 계획을 말한다. 이 에 남자는 적어도…</td></tr>
+      <tr><td class="c"><b>14</b></td><td>적절한 응답 고르기</td><td class="c"><b>③</b></td><td>개인 물품을 기숙사 복도에 두면 안 된다고 말하는 여자에게 남자는 지난밤 폭우 때 문에 복도에 자전거를 둔 사정을 말하지만, 여자는 공용 공간이 막히면 안전 문제가 생길 수 있다며 자전거를 옮겨줄 것을 간접적으로 요청하고 있다. 그럼에도 남자가 나중에 옮겨도 될지를…</td></tr>
+      <tr><td class="c"><b>15</b></td><td>상황에 적절한 말</td><td class="c"><b>⑤</b></td><td>Jake는 가장 좋아하는 치킨 수프를 만들어달라고 Rachel에게 부탁했으나 조리법을 찾을 수 없어 두 사람이 온종일 온 집안을 찾은 끝에 발견하는데, Rachel이 그것을 다시 잃어버릴까 걱정하자 Jake는 휴대전화로 조리법들을 촬영하여 저장하라고 제안 하고 싶은…</td></tr>
+      <tr><td class="c"><b>16</b></td><td>주제 파악</td><td class="c"><b>①</b></td><td>남자는 인류의 몸이 어떻게 변화하여 지금의 모습을 갖게 되었는지를 설명하고 있다. 따라서 남자가 하는 말의 주제로 가장 적절한 것은 ① ‘시간이 지나면서 인간의 몸이 어떻게 변했는가’이다. ② 인간의 몸과 동물의 몸 비교 ③ 균형이 인간의 몸에 중요한 이유 11 ④…</td></tr>
+      <tr><td class="c"><b>17</b></td><td>세부 내용 파악</td><td class="c"><b>③</b></td><td>턱, 목, 다리, 발뒤꿈치는 언급되었지만, ③ ‘손’은 언급되지 않았다.</td></tr>
+    </tbody>
+  </table>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 듣기 10~17번</span><span>3 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>듣기 핵심 어휘 · 표현 (1~17번)</h2>
+  <div class="explain-box"><span class="label">공식 해설 수록 어휘</span>a variety of 다양한 protective film 보호 필름 tempo 박자 raise 높이다 heartbeat 심장박동, 심박 distracted (주의가) 산만한 mention 언급하다 atmosphere 분위기 smoothly 순조롭게 mall 쇼핑몰 nursing room 수유실 microwave 전자레인지 heat up 데우다 star-patterned 별무늬의 heart-shaped 하트 모양의 head out to ~로 출발하다, ~로 가다 reservation 예약 confirmation 확인서, 확인 ferry 페리, (사람·차량 등을 운반하 는) 연락선 contact 연락하다 sort out ~을 정리하다 organic 유기농의 discount 할인 hold 열다, 개최하다 compete 경쟁하다 distance 거리 biology 생물학 submit 제출하다 community center 주민 센터 purpose 목적 flyer 전단 reading light 독서등, 독서용 조명 memorable 기억 할 만한 feel stuck 갇혀 있다는 느낌이 들다 announce 알리다 unique 독특한 gardening 정원 가꾸기, 원예 pricey 비싼 recommend 추천하다 water-resistant 방수의 checkup 건강검진 be on the list 명단에 있다 empty stomach 공복 stop eating 금식하다 give a ride (차를) 태워다 주다 pick up ~를 (차에) 태우러 가다 subscriber 구독자 post 올리다, 게시하다 strategy 전략 dormitory 기숙사 fire drill 소방 훈련 get through ~을 통과하다 recipe 조리[요리]법 request 부탁하다, 요청하다 entire 온, 전체의 replace 대 체하다 suggest 제안하다 [16~17] [해석] 남: 안녕하세요, 학생 여러분. 여러분은 우리 몸이 왜 지금의 모습인지 궁금해 본 적 이 있나요? 오늘 우리는 인류의 역사 속에서 인간의 몸에 일어난 변화에 대해 배 워 보겠습니다. 우선, 인간의 턱은 점차 더 작아졌습니다. 인간의 식단이 질기고 익히지 않은 음식에서 익힌 음식으로 바뀌면서, 인간은 예전과 같은 강력한 씹는 힘이 턱에 필요하지 않았습니다. 두 번째로, 인간의 목은 더 가늘어졌습니다. 인 간이 똑바로 서기 시작하면서, 목이 몸의 균형을 맞추고 몸을 지탱하는 데 예전 만큼 큰 역할을 하지 않았습니다. 세 번째로, 인간의 다리는 더 길어졌습니 jaw 턱 gradually 점차, 서서히 shift 바뀌다; 변화 chew (음식을) 씹다 contribute to ~에 기여하다 heel 발뒤꿈치 absorb 흡수하다 impact 충격 illustrate 잘[분명히] 보여주다</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 듣기 핵심 어휘</span><span>4 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">18</span>
+    <span class="typ">목적 파악</span>
+    <span class="topic">AI 여름 프로그램 강의실 변경 안내</span>
+    <span class="ans">18번 <b>②</b></span>
+  </div>
+  <div class="passage">Dear AI summer program participants, I am your instructor John Phillips. I am excited about your enthusiasm for expanding your familiarity with AI by registering for our AI summer program. Thanks to your interest, more participants enrolled in our program than we expected. Therefore, the original lecture room does not have enough seating for all the participants. So, we have decided to move the location to make space for everyone. The program was supposed to be held in classroom 502 in the Ranark building, but it will be changed to classroom 103 in the Whitewood building. Thank you for your understanding. I am looking forward to meeting you all. Sincerely, John Phillips</div>
+  <div class="sol"><span class="label">풀이</span>AI 여름 프로그램에 예상보다 많은 참가자가 등록하여, 당초 예정된 강의실의 좌석이 부족하게 되어 장소를 변경하게 되었다는 것을 알리는 내용이므로, 글의 목적으로 가 장 적절한 것은 ②이다.</div>
+  <div class="qh">
+    <span class="no">19</span>
+    <span class="typ">심경 변화 파악</span>
+    <span class="topic">교수 연구실 앞 Sierra의 심경</span>
+    <span class="ans">19번 <b>③</b></span>
+  </div>
+  <div class="passage">Sierra shook as she walked back and forth in front of her professor’s office. The week before, she had turned in her art assignment and today, Professor Fox had asked Sierra to come see her. “Oh, no.” Sierra thought, “What if she thinks my paintings are horrible?” Sierra’s sweating hand turned the door handle. Professor Fox smiled and said, “Sierra, your paintings were amazing and so unique! Can I display them at the school exhibition?” Sierra smiled brightly as she exclaimed, “Oh, this is so wonderful! It’s always been a dream of mine to share my art with others! This is the best day ever!” ①angry۳calm ②frustrated۳bored ③nervous۳delighted ④relieved۳surprised ⑤thrilled۳panicked </div>
+  <div class="sol"><span class="label">풀이</span>Sierra는 일주일 전에 미술 과제를 제출했는데 Fox 교수님이 만나러 오라고 하자 자 신의 그림들이 형편없다고 할까 봐 불안해했지만, 교수님이 자신의 그림을 극찬하시 며 전시회에 전시해도 되겠느냐고 물으시자 매우 기뻐했으므로, Sierra의 심경 변화 로 가장 적절한 것은 ③ ‘불안해하는 → 매우 기뻐하는’이다. ① 화난 → 차분한 ② 좌절한 → 지루한 ④ 안도한 → 놀란 ⑤ 아주 신이 난 → 겁에 질린</div>
+  <div class="qh">
+    <span class="no">20</span>
+    <span class="typ">필자의 주장 파악</span>
+    <span class="topic">'썩은 사과' 처벌보다 시스템 개선</span>
+    <span class="ans">20번 <b>②</b></span>
+  </div>
+  <div class="passage">Showing up late for work and using abusive language are the kinds of problems that every business wants to eliminate. Business leaders looking to achieve this often focus on finding “bad apples” who break their rules and then punishing them. This assumes that the bad apples are acting badly on purpose. In fact, one common reason that employees give for breaking rules is that they were unaware their behavior was undesirable. There are some actors who knowingly act against policy, but many problems are unintentional failings. If businesses want better employees, those businesses must create clear standards and educate their employees directly about how to follow them. Without these standards there would be no way to distinguish bad apples from merely uninformed apples.</div>
+  <div class="sol"><span class="label">풀이</span>기업이 직원의 행동 문제를 없애려고 하면서 나쁜 사과들(문제 직원들)을 찾아내려고 하지만, 직원이 규칙을 어기는 한 가지 흔한 이유는 정보가 부족한 것이므로, 기업은 명확한 기준과 교육을 제공해야 한다는 내용의 글이다. 따라서 필자가 주장하는 바로 가장 적절한 것은 ②이다.</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 18~20번</span><span>5 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">21</span>
+    <span class="typ">함축 의미 추론</span>
+    <span class="topic">옥타브 — 음악의 보편적 기초</span>
+    <span class="ans">21번 <b>③</b></span>
+  </div>
+  <div class="passage">Here is a fundamental quality of music. Note names repeat because of a perceptual phenomenon that corresponds to the doubling and halving of frequencies. When we double or halve a frequency, we end up with a note that sounds remarkably similar to the one we started out with. This relationship, a frequency ratio o f 2 : 1 o r 1 : 2 , is called the octave. It is so important that, in spite of the large differences that exist between musical cultures, every culture we know of has the octave as the basis for its music, even if it has little else in common with other musical traditions. This phenomenon leads to the notion of circularity in pitch perception, and is similar to circularity in colors. Although red and violet fall at opposite ends of the continuum of visible frequencies of electromagnetic energy, we see them as perceptually similar. The same is true in music, and music is often described as having two dimensions, one that accounts for tones going up in frequency and another that accounts for the perceptual sense that we’ve come back home again each time we double a tone’s frequency.</div>
+  <div class="sol"><span class="label">풀이</span>주파수와 지각 현상을 통해 옥타브가 어떻게 음악의 보편적 기초가 되는지를 설명하 는 내용의 글이다. 주파수를 두 배 혹은 절반으로 변화시켰을 때 놀라운 정도로 유사 한 음을 듣게 되는 지각 경험을 비유적으로 표현한 것이므로, 밑줄 친 부분이 글에서 의미하는 바로 가장 적절한 것은 ③ ‘이름은 같으나 다른 음높이를 가진 음에 도달했 다’이다. ① 같은 옥타브 내에서 음조의 차이를 식별했다 ② 동일한 주파수를…</div>
+  <div class="qh">
+    <span class="no">22</span>
+    <span class="typ">요지 파악</span>
+    <span class="topic">소셜미디어와 사회적 자본</span>
+    <span class="ans">22번 <b>①</b></span>
+  </div>
+  <div class="passage">One reason that people participate in social media is because it builds social relations. We increase our social capital when we successfully engage in social media. Social capital describes the networks of relationships we have that are built on mutuality and sharing of identity, understanding, norms and values. We build ties that may pay off with a job lead or a letter of recommendation. We reinforce our identities through our online presentation in a personal blog or our pro fi l e . “ The premise behind the notion of social capital is rather simple and straightforward: investment in social relations with expected returns,” noted sociologist Nan Lin. Lin’s work stresses that it is who you know as much as what you know that shapes our experience in society. With new media, our reach of connecting is all the greater, expanding our “ who you know ” to greater and greater lengths. *premise:</div>
+  <div class="sol"><span class="label">풀이</span>소셜 미디어는 상호성과 정체성, 이해, 규범 및 가치 공유를 바탕으로 구축된 관계망 을 확장하여 사회적 자본을 증가시키는데, 이는 우리가 무엇을 아는가만큼이나 우리 가 누구를 아는가가 사회 경험을 형성하는 데 중요하다는 내용의 글이다. 따라서 글 의 요지로 가장 적절한 것은 ①이다.</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 21~22번</span><span>6 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">23</span>
+    <span class="typ">주제 추론</span>
+    <span class="topic">자서전 서술자와 전기 작가의 차이</span>
+    <span class="ans">23번 <b>①</b></span>
+  </div>
+  <div class="passage">In writing a life, the life narrator and the biographer engage different kinds of evidence. Most biographers incorporate multiple forms of evidence, including historical documents, interviews, and family archives, which they evaluate for validity. Relatively few biographers use their personal memories of their subject as reliable evidence, unless they had a personal relationship to the subject of the biography (as a relative, child, friend, or colleague). For life narrators , by contrast , personal memories are the primary archival source. They may have recourse to other kinds of sources —letters, journals, photographs, conversations—and to their knowledge of a historical moment. But the usefulness of such evidence for their stories lies in the ways in which they employ that evidence to support, supplement, or offer commentary on their personalized acts of remembering. In autobiographical narratives, imaginative acts of remembering always overlap with such rhetorical acts as assertion, justification, judgment, conviction, and questioning. *archive:</div>
+  <div class="sol"><span class="label">풀이</span>한 사람의 삶을 글로 쓸 때 전기 작가는 주로 문서, 인터뷰, 가족 보관 기록 등 객관 적 자료를 활용하고 개인적 기억은 특별한 관계가 있을 때만 사용하는 반면, 생애를 서술하는 사람은 개인적 기억을 가장 중요한 자료로 삼고, 편지, 일기, 사진, 대화, 역 사적 지식 등을 보조 자료로 활용한다는 내용의 글이다. 따라서 글의 주제로 가장 적 절한 것은 ① ‘다양한 유형의 생애 서술에서 개인적 기억의…</div>
+  <div class="qh">
+    <span class="no">24</span>
+    <span class="typ">제목 추론</span>
+    <span class="topic">중세 수도원의 역할</span>
+    <span class="ans">24번 <b>③</b></span>
+  </div>
+  <div class="passage">Monasteries were the engine rooms of the Middle Ages. At the height of their activities and influence, monasteries provided intellectual leadership for the institutions of Church and civil governments, innovation in religious thought and practice, medical provision, education, visual culture and agricultural development. They did all this while apparently observing self-imposed isolation from the wider community. For monasteries were intended to function as places set apart from the world, in which monks devoted their lives to a permanent rhythm of religious observance, prayer and study. Religious prayer and praise lay at the heart of monasticism. Both those following this life and those outside believed that monastic lives were led for the benefit of wider society, and that the sacrifices made by monks in separating themselves from ‘normal’ human contact functioned as penances on behalf of the community as well as for their own deliverance. Monks were regarded as leading parallel lives that had the power to save themselves and others. *monastery:</div>
+  <div class="sol"><span class="label">풀이</span>중세 시대의 수도원들은 사회와 단절된 듯 보였지만, 실제로는 종교, 정부, 의료, 교 육, 예술, 농업 등 여러 방면에서 사회 전체에 이바지하였고, 수도사들의 고립과 희생 적인 생활 역시 수도사 자신들만이 아니라 공동체 전체를 대신한 참회와 구원을 위한 것으로 이해되었기에, 수도원은 사회와는 분리된 듯하면서도 사회와 긴밀히 연결되어 있었다는 내용의 글이다. 따라서 글의 제목으로 가장 적절한 것은 ③ ‘고독의…</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 23~24번</span><span>7 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">25</span>
+    <span class="typ">도표 내용 일치 파악</span>
+    <span class="topic">온라인 후기를 읽는 미국 소비자 비율</span>
+    <span class="ans">25번 <b>⑤</b></span>
+  </div>
+  <div class="passage">The above graph shows the percentages of U.S. shoppers who read online reviews before making purchases in 2015 by product category and age group.①Of all the above categories, people from each age group tended to read online reviews the most, by percentage, before buying electronics. ②The age group least likely to read online reviews before buying a car was the 18ْ34 age group.③The percentage of people in the 35ْ54 age group using online reviews before making purchases of household appliances was more than twice that of people in the same age group using online reviews before purchasing clothes.④For people who read online reviews before purchasing household appliances, the percentage of people aged 35ْ54 was higher than that of those aged 18ْ34 and lower than that of those aged 55+.⑤The percentage of people reading online reviews before buying clothes was less than 30% for each of the three age groups. Claude Shannon玽</div>
+  <div class="sol"><span class="label">풀이</span>옷을 사기 전에 온라인 구매평을 읽은 18~34세 사람들의 비율은 33%로 30%를 넘었 으므로, 도표의 내용과 일치하지 않는 것은 ⑤이다.</div>
+  <div class="qh">
+    <span class="no">26</span>
+    <span class="typ">글의 세부 내용 파악</span>
+    <span class="topic">Claude Shannon — 정보이론의 아버지</span>
+    <span class="ans">26번 <b>⑤</b></span>
+  </div>
+  <div class="passage">Claude Shannon was an American mathematician and information scientist, famous for being the “father of information theory.” As a child, he was interested in electrical devices and built a telegraph that connected to his friend’s home half a mile away. At age 21, he started his master’s program in electrical engineering. His master’s thesis on digital computing theory has been called the “most important master’s thesis of all time.” During World War II, he worked to help win the war by inventing a machine that helped destroy German rockets. In 1950, with the help of his wife, he built a machine capable of learning by itself. This machine was viewed as part of the foundation of Artificial Intelligence. In 1958, he became a full professor at MIT and continued to teach there for more than 20 years. A biography written about his life called him, the “most important genius you’ve never heard of.” *telegraph:</div>
+  <div class="sol"><span class="label">풀이</span>1958년에 MIT의 정교수가 되었고, 이후 20년 넘게 그곳에서 가르쳤다고 했으므로, 글의 내용과 일치하지 않는 것은 ⑤이다. 17</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 25~26번</span><span>8 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">27</span>
+    <span class="typ">안내문의 세부 내용 파악</span>
+    <span class="topic">Wabut Jungle Yoga 프로그램 안내</span>
+    <span class="ans">27번 <b>③</b></span>
+  </div>
+  <div class="passage">Wabut Jungle Yoga In this program, you can rediscover forgotten rhythms of your life while experiencing both yoga and the jungle. Many travelers join us again year after year. Where: Wabut Jungle Yoga Center in Kroiwan What ݜDoing yoga on the deck outside ݜBird watching in the jungle ݜHiking in the jungle with a guide Lodging:Beautifully crafted bungalow (No private restroom inside bungalow, but common restrooms easily accessible) Application ݜVisit our website at www.wabu*.com and fill out the application form online. ݜFor more information, email us at wabu*@*mail.com. Transportati on:It is offered from the airport to the yoga center .</div>
+  <div class="sol"><span class="label">풀이</span>방갈로 내부에 개인 화장실은 없다고 했으므로, 안내문의 내용과 일치하지 않는 것은 ③이다.</div>
+  <div class="qh">
+    <span class="no">28</span>
+    <span class="typ">안내문의 세부 내용 파악</span>
+    <span class="topic">Under the Sea 마스코트 공모전</span>
+    <span class="ans">28번 <b>⑤</b></span>
+  </div>
+  <div class="passage">Under the Sea Mascot Contest Design a unique marine animal mascot, reflecting the theme of marine ecosystem conservation. Schedule ݜSubmission period: September 15ْOctober 15 ݜJudging period: October 16ْOctober 20 ݜWinner announcement: October 21 Prizes Number of Winners Prize Money (per winner) 1st prize 1 $1,000 2nd prize 1 $700 3rd prize 2 $500 Guidelines ݜThere is no participation fee. ݜThe design must be in JPG format. (Maximum file size: 10MB) ݜEach participant must submit one mascot design. Assessment Criteria Percentage Creativity 50% Relevance to Theme 30% Attractiveness 20% ٷYou can f ind more infor mation at www.eco*cea*.org.</div>
+  <div class="sol"><span class="label">풀이</span>평가 기준에서 창의성이 50%로 가장 높은 비중을 차지한다고 했으므로, 안내문의 내 용과 일치하는 것은 ⑤이다.</div>
+  <div class="qh">
+    <span class="no">29</span>
+    <span class="typ">문법성 판단</span>
+    <span class="topic">꿀의 가공과 종류</span>
+    <span class="ans">29번 <b>②</b></span>
+  </div>
+  <div class="passage">Honey can be eaten by itself or mixed with other ingredients. Natural or pure honey has had no additives, preservatives or synthetic ingredients added. Also①referred to as ‘undiluted’, it is usually more expensive than diluted honeys. Natural honey can also be called ‘blended honey’, ②which honeys from various sources are blended together—not by the bees, but by human processors and distributors in stages after the honey has been collected. Blending is frequently done for taste as well as marketing reasons, especially since some consumers find the darker honeys too③strong. Mixing different types of honey together can make it more palatable, and also gives a more uniform flavour—this is an important consideration for producers and retailers, who④feel the need to guarantee reliable, unsurprising (typically mild) flavours to their customers. Clover is one of the most popular honeys in the U.S., and⑤its mild flavour and taste have become familiar to many Americans. *dilute:</div>
+  <div class="sol"><span class="label">풀이</span>② 관계절 안에 빠져 있는 필수 요소가 없고, 선행사인 ‘blended honey’가 관계절 내에서 장소에 관한 부가적인 정보를 나타내야 하므로, which를 관계사 where나 in which로 고쳐야 한다. ① 분사구문을 이끄는 분사로, 의미상의 주어인 it이 refer가 나타내는 행위의 대상이 므로 과거분사 referred는 어법상 옳다. ③ find의 목적격 보어인 형용사구의 핵이므로 형용사…</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 27~29번</span><span>9 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">30</span>
+    <span class="typ">어휘의 적절성 파악</span>
+    <span class="topic">연성 하천 공학(soft-path)</span>
+    <span class="ans">30번 <b>⑤</b></span>
+  </div>
+  <div class="passage">What is soft-path river engineering? One way to visualize its spirit is to liken it to a f ootpath in the fores t. Suppos e a tree falls across a footpath. A soft-path response would be simply to redirect the trail around the fallen tree. A more interventionist response would be to①remove the tree and restore the original route. A still more interventionist response might be to straighten and pave the path to insert it more②permanently in the landscape. The true high-modernist step would, of course, be to③create a superhighway that removes the landscape and bulldozes straight through all obstacles in the topography. Soft-path engineering has the unique advantage of intellectual ④modesty with respect to what we actually know about river movement and its environmental effects. In contrast to hard-path engineering, soft-path engineering accepts variability in the river’s movement as⑤insignificant until proven otherwise . Backwaters, short-lived wetlands, braids and channels, swamps —all undesirable to hard-path engineering—are presumed by soft-path engineers to be ecologically important. *pave:</div>
+  <div class="sol"><span class="label">풀이</span>소프트 패스 공학은 길과 하천의 움직임을 자연스럽게 받아들이는 태도를 강조하는 반면, 하드 패스 공학은 길과 하천의 움직임을 인위적으로 고정하고 통제하려 한다는 20 내용의 글이다. 따라서 소프트 패스 공학은 하천 움직임의 변동성을 사소한 것으로 보는 것이 아니라 생태학적으로 중요한 것으로 받아들인다는 흐름이 되어야 하므로, ⑤의 insignificant를 significant와 같은 낱말로 바꿔야 한다.</div>
+  <div class="qh">
+    <span class="no">31</span>
+    <span class="typ">빈칸 추론</span>
+    <span class="topic">동물의 지각 조작과 바우어새</span>
+    <span class="ans">31번 <b>②</b></span>
+  </div>
+  <div class="passage"> We know that animals have evolved a variety of patterns to manipulate the perceptions o f their predators to afford themselves a modicum of safety. Greater Bower birds utilize in the mating domain. Males construct a bower; its function is to provide an arena in which males display to females standing in an avenue that leads up to the bower. The males decorate the avenue with a variety of objects, such as stones and shells. But they do not do so in a chaotic manner. The larger objects are placed closer to the bower and the smaller objects farther away. This creates a forced perspective the opposite of the Cinderella Castle ; t h e bower appears smaller than it actually is. Endler and his colleagues suggested that the male courting in the bower now appears larger and thus more attractive to the female. Data on male mating success collected in the wild supports their hypothesis. *predator:</div>
+  <div class="sol"><span class="label">풀이</span>큰바우어새 수컷은 바우어로 이어지는 길을 다양한 물체로 장식하면서 크기에 따라 배치해 강제 원근감을 만들어 내는데, 그 결과 암컷이 수컷을 실제보다 더 크고 매력 적으로 지각하게 되는 현상을 설명하는 내용이므로, 빈칸에 들어갈 말로 가장 적절한 것은 ② ‘지각적 편향’이다. ① 유전적 변이 ③ 목소리의 매력 ④ 장식하는 기술 ⑤ 위치상의 이점</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 30~31번</span><span>10 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">32</span>
+    <span class="typ">빈칸 추론</span>
+    <span class="topic">공감(empathy)에 대한 비판</span>
+    <span class="ans">32번 <b>③</b></span>
+  </div>
+  <div class="passage">Although empathy is widely praised by scholars and public figures, not everyone is an empathy booster. Critics of empathy argue that empathy will not save us from interpersonal and intergroup conflict. In fact, they argue, empathy makes such conflicts worse. These critics maintain that empathy can be exhausting and lead to burnout, insensitivity to suffering, or worse. They argue that we tend to empathize strongly with our in-group and resist empathizing with out-groups, and even enjoy the suffering of out-groups in competitive or threatening contexts. Thus, the prescription for more empathy . Empathy, they argue, can further entrench conflict and force us into an us vs. them mentality. Finally, even when we try to empathize with others who are dissimilar from us or in unfamiliar contexts, sometimes we are unable to accurately empathize with their experiences, causing further misunderstandings and frustration. Critics of empathy argue that we should give up on empathy and employ other tools in pursuit of social harmony, e.g., rational compassion or moral emotions like fear, anger, and shame.&lt;痽&gt; *entrench:</div>
+  <div class="sol"><span class="label">풀이</span>공감에 대해 비판하는 이들은 공감이 개인 간 및 집단 간의 갈등을 악화시키고, 우리 가 외집단에 대해서는 공감을 거부하고 특정 상황에서는 외집단의 고통을 즐기기까지 하는 경향이 있기에, 갈등을 더 확립하고 더 깊은 오해와 좌절을 일으킨다고 주장한 다는 내용의 글이다. 따라서 빈칸에 들어갈 말로 가장 적절한 것은 ③ ‘갈등 상황에 서 흔히 역효과를 낸다’이다. ① 집단 내에서 일어날 수 있는 보이지 않는…</div>
+  <div class="qh">
+    <span class="no">33</span>
+    <span class="typ">빈칸 추론</span>
+    <span class="topic">산림 확대 정책의 생태적 문제</span>
+    <span class="ans">33번 <b>⑤</b></span>
+  </div>
+  <div class="passage">Compared to other ecosystems, forests are relatively diverse, but this should not necessarily be . Wetlands, meadows, and grasslands have a unique biota too, even if it is often not as rich as a forest biota. The ecological problems of this process have been described from a number of places such as Iceland, South Africa, and Australia, but the classic example of this comes from Scotland and northern England. Here the Forestry Commission has drained, fertilized, and fenced extensive areas of wetlands to facilitate turning them into forests. Increasing the extent of forests in Britain is certainly a desirable goal, and most of the Forestry Commission’s efforts are directed toward sites that were forested before sheep and their keepers came to the island. However, ecologists frequently complain about the Commission’s work because it is not restricted to former forest sites, because the forests established are usually composed of exotic trees, and because the wildlife threatened by th is activity includes many uncommon species. *biota:</div>
+  <div class="sol"><span class="label">풀이</span>숲이 아닌 습지, 목초지, 초원 같은 곳도 고유한 생물상을 가지고 있다고 하면서, 스 코틀랜드와 잉글랜드 북부의 사례를 들어 광대한 습지 지역을 숲으로 바꾸는 과정에 서 발생하는 생태학적 문제를 설명하는 글이다. 따라서 빈칸에 들어갈 말로 가장 적 절한 것은 ⑤ ‘숲이 아닌 곳을 숲으로 전환하기 위한 타당한 이유’이다. ① 숲 확장의 가치를 조사하기 위한 근거 ② 전체 생태계에 제도적 지원을 확대하기 위한…</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 32~33번</span><span>11 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">34</span>
+    <span class="typ">빈칸 추론</span>
+    <span class="topic">집단적 선택과 추첨 — 익명성·중립성</span>
+    <span class="ans">34번 <b>①</b></span>
+  </div>
+  <div class="passage">When gathering the preferences of multiple agents into one collective choice, it is easily seen that certain cases . For example, if there are two alternatives, a and b, and two agents such that one prefers a and the other one b, there is no deterministic way of selecting a single alternative without violating one of two basic fairness conditions known as anonymity and neutrality. Anonymity requires that the collective choice ought to be independent of the agents’ identities whereas neutrality requires impartiality towards the alternatives. Allowing lotteries as social outcomes hence seems like a necessity for impartial collective choice. Indeed, most common “deterministic” social choice functions such as plurality rule are only deterministic as long as there is no tie, which is usually resolved by drawing a lot. The use of lotteries for the selection of officials interestingly goes back to the world’s first democracy in Athens, where it was widely regarded as a principal characteristic of democracy, and has recently gained increasing attention in political science.&lt;痽&gt; *plurality:</div>
+  <div class="sol"><span class="label">풀이</span>여러 행위자의 선호를 하나의 집단적 선택으로 모을 때 동점이 발생한 경우, 익명성 과 중립성이라는 두 가지 기본적인 공정성 조건 중 하나를 위반하지 않으면서 단일 대안을 선택할 결정적 방법은 없으며, 그 때문에 사회적 결과로 추첨을 허용하여 공 정한 집단적 선택을 할 수 있게 되었는데, 사실 다수결 규칙도 동점 상황에서는 제비 뽑기로 해결하게 된다는 내용의 글이다. 따라서 빈칸에 들어갈 말로 가장 적절한 것…</div>
+  <div class="qh">
+    <span class="no">35</span>
+    <span class="typ">무관한 문장 찾기</span>
+    <span class="topic">멘토 네트워크의 필요성</span>
+    <span class="ans">35번 <b>④</b></span>
+  </div>
+  <div class="passage">All workers need access to mentors that can provide them with valuable information about their job, their workplace, and the resources that are available within their organization. Mentors also provide much needed psychosocial support.①Having a diverse network of mentors is important for dominant and minority group members alike.②Minority group members need diverse mentors so that they can gain insight into what it means to be employed by a particular organization or in a particular field or profession.③Majority workers benefit by having a network of diverse mentors because it increases their understanding and sensitivity to the unique realities of diverse workers and their own identity, and perhaps even their own forms of privilege.④Mentoring has been typically required and praised as an essential component in the personal development of employers.⑤The ultimate goal of these mentoring opportunities is to have individuals be more informed, identified, and engaged in their work and in their organization. *privilege:</div>
+  <div class="sol"><span class="label">풀이</span>멘토링은 모든 근로자에게 필수적이며, 조직 내에서 개인의 업무 적응과 성장을 돕는 중요한 수단이라는 내용의 글이므로, 멘토링은 전형적으로 고용주의 개인적 성장의 필수 요소였다는 내용의 ④는 글의 전체 흐름과 관계가 없다. 24</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 34~35번</span><span>12 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">36</span>
+    <span class="typ">글의 순서 파악</span>
+    <span class="topic">작문 지도 방식의 전환</span>
+    <span class="ans">36번 <b>④</b></span>
+  </div>
+  <div class="passage">Traditionally, when teachers teach writing , they assign topics for students to write on; perhaps they do a bit of brainstorming about the topic during a pre-writing phase, and then have students write about the topic without interruption. (A) In process writing, on the other hand, students may initially brainstorm ideas about a topic and begin writing, but then they have repeated conferences with the teacher and the other students, during which they receive feedback on their writing up to that point, make revisions, based on the feedback they receive, and carry on writing. (B) In this way, students learn to view their writing as someone else’s reading and to improve both the expression of meaning and the form of their writing as they draft and redraft. Process writing shifts the emphasis in teaching writing from evaluation to revision. (C) Subsequently, teachers collect and evaluate what students have written. Such instruction is very ‘product-oriented;’ there is no involvement of the teacher in the act or ‘process’ of writing. ① ③ ⑤ A) (B) (C) 餈 餈 餈 (C) (C) (B) 餈 餈 餈 (B) (A) (A) ② ④ B) (C) 餈 餈 (A) (A) 餈 餈 (C) (B)</div>
+  <div class="sol"><span class="label">풀이</span>전통적인 글쓰기 지도 방식의 첫 시작 부분의 특징을 설명한 주어진 글 다음에, 이를 교사가 수거하여 평가하면서 글쓰기 과정에 개입하지 않는다는 추가적인 특징이 언급 된 (C)가 이어져야 한다. 그다음에는 이와 대조되는 방식인 과정 중심 글쓰기의 과정 을 설명하는 (A)가 이어진 후, 이러한 글쓰기 방식의 효과와 교육적 전환을 서술하는 내용의 (B)가 와야 한다. 따라서 주어진 글 다음에 이어질 글의 순서로…</div>
+  <div class="qh">
+    <span class="no">37</span>
+    <span class="typ">글의 순서 파악</span>
+    <span class="topic">수학적 글을 알아보는 법</span>
+    <span class="ans">37번 <b>②</b></span>
+  </div>
+  <div class="passage">Perhaps at some point you have seen some mathematical writing and not understood it. (A) The complicated notations that might spring to mind—all those strange dashes, squiggles and letters—are obvious signs, but a lot of those are really quite modern. Mathematics had been going on for a long time before the dashes and squiggles were invented. (B) You would not be the first; rest assured, even professional mathematicians sometimes have to rely on discussions with colleagues to properly understand problems they are looking at. But how do you recognise some writing is mathematical in the first place? (C) Put simply, there has to be something mathematical going on for us to say that it is mathematics. And if we are dealing with writing from a very distant past, in a language that is not familiar to us, from a time even before recorded language, that can be sometimes difficult to recognise.&lt;痽&gt; *squiggle:</div>
+  <div class="sol"><span class="label">풀이</span>수학적 글을 보고도 이해하지 못했던 경험이 있을 수도 있다는 주어진 글 다음에, 실 제로는 전문 수학자들조차 문제를 제대로 이해하기 위해 동료와의 논의에 의존한다는 내용의 (B)가 이어져야 한다. 그다음에는, 사람들이 수학적 글을 인식할 때 흔히 떠올 리는 복잡한 수학 기호들이 사실은 꽤 최근에 생긴 것들이며, 수학은 이들 기호 없이 도 오랫동안 존재해 왔다는 배경을 설명하는 (A)가 온 후, 우리가 그것이…</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 36~37번</span><span>13 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">38</span>
+    <span class="typ">주어진 문장 넣기</span>
+    <span class="topic">낙엽 — 나무의 능동적 재활용</span>
+    <span class="ans">38번 <b>③</b></span>
+  </div>
+  <div class="passage">As winter approaches, the length of the day shortens, the temperature drops, and plants, including trees , can detect this change. It is worth pointing out that leaves don’t drop to the ground because they are dying—rather, the tree initiates an active process of clever recycling called senescence. A tree, like an oak for example, would struggle to survive through a harsh winter if it retained its canopy of leaves. (①It would risk damage from strong winter winds and would lose more water from its leaves than it could draw up from the frozen ground. (②If it didn ’ t blow over , it would die of thirst .(③I t signals to them that it is time to lose their leaves. (④First , however, trees carefully suck all of the useful nutrients out of the leaves and then, with surgical precision, block up that pathway into the leaves. (⑤That blocked pathway at the base of the leaf stem creates a weakness and, in the wind, the leaves snap off and fall to the ground. *senescence:</div>
+  <div class="sol"><span class="label">풀이</span>나무가 생존을 위해 능동적으로 잎을 떨어뜨리는 과정(노화)에 관한 글이다. 주어진 문장은 겨울이 다가오면서 낮이 짧아지고 기온이 떨어지는 변화를 식물이 감지할 수 있다는 내용이므로, 앞에는 나무가 겨울에도 잎을 달고 있으면 생존에 위협이 된다는 내용의 문장이 있어야 하고, 뒤에는 나무가 낮 길이와 기온의 변화를 감지하여 잎을 떨어뜨리는 과정을 설명하는 문장이 이어져야 한다. 또한 ③ 바로 뒤 문장의 It이…</div>
+  <div class="qh">
+    <span class="no">39</span>
+    <span class="typ">주어진 문장 넣기</span>
+    <span class="topic">건축사의 증거와 현존의 문제</span>
+    <span class="ans">39번 <b>②</b></span>
+  </div>
+  <div class="passage">The problem of survival lies at the root of many of the historian’s problems, for what has survived may not necessarily be more significant than what has not survived. Historians use evidence in order to understand what happened and why it happened. In architectural history this evidence may take the form of the buildings themselves or their remains, and documents such as plans, drawings, descriptions, diaries or bills. (①Our picture of any period of history is derived from a multitude of sources, such as the paintings, literature, deeds, buildings and other artefacts that have survived. (②The Egyptian pyramids have survived thousands of years, but historical significance is not just a question of durability. (③These buildings were part of a rich and diverse culture, much of which has been lost. (④They are historical facts, but facts by themselves, even such massive facts as the pyramids, are just the first stage in any historical study, and until they have been evaluated, placed in context and interpreted, they tell us little. (⑤Different historians may place different values on the same facts, and the discovery of new evidence may modify or change existing theories and interpretations.&lt;痽&gt; </div>
+  <div class="sol"><span class="label">풀이</span>역사 연구는 단순히 남아 있는 사실이 아니라 다양한 증거를 평가하고 맥락화하여 해 석하는 과정이라는 내용의 글이다. 주어진 문장은 현존하는 것이 소실된 것보다 반드 시 더 중요한 것은 아니므로 현존의 문제는 역사가들이 직면한 문제의 근원이 된다는 내용이다. 따라서 이 문장 앞에는 역사 연구에서 활용되는 다양한 유형의 증거에 관 한 문장이 있어야 하고, 뒤에는 현재 남아 있는 것이 반드시 더 중요한 것은 아닐…</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 38~39번</span><span>14 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">40</span>
+    <span class="typ">요약문 완성</span>
+    <span class="topic">만화 캐릭터의 지속과 변형</span>
+    <span class="ans">40번 <b>④</b></span>
+  </div>
+  <div class="passage">In most fiction, characters’ lives are limited to the individual work. Readers may disagree on the characteristics and traits of fictional figures, and in drama there is room for different interpretations of characters. However, it is less common for characters in literary fiction to reappear in subsequent works than in genre fiction, where series featuring the same central characters are common. This is even more pronounced in comics, which are typically serialized in newspaper strips or comic books. Thus characters introduced in the 1930s, like Superman and Batman, may still enjoy new adventures decades later. During these characters’ long histories, they change in various ways for a variety of reasons. If a character is created by a single author, like Sherlock Holmes, the character’s core traits may change little from story to story, but readers learn more about him with each successive story. On the other hand, if characters are the work of several hands over decades, they may change considerably. 󰀻 While characters in most literary fiction hardly ever (A) in successive works , those in genre fiction and comics often do so, and may undergo (B) in their traits especially when written about by different authors over time. (A) (B) (A) (B) ①resurface</div>
+  <div class="sol"><span class="label">풀이</span>문학 소설과 달리 장르 소설이나 만화의 등장인물은 오랜 시간이 지나도 후속 연재물 에 다시 등장할 수 있는데, 여러 작가의 손을 거쳐 재등장하는 등장인물의 경우 특성 면에서 크게 달라질 수도 있다는 내용의 글이다. 따라서 요약문의 빈칸 (A), (B)에 들 어갈 말로 가장 적절한 것은 ④ ‘등장하지 – 변형’이다. ① 다시 드러나지 - 단순화 ② 지속되지 – 저하 ③ 사그라지지 - 변화 ⑤ 사라지지 - 화석화</div>
+  <div class="qh">
+    <span class="no">41~42</span>
+    <span class="typ">장문(제목 추론)</span>
+    <span class="topic">사회적 실재감과 매체 선택</span>
+    <span class="ans">41번 <b>①</b> · 42번 <b>④</b></span>
+  </div>
+  <div class="passage">While social presence has evolved through many iterations since its first development within the context of the landline telephone, the perception or feeling of being connected with the other person within the context of the conversation has persisted. Some research has explored specific technologies and the extent to which their characteristics lead to a feeling of social presence. For example, some researchers have studied the “richness” of the media, or the (a) number o f cues available to convey social presence . A telephone call , which provides for audio cues and immediate feedback, is potentially (b) richer than an email, which provides only textual cues and no immediate feedback. Videoconferencing would be considered richer than the phone because of the addition of (c) visual cues, making it closer to replicating a perceived gold standard of face-to-face, in-person social presence. Researchers have suggested that successful managers would choose rich media for confusing or ambiguous messages and lean or less rich media for messages that were (d) less routine in nature. For example, if you wanted to discuss a complicated client agreement, it would be best to choose a( e ) face - t o - face meeting. In contrast, if you were going to inform your team about a change in meeting time from 3:00 to 3:30, you might send out a generic email to everyone. These different channels of communication were considered by researchers as a type of container that the message comes in. To be a good communicator, you need to choose the right container. *iteration:</div>
+  <div class="sol"><span class="label">풀이</span>사회적 실재감은 매체의 ‘풍부성’에 따라 달라지고, 상황에 맞게 적절한 매체를 선택 하는 것이 효과적인 의사소통을 위해 중요하다는 내용의 글이다. 따라서 글의 제목으 로 가장 적절한 것은 ① ‘성공적인 의사소통에서 중요한 것은 어떤 수단인가’이다. ② 효과적인 사회적 의사소통을 위한 최첨단 그릇 ③ 즉각적인 피드백: 성공적인 관리로 가는 지름길 ④ 사회적 실재감은 사회적 수단과 함께 어떻게 진화했는가 ⑤ 더…</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 40~42번</span><span>15 / 16</span></div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="qh">
+    <span class="no">43~45</span>
+    <span class="typ">장문(글의 순서 파악)</span>
+    <span class="topic">야구장에서 만난 친절 — Mike 이야기</span>
+    <span class="ans">43번 <b>③</b> · 44번 <b>④</b> · 45번 <b>②</b></span>
+  </div>
+  <div class="passage"> (A) Mike had always dreamed about going to a baseball game. He watched his favorite team, the Arrows, on TV all the time, but he had never seen a game in person. One afternoon, Mike’s dad came home earlier than usual. “Hey, Mike,” he said, “I just got two tickets for tonight’s Arrows game. Do (a) you want to go?” Mike was so excited that he ran to grab his Arrows hat. In the car, his dad handed him a new baseball glove and added, “Just in case a fly ball comes our way.” (B) Several hours later, Mike’s favorite team hit a home run and won the game. Fireworks filled the sky, and the team song played throughout the stadium. When they got home, Mike told his mom all about his favorite plays and showed her the ball he caught. (b) He knew this was a day he would never forget. It wasn’t just the game—it was the cheering, the excitement, and best of all, spending time with his dad. He couldn’t wait for the next time they would get to go to a game. (C) The stadium was full of people wearing Arrows shirts. Mike couldn’t believe how big the stadium looked in person. As the players ran onto the field, Mike and his dad cheered for their team’s players. His dad pointed at the player running out to third base, saying “Look, it’s Chavez, (c) your favorite player!” Mike saw him warming up on the field and waved hoping to get (d) his attention. After the players warmed up, Mike and his dad went to get some snacks. As soon as they sat back down, the pitcher threw the first pitch. (D) Before long, it was Chavez’s turn to hit. He hit a high fly ball into the stands. The whole crowd stood up, but Mike reached up with his glove and grabbed the ball . Everyone clapped and smiled at Mike. (e) He tightly held the ball and felt a little surprised, but very proud. Both teams kept scoring and the game stayed close. Mike and his dad cheered for every hit and held their breath during every big play. They high-fived each other every time the Arrows scored. </div>
+  <div class="sol"><span class="label">풀이</span>Mike는 평소 자신이 제일 좋아하는 Arrows 팀을 경기장에 가서 직접 보고 싶다는 30 꿈을 가지고 있었는데, 어느 날 아빠가 경기 관람권을 구해 함께 경기장에 가게 되었 다는 내용의 (A) 다음에는, 두 사람이 경기장에 도착하여 선수들을 응원하고 간식을 사서 경기 관람을 시작했다는 내용의 (C)가 이어져야 한다. 그다음에는 경기 중에 Mike가 파울볼을 잡았으며, 두 사람이 마음 졸이며 경기를…</div>
+  <div class="page-footer"><span>2026학년도 9월 모평 영어 · 독해 43~45번</span><span>16 / 16</span></div>
+</section>
+
+</body>
+</html>
