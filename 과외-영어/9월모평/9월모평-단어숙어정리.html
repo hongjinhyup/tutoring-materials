@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026학년도 9월 모평 영어 — 단어 · 숙어 정리 (18~45번)</title>
+<style>
+@page { size: A4; margin: 12mm 10mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:      #1f3a5f;
+  --accent-soft: #eef2f7;
+  --accent-line: #c9d4e2;
+  --ink:         #1a1a1a;
+  --muted:       #5a6473;
+  --warn-bg:     #fff7e6;
+  --warn-line:   #e8c97a;
+  --warn-ink:    #8a5d00;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 10.5pt;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.sheet {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 16mm 15mm 14mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+}
+
+.author-bar {
+  display: flex; justify-content: flex-end; gap: 16px;
+  font-size: 8.7pt; color: var(--muted); letter-spacing: .2px;
+  padding-bottom: 6px; margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 20px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 21pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 11.5pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14pt; color: var(--accent); font-weight: 700;
+  margin: 24px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  break-after: avoid; page-break-after: avoid;
+}
+h3 {
+  font-size: 11.5pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; break-after: avoid; page-break-after: avoid;
+}
+p { margin: 7px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.concept {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  padding: 11px 15px; margin: 11px 0;
+  break-inside: avoid;
+}
+.concept .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 3px;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 11px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: var(--warn-ink); margin-right: 6px; }
+
+table { width: 100%; border-collapse: collapse; margin: 9px 0; font-size: 9.5pt; }
+th, td { border: 1px solid var(--accent-line); padding: 6px 9px; text-align: left; vertical-align: top; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9pt; }
+tbody tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 어휘 표 */
+.vocab-table col.c-no   { width: 5%; }
+.vocab-table col.c-word { width: 32%; }
+.vocab-table col.c-pos  { width: 7%; }
+.vocab-table col.c-mean { width: 56%; }
+.vocab-table td.word {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; font-size: 10pt; color: var(--accent);
+}
+.vocab-table td.pos { text-align: center; font-size: 8.5pt; color: var(--muted); font-style: italic; }
+.vocab-table tr.is-phr td.word { color: #6b3fa0; }
+
+/* 지문 헤더 블록 */
+.q-head {
+  display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap;
+  margin: 22px 0 6px; padding: 7px 10px;
+  background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 4px;
+  break-after: avoid; page-break-after: avoid; break-inside: avoid;
+}
+.q-head .no {
+  background: var(--accent); color: #fff; border-radius: 4px;
+  padding: 1px 9px; font-weight: 700; font-size: 10pt;
+  font-family: 'SF Mono','Menlo',monospace;
+}
+.q-head .typ { font-weight: 700; color: var(--accent); font-size: 10.5pt; }
+.q-head .topic { color: var(--muted); font-size: 9.5pt; }
+.q-head .ans { margin-left: auto; font-size: 9pt; color: var(--muted); }
+.q-head .ans b { color: #b3261e; }
+.badge3 {
+  background: #fdecea; color: #b3261e; border: 1px solid #f2b8b5;
+  border-radius: 3px; padding: 0 5px; font-size: 8.5pt; font-weight: 700;
+}
+
+.legend { font-size: 9pt; color: var(--muted); margin: 6px 0 0; }
+.legend .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; vertical-align: -1px; margin-right: 3px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 화면 전용 네비 */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+
+.quiz-bar {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: center; gap: 10px;
+  background: var(--accent); padding: 8px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+.quiz-bar button {
+  font-size: 10pt; font-weight: 600; border: 1.5px solid #fff;
+  border-radius: 6px; padding: 5px 16px; cursor: pointer;
+  font-family: inherit; background: transparent; color: #fff; transition: all .15s;
+}
+.quiz-bar button.on { background: #fff; color: var(--accent); }
+body.hide-word .vocab-table td.word { color: transparent; user-select: none; }
+body.hide-word .vocab-table td.word:hover { color: var(--accent); }
+body.hide-mean .vocab-table td.mean { color: transparent; user-select: none; }
+body.hide-mean .vocab-table td.mean:hover { color: var(--ink); }
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 9.3pt; }
+  .sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+  .nav-bar, .quiz-bar { display: none !important; }
+  thead { display: table-header-group; }
+  tr, .concept, .tip, .q-head { break-inside: avoid; page-break-inside: avoid; }
+  /* 문항 헤더 + 표 머리 뒤에 최소 4행이 함께 오도록 — 한 줄만 남는 위도우 방지 */
+  .vocab-table tbody tr:nth-child(-n+3) { break-after: avoid; page-break-after: avoid; }
+  table { font-size: 8.6pt; }
+  th, td { padding: 4px 7px; }
+  h2 { margin: 16px 0 8px; }
+  .page-break { break-before: page; page-break-before: always; }
+}
+
+.idiom-table col.c-no { width: 5%; }
+.idiom-table col.c-word { width: 30%; }
+.idiom-table col.c-mean { width: 53%; }
+.idiom-table col.c-src { width: 12%; }
+.idiom-table td.word { font-family: 'Times New Roman', Georgia, serif; font-weight: 600; font-size: 10pt; color: #6b3fa0; }
+.idiom-table td.pos { text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="quiz-bar">
+  <button onclick="document.body.classList.toggle('hide-word');this.classList.toggle('on')">영어 가리기</button>
+  <button onclick="document.body.classList.toggle('hide-mean');this.classList.toggle('on')">뜻 가리기</button>
+</div>
+
+<div class="sheet">
+  <div class="nav-bar">
+    <div class="nav-group">
+      <a class="nav-btn" href="index.html">← 목록</a>
+      <a class="nav-btn" href="9월모평-출제스타일.html">📋 출제 스타일 분석</a>
+    </div>
+    <button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button>
+  </div>
+
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">9월 모의평가 대비</div>
+    <h1>영어 단어 · 숙어 정리</h1>
+    <p class="subtitle">2026학년도 수능 9월 모의평가 · 18~45번 (듣기 제외) 전 지문</p>
+    <p class="meta">한국교육과정평가원 | 독해·어법·어휘 28문항 · 25개 지문 | 총 <b>540</b>개 (숙어·구동사 <b>216</b>개 포함)</p>
+  </div>
+
+  <h2>이 자료 사용법</h2>
+
+  <div class="concept">
+    <span class="label">STEP 1 — 시험 전날: 훑기</span>
+    문항 순서대로 넘기며 <b>모르는 단어에만 체크</b>한다. 아는 단어는 과감히 건너뛴다. 한 번에 다 외우려 하지 말 것.
+  </div>
+  <div class="concept">
+    <span class="label">STEP 2 — 체크한 것만 반복</span>
+    체크한 단어만 2~3회 반복한다. 보라색으로 표시된 <b>숙어·구동사</b>는 통째로 소리 내어 읽는다.
+  </div>
+  <div class="concept">
+    <span class="label">STEP 3 — 시험 당일 아침: 숙어 총정리만</span>
+    맨 뒤 <b>숙어·구동사 총정리 216선</b>만 5분간 훑는다. 개별 단어보다 숙어가 오답을 더 많이 만든다.
+  </div>
+
+  <div class="tip">
+    <span class="label">가리기 모드</span>
+    화면 상단 버튼으로 <b>영어 가리기</b> / <b>뜻 가리기</b>를 켜면 즉석 암기 테스트가 된다.
+    가려진 칸에 마우스를 올리면 정답이 보인다. 인쇄 시에는 버튼이 나오지 않는다.
+  </div>
+
+  <p class="legend">
+    <span class="sw" style="background:#1f3a5f"></span>단어 &nbsp;
+    <span class="sw" style="background:#6b3fa0"></span>숙어·구동사(phr.) &nbsp;
+    <span class="badge3">3점</span> 고배점 문항 &nbsp;
+    <b>←</b> 표시는 정답·오답을 직접 가르는 핵심어
+  </p>
+
+  <h2 class="page-break">문항별 단어 · 숙어</h2>
+
+  <div class="q-head">
+    <span class="no">18</span>
+    <span class="typ">글의 목적</span>
+    <span class="topic">AI 여름 프로그램 — 강의실 변경 안내 (이메일)</span>
+    <span class="ans">정답 <b>②</b> · 14개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">instructor</td><td class="pos">n.</td><td class="mean">강사, 교관</td></tr>
+      <tr><td>2</td><td class="word">enthusiasm</td><td class="pos">n.</td><td class="mean">열정, 열의</td></tr>
+      <tr><td>3</td><td class="word">expand</td><td class="pos">v.</td><td class="mean">확장하다, 넓히다</td></tr>
+      <tr><td>4</td><td class="word">familiarity</td><td class="pos">n.</td><td class="mean">익숙함, 친숙함</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">register for</td><td class="pos">phr.</td><td class="mean">~에 등록하다, 수강 신청하다</td></tr>
+      <tr><td>6</td><td class="word">enroll (in)</td><td class="pos">v.</td><td class="mean">(~에) 등록하다</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">thanks to</td><td class="pos">phr.</td><td class="mean">~ 덕분에</td></tr>
+      <tr><td>8</td><td class="word">seating</td><td class="pos">n.</td><td class="mean">좌석 (수)</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">be supposed to</td><td class="pos">phr.</td><td class="mean">~하기로 되어 있다</td></tr>
+      <tr class="is-phr"><td>10</td><td class="word">make space for</td><td class="pos">phr.</td><td class="mean">~을 위한 공간을 마련하다</td></tr>
+      <tr><td>11</td><td class="word">original</td><td class="pos">a.</td><td class="mean">원래의, 본래의</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">look forward to -ing</td><td class="pos">phr.</td><td class="mean">~하기를 고대하다</td></tr>
+      <tr><td>13</td><td class="word">participant</td><td class="pos">n.</td><td class="mean">참가자</td></tr>
+      <tr><td>14</td><td class="word">understanding</td><td class="pos">n.</td><td class="mean">양해, 이해</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">19</span>
+    <span class="typ">심경 변화</span>
+    <span class="topic">미술 과제를 낸 Sierra — 교수 연구실 앞</span>
+    <span class="ans">정답 <b>③</b> · 18개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">shake</td><td class="pos">v.</td><td class="mean">(몸이) 떨리다, 떨다</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">back and forth</td><td class="pos">phr.</td><td class="mean">왔다 갔다, 앞뒤로</td></tr>
+      <tr class="is-phr"><td>3</td><td class="word">turn in</td><td class="pos">phr.</td><td class="mean">제출하다 (= hand in, submit)</td></tr>
+      <tr><td>4</td><td class="word">assignment</td><td class="pos">n.</td><td class="mean">과제, 숙제</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">What if ~?</td><td class="pos">phr.</td><td class="mean">~하면 어쩌지?</td></tr>
+      <tr><td>6</td><td class="word">horrible</td><td class="pos">a.</td><td class="mean">끔찍한, 형편없는</td></tr>
+      <tr><td>7</td><td class="word">sweating</td><td class="pos">a.</td><td class="mean">땀이 나는</td></tr>
+      <tr><td>8</td><td class="word">handle</td><td class="pos">n.</td><td class="mean">손잡이</td></tr>
+      <tr><td>9</td><td class="word">unique</td><td class="pos">a.</td><td class="mean">독특한, 유일무이한</td></tr>
+      <tr><td>10</td><td class="word">display</td><td class="pos">v.</td><td class="mean">전시하다, 진열하다</td></tr>
+      <tr><td>11</td><td class="word">exhibition</td><td class="pos">n.</td><td class="mean">전시(회)</td></tr>
+      <tr><td>12</td><td class="word">exclaim</td><td class="pos">v.</td><td class="mean">(감격해서) 외치다</td></tr>
+      <tr><td>13</td><td class="word">nervous</td><td class="pos">a.</td><td class="mean">초조한, 긴장한  ← 정답 앞부분</td></tr>
+      <tr><td>14</td><td class="word">delighted</td><td class="pos">a.</td><td class="mean">아주 기뻐하는  ← 정답 뒷부분</td></tr>
+      <tr><td>15</td><td class="word">frustrated</td><td class="pos">a.</td><td class="mean">좌절한, 답답한</td></tr>
+      <tr><td>16</td><td class="word">relieved</td><td class="pos">a.</td><td class="mean">안도한</td></tr>
+      <tr><td>17</td><td class="word">thrilled</td><td class="pos">a.</td><td class="mean">아주 신이 난</td></tr>
+      <tr><td>18</td><td class="word">panicked</td><td class="pos">a.</td><td class="mean">공황 상태의</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">20</span>
+    <span class="typ">필자의 주장</span>
+    <span class="topic">기업의 규칙 위반 — &quot;썩은 사과&quot; 처벌 vs 명확한 기준 교육</span>
+    <span class="ans">정답 <b>②</b> · 19개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">show up</td><td class="pos">phr.</td><td class="mean">나타나다, 출근하다</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">abusive language</td><td class="pos">phr.</td><td class="mean">욕설, 폭언</td></tr>
+      <tr><td>3</td><td class="word">eliminate</td><td class="pos">v.</td><td class="mean">없애다, 제거하다</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">look to do</td><td class="pos">phr.</td><td class="mean">~하려고 하다, ~을 노리다</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">bad apple</td><td class="pos">phr.</td><td class="mean">(조직의) 문제 인물, 썩은 사과</td></tr>
+      <tr><td>6</td><td class="word">punish</td><td class="pos">v.</td><td class="mean">처벌하다</td></tr>
+      <tr><td>7</td><td class="word">assume</td><td class="pos">v.</td><td class="mean">가정하다, 전제하다</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">on purpose</td><td class="pos">phr.</td><td class="mean">고의로, 일부러</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">be unaware (that)</td><td class="pos">phr.</td><td class="mean">~을 알지 못하다</td></tr>
+      <tr><td>10</td><td class="word">undesirable</td><td class="pos">a.</td><td class="mean">바람직하지 않은</td></tr>
+      <tr><td>11</td><td class="word">actor</td><td class="pos">n.</td><td class="mean">행위자, 당사자</td></tr>
+      <tr><td>12</td><td class="word">knowingly</td><td class="pos">ad.</td><td class="mean">알면서도, 고의로</td></tr>
+      <tr class="is-phr"><td>13</td><td class="word">act against policy</td><td class="pos">phr.</td><td class="mean">방침에 어긋나게 행동하다</td></tr>
+      <tr><td>14</td><td class="word">unintentional</td><td class="pos">a.</td><td class="mean">의도치 않은</td></tr>
+      <tr><td>15</td><td class="word">failing</td><td class="pos">n.</td><td class="mean">잘못, 결점</td></tr>
+      <tr><td>16</td><td class="word">standard</td><td class="pos">n.</td><td class="mean">기준, 표준</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">distinguish A from B</td><td class="pos">phr.</td><td class="mean">A를 B와 구별하다</td></tr>
+      <tr><td>18</td><td class="word">merely</td><td class="pos">ad.</td><td class="mean">단지, 그저</td></tr>
+      <tr><td>19</td><td class="word">uninformed</td><td class="pos">a.</td><td class="mean">정보를 못 들은, (사실을) 모르는</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">21</span>
+    <span class="typ">밑줄 함의 추론</span> <span class="badge3">3점</span>
+    <span class="topic">옥타브 — 주파수 2배/절반과 음 지각의 순환성</span>
+    <span class="ans">정답 <b>③</b> · 24개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">fundamental</td><td class="pos">a.</td><td class="mean">근본적인, 기본적인</td></tr>
+      <tr><td>2</td><td class="word">quality</td><td class="pos">n.</td><td class="mean">특성, 성질</td></tr>
+      <tr><td>3</td><td class="word">note</td><td class="pos">n.</td><td class="mean">음, 음표</td></tr>
+      <tr><td>4</td><td class="word">perceptual</td><td class="pos">a.</td><td class="mean">지각의, 지각에 관한</td></tr>
+      <tr><td>5</td><td class="word">phenomenon</td><td class="pos">n.</td><td class="mean">현상 (pl. phenomena)</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">correspond to</td><td class="pos">phr.</td><td class="mean">~에 해당하다, 상응하다</td></tr>
+      <tr><td>7</td><td class="word">doubling</td><td class="pos">n.</td><td class="mean">두 배로 만듦</td></tr>
+      <tr><td>8</td><td class="word">halving</td><td class="pos">n.</td><td class="mean">절반으로 만듦</td></tr>
+      <tr><td>9</td><td class="word">frequency</td><td class="pos">n.</td><td class="mean">진동수, 주파수</td></tr>
+      <tr class="is-phr"><td>10</td><td class="word">end up with</td><td class="pos">phr.</td><td class="mean">결국 ~을 얻게 되다</td></tr>
+      <tr><td>11</td><td class="word">remarkably</td><td class="pos">ad.</td><td class="mean">놀랄 만큼, 현저히</td></tr>
+      <tr><td>12</td><td class="word">ratio</td><td class="pos">n.</td><td class="mean">비(比), 비율</td></tr>
+      <tr><td>13</td><td class="word">octave</td><td class="pos">n.</td><td class="mean">옥타브</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">in spite of</td><td class="pos">phr.</td><td class="mean">~에도 불구하고</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">have little in common</td><td class="pos">phr.</td><td class="mean">공통점이 거의 없다</td></tr>
+      <tr><td>16</td><td class="word">notion</td><td class="pos">n.</td><td class="mean">개념, 관념</td></tr>
+      <tr><td>17</td><td class="word">circularity</td><td class="pos">n.</td><td class="mean">순환성</td></tr>
+      <tr><td>18</td><td class="word">pitch</td><td class="pos">n.</td><td class="mean">음높이</td></tr>
+      <tr><td>19</td><td class="word">violet</td><td class="pos">n.</td><td class="mean">보라(색)</td></tr>
+      <tr><td>20</td><td class="word">continuum</td><td class="pos">n.</td><td class="mean">연속체</td></tr>
+      <tr><td>21</td><td class="word">visible</td><td class="pos">a.</td><td class="mean">눈에 보이는, 가시적인</td></tr>
+      <tr><td>22</td><td class="word">electromagnetic</td><td class="pos">a.</td><td class="mean">전자기의</td></tr>
+      <tr><td>23</td><td class="word">dimension</td><td class="pos">n.</td><td class="mean">차원</td></tr>
+      <tr class="is-phr"><td>24</td><td class="word">account for</td><td class="pos">phr.</td><td class="mean">~을 설명하다; 차지하다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">22</span>
+    <span class="typ">글의 요지</span>
+    <span class="topic">소셜 미디어와 사회적 자본(social capital)</span>
+    <span class="ans">정답 <b>①</b> · 20개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">social capital</td><td class="pos">phr.</td><td class="mean">사회적 자본</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">engage in</td><td class="pos">phr.</td><td class="mean">~에 참여하다, 관여하다</td></tr>
+      <tr><td>3</td><td class="word">mutuality</td><td class="pos">n.</td><td class="mean">상호성, 상호 관계</td></tr>
+      <tr><td>4</td><td class="word">norm</td><td class="pos">n.</td><td class="mean">규범</td></tr>
+      <tr><td>5</td><td class="word">tie</td><td class="pos">n.</td><td class="mean">유대, 관계</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">pay off</td><td class="pos">phr.</td><td class="mean">성과를 내다, 결실을 맺다</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">job lead</td><td class="pos">phr.</td><td class="mean">취업 정보(단서)</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">letter of recommendation</td><td class="pos">phr.</td><td class="mean">추천서</td></tr>
+      <tr><td>9</td><td class="word">reinforce</td><td class="pos">v.</td><td class="mean">강화하다</td></tr>
+      <tr><td>10</td><td class="word">presentation</td><td class="pos">n.</td><td class="mean">(자기) 표현, 내보임</td></tr>
+      <tr><td>11</td><td class="word">profile</td><td class="pos">n.</td><td class="mean">프로필, 인물 소개</td></tr>
+      <tr><td>12</td><td class="word">premise</td><td class="pos">n.</td><td class="mean">전제</td></tr>
+      <tr><td>13</td><td class="word">straightforward</td><td class="pos">a.</td><td class="mean">단순 명료한, 간단한</td></tr>
+      <tr><td>14</td><td class="word">investment</td><td class="pos">n.</td><td class="mean">투자</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">expected return</td><td class="pos">phr.</td><td class="mean">기대 수익</td></tr>
+      <tr><td>16</td><td class="word">sociologist</td><td class="pos">n.</td><td class="mean">사회학자</td></tr>
+      <tr><td>17</td><td class="word">stress</td><td class="pos">v.</td><td class="mean">강조하다</td></tr>
+      <tr><td>18</td><td class="word">shape</td><td class="pos">v.</td><td class="mean">형성하다, 좌우하다</td></tr>
+      <tr><td>19</td><td class="word">reach</td><td class="pos">n.</td><td class="mean">도달 범위, 미치는 범위</td></tr>
+      <tr class="is-phr"><td>20</td><td class="word">to greater lengths</td><td class="pos">phr.</td><td class="mean">더 멀리, 더 큰 범위로</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">23</span>
+    <span class="typ">글의 주제</span>
+    <span class="topic">전기 작가 vs 자기 삶 서술자 — 증거의 종류</span>
+    <span class="ans">정답 <b>①</b> · 24개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">life narrator</td><td class="pos">phr.</td><td class="mean">자기 삶을 서술하는 사람</td></tr>
+      <tr><td>2</td><td class="word">biographer</td><td class="pos">n.</td><td class="mean">전기 작가</td></tr>
+      <tr><td>3</td><td class="word">engage</td><td class="pos">v.</td><td class="mean">(증거를) 다루다, 활용하다</td></tr>
+      <tr><td>4</td><td class="word">incorporate</td><td class="pos">v.</td><td class="mean">포함하다, 통합하다</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">historical document</td><td class="pos">phr.</td><td class="mean">역사적 문서</td></tr>
+      <tr><td>6</td><td class="word">archive</td><td class="pos">n.</td><td class="mean">기록(보관소)</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">evaluate A for B</td><td class="pos">phr.</td><td class="mean">B의 관점에서 A를 평가하다</td></tr>
+      <tr><td>8</td><td class="word">validity</td><td class="pos">n.</td><td class="mean">타당성, 유효성</td></tr>
+      <tr><td>9</td><td class="word">reliable</td><td class="pos">a.</td><td class="mean">신뢰할 만한</td></tr>
+      <tr><td>10</td><td class="word">relative</td><td class="pos">n.</td><td class="mean">친척</td></tr>
+      <tr><td>11</td><td class="word">colleague</td><td class="pos">n.</td><td class="mean">동료</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">by contrast</td><td class="pos">phr.</td><td class="mean">그에 반해, 대조적으로</td></tr>
+      <tr><td>13</td><td class="word">primary</td><td class="pos">a.</td><td class="mean">주된, 일차적인</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">have recourse to</td><td class="pos">phr.</td><td class="mean">~에 의지하다</td></tr>
+      <tr><td>15</td><td class="word">journal</td><td class="pos">n.</td><td class="mean">일기, 일지</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">lie in</td><td class="pos">phr.</td><td class="mean">~에 있다</td></tr>
+      <tr><td>17</td><td class="word">employ</td><td class="pos">v.</td><td class="mean">사용하다, 활용하다</td></tr>
+      <tr><td>18</td><td class="word">supplement</td><td class="pos">v.</td><td class="mean">보완하다</td></tr>
+      <tr><td>19</td><td class="word">commentary</td><td class="pos">n.</td><td class="mean">논평, 해설</td></tr>
+      <tr class="is-phr"><td>20</td><td class="word">overlap with</td><td class="pos">phr.</td><td class="mean">~와 겹치다</td></tr>
+      <tr><td>21</td><td class="word">assertion</td><td class="pos">n.</td><td class="mean">주장</td></tr>
+      <tr><td>22</td><td class="word">justification</td><td class="pos">n.</td><td class="mean">정당화</td></tr>
+      <tr><td>23</td><td class="word">conviction</td><td class="pos">n.</td><td class="mean">확신, 신념</td></tr>
+      <tr><td>24</td><td class="word">rhetorical</td><td class="pos">a.</td><td class="mean">수사적인</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">24</span>
+    <span class="typ">글의 제목</span> <span class="badge3">3점</span>
+    <span class="topic">중세 수도원 — 세상과 분리되었으나 사회에 기여</span>
+    <span class="ans">정답 <b>③</b> · 31개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">monastery</td><td class="pos">n.</td><td class="mean">수도원</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">engine room</td><td class="pos">phr.</td><td class="mean">원동력, 기관실</td></tr>
+      <tr class="is-phr"><td>3</td><td class="word">the Middle Ages</td><td class="pos">phr.</td><td class="mean">중세</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">at the height of</td><td class="pos">phr.</td><td class="mean">~의 절정기에</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">intellectual leadership</td><td class="pos">phr.</td><td class="mean">지적 지도력</td></tr>
+      <tr><td>6</td><td class="word">institution</td><td class="pos">n.</td><td class="mean">기관, 제도</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">civil government</td><td class="pos">phr.</td><td class="mean">세속 정부</td></tr>
+      <tr><td>8</td><td class="word">innovation</td><td class="pos">n.</td><td class="mean">혁신</td></tr>
+      <tr><td>9</td><td class="word">provision</td><td class="pos">n.</td><td class="mean">제공, 공급</td></tr>
+      <tr><td>10</td><td class="word">agricultural</td><td class="pos">a.</td><td class="mean">농업의</td></tr>
+      <tr><td>11</td><td class="word">apparently</td><td class="pos">ad.</td><td class="mean">겉보기에는, 보아하니</td></tr>
+      <tr><td>12</td><td class="word">observe</td><td class="pos">v.</td><td class="mean">(규칙을) 지키다; 관찰하다</td></tr>
+      <tr><td>13</td><td class="word">self-imposed</td><td class="pos">a.</td><td class="mean">스스로 부과한</td></tr>
+      <tr><td>14</td><td class="word">isolation</td><td class="pos">n.</td><td class="mean">고립, 격리</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">set apart from</td><td class="pos">phr.</td><td class="mean">~와 분리된, 구별된</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">devote A to B</td><td class="pos">phr.</td><td class="mean">A를 B에 바치다</td></tr>
+      <tr><td>17</td><td class="word">permanent</td><td class="pos">a.</td><td class="mean">영구적인, 지속적인</td></tr>
+      <tr><td>18</td><td class="word">observance</td><td class="pos">n.</td><td class="mean">(의식의) 준수, 의례</td></tr>
+      <tr><td>19</td><td class="word">prayer</td><td class="pos">n.</td><td class="mean">기도</td></tr>
+      <tr><td>20</td><td class="word">praise</td><td class="pos">n.</td><td class="mean">찬양, 찬미</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word">lie at the heart of</td><td class="pos">phr.</td><td class="mean">~의 핵심에 있다</td></tr>
+      <tr><td>22</td><td class="word">monasticism</td><td class="pos">n.</td><td class="mean">수도원 제도, 수도 생활</td></tr>
+      <tr class="is-phr"><td>23</td><td class="word">for the benefit of</td><td class="pos">phr.</td><td class="mean">~의 이익을 위해</td></tr>
+      <tr><td>24</td><td class="word">sacrifice</td><td class="pos">n.</td><td class="mean">희생</td></tr>
+      <tr><td>25</td><td class="word">penance</td><td class="pos">n.</td><td class="mean">참회, 속죄</td></tr>
+      <tr class="is-phr"><td>26</td><td class="word">on behalf of</td><td class="pos">phr.</td><td class="mean">~을 대신하여, ~을 위하여</td></tr>
+      <tr><td>27</td><td class="word">deliverance</td><td class="pos">n.</td><td class="mean">구원, 구제</td></tr>
+      <tr class="is-phr"><td>28</td><td class="word">be regarded as</td><td class="pos">phr.</td><td class="mean">~로 여겨지다</td></tr>
+      <tr><td>29</td><td class="word">parallel</td><td class="pos">a.</td><td class="mean">병행하는, 나란한</td></tr>
+      <tr><td>30</td><td class="word">solitude</td><td class="pos">n.</td><td class="mean">고독, 홀로 있음</td></tr>
+      <tr class="is-phr"><td>31</td><td class="word">detached from</td><td class="pos">phr.</td><td class="mean">~에서 떨어진, 분리된</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">25</span>
+    <span class="typ">도표 일치</span>
+    <span class="topic">2015년 미국 구매자의 제품군·연령대별 온라인 후기 열람률</span>
+    <span class="ans">정답 <b>⑤</b> · 12개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">shopper</td><td class="pos">n.</td><td class="mean">구매자, 쇼핑객</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">online review</td><td class="pos">phr.</td><td class="mean">온라인 후기</td></tr>
+      <tr class="is-phr"><td>3</td><td class="word">make a purchase</td><td class="pos">phr.</td><td class="mean">구매하다</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">product category</td><td class="pos">phr.</td><td class="mean">제품 범주</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">age group</td><td class="pos">phr.</td><td class="mean">연령대</td></tr>
+      <tr><td>6</td><td class="word">electronics</td><td class="pos">n.</td><td class="mean">전자 제품</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">be least likely to</td><td class="pos">phr.</td><td class="mean">~할 가능성이 가장 낮다</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">household appliance</td><td class="pos">phr.</td><td class="mean">가전제품</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">more than twice that of</td><td class="pos">phr.</td><td class="mean">~의 두 배가 넘는</td></tr>
+      <tr class="is-phr"><td>10</td><td class="word">aged 35—54</td><td class="pos">phr.</td><td class="mean">35~54세의</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">each of the three</td><td class="pos">phr.</td><td class="mean">세 가지 각각</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">tend to</td><td class="pos">phr.</td><td class="mean">~하는 경향이 있다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">26</span>
+    <span class="typ">내용 일치(인물)</span>
+    <span class="topic">Claude Shannon — 정보 이론의 아버지</span>
+    <span class="ans">정답 <b>⑤</b> · 16개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">mathematician</td><td class="pos">n.</td><td class="mean">수학자</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">information theory</td><td class="pos">phr.</td><td class="mean">정보 이론</td></tr>
+      <tr class="is-phr"><td>3</td><td class="word">electrical device</td><td class="pos">phr.</td><td class="mean">전기 기기</td></tr>
+      <tr><td>4</td><td class="word">telegraph</td><td class="pos">n.</td><td class="mean">전신기</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">master&#x27;s program</td><td class="pos">phr.</td><td class="mean">석사 과정</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">electrical engineering</td><td class="pos">phr.</td><td class="mean">전기공학</td></tr>
+      <tr><td>7</td><td class="word">thesis</td><td class="pos">n.</td><td class="mean">논문 (pl. theses)</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">digital computing</td><td class="pos">phr.</td><td class="mean">디지털 연산</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">of all time</td><td class="pos">phr.</td><td class="mean">역대, 사상</td></tr>
+      <tr class="is-phr"><td>10</td><td class="word">World War II</td><td class="pos">phr.</td><td class="mean">제2차 세계대전</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">be capable of -ing</td><td class="pos">phr.</td><td class="mean">~할 수 있다</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">by itself</td><td class="pos">phr.</td><td class="mean">스스로, 저절로</td></tr>
+      <tr><td>13</td><td class="word">foundation</td><td class="pos">n.</td><td class="mean">토대, 기초</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">Artificial Intelligence</td><td class="pos">phr.</td><td class="mean">인공지능</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">full professor</td><td class="pos">phr.</td><td class="mean">정교수</td></tr>
+      <tr><td>16</td><td class="word">biography</td><td class="pos">n.</td><td class="mean">전기(傳記)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">27</span>
+    <span class="typ">실용문 불일치</span>
+    <span class="topic">Wabut Jungle Yoga 안내문</span>
+    <span class="ans">정답 <b>③</b> · 14개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">rediscover</td><td class="pos">v.</td><td class="mean">재발견하다</td></tr>
+      <tr><td>2</td><td class="word">forgotten</td><td class="pos">a.</td><td class="mean">잊힌</td></tr>
+      <tr class="is-phr"><td>3</td><td class="word">year after year</td><td class="pos">phr.</td><td class="mean">해마다, 매년</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">bird watching</td><td class="pos">phr.</td><td class="mean">조류 관찰</td></tr>
+      <tr><td>5</td><td class="word">lodging</td><td class="pos">n.</td><td class="mean">숙소, 숙박</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">beautifully crafted</td><td class="pos">phr.</td><td class="mean">아름답게 지어진</td></tr>
+      <tr><td>7</td><td class="word">bungalow</td><td class="pos">n.</td><td class="mean">방갈로, 단층 별장</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">private restroom</td><td class="pos">phr.</td><td class="mean">전용(개인) 화장실</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">common restroom</td><td class="pos">phr.</td><td class="mean">공용 화장실</td></tr>
+      <tr><td>10</td><td class="word">accessible</td><td class="pos">a.</td><td class="mean">이용(접근) 가능한</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">application form</td><td class="pos">phr.</td><td class="mean">신청서</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">fill out</td><td class="pos">phr.</td><td class="mean">(서식을) 작성하다</td></tr>
+      <tr><td>13</td><td class="word">transportation</td><td class="pos">n.</td><td class="mean">교통편, 수송</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">be offered from A to B</td><td class="pos">phr.</td><td class="mean">A에서 B까지 제공되다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">28</span>
+    <span class="typ">실용문 일치</span>
+    <span class="topic">Under the Sea Mascot Contest 공모전 안내문</span>
+    <span class="ans">정답 <b>⑤</b> · 17개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">mascot</td><td class="pos">n.</td><td class="mean">마스코트</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">marine animal</td><td class="pos">phr.</td><td class="mean">해양 동물</td></tr>
+      <tr><td>3</td><td class="word">reflect</td><td class="pos">v.</td><td class="mean">반영하다</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">marine ecosystem conservation</td><td class="pos">phr.</td><td class="mean">해양 생태계 보전</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">submission period</td><td class="pos">phr.</td><td class="mean">제출(접수) 기간</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">judging period</td><td class="pos">phr.</td><td class="mean">심사 기간</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">winner announcement</td><td class="pos">phr.</td><td class="mean">수상자 발표</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">prize money</td><td class="pos">phr.</td><td class="mean">상금</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">per winner</td><td class="pos">phr.</td><td class="mean">수상자 1인당</td></tr>
+      <tr><td>10</td><td class="word">guideline</td><td class="pos">n.</td><td class="mean">지침, 가이드라인</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">participation fee</td><td class="pos">phr.</td><td class="mean">참가비</td></tr>
+      <tr><td>12</td><td class="word">format</td><td class="pos">n.</td><td class="mean">형식, 포맷</td></tr>
+      <tr class="is-phr"><td>13</td><td class="word">maximum file size</td><td class="pos">phr.</td><td class="mean">최대 파일 크기</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">assessment criteria</td><td class="pos">phr.</td><td class="mean">평가 기준 (sg. criterion)</td></tr>
+      <tr><td>15</td><td class="word">creativity</td><td class="pos">n.</td><td class="mean">창의성</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">relevance to</td><td class="pos">phr.</td><td class="mean">~와의 관련성</td></tr>
+      <tr><td>17</td><td class="word">attractiveness</td><td class="pos">n.</td><td class="mean">매력도</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">29</span>
+    <span class="typ">어법</span>
+    <span class="topic">천연 꿀(natural honey)과 혼합 꿀(blended honey)</span>
+    <span class="ans">정답 <b>②</b> · 21개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">by itself</td><td class="pos">phr.</td><td class="mean">그 자체로, 단독으로</td></tr>
+      <tr><td>2</td><td class="word">ingredient</td><td class="pos">n.</td><td class="mean">재료, 성분</td></tr>
+      <tr><td>3</td><td class="word">additive</td><td class="pos">n.</td><td class="mean">첨가물</td></tr>
+      <tr><td>4</td><td class="word">preservative</td><td class="pos">n.</td><td class="mean">방부제</td></tr>
+      <tr><td>5</td><td class="word">synthetic</td><td class="pos">a.</td><td class="mean">합성의, 인조의</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">refer to A as B</td><td class="pos">phr.</td><td class="mean">A를 B라고 부르다</td></tr>
+      <tr><td>7</td><td class="word">undiluted</td><td class="pos">a.</td><td class="mean">희석하지 않은, 원액의</td></tr>
+      <tr><td>8</td><td class="word">dilute</td><td class="pos">v.</td><td class="mean">묽게 하다, 희석하다</td></tr>
+      <tr><td>9</td><td class="word">blend</td><td class="pos">v.</td><td class="mean">섞다, 혼합하다</td></tr>
+      <tr><td>10</td><td class="word">processor</td><td class="pos">n.</td><td class="mean">가공업자</td></tr>
+      <tr><td>11</td><td class="word">distributor</td><td class="pos">n.</td><td class="mean">유통업자</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">in stages</td><td class="pos">phr.</td><td class="mean">단계적으로</td></tr>
+      <tr class="is-phr"><td>13</td><td class="word">A as well as B</td><td class="pos">phr.</td><td class="mean">B뿐만 아니라 A도</td></tr>
+      <tr><td>14</td><td class="word">palatable</td><td class="pos">a.</td><td class="mean">맛있는, 입에 맞는</td></tr>
+      <tr><td>15</td><td class="word">uniform</td><td class="pos">a.</td><td class="mean">균일한, 한결같은</td></tr>
+      <tr><td>16</td><td class="word">flavour</td><td class="pos">n.</td><td class="mean">풍미, 맛 (美 flavor)</td></tr>
+      <tr><td>17</td><td class="word">consideration</td><td class="pos">n.</td><td class="mean">고려 사항</td></tr>
+      <tr><td>18</td><td class="word">retailer</td><td class="pos">n.</td><td class="mean">소매업자</td></tr>
+      <tr><td>19</td><td class="word">guarantee</td><td class="pos">v.</td><td class="mean">보장하다</td></tr>
+      <tr><td>20</td><td class="word">mild</td><td class="pos">a.</td><td class="mean">순한, 부드러운</td></tr>
+      <tr><td>21</td><td class="word">clover</td><td class="pos">n.</td><td class="mean">클로버, 토끼풀</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">30</span>
+    <span class="typ">어휘(문맥)</span> <span class="badge3">3점</span>
+    <span class="topic">soft-path 하천 공학 — 숲속 오솔길 비유</span>
+    <span class="ans">정답 <b>⑤</b> · 30개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">river engineering</td><td class="pos">phr.</td><td class="mean">하천 공학</td></tr>
+      <tr><td>2</td><td class="word">visualize</td><td class="pos">v.</td><td class="mean">시각화하다, 그려 보다</td></tr>
+      <tr class="is-phr"><td>3</td><td class="word">liken A to B</td><td class="pos">phr.</td><td class="mean">A를 B에 비유하다</td></tr>
+      <tr><td>4</td><td class="word">footpath</td><td class="pos">n.</td><td class="mean">오솔길, 보행로</td></tr>
+      <tr><td>5</td><td class="word">redirect</td><td class="pos">v.</td><td class="mean">방향을 바꾸다, 우회시키다</td></tr>
+      <tr><td>6</td><td class="word">trail</td><td class="pos">n.</td><td class="mean">오솔길, 자취</td></tr>
+      <tr><td>7</td><td class="word">interventionist</td><td class="pos">a.</td><td class="mean">개입주의적인</td></tr>
+      <tr><td>8</td><td class="word">restore</td><td class="pos">v.</td><td class="mean">복원하다, 회복시키다</td></tr>
+      <tr><td>9</td><td class="word">straighten</td><td class="pos">v.</td><td class="mean">곧게 펴다</td></tr>
+      <tr><td>10</td><td class="word">pave</td><td class="pos">v.</td><td class="mean">(길을) 포장하다</td></tr>
+      <tr><td>11</td><td class="word">insert</td><td class="pos">v.</td><td class="mean">끼워 넣다, 삽입하다</td></tr>
+      <tr><td>12</td><td class="word">permanently</td><td class="pos">ad.</td><td class="mean">영구적으로</td></tr>
+      <tr><td>13</td><td class="word">high-modernist</td><td class="pos">a.</td><td class="mean">고도 근대주의의</td></tr>
+      <tr><td>14</td><td class="word">superhighway</td><td class="pos">n.</td><td class="mean">고속도로</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">bulldoze through</td><td class="pos">phr.</td><td class="mean">밀어붙여 뚫고 나가다</td></tr>
+      <tr><td>16</td><td class="word">obstacle</td><td class="pos">n.</td><td class="mean">장애물</td></tr>
+      <tr><td>17</td><td class="word">topography</td><td class="pos">n.</td><td class="mean">지형</td></tr>
+      <tr><td>18</td><td class="word">modesty</td><td class="pos">n.</td><td class="mean">겸손, 절제</td></tr>
+      <tr class="is-phr"><td>19</td><td class="word">with respect to</td><td class="pos">phr.</td><td class="mean">~에 관하여</td></tr>
+      <tr class="is-phr"><td>20</td><td class="word">in contrast to</td><td class="pos">phr.</td><td class="mean">~와 대조적으로</td></tr>
+      <tr><td>21</td><td class="word">variability</td><td class="pos">n.</td><td class="mean">가변성, 변동성</td></tr>
+      <tr><td>22</td><td class="word">insignificant</td><td class="pos">a.</td><td class="mean">중요하지 않은  ← ⑤ 오답 단어</td></tr>
+      <tr><td>23</td><td class="word">significant</td><td class="pos">a.</td><td class="mean">중요한, 유의미한  ← 문맥상 정답</td></tr>
+      <tr class="is-phr"><td>24</td><td class="word">until proven otherwise</td><td class="pos">phr.</td><td class="mean">달리 입증되기 전까지는</td></tr>
+      <tr><td>25</td><td class="word">backwater</td><td class="pos">n.</td><td class="mean">(흐르지 않는) 역수, 고인 물</td></tr>
+      <tr><td>26</td><td class="word">short-lived</td><td class="pos">a.</td><td class="mean">단기간의, 일시적인</td></tr>
+      <tr><td>27</td><td class="word">wetland</td><td class="pos">n.</td><td class="mean">습지</td></tr>
+      <tr><td>28</td><td class="word">braid</td><td class="pos">n.</td><td class="mean">(하천의) 분기 유로</td></tr>
+      <tr><td>29</td><td class="word">swamp</td><td class="pos">n.</td><td class="mean">늪, 습지</td></tr>
+      <tr><td>30</td><td class="word">presume</td><td class="pos">v.</td><td class="mean">추정하다, 여기다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">31</span>
+    <span class="typ">빈칸 추론</span>
+    <span class="topic">바우어새의 강제 원근법 — 지각 편향(perceptual biases) 이용</span>
+    <span class="ans">정답 <b>②</b> · 21개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">evolve</td><td class="pos">v.</td><td class="mean">진화하다, 진화시켜 갖추다</td></tr>
+      <tr><td>2</td><td class="word">manipulate</td><td class="pos">v.</td><td class="mean">조작하다, 조종하다</td></tr>
+      <tr><td>3</td><td class="word">perception</td><td class="pos">n.</td><td class="mean">지각, 인식</td></tr>
+      <tr><td>4</td><td class="word">predator</td><td class="pos">n.</td><td class="mean">포식자, 약탈자</td></tr>
+      <tr><td>5</td><td class="word">afford</td><td class="pos">v.</td><td class="mean">제공하다, 주다</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">a modicum of</td><td class="pos">phr.</td><td class="mean">약간의, 소량의</td></tr>
+      <tr><td>7</td><td class="word">utilize</td><td class="pos">v.</td><td class="mean">활용하다, 이용하다</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">mating domain</td><td class="pos">phr.</td><td class="mean">짝짓기 영역</td></tr>
+      <tr><td>9</td><td class="word">bower</td><td class="pos">n.</td><td class="mean">(바우어새가 만드는) 정자, 구조물</td></tr>
+      <tr><td>10</td><td class="word">arena</td><td class="pos">n.</td><td class="mean">무대, 경기장</td></tr>
+      <tr><td>11</td><td class="word">display</td><td class="pos">v.</td><td class="mean">과시하다, 구애 행동을 하다</td></tr>
+      <tr><td>12</td><td class="word">avenue</td><td class="pos">n.</td><td class="mean">통로, 진입로</td></tr>
+      <tr class="is-phr"><td>13</td><td class="word">lead up to</td><td class="pos">phr.</td><td class="mean">~로 이어지다</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">decorate A with B</td><td class="pos">phr.</td><td class="mean">A를 B로 장식하다</td></tr>
+      <tr><td>15</td><td class="word">chaotic</td><td class="pos">a.</td><td class="mean">무질서한, 혼란스러운</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">forced perspective</td><td class="pos">phr.</td><td class="mean">강제 원근법(착시 기법)</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">the opposite of</td><td class="pos">phr.</td><td class="mean">~의 정반대</td></tr>
+      <tr><td>18</td><td class="word">court</td><td class="pos">v.</td><td class="mean">구애하다</td></tr>
+      <tr class="is-phr"><td>19</td><td class="word">in the wild</td><td class="pos">phr.</td><td class="mean">야생에서</td></tr>
+      <tr><td>20</td><td class="word">hypothesis</td><td class="pos">n.</td><td class="mean">가설 (pl. hypotheses)</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word">perceptual bias</td><td class="pos">phr.</td><td class="mean">지각 편향  ← 정답 표현</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">32</span>
+    <span class="typ">빈칸 추론</span> <span class="badge3">3점</span>
+    <span class="topic">공감(empathy) 비판론 — 갈등 상황에서 역효과</span>
+    <span class="ans">정답 <b>③</b> · 28개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">empathy</td><td class="pos">n.</td><td class="mean">공감</td></tr>
+      <tr><td>2</td><td class="word">scholar</td><td class="pos">n.</td><td class="mean">학자</td></tr>
+      <tr class="is-phr"><td>3</td><td class="word">public figure</td><td class="pos">phr.</td><td class="mean">공인, 유명 인사</td></tr>
+      <tr><td>4</td><td class="word">booster</td><td class="pos">n.</td><td class="mean">옹호자, 지지자</td></tr>
+      <tr><td>5</td><td class="word">critic</td><td class="pos">n.</td><td class="mean">비판자, 비평가</td></tr>
+      <tr><td>6</td><td class="word">interpersonal</td><td class="pos">a.</td><td class="mean">대인 관계의</td></tr>
+      <tr><td>7</td><td class="word">intergroup</td><td class="pos">a.</td><td class="mean">집단 간의</td></tr>
+      <tr><td>8</td><td class="word">maintain</td><td class="pos">v.</td><td class="mean">주장하다; 유지하다</td></tr>
+      <tr><td>9</td><td class="word">exhausting</td><td class="pos">a.</td><td class="mean">진을 빼는, 지치게 하는</td></tr>
+      <tr><td>10</td><td class="word">burnout</td><td class="pos">n.</td><td class="mean">탈진, 소진</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">insensitivity to</td><td class="pos">phr.</td><td class="mean">~에 대한 무감각</td></tr>
+      <tr><td>12</td><td class="word">suffering</td><td class="pos">n.</td><td class="mean">고통</td></tr>
+      <tr class="is-phr"><td>13</td><td class="word">empathize with</td><td class="pos">phr.</td><td class="mean">~에 공감하다</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">in-group / out-group</td><td class="pos">phr.</td><td class="mean">내집단 / 외집단</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">resist -ing</td><td class="pos">phr.</td><td class="mean">~하기를 거부(저항)하다</td></tr>
+      <tr><td>16</td><td class="word">threatening</td><td class="pos">a.</td><td class="mean">위협적인</td></tr>
+      <tr><td>17</td><td class="word">prescription</td><td class="pos">n.</td><td class="mean">처방(전)</td></tr>
+      <tr><td>18</td><td class="word">counterproductive</td><td class="pos">a.</td><td class="mean">역효과를 낳는  ← 정답 표현</td></tr>
+      <tr><td>19</td><td class="word">entrench</td><td class="pos">v.</td><td class="mean">확립하다, 고착시키다</td></tr>
+      <tr class="is-phr"><td>20</td><td class="word">us vs. them mentality</td><td class="pos">phr.</td><td class="mean">우리 대 그들이라는 사고방식</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word">dissimilar from</td><td class="pos">phr.</td><td class="mean">~와 다른</td></tr>
+      <tr><td>22</td><td class="word">accurately</td><td class="pos">ad.</td><td class="mean">정확하게</td></tr>
+      <tr><td>23</td><td class="word">frustration</td><td class="pos">n.</td><td class="mean">좌절(감)</td></tr>
+      <tr class="is-phr"><td>24</td><td class="word">give up on</td><td class="pos">phr.</td><td class="mean">~을 포기하다</td></tr>
+      <tr class="is-phr"><td>25</td><td class="word">in pursuit of</td><td class="pos">phr.</td><td class="mean">~을 추구하여</td></tr>
+      <tr class="is-phr"><td>26</td><td class="word">rational compassion</td><td class="pos">phr.</td><td class="mean">이성적 연민</td></tr>
+      <tr class="is-phr"><td>27</td><td class="word">moral emotion</td><td class="pos">phr.</td><td class="mean">도덕적 감정</td></tr>
+      <tr><td>28</td><td class="word">shame</td><td class="pos">n.</td><td class="mean">수치심</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">33</span>
+    <span class="typ">빈칸 추론</span>
+    <span class="topic">숲의 생물다양성 — 비(非)숲을 숲으로 바꾸는 정당화의 오류</span>
+    <span class="ans">정답 <b>⑤</b> · 28개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">ecosystem</td><td class="pos">n.</td><td class="mean">생태계</td></tr>
+      <tr><td>2</td><td class="word">relatively</td><td class="pos">ad.</td><td class="mean">상대적으로, 비교적</td></tr>
+      <tr><td>3</td><td class="word">necessarily</td><td class="pos">ad.</td><td class="mean">반드시, 필연적으로</td></tr>
+      <tr><td>4</td><td class="word">meadow</td><td class="pos">n.</td><td class="mean">목초지, 초원</td></tr>
+      <tr><td>5</td><td class="word">grassland</td><td class="pos">n.</td><td class="mean">초지, 풀밭</td></tr>
+      <tr><td>6</td><td class="word">biota</td><td class="pos">n.</td><td class="mean">생물상(생물 종류의 총체)</td></tr>
+      <tr><td>7</td><td class="word">ecological</td><td class="pos">a.</td><td class="mean">생태(학)적인</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">classic example</td><td class="pos">phr.</td><td class="mean">전형적인 사례</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">Forestry Commission</td><td class="pos">phr.</td><td class="mean">(영국) 산림위원회</td></tr>
+      <tr><td>10</td><td class="word">drain</td><td class="pos">v.</td><td class="mean">물을 빼다, 배수하다</td></tr>
+      <tr><td>11</td><td class="word">fertilize</td><td class="pos">v.</td><td class="mean">(땅을) 기름지게 하다</td></tr>
+      <tr><td>12</td><td class="word">fence</td><td class="pos">v.</td><td class="mean">울타리를 치다</td></tr>
+      <tr><td>13</td><td class="word">extensive</td><td class="pos">a.</td><td class="mean">광범위한, 넓은</td></tr>
+      <tr><td>14</td><td class="word">facilitate</td><td class="pos">v.</td><td class="mean">용이하게 하다, 촉진하다</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">turn A into B</td><td class="pos">phr.</td><td class="mean">A를 B로 바꾸다</td></tr>
+      <tr><td>16</td><td class="word">extent</td><td class="pos">n.</td><td class="mean">범위, 정도</td></tr>
+      <tr><td>17</td><td class="word">desirable</td><td class="pos">a.</td><td class="mean">바람직한</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word">be directed toward</td><td class="pos">phr.</td><td class="mean">~로 향해 있다</td></tr>
+      <tr><td>19</td><td class="word">site</td><td class="pos">n.</td><td class="mean">부지, 장소</td></tr>
+      <tr><td>20</td><td class="word">keeper</td><td class="pos">n.</td><td class="mean">(가축을) 치는 사람, 관리인</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word">complain about</td><td class="pos">phr.</td><td class="mean">~에 대해 불평하다</td></tr>
+      <tr class="is-phr"><td>22</td><td class="word">be restricted to</td><td class="pos">phr.</td><td class="mean">~에 한정되다</td></tr>
+      <tr><td>23</td><td class="word">former</td><td class="pos">a.</td><td class="mean">이전의, 예전의</td></tr>
+      <tr class="is-phr"><td>24</td><td class="word">be composed of</td><td class="pos">phr.</td><td class="mean">~로 구성되다</td></tr>
+      <tr><td>25</td><td class="word">exotic</td><td class="pos">a.</td><td class="mean">외래의, 외국산의</td></tr>
+      <tr class="is-phr"><td>26</td><td class="word">uncommon species</td><td class="pos">phr.</td><td class="mean">희귀종</td></tr>
+      <tr><td>27</td><td class="word">justification</td><td class="pos">n.</td><td class="mean">정당화, 명분  ← 정답 표현</td></tr>
+      <tr class="is-phr"><td>28</td><td class="word">convert A into B</td><td class="pos">phr.</td><td class="mean">A를 B로 전환하다  ← 정답 표현</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">34</span>
+    <span class="typ">빈칸 추론</span> <span class="badge3">3점</span>
+    <span class="topic">집단적 선택과 추첨 — 익명성·중립성 충돌 시 무작위 필요</span>
+    <span class="ans">정답 <b>①</b> · 27개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">gather A into B</td><td class="pos">phr.</td><td class="mean">A를 B로 모으다</td></tr>
+      <tr><td>2</td><td class="word">preference</td><td class="pos">n.</td><td class="mean">선호(도)</td></tr>
+      <tr><td>3</td><td class="word">agent</td><td class="pos">n.</td><td class="mean">행위자, 주체</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">collective choice</td><td class="pos">phr.</td><td class="mean">집단적 선택</td></tr>
+      <tr><td>5</td><td class="word">alternative</td><td class="pos">n.</td><td class="mean">대안, 선택지</td></tr>
+      <tr><td>6</td><td class="word">deterministic</td><td class="pos">a.</td><td class="mean">결정론적인 (확률에 의존하지 않는)</td></tr>
+      <tr><td>7</td><td class="word">violate</td><td class="pos">v.</td><td class="mean">위반하다, 침해하다</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">fairness condition</td><td class="pos">phr.</td><td class="mean">공정성 조건</td></tr>
+      <tr><td>9</td><td class="word">anonymity</td><td class="pos">n.</td><td class="mean">익명성</td></tr>
+      <tr><td>10</td><td class="word">neutrality</td><td class="pos">n.</td><td class="mean">중립성</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">be independent of</td><td class="pos">phr.</td><td class="mean">~와 무관하다</td></tr>
+      <tr><td>12</td><td class="word">whereas</td><td class="pos">conj.</td><td class="mean">반면에</td></tr>
+      <tr><td>13</td><td class="word">impartiality</td><td class="pos">n.</td><td class="mean">공평(무사)</td></tr>
+      <tr><td>14</td><td class="word">lottery</td><td class="pos">n.</td><td class="mean">추첨, 제비뽑기</td></tr>
+      <tr><td>15</td><td class="word">necessity</td><td class="pos">n.</td><td class="mean">필수 요소, 필요성</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">social choice function</td><td class="pos">phr.</td><td class="mean">사회적 선택 함수</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">plurality rule</td><td class="pos">phr.</td><td class="mean">다수결(최다 득표) 원칙</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word">as long as</td><td class="pos">phr.</td><td class="mean">~하는 한</td></tr>
+      <tr><td>19</td><td class="word">tie</td><td class="pos">n.</td><td class="mean">동점, 무승부</td></tr>
+      <tr><td>20</td><td class="word">resolve</td><td class="pos">v.</td><td class="mean">해결하다</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word">draw a lot</td><td class="pos">phr.</td><td class="mean">제비를 뽑다</td></tr>
+      <tr><td>22</td><td class="word">official</td><td class="pos">n.</td><td class="mean">공직자, 관리</td></tr>
+      <tr class="is-phr"><td>23</td><td class="word">go back to</td><td class="pos">phr.</td><td class="mean">~로 거슬러 올라가다</td></tr>
+      <tr><td>24</td><td class="word">principal</td><td class="pos">a.</td><td class="mean">주요한, 주된</td></tr>
+      <tr><td>25</td><td class="word">randomization</td><td class="pos">n.</td><td class="mean">무작위화  ← 정답 표현</td></tr>
+      <tr><td>26</td><td class="word">tiebreaking</td><td class="pos">n.</td><td class="mean">동점 처리(가르기)  ← 정답 표현</td></tr>
+      <tr class="is-phr"><td>27</td><td class="word">inherent in</td><td class="pos">phr.</td><td class="mean">~에 내재된</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">35</span>
+    <span class="typ">무관한 문장</span>
+    <span class="topic">다양한 멘토 네트워크의 필요성</span>
+    <span class="ans">정답 <b>④</b> · 19개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">mentor</td><td class="pos">n.</td><td class="mean">멘토, 조언자</td></tr>
+      <tr><td>2</td><td class="word">workplace</td><td class="pos">n.</td><td class="mean">직장, 일터</td></tr>
+      <tr><td>3</td><td class="word">available</td><td class="pos">a.</td><td class="mean">이용 가능한</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">psychosocial support</td><td class="pos">phr.</td><td class="mean">심리사회적 지원</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">dominant group</td><td class="pos">phr.</td><td class="mean">주류(지배) 집단</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">minority group</td><td class="pos">phr.</td><td class="mean">소수 집단</td></tr>
+      <tr><td>7</td><td class="word">alike</td><td class="pos">ad.</td><td class="mean">마찬가지로, 똑같이</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">gain insight into</td><td class="pos">phr.</td><td class="mean">~에 대한 통찰을 얻다</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">be employed by</td><td class="pos">phr.</td><td class="mean">~에 고용되다</td></tr>
+      <tr><td>10</td><td class="word">profession</td><td class="pos">n.</td><td class="mean">전문직</td></tr>
+      <tr><td>11</td><td class="word">majority</td><td class="pos">n.</td><td class="mean">다수(집단)</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">sensitivity to</td><td class="pos">phr.</td><td class="mean">~에 대한 민감성, 감수성</td></tr>
+      <tr><td>13</td><td class="word">privilege</td><td class="pos">n.</td><td class="mean">특권</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">essential component</td><td class="pos">phr.</td><td class="mean">필수 구성 요소</td></tr>
+      <tr><td>15</td><td class="word">employer</td><td class="pos">n.</td><td class="mean">고용주  ← ④의 함정 단어</td></tr>
+      <tr><td>16</td><td class="word">employee</td><td class="pos">n.</td><td class="mean">피고용인, 직원</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">ultimate goal</td><td class="pos">phr.</td><td class="mean">궁극적 목표</td></tr>
+      <tr><td>18</td><td class="word">informed</td><td class="pos">a.</td><td class="mean">정보를 잘 아는</td></tr>
+      <tr><td>19</td><td class="word">engaged</td><td class="pos">a.</td><td class="mean">몰입한, 참여도가 높은</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">36</span>
+    <span class="typ">글의 순서</span>
+    <span class="topic">결과 중심 쓰기 vs 과정 중심 쓰기(process writing)</span>
+    <span class="ans">정답 <b>④</b> · 19개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">traditionally</td><td class="pos">ad.</td><td class="mean">전통적으로</td></tr>
+      <tr><td>2</td><td class="word">assign</td><td class="pos">v.</td><td class="mean">(과제를) 부여하다</td></tr>
+      <tr><td>3</td><td class="word">brainstorm</td><td class="pos">v.</td><td class="mean">아이디어를 자유롭게 내다</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">pre-writing phase</td><td class="pos">phr.</td><td class="mean">쓰기 전 단계</td></tr>
+      <tr><td>5</td><td class="word">interruption</td><td class="pos">n.</td><td class="mean">중단, 방해</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">process writing</td><td class="pos">phr.</td><td class="mean">과정 중심 쓰기</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">on the other hand</td><td class="pos">phr.</td><td class="mean">반면에</td></tr>
+      <tr><td>8</td><td class="word">initially</td><td class="pos">ad.</td><td class="mean">처음에는</td></tr>
+      <tr><td>9</td><td class="word">conference</td><td class="pos">n.</td><td class="mean">협의, 면담</td></tr>
+      <tr class="is-phr"><td>10</td><td class="word">up to that point</td><td class="pos">phr.</td><td class="mean">그 시점까지</td></tr>
+      <tr><td>11</td><td class="word">revision</td><td class="pos">n.</td><td class="mean">수정, 개고</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">carry on -ing</td><td class="pos">phr.</td><td class="mean">계속 ~하다</td></tr>
+      <tr><td>13</td><td class="word">draft / redraft</td><td class="pos">v.</td><td class="mean">초고를 쓰다 / 다시 쓰다</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">shift A from B to C</td><td class="pos">phr.</td><td class="mean">A를 B에서 C로 옮기다</td></tr>
+      <tr><td>15</td><td class="word">emphasis</td><td class="pos">n.</td><td class="mean">강조(점)</td></tr>
+      <tr><td>16</td><td class="word">evaluation</td><td class="pos">n.</td><td class="mean">평가</td></tr>
+      <tr><td>17</td><td class="word">subsequently</td><td class="pos">ad.</td><td class="mean">그 후에, 나중에  ← (C) 연결 단서</td></tr>
+      <tr><td>18</td><td class="word">product-oriented</td><td class="pos">a.</td><td class="mean">결과(산출물) 중심의</td></tr>
+      <tr><td>19</td><td class="word">involvement</td><td class="pos">n.</td><td class="mean">관여, 참여</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">37</span>
+    <span class="typ">글의 순서</span> <span class="badge3">3점</span>
+    <span class="topic">수학적 글쓰기를 알아보는 법 — 기호는 사실 근대의 산물</span>
+    <span class="ans">정답 <b>②</b> · 18개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">at some point</td><td class="pos">phr.</td><td class="mean">어느 시점에, 언젠가</td></tr>
+      <tr><td>2</td><td class="word">mathematical</td><td class="pos">a.</td><td class="mean">수학적인</td></tr>
+      <tr><td>3</td><td class="word">complicated</td><td class="pos">a.</td><td class="mean">복잡한</td></tr>
+      <tr><td>4</td><td class="word">notation</td><td class="pos">n.</td><td class="mean">표기(법), 기호</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">spring to mind</td><td class="pos">phr.</td><td class="mean">문득 떠오르다</td></tr>
+      <tr><td>6</td><td class="word">dash</td><td class="pos">n.</td><td class="mean">대시(—), 줄표</td></tr>
+      <tr><td>7</td><td class="word">squiggle</td><td class="pos">n.</td><td class="mean">꼬불꼬불한 글자(기호)</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">obvious sign</td><td class="pos">phr.</td><td class="mean">명백한 표시</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">rest assured</td><td class="pos">phr.</td><td class="mean">안심해도 좋다</td></tr>
+      <tr class="is-phr"><td>10</td><td class="word">rely on</td><td class="pos">phr.</td><td class="mean">~에 의존하다</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">in the first place</td><td class="pos">phr.</td><td class="mean">애초에, 우선</td></tr>
+      <tr><td>12</td><td class="word">recognise</td><td class="pos">v.</td><td class="mean">알아보다 (美 recognize)</td></tr>
+      <tr class="is-phr"><td>13</td><td class="word">put simply</td><td class="pos">phr.</td><td class="mean">간단히 말해</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">deal with</td><td class="pos">phr.</td><td class="mean">~을 다루다</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">distant past</td><td class="pos">phr.</td><td class="mean">먼 과거</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">familiar to</td><td class="pos">phr.</td><td class="mean">~에게 익숙한</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">recorded language</td><td class="pos">phr.</td><td class="mean">기록된 언어</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word">You would not be the first</td><td class="pos">phr.</td><td class="mean">당신이 처음은 아닐 것이다  ← (B) 연결 단서</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">38</span>
+    <span class="typ">문장 삽입</span>
+    <span class="topic">나무는 왜 잎을 떨구는가 — 노화(senescence)라는 능동적 재활용</span>
+    <span class="ans">정답 <b>③</b> · 25개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">approach</td><td class="pos">v.</td><td class="mean">다가오다, 가까워지다</td></tr>
+      <tr><td>2</td><td class="word">shorten</td><td class="pos">v.</td><td class="mean">짧아지다</td></tr>
+      <tr><td>3</td><td class="word">detect</td><td class="pos">v.</td><td class="mean">감지하다, 알아채다</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">It is worth -ing</td><td class="pos">phr.</td><td class="mean">~할 가치가 있다</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">point out</td><td class="pos">phr.</td><td class="mean">지적하다</td></tr>
+      <tr><td>6</td><td class="word">initiate</td><td class="pos">v.</td><td class="mean">시작하다, 착수하다</td></tr>
+      <tr><td>7</td><td class="word">senescence</td><td class="pos">n.</td><td class="mean">노화</td></tr>
+      <tr><td>8</td><td class="word">oak</td><td class="pos">n.</td><td class="mean">참나무, 오크</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">struggle to</td><td class="pos">phr.</td><td class="mean">~하는 데 애를 먹다</td></tr>
+      <tr><td>10</td><td class="word">harsh</td><td class="pos">a.</td><td class="mean">혹독한, 가혹한</td></tr>
+      <tr><td>11</td><td class="word">retain</td><td class="pos">v.</td><td class="mean">유지하다, 보유하다</td></tr>
+      <tr><td>12</td><td class="word">canopy</td><td class="pos">n.</td><td class="mean">수관(樹冠), 잎 지붕</td></tr>
+      <tr><td>13</td><td class="word">risk</td><td class="pos">v.</td><td class="mean">~의 위험을 무릅쓰다</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">draw up</td><td class="pos">phr.</td><td class="mean">(물을) 끌어올리다</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">frozen ground</td><td class="pos">phr.</td><td class="mean">언 땅</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">blow over</td><td class="pos">phr.</td><td class="mean">바람에 넘어지다</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">die of thirst</td><td class="pos">phr.</td><td class="mean">갈증으로 죽다</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word">signal to A that</td><td class="pos">phr.</td><td class="mean">A에게 ~라고 신호를 보내다</td></tr>
+      <tr class="is-phr"><td>19</td><td class="word">suck out</td><td class="pos">phr.</td><td class="mean">빨아내다</td></tr>
+      <tr><td>20</td><td class="word">nutrient</td><td class="pos">n.</td><td class="mean">영양분, 영양소</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word">surgical precision</td><td class="pos">phr.</td><td class="mean">외과 수술 같은 정밀함</td></tr>
+      <tr class="is-phr"><td>22</td><td class="word">block up</td><td class="pos">phr.</td><td class="mean">막다, 차단하다</td></tr>
+      <tr><td>23</td><td class="word">pathway</td><td class="pos">n.</td><td class="mean">통로, 경로</td></tr>
+      <tr class="is-phr"><td>24</td><td class="word">leaf stem</td><td class="pos">phr.</td><td class="mean">잎자루</td></tr>
+      <tr class="is-phr"><td>25</td><td class="word">snap off</td><td class="pos">phr.</td><td class="mean">툭 부러져 떨어지다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">39</span>
+    <span class="typ">문장 삽입</span> <span class="badge3">3점</span>
+    <span class="topic">건축사에서의 증거 — 살아남은 것이 곧 중요한 것은 아니다</span>
+    <span class="ans">정답 <b>②</b> · 22개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">survival</td><td class="pos">n.</td><td class="mean">살아남음, 잔존</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">lie at the root of</td><td class="pos">phr.</td><td class="mean">~의 근원에 있다</td></tr>
+      <tr><td>3</td><td class="word">significant</td><td class="pos">a.</td><td class="mean">중요한, 의미 있는</td></tr>
+      <tr><td>4</td><td class="word">historian</td><td class="pos">n.</td><td class="mean">역사가</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">architectural history</td><td class="pos">phr.</td><td class="mean">건축사(建築史)</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">take the form of</td><td class="pos">phr.</td><td class="mean">~의 형태를 취하다</td></tr>
+      <tr><td>7</td><td class="word">remains</td><td class="pos">n.</td><td class="mean">유적, 잔해</td></tr>
+      <tr><td>8</td><td class="word">plan</td><td class="pos">n.</td><td class="mean">도면, 평면도</td></tr>
+      <tr><td>9</td><td class="word">description</td><td class="pos">n.</td><td class="mean">서술, 기술</td></tr>
+      <tr><td>10</td><td class="word">bill</td><td class="pos">n.</td><td class="mean">청구서, 계산서</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">be derived from</td><td class="pos">phr.</td><td class="mean">~에서 유래하다, 나오다</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">a multitude of</td><td class="pos">phr.</td><td class="mean">수많은, 다수의</td></tr>
+      <tr><td>13</td><td class="word">deed</td><td class="pos">n.</td><td class="mean">증서; 행위</td></tr>
+      <tr><td>14</td><td class="word">artefact</td><td class="pos">n.</td><td class="mean">인공물, 유물 (美 artifact)</td></tr>
+      <tr><td>15</td><td class="word">durability</td><td class="pos">n.</td><td class="mean">내구성, 오래감</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">historical significance</td><td class="pos">phr.</td><td class="mean">역사적 중요성</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">by themselves</td><td class="pos">phr.</td><td class="mean">그것들 자체로는</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word">place A in context</td><td class="pos">phr.</td><td class="mean">A를 맥락 속에 놓다</td></tr>
+      <tr><td>19</td><td class="word">interpret</td><td class="pos">v.</td><td class="mean">해석하다</td></tr>
+      <tr class="is-phr"><td>20</td><td class="word">place value on</td><td class="pos">phr.</td><td class="mean">~에 가치를 두다</td></tr>
+      <tr><td>21</td><td class="word">modify</td><td class="pos">v.</td><td class="mean">수정하다, 변경하다</td></tr>
+      <tr><td>22</td><td class="word">interpretation</td><td class="pos">n.</td><td class="mean">해석</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">40</span>
+    <span class="typ">문단 요약</span>
+    <span class="topic">장르 소설·만화 캐릭터의 재등장과 변형</span>
+    <span class="ans">정답 <b>④</b> · 24개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">be limited to</td><td class="pos">phr.</td><td class="mean">~에 국한되다</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word">individual work</td><td class="pos">phr.</td><td class="mean">개별 작품</td></tr>
+      <tr><td>3</td><td class="word">trait</td><td class="pos">n.</td><td class="mean">특성, 특징</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">fictional figure</td><td class="pos">phr.</td><td class="mean">허구의 인물</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">room for</td><td class="pos">phr.</td><td class="mean">~의 여지</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">literary fiction</td><td class="pos">phr.</td><td class="mean">순수(본격) 문학</td></tr>
+      <tr><td>7</td><td class="word">reappear</td><td class="pos">v.</td><td class="mean">다시 나타나다</td></tr>
+      <tr><td>8</td><td class="word">subsequent</td><td class="pos">a.</td><td class="mean">이후의, 뒤따르는</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">genre fiction</td><td class="pos">phr.</td><td class="mean">장르 소설</td></tr>
+      <tr><td>10</td><td class="word">feature</td><td class="pos">v.</td><td class="mean">~을 주요 인물로 하다</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">central character</td><td class="pos">phr.</td><td class="mean">중심 인물, 주인공</td></tr>
+      <tr><td>12</td><td class="word">pronounced</td><td class="pos">a.</td><td class="mean">두드러진, 뚜렷한</td></tr>
+      <tr><td>13</td><td class="word">serialize</td><td class="pos">v.</td><td class="mean">연재하다</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">newspaper strip</td><td class="pos">phr.</td><td class="mean">신문 연재만화</td></tr>
+      <tr class="is-phr"><td>15</td><td class="word">core trait</td><td class="pos">phr.</td><td class="mean">핵심 특성</td></tr>
+      <tr><td>16</td><td class="word">successive</td><td class="pos">a.</td><td class="mean">연이은, 잇따른</td></tr>
+      <tr><td>17</td><td class="word">considerably</td><td class="pos">ad.</td><td class="mean">상당히, 꽤</td></tr>
+      <tr><td>18</td><td class="word">resurface</td><td class="pos">v.</td><td class="mean">다시 떠오르다(등장하다)</td></tr>
+      <tr><td>19</td><td class="word">endure</td><td class="pos">v.</td><td class="mean">지속되다, 견디다</td></tr>
+      <tr><td>20</td><td class="word">degradation</td><td class="pos">n.</td><td class="mean">저하, 퇴화</td></tr>
+      <tr><td>21</td><td class="word">variation</td><td class="pos">n.</td><td class="mean">변화, 변주</td></tr>
+      <tr><td>22</td><td class="word">transformation</td><td class="pos">n.</td><td class="mean">변형, 변모  ← 정답 (B)</td></tr>
+      <tr><td>23</td><td class="word">fossilization</td><td class="pos">n.</td><td class="mean">화석화</td></tr>
+      <tr><td>24</td><td class="word">undergo</td><td class="pos">v.</td><td class="mean">겪다, 거치다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">41–42</span>
+    <span class="typ">장문(제목·어휘)</span>
+    <span class="topic">사회적 실재감(social presence)과 매체의 풍부함(richness)</span>
+    <span class="ans">정답 <b>41 ① / 42 ④</b> · 22개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">social presence</td><td class="pos">phr.</td><td class="mean">사회적 실재감(함께 있다는 느낌)</td></tr>
+      <tr><td>2</td><td class="word">iteration</td><td class="pos">n.</td><td class="mean">반복, (개발) 차수</td></tr>
+      <tr class="is-phr"><td>3</td><td class="word">landline telephone</td><td class="pos">phr.</td><td class="mean">유선 전화</td></tr>
+      <tr><td>4</td><td class="word">persist</td><td class="pos">v.</td><td class="mean">지속되다, 계속 남다</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">the extent to which</td><td class="pos">phr.</td><td class="mean">~하는 정도</td></tr>
+      <tr><td>6</td><td class="word">richness</td><td class="pos">n.</td><td class="mean">풍부함</td></tr>
+      <tr><td>7</td><td class="word">cue</td><td class="pos">n.</td><td class="mean">단서, 신호</td></tr>
+      <tr><td>8</td><td class="word">convey</td><td class="pos">v.</td><td class="mean">전달하다</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">immediate feedback</td><td class="pos">phr.</td><td class="mean">즉각적인 반응(피드백)</td></tr>
+      <tr class="is-phr"><td>10</td><td class="word">textual cue</td><td class="pos">phr.</td><td class="mean">문자 단서</td></tr>
+      <tr><td>11</td><td class="word">videoconferencing</td><td class="pos">n.</td><td class="mean">화상 회의</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">visual cue</td><td class="pos">phr.</td><td class="mean">시각적 단서</td></tr>
+      <tr><td>13</td><td class="word">replicate</td><td class="pos">v.</td><td class="mean">재현하다, 복제하다</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">gold standard</td><td class="pos">phr.</td><td class="mean">최고의 기준, 황금률</td></tr>
+      <tr><td>15</td><td class="word">face-to-face</td><td class="pos">a.</td><td class="mean">대면의, 얼굴을 맞대는</td></tr>
+      <tr><td>16</td><td class="word">ambiguous</td><td class="pos">a.</td><td class="mean">모호한, 애매한</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">lean media</td><td class="pos">phr.</td><td class="mean">정보량이 적은 매체</td></tr>
+      <tr><td>18</td><td class="word">routine</td><td class="pos">a.</td><td class="mean">일상적인, 판에 박힌  ← 42번 (d) 함정</td></tr>
+      <tr class="is-phr"><td>19</td><td class="word">client agreement</td><td class="pos">phr.</td><td class="mean">고객 계약(서)</td></tr>
+      <tr><td>20</td><td class="word">generic</td><td class="pos">a.</td><td class="mean">일반적인, 포괄적인</td></tr>
+      <tr><td>21</td><td class="word">channel</td><td class="pos">n.</td><td class="mean">(의사소통) 경로, 채널</td></tr>
+      <tr><td>22</td><td class="word">container</td><td class="pos">n.</td><td class="mean">그릇, 용기</td></tr>
+    </tbody>
+  </table>
+
+  <div class="q-head">
+    <span class="no">43–45</span>
+    <span class="typ">장문(순서·지칭·일치)</span>
+    <span class="topic">Mike와 아빠의 야구장 나들이 — 파울볼을 잡은 날</span>
+    <span class="ans">정답 <b>43 ③ / 44 ④ / 45 ②</b> · 27개</span>
+  </div>
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col class="c-mean"></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">in person</td><td class="pos">phr.</td><td class="mean">직접, 몸소</td></tr>
+      <tr><td>2</td><td class="word">grab</td><td class="pos">v.</td><td class="mean">움켜쥐다, 잡다</td></tr>
+      <tr><td>3</td><td class="word">hand</td><td class="pos">v.</td><td class="mean">건네주다</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word">just in case</td><td class="pos">phr.</td><td class="mean">만약을 대비해서</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word">fly ball</td><td class="pos">phr.</td><td class="mean">뜬공, 플라이볼</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">come one’s way</td><td class="pos">phr.</td><td class="mean">~ 쪽으로 오다</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">hit a home run</td><td class="pos">phr.</td><td class="mean">홈런을 치다</td></tr>
+      <tr><td>8</td><td class="word">fireworks</td><td class="pos">n.</td><td class="mean">불꽃놀이</td></tr>
+      <tr class="is-phr"><td>9</td><td class="word">throughout the stadium</td><td class="pos">phr.</td><td class="mean">경기장 곳곳에</td></tr>
+      <tr><td>10</td><td class="word">play</td><td class="pos">n.</td><td class="mean">플레이, 경기 장면</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">can&#x27;t wait for</td><td class="pos">phr.</td><td class="mean">~가 몹시 기다려지다</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">run onto the field</td><td class="pos">phr.</td><td class="mean">그라운드로 뛰어나오다</td></tr>
+      <tr class="is-phr"><td>13</td><td class="word">third base</td><td class="pos">phr.</td><td class="mean">3루</td></tr>
+      <tr class="is-phr"><td>14</td><td class="word">warm up</td><td class="pos">phr.</td><td class="mean">몸을 풀다</td></tr>
+      <tr><td>15</td><td class="word">wave</td><td class="pos">v.</td><td class="mean">손을 흔들다</td></tr>
+      <tr><td>16</td><td class="word">pitcher</td><td class="pos">n.</td><td class="mean">투수</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">throw the first pitch</td><td class="pos">phr.</td><td class="mean">초구를 던지다</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word">before long</td><td class="pos">phr.</td><td class="mean">머지않아, 곧</td></tr>
+      <tr><td>19</td><td class="word">stands</td><td class="pos">n.</td><td class="mean">관중석</td></tr>
+      <tr><td>20</td><td class="word">crowd</td><td class="pos">n.</td><td class="mean">관중, 군중</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word">reach up</td><td class="pos">phr.</td><td class="mean">손을 위로 뻗다</td></tr>
+      <tr><td>22</td><td class="word">clap</td><td class="pos">v.</td><td class="mean">박수를 치다</td></tr>
+      <tr><td>23</td><td class="word">tightly</td><td class="pos">ad.</td><td class="mean">꽉, 단단히</td></tr>
+      <tr class="is-phr"><td>24</td><td class="word">keep scoring</td><td class="pos">phr.</td><td class="mean">계속 득점하다</td></tr>
+      <tr class="is-phr"><td>25</td><td class="word">stay close</td><td class="pos">phr.</td><td class="mean">(경기가) 접전으로 유지되다</td></tr>
+      <tr class="is-phr"><td>26</td><td class="word">hold one&#x27;s breath</td><td class="pos">phr.</td><td class="mean">숨을 죽이다</td></tr>
+      <tr><td>27</td><td class="word">high-five</td><td class="pos">v.</td><td class="mean">하이파이브를 하다</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="page-break">숙어 · 구동사 총정리 216선</h2>
+  <p>위 문항별 목록에서 <b>phr.</b>로 표시된 항목만 모아 알파벳순으로 정리했다. 시험 직전 5분 복습용.</p>
+  <table class="idiom-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-mean"><col class="c-src"></colgroup>
+    <thead><tr><th>#</th><th>숙어 · 구동사</th><th>뜻</th><th>출처</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word">A as well as B</td><td class="mean">B뿐만 아니라 A도</td><td class="pos">29</td></tr>
+      <tr><td>2</td><td class="word">a modicum of</td><td class="mean">약간의, 소량의</td><td class="pos">31</td></tr>
+      <tr><td>3</td><td class="word">a multitude of</td><td class="mean">수많은, 다수의</td><td class="pos">39</td></tr>
+      <tr><td>4</td><td class="word">abusive language</td><td class="mean">욕설, 폭언</td><td class="pos">20</td></tr>
+      <tr><td>5</td><td class="word">account for</td><td class="mean">~을 설명하다; 차지하다</td><td class="pos">21</td></tr>
+      <tr><td>6</td><td class="word">act against policy</td><td class="mean">방침에 어긋나게 행동하다</td><td class="pos">20</td></tr>
+      <tr><td>7</td><td class="word">age group</td><td class="mean">연령대</td><td class="pos">25</td></tr>
+      <tr><td>8</td><td class="word">aged 35—54</td><td class="mean">35~54세의</td><td class="pos">25</td></tr>
+      <tr><td>9</td><td class="word">application form</td><td class="mean">신청서</td><td class="pos">27</td></tr>
+      <tr><td>10</td><td class="word">architectural history</td><td class="mean">건축사(建築史)</td><td class="pos">39</td></tr>
+      <tr><td>11</td><td class="word">Artificial Intelligence</td><td class="mean">인공지능</td><td class="pos">26</td></tr>
+      <tr><td>12</td><td class="word">as long as</td><td class="mean">~하는 한</td><td class="pos">34</td></tr>
+      <tr><td>13</td><td class="word">assessment criteria</td><td class="mean">평가 기준 (sg. criterion)</td><td class="pos">28</td></tr>
+      <tr><td>14</td><td class="word">at some point</td><td class="mean">어느 시점에, 언젠가</td><td class="pos">37</td></tr>
+      <tr><td>15</td><td class="word">at the height of</td><td class="mean">~의 절정기에</td><td class="pos">24</td></tr>
+      <tr><td>16</td><td class="word">back and forth</td><td class="mean">왔다 갔다, 앞뒤로</td><td class="pos">19</td></tr>
+      <tr><td>17</td><td class="word">bad apple</td><td class="mean">(조직의) 문제 인물, 썩은 사과</td><td class="pos">20</td></tr>
+      <tr><td>18</td><td class="word">be capable of -ing</td><td class="mean">~할 수 있다</td><td class="pos">26</td></tr>
+      <tr><td>19</td><td class="word">be composed of</td><td class="mean">~로 구성되다</td><td class="pos">33</td></tr>
+      <tr><td>20</td><td class="word">be derived from</td><td class="mean">~에서 유래하다, 나오다</td><td class="pos">39</td></tr>
+      <tr><td>21</td><td class="word">be directed toward</td><td class="mean">~로 향해 있다</td><td class="pos">33</td></tr>
+      <tr><td>22</td><td class="word">be employed by</td><td class="mean">~에 고용되다</td><td class="pos">35</td></tr>
+      <tr><td>23</td><td class="word">be independent of</td><td class="mean">~와 무관하다</td><td class="pos">34</td></tr>
+      <tr><td>24</td><td class="word">be least likely to</td><td class="mean">~할 가능성이 가장 낮다</td><td class="pos">25</td></tr>
+      <tr><td>25</td><td class="word">be limited to</td><td class="mean">~에 국한되다</td><td class="pos">40</td></tr>
+      <tr><td>26</td><td class="word">be offered from A to B</td><td class="mean">A에서 B까지 제공되다</td><td class="pos">27</td></tr>
+      <tr><td>27</td><td class="word">be regarded as</td><td class="mean">~로 여겨지다</td><td class="pos">24</td></tr>
+      <tr><td>28</td><td class="word">be restricted to</td><td class="mean">~에 한정되다</td><td class="pos">33</td></tr>
+      <tr><td>29</td><td class="word">be supposed to</td><td class="mean">~하기로 되어 있다</td><td class="pos">18</td></tr>
+      <tr><td>30</td><td class="word">be unaware (that)</td><td class="mean">~을 알지 못하다</td><td class="pos">20</td></tr>
+      <tr><td>31</td><td class="word">beautifully crafted</td><td class="mean">아름답게 지어진</td><td class="pos">27</td></tr>
+      <tr><td>32</td><td class="word">before long</td><td class="mean">머지않아, 곧</td><td class="pos">43–45</td></tr>
+      <tr><td>33</td><td class="word">bird watching</td><td class="mean">조류 관찰</td><td class="pos">27</td></tr>
+      <tr><td>34</td><td class="word">block up</td><td class="mean">막다, 차단하다</td><td class="pos">38</td></tr>
+      <tr><td>35</td><td class="word">blow over</td><td class="mean">바람에 넘어지다</td><td class="pos">38</td></tr>
+      <tr><td>36</td><td class="word">bulldoze through</td><td class="mean">밀어붙여 뚫고 나가다</td><td class="pos">30</td></tr>
+      <tr><td>37</td><td class="word">by contrast</td><td class="mean">그에 반해, 대조적으로</td><td class="pos">23</td></tr>
+      <tr><td>38</td><td class="word">by itself</td><td class="mean">스스로, 저절로</td><td class="pos">26, 29</td></tr>
+      <tr><td>39</td><td class="word">by themselves</td><td class="mean">그것들 자체로는</td><td class="pos">39</td></tr>
+      <tr><td>40</td><td class="word">can&#x27;t wait for</td><td class="mean">~가 몹시 기다려지다</td><td class="pos">43–45</td></tr>
+      <tr><td>41</td><td class="word">carry on -ing</td><td class="mean">계속 ~하다</td><td class="pos">36</td></tr>
+      <tr><td>42</td><td class="word">central character</td><td class="mean">중심 인물, 주인공</td><td class="pos">40</td></tr>
+      <tr><td>43</td><td class="word">civil government</td><td class="mean">세속 정부</td><td class="pos">24</td></tr>
+      <tr><td>44</td><td class="word">classic example</td><td class="mean">전형적인 사례</td><td class="pos">33</td></tr>
+      <tr><td>45</td><td class="word">client agreement</td><td class="mean">고객 계약(서)</td><td class="pos">41–42</td></tr>
+      <tr><td>46</td><td class="word">collective choice</td><td class="mean">집단적 선택</td><td class="pos">34</td></tr>
+      <tr><td>47</td><td class="word">come one’s way</td><td class="mean">~ 쪽으로 오다</td><td class="pos">43–45</td></tr>
+      <tr><td>48</td><td class="word">common restroom</td><td class="mean">공용 화장실</td><td class="pos">27</td></tr>
+      <tr><td>49</td><td class="word">complain about</td><td class="mean">~에 대해 불평하다</td><td class="pos">33</td></tr>
+      <tr><td>50</td><td class="word">convert A into B</td><td class="mean">A를 B로 전환하다</td><td class="pos">33</td></tr>
+      <tr><td>51</td><td class="word">core trait</td><td class="mean">핵심 특성</td><td class="pos">40</td></tr>
+      <tr><td>52</td><td class="word">correspond to</td><td class="mean">~에 해당하다, 상응하다</td><td class="pos">21</td></tr>
+      <tr><td>53</td><td class="word">deal with</td><td class="mean">~을 다루다</td><td class="pos">37</td></tr>
+      <tr><td>54</td><td class="word">decorate A with B</td><td class="mean">A를 B로 장식하다</td><td class="pos">31</td></tr>
+      <tr><td>55</td><td class="word">detached from</td><td class="mean">~에서 떨어진, 분리된</td><td class="pos">24</td></tr>
+      <tr><td>56</td><td class="word">devote A to B</td><td class="mean">A를 B에 바치다</td><td class="pos">24</td></tr>
+      <tr><td>57</td><td class="word">die of thirst</td><td class="mean">갈증으로 죽다</td><td class="pos">38</td></tr>
+      <tr><td>58</td><td class="word">digital computing</td><td class="mean">디지털 연산</td><td class="pos">26</td></tr>
+      <tr><td>59</td><td class="word">dissimilar from</td><td class="mean">~와 다른</td><td class="pos">32</td></tr>
+      <tr><td>60</td><td class="word">distant past</td><td class="mean">먼 과거</td><td class="pos">37</td></tr>
+      <tr><td>61</td><td class="word">distinguish A from B</td><td class="mean">A를 B와 구별하다</td><td class="pos">20</td></tr>
+      <tr><td>62</td><td class="word">dominant group</td><td class="mean">주류(지배) 집단</td><td class="pos">35</td></tr>
+      <tr><td>63</td><td class="word">draw a lot</td><td class="mean">제비를 뽑다</td><td class="pos">34</td></tr>
+      <tr><td>64</td><td class="word">draw up</td><td class="mean">(물을) 끌어올리다</td><td class="pos">38</td></tr>
+      <tr><td>65</td><td class="word">each of the three</td><td class="mean">세 가지 각각</td><td class="pos">25</td></tr>
+      <tr><td>66</td><td class="word">electrical device</td><td class="mean">전기 기기</td><td class="pos">26</td></tr>
+      <tr><td>67</td><td class="word">electrical engineering</td><td class="mean">전기공학</td><td class="pos">26</td></tr>
+      <tr><td>68</td><td class="word">empathize with</td><td class="mean">~에 공감하다</td><td class="pos">32</td></tr>
+      <tr><td>69</td><td class="word">end up with</td><td class="mean">결국 ~을 얻게 되다</td><td class="pos">21</td></tr>
+      <tr><td>70</td><td class="word">engage in</td><td class="mean">~에 참여하다, 관여하다</td><td class="pos">22</td></tr>
+      <tr><td>71</td><td class="word">engine room</td><td class="mean">원동력, 기관실</td><td class="pos">24</td></tr>
+      <tr><td>72</td><td class="word">essential component</td><td class="mean">필수 구성 요소</td><td class="pos">35</td></tr>
+      <tr><td>73</td><td class="word">evaluate A for B</td><td class="mean">B의 관점에서 A를 평가하다</td><td class="pos">23</td></tr>
+      <tr><td>74</td><td class="word">expected return</td><td class="mean">기대 수익</td><td class="pos">22</td></tr>
+      <tr><td>75</td><td class="word">fairness condition</td><td class="mean">공정성 조건</td><td class="pos">34</td></tr>
+      <tr><td>76</td><td class="word">familiar to</td><td class="mean">~에게 익숙한</td><td class="pos">37</td></tr>
+      <tr><td>77</td><td class="word">fictional figure</td><td class="mean">허구의 인물</td><td class="pos">40</td></tr>
+      <tr><td>78</td><td class="word">fill out</td><td class="mean">(서식을) 작성하다</td><td class="pos">27</td></tr>
+      <tr><td>79</td><td class="word">fly ball</td><td class="mean">뜬공, 플라이볼</td><td class="pos">43–45</td></tr>
+      <tr><td>80</td><td class="word">for the benefit of</td><td class="mean">~의 이익을 위해</td><td class="pos">24</td></tr>
+      <tr><td>81</td><td class="word">forced perspective</td><td class="mean">강제 원근법(착시 기법)</td><td class="pos">31</td></tr>
+      <tr><td>82</td><td class="word">Forestry Commission</td><td class="mean">(영국) 산림위원회</td><td class="pos">33</td></tr>
+      <tr><td>83</td><td class="word">frozen ground</td><td class="mean">언 땅</td><td class="pos">38</td></tr>
+      <tr><td>84</td><td class="word">full professor</td><td class="mean">정교수</td><td class="pos">26</td></tr>
+      <tr><td>85</td><td class="word">gain insight into</td><td class="mean">~에 대한 통찰을 얻다</td><td class="pos">35</td></tr>
+      <tr><td>86</td><td class="word">gather A into B</td><td class="mean">A를 B로 모으다</td><td class="pos">34</td></tr>
+      <tr><td>87</td><td class="word">genre fiction</td><td class="mean">장르 소설</td><td class="pos">40</td></tr>
+      <tr><td>88</td><td class="word">give up on</td><td class="mean">~을 포기하다</td><td class="pos">32</td></tr>
+      <tr><td>89</td><td class="word">go back to</td><td class="mean">~로 거슬러 올라가다</td><td class="pos">34</td></tr>
+      <tr><td>90</td><td class="word">gold standard</td><td class="mean">최고의 기준, 황금률</td><td class="pos">41–42</td></tr>
+      <tr><td>91</td><td class="word">have little in common</td><td class="mean">공통점이 거의 없다</td><td class="pos">21</td></tr>
+      <tr><td>92</td><td class="word">have recourse to</td><td class="mean">~에 의지하다</td><td class="pos">23</td></tr>
+      <tr><td>93</td><td class="word">historical document</td><td class="mean">역사적 문서</td><td class="pos">23</td></tr>
+      <tr><td>94</td><td class="word">historical significance</td><td class="mean">역사적 중요성</td><td class="pos">39</td></tr>
+      <tr><td>95</td><td class="word">hit a home run</td><td class="mean">홈런을 치다</td><td class="pos">43–45</td></tr>
+      <tr><td>96</td><td class="word">hold one&#x27;s breath</td><td class="mean">숨을 죽이다</td><td class="pos">43–45</td></tr>
+      <tr><td>97</td><td class="word">household appliance</td><td class="mean">가전제품</td><td class="pos">25</td></tr>
+      <tr><td>98</td><td class="word">immediate feedback</td><td class="mean">즉각적인 반응(피드백)</td><td class="pos">41–42</td></tr>
+      <tr><td>99</td><td class="word">in contrast to</td><td class="mean">~와 대조적으로</td><td class="pos">30</td></tr>
+      <tr><td>100</td><td class="word">in person</td><td class="mean">직접, 몸소</td><td class="pos">43–45</td></tr>
+      <tr><td>101</td><td class="word">in pursuit of</td><td class="mean">~을 추구하여</td><td class="pos">32</td></tr>
+      <tr><td>102</td><td class="word">in spite of</td><td class="mean">~에도 불구하고</td><td class="pos">21</td></tr>
+      <tr><td>103</td><td class="word">in stages</td><td class="mean">단계적으로</td><td class="pos">29</td></tr>
+      <tr><td>104</td><td class="word">in the first place</td><td class="mean">애초에, 우선</td><td class="pos">37</td></tr>
+      <tr><td>105</td><td class="word">in the wild</td><td class="mean">야생에서</td><td class="pos">31</td></tr>
+      <tr><td>106</td><td class="word">in-group / out-group</td><td class="mean">내집단 / 외집단</td><td class="pos">32</td></tr>
+      <tr><td>107</td><td class="word">individual work</td><td class="mean">개별 작품</td><td class="pos">40</td></tr>
+      <tr><td>108</td><td class="word">information theory</td><td class="mean">정보 이론</td><td class="pos">26</td></tr>
+      <tr><td>109</td><td class="word">inherent in</td><td class="mean">~에 내재된</td><td class="pos">34</td></tr>
+      <tr><td>110</td><td class="word">insensitivity to</td><td class="mean">~에 대한 무감각</td><td class="pos">32</td></tr>
+      <tr><td>111</td><td class="word">intellectual leadership</td><td class="mean">지적 지도력</td><td class="pos">24</td></tr>
+      <tr><td>112</td><td class="word">It is worth -ing</td><td class="mean">~할 가치가 있다</td><td class="pos">38</td></tr>
+      <tr><td>113</td><td class="word">job lead</td><td class="mean">취업 정보(단서)</td><td class="pos">22</td></tr>
+      <tr><td>114</td><td class="word">judging period</td><td class="mean">심사 기간</td><td class="pos">28</td></tr>
+      <tr><td>115</td><td class="word">just in case</td><td class="mean">만약을 대비해서</td><td class="pos">43–45</td></tr>
+      <tr><td>116</td><td class="word">keep scoring</td><td class="mean">계속 득점하다</td><td class="pos">43–45</td></tr>
+      <tr><td>117</td><td class="word">landline telephone</td><td class="mean">유선 전화</td><td class="pos">41–42</td></tr>
+      <tr><td>118</td><td class="word">lead up to</td><td class="mean">~로 이어지다</td><td class="pos">31</td></tr>
+      <tr><td>119</td><td class="word">leaf stem</td><td class="mean">잎자루</td><td class="pos">38</td></tr>
+      <tr><td>120</td><td class="word">lean media</td><td class="mean">정보량이 적은 매체</td><td class="pos">41–42</td></tr>
+      <tr><td>121</td><td class="word">letter of recommendation</td><td class="mean">추천서</td><td class="pos">22</td></tr>
+      <tr><td>122</td><td class="word">lie at the heart of</td><td class="mean">~의 핵심에 있다</td><td class="pos">24</td></tr>
+      <tr><td>123</td><td class="word">lie at the root of</td><td class="mean">~의 근원에 있다</td><td class="pos">39</td></tr>
+      <tr><td>124</td><td class="word">lie in</td><td class="mean">~에 있다</td><td class="pos">23</td></tr>
+      <tr><td>125</td><td class="word">life narrator</td><td class="mean">자기 삶을 서술하는 사람</td><td class="pos">23</td></tr>
+      <tr><td>126</td><td class="word">liken A to B</td><td class="mean">A를 B에 비유하다</td><td class="pos">30</td></tr>
+      <tr><td>127</td><td class="word">literary fiction</td><td class="mean">순수(본격) 문학</td><td class="pos">40</td></tr>
+      <tr><td>128</td><td class="word">look forward to -ing</td><td class="mean">~하기를 고대하다</td><td class="pos">18</td></tr>
+      <tr><td>129</td><td class="word">look to do</td><td class="mean">~하려고 하다, ~을 노리다</td><td class="pos">20</td></tr>
+      <tr><td>130</td><td class="word">make a purchase</td><td class="mean">구매하다</td><td class="pos">25</td></tr>
+      <tr><td>131</td><td class="word">make space for</td><td class="mean">~을 위한 공간을 마련하다</td><td class="pos">18</td></tr>
+      <tr><td>132</td><td class="word">marine animal</td><td class="mean">해양 동물</td><td class="pos">28</td></tr>
+      <tr><td>133</td><td class="word">marine ecosystem conservation</td><td class="mean">해양 생태계 보전</td><td class="pos">28</td></tr>
+      <tr><td>134</td><td class="word">master&#x27;s program</td><td class="mean">석사 과정</td><td class="pos">26</td></tr>
+      <tr><td>135</td><td class="word">mating domain</td><td class="mean">짝짓기 영역</td><td class="pos">31</td></tr>
+      <tr><td>136</td><td class="word">maximum file size</td><td class="mean">최대 파일 크기</td><td class="pos">28</td></tr>
+      <tr><td>137</td><td class="word">minority group</td><td class="mean">소수 집단</td><td class="pos">35</td></tr>
+      <tr><td>138</td><td class="word">moral emotion</td><td class="mean">도덕적 감정</td><td class="pos">32</td></tr>
+      <tr><td>139</td><td class="word">more than twice that of</td><td class="mean">~의 두 배가 넘는</td><td class="pos">25</td></tr>
+      <tr><td>140</td><td class="word">newspaper strip</td><td class="mean">신문 연재만화</td><td class="pos">40</td></tr>
+      <tr><td>141</td><td class="word">obvious sign</td><td class="mean">명백한 표시</td><td class="pos">37</td></tr>
+      <tr><td>142</td><td class="word">of all time</td><td class="mean">역대, 사상</td><td class="pos">26</td></tr>
+      <tr><td>143</td><td class="word">on behalf of</td><td class="mean">~을 대신하여, ~을 위하여</td><td class="pos">24</td></tr>
+      <tr><td>144</td><td class="word">on purpose</td><td class="mean">고의로, 일부러</td><td class="pos">20</td></tr>
+      <tr><td>145</td><td class="word">on the other hand</td><td class="mean">반면에</td><td class="pos">36</td></tr>
+      <tr><td>146</td><td class="word">online review</td><td class="mean">온라인 후기</td><td class="pos">25</td></tr>
+      <tr><td>147</td><td class="word">overlap with</td><td class="mean">~와 겹치다</td><td class="pos">23</td></tr>
+      <tr><td>148</td><td class="word">participation fee</td><td class="mean">참가비</td><td class="pos">28</td></tr>
+      <tr><td>149</td><td class="word">pay off</td><td class="mean">성과를 내다, 결실을 맺다</td><td class="pos">22</td></tr>
+      <tr><td>150</td><td class="word">per winner</td><td class="mean">수상자 1인당</td><td class="pos">28</td></tr>
+      <tr><td>151</td><td class="word">perceptual bias</td><td class="mean">지각 편향</td><td class="pos">31</td></tr>
+      <tr><td>152</td><td class="word">place A in context</td><td class="mean">A를 맥락 속에 놓다</td><td class="pos">39</td></tr>
+      <tr><td>153</td><td class="word">place value on</td><td class="mean">~에 가치를 두다</td><td class="pos">39</td></tr>
+      <tr><td>154</td><td class="word">plurality rule</td><td class="mean">다수결(최다 득표) 원칙</td><td class="pos">34</td></tr>
+      <tr><td>155</td><td class="word">point out</td><td class="mean">지적하다</td><td class="pos">38</td></tr>
+      <tr><td>156</td><td class="word">pre-writing phase</td><td class="mean">쓰기 전 단계</td><td class="pos">36</td></tr>
+      <tr><td>157</td><td class="word">private restroom</td><td class="mean">전용(개인) 화장실</td><td class="pos">27</td></tr>
+      <tr><td>158</td><td class="word">prize money</td><td class="mean">상금</td><td class="pos">28</td></tr>
+      <tr><td>159</td><td class="word">process writing</td><td class="mean">과정 중심 쓰기</td><td class="pos">36</td></tr>
+      <tr><td>160</td><td class="word">product category</td><td class="mean">제품 범주</td><td class="pos">25</td></tr>
+      <tr><td>161</td><td class="word">psychosocial support</td><td class="mean">심리사회적 지원</td><td class="pos">35</td></tr>
+      <tr><td>162</td><td class="word">public figure</td><td class="mean">공인, 유명 인사</td><td class="pos">32</td></tr>
+      <tr><td>163</td><td class="word">put simply</td><td class="mean">간단히 말해</td><td class="pos">37</td></tr>
+      <tr><td>164</td><td class="word">rational compassion</td><td class="mean">이성적 연민</td><td class="pos">32</td></tr>
+      <tr><td>165</td><td class="word">reach up</td><td class="mean">손을 위로 뻗다</td><td class="pos">43–45</td></tr>
+      <tr><td>166</td><td class="word">recorded language</td><td class="mean">기록된 언어</td><td class="pos">37</td></tr>
+      <tr><td>167</td><td class="word">refer to A as B</td><td class="mean">A를 B라고 부르다</td><td class="pos">29</td></tr>
+      <tr><td>168</td><td class="word">register for</td><td class="mean">~에 등록하다, 수강 신청하다</td><td class="pos">18</td></tr>
+      <tr><td>169</td><td class="word">relevance to</td><td class="mean">~와의 관련성</td><td class="pos">28</td></tr>
+      <tr><td>170</td><td class="word">rely on</td><td class="mean">~에 의존하다</td><td class="pos">37</td></tr>
+      <tr><td>171</td><td class="word">resist -ing</td><td class="mean">~하기를 거부(저항)하다</td><td class="pos">32</td></tr>
+      <tr><td>172</td><td class="word">rest assured</td><td class="mean">안심해도 좋다</td><td class="pos">37</td></tr>
+      <tr><td>173</td><td class="word">river engineering</td><td class="mean">하천 공학</td><td class="pos">30</td></tr>
+      <tr><td>174</td><td class="word">room for</td><td class="mean">~의 여지</td><td class="pos">40</td></tr>
+      <tr><td>175</td><td class="word">run onto the field</td><td class="mean">그라운드로 뛰어나오다</td><td class="pos">43–45</td></tr>
+      <tr><td>176</td><td class="word">sensitivity to</td><td class="mean">~에 대한 민감성, 감수성</td><td class="pos">35</td></tr>
+      <tr><td>177</td><td class="word">set apart from</td><td class="mean">~와 분리된, 구별된</td><td class="pos">24</td></tr>
+      <tr><td>178</td><td class="word">shift A from B to C</td><td class="mean">A를 B에서 C로 옮기다</td><td class="pos">36</td></tr>
+      <tr><td>179</td><td class="word">show up</td><td class="mean">나타나다, 출근하다</td><td class="pos">20</td></tr>
+      <tr><td>180</td><td class="word">signal to A that</td><td class="mean">A에게 ~라고 신호를 보내다</td><td class="pos">38</td></tr>
+      <tr><td>181</td><td class="word">snap off</td><td class="mean">툭 부러져 떨어지다</td><td class="pos">38</td></tr>
+      <tr><td>182</td><td class="word">social capital</td><td class="mean">사회적 자본</td><td class="pos">22</td></tr>
+      <tr><td>183</td><td class="word">social choice function</td><td class="mean">사회적 선택 함수</td><td class="pos">34</td></tr>
+      <tr><td>184</td><td class="word">social presence</td><td class="mean">사회적 실재감(함께 있다는 느낌)</td><td class="pos">41–42</td></tr>
+      <tr><td>185</td><td class="word">spring to mind</td><td class="mean">문득 떠오르다</td><td class="pos">37</td></tr>
+      <tr><td>186</td><td class="word">stay close</td><td class="mean">(경기가) 접전으로 유지되다</td><td class="pos">43–45</td></tr>
+      <tr><td>187</td><td class="word">struggle to</td><td class="mean">~하는 데 애를 먹다</td><td class="pos">38</td></tr>
+      <tr><td>188</td><td class="word">submission period</td><td class="mean">제출(접수) 기간</td><td class="pos">28</td></tr>
+      <tr><td>189</td><td class="word">suck out</td><td class="mean">빨아내다</td><td class="pos">38</td></tr>
+      <tr><td>190</td><td class="word">surgical precision</td><td class="mean">외과 수술 같은 정밀함</td><td class="pos">38</td></tr>
+      <tr><td>191</td><td class="word">take the form of</td><td class="mean">~의 형태를 취하다</td><td class="pos">39</td></tr>
+      <tr><td>192</td><td class="word">tend to</td><td class="mean">~하는 경향이 있다</td><td class="pos">25</td></tr>
+      <tr><td>193</td><td class="word">textual cue</td><td class="mean">문자 단서</td><td class="pos">41–42</td></tr>
+      <tr><td>194</td><td class="word">thanks to</td><td class="mean">~ 덕분에</td><td class="pos">18</td></tr>
+      <tr><td>195</td><td class="word">the extent to which</td><td class="mean">~하는 정도</td><td class="pos">41–42</td></tr>
+      <tr><td>196</td><td class="word">the Middle Ages</td><td class="mean">중세</td><td class="pos">24</td></tr>
+      <tr><td>197</td><td class="word">the opposite of</td><td class="mean">~의 정반대</td><td class="pos">31</td></tr>
+      <tr><td>198</td><td class="word">third base</td><td class="mean">3루</td><td class="pos">43–45</td></tr>
+      <tr><td>199</td><td class="word">throughout the stadium</td><td class="mean">경기장 곳곳에</td><td class="pos">43–45</td></tr>
+      <tr><td>200</td><td class="word">throw the first pitch</td><td class="mean">초구를 던지다</td><td class="pos">43–45</td></tr>
+      <tr><td>201</td><td class="word">to greater lengths</td><td class="mean">더 멀리, 더 큰 범위로</td><td class="pos">22</td></tr>
+      <tr><td>202</td><td class="word">turn A into B</td><td class="mean">A를 B로 바꾸다</td><td class="pos">33</td></tr>
+      <tr><td>203</td><td class="word">turn in</td><td class="mean">제출하다 (= hand in, submit)</td><td class="pos">19</td></tr>
+      <tr><td>204</td><td class="word">ultimate goal</td><td class="mean">궁극적 목표</td><td class="pos">35</td></tr>
+      <tr><td>205</td><td class="word">uncommon species</td><td class="mean">희귀종</td><td class="pos">33</td></tr>
+      <tr><td>206</td><td class="word">until proven otherwise</td><td class="mean">달리 입증되기 전까지는</td><td class="pos">30</td></tr>
+      <tr><td>207</td><td class="word">up to that point</td><td class="mean">그 시점까지</td><td class="pos">36</td></tr>
+      <tr><td>208</td><td class="word">us vs. them mentality</td><td class="mean">우리 대 그들이라는 사고방식</td><td class="pos">32</td></tr>
+      <tr><td>209</td><td class="word">visual cue</td><td class="mean">시각적 단서</td><td class="pos">41–42</td></tr>
+      <tr><td>210</td><td class="word">warm up</td><td class="mean">몸을 풀다</td><td class="pos">43–45</td></tr>
+      <tr><td>211</td><td class="word">What if ~?</td><td class="mean">~하면 어쩌지?</td><td class="pos">19</td></tr>
+      <tr><td>212</td><td class="word">winner announcement</td><td class="mean">수상자 발표</td><td class="pos">28</td></tr>
+      <tr><td>213</td><td class="word">with respect to</td><td class="mean">~에 관하여</td><td class="pos">30</td></tr>
+      <tr><td>214</td><td class="word">World War II</td><td class="mean">제2차 세계대전</td><td class="pos">26</td></tr>
+      <tr><td>215</td><td class="word">year after year</td><td class="mean">해마다, 매년</td><td class="pos">27</td></tr>
+      <tr><td>216</td><td class="word">You would not be the first</td><td class="mean">당신이 처음은 아닐 것이다</td><td class="pos">37</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="divider">
+  <p style="font-size:9pt;color:#5a6473;text-align:center;margin-top:14px;">
+    2026학년도 대학수학능력시험 9월 모의평가 영어 영역 · 18~45번 어휘 정리 · 총 540개
+  </p>
+</div>
+</body>
+</html>
