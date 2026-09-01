@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9월 모평 대비 — 실전 독해 4제 (21 · 24 · 32 · 36번 유형)</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+/* 주어진 문장 박스 */
+.given-sentence {
+  background: var(--purple-bg); border: 2px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.given-sentence .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* 삽입 위치 표시 */
+.insert-mark {
+  display: inline-block;
+  font-weight: 700; color: var(--accent);
+  margin: 0 2px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 10pt;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  .question-block, .answer-reveal, .explain-box, .tip, .word-bank,
+  .model-answer, .rubric, .writing-area, .memo-area, .dist-table,
+  table, tr, .choice-list li, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
+
+/* ===== 독해 자료 전용 추가 스타일 ===== */
+.imply {
+  font-weight: 700; text-decoration: underline;
+  text-underline-offset: 3px; color: #1a1a1a;
+}
+.point-tag {
+  display: inline-block; background: var(--warn-bg);
+  border: 1px solid var(--warn-line); border-radius: 4px;
+  padding: 2px 10px; font-size: 9.5pt; font-weight: 600;
+  color: #8a6d1f; margin-left: 6px;
+}
+.ox { font-weight: 800; margin-right: 4px; }
+.ox.o { color: #2e7d32; }
+.ox.x { color: #c62828; }
+.wrong-list { margin: 8px 0 0; padding-left: 0; list-style: none; }
+.wrong-list li { font-size: 10pt; line-height: 1.6; margin: 5px 0; }
+.seg-label {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line); border-radius: 4px;
+  padding: 1px 9px; font-weight: 700; font-size: 10pt;
+  margin-right: 6px; font-family: 'Pretendard', sans-serif;
+}
+.flow {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  font-size: 10pt; line-height: 1.8; break-inside: avoid;
+}
+.flow b { color: var(--accent); }
+.blank-line {
+  display: inline-block; border-bottom: 2px solid var(--accent);
+  min-width: 200px; margin: 0 3px;
+}
+.choice-list li.en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt;
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 ============ -->
+<section class="page">
+  <div class="nav-bar">
+    <div class="nav-group">
+      <a class="nav-btn" href="index.html">← 목록</a>
+      <a class="nav-btn vocab" href="9월모평-단어숙어정리.html">📖 단어정리</a>
+      <a class="nav-btn" href="9월모평-출제스타일.html">📋 출제스타일</a>
+      <a class="nav-btn" href="9월모평-실전어법-10제.html">✏️ 실전어법</a>
+    </div>
+    <button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button>
+  </div>
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 연계 · 9월 모평 대비</div>
+    <h1>실전 독해 4제</h1>
+    <p class="subtitle">밑줄 함의 · 글의 제목 · 빈칸 추론(절) · 글의 순서</p>
+    <p class="meta">
+      <span class="transform-badge">4문항</span>
+      <span class="passage-badge">수능 배점 기준 3점 2문항 포함</span>
+      <span class="code-badge">EBS 연계 변형</span>
+    </p>
+  </div>
+
+  <div class="tip">
+    <span class="label">이 자료의 사용법</span>
+    수능 시험지에서 <strong>가장 시간을 많이 잡아먹는 네 자리</strong>만 골라 한 문항씩 담았다.
+    각 문항은 실제 수능과 같은 <strong>발문·선지 형식</strong>을 그대로 따른다(선지는 모두 영어).
+    문제 페이지(2~5쪽)를 <strong>한 문항당 2분 안에</strong> 풀어 보고, 해설 페이지(6~9쪽)에서 확인한다.
+  </div>
+
+  <h2>문항 구성</h2>
+
+  <table>
+    <thead>
+      <tr><th style="width:56px;">문항</th><th style="width:90px;">수능 번호</th><th>유형</th><th>이 유형의 핵심</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td><td><b>21번</b></td><td>밑줄 친 부분의 함의</td>
+        <td>밑줄은 <b>비유</b>다. 글 전체의 요지를 먼저 잡고 그 요지로 비유를 번역한다</td>
+      </tr>
+      <tr>
+        <td>2</td><td><b>24번</b></td><td>글의 제목</td>
+        <td>주제를 <b>다 덮되 넘치지 않는</b> 선지를 고른다. 소재만 겹치는 선지가 함정</td>
+      </tr>
+      <tr>
+        <td>3</td><td><b>32번</b> <span class="ans-badge">3점</span></td><td>빈칸 추론 — 빈칸에 <b>절</b></td>
+        <td>빈칸은 결론 자리다. 앞 문단이 그 결론의 <b>근거</b>를 이미 깔아 두었다</td>
+      </tr>
+      <tr>
+        <td>4</td><td><b>36번</b></td><td>글의 순서</td>
+        <td>지시어·연결어가 <b>가리키는 대상</b>을 앞 단락에서 찾는다</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="explain-box">
+    <span class="label">시간 배분</span>
+    실제 수능에서 이 네 문항에 쓸 수 있는 시간은 <b>21번 2분 · 24번 1분 30초 · 32번 2분 30초 · 36번 2분</b> 정도다.
+    합쳐서 <b>8분</b>. 이 자료도 같은 기준으로 재 보고, 초과한 유형이 이번 주에 보강할 유형이다.
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제</span>
+    <span>1 / 9</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 문항 1 (21번) ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">1</span> 밑줄 함의 <span class="type-tag">수능 21번</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">
+      밑줄 친 <b>we want to come to work to build a cathedral</b>이 다음 글에서 의미하는 바로 가장 적절한 것은?
+    </p>
+
+    <div class="passage">
+      Energy can always be injected into an organization to motivate people to do things.
+      Bonuses, promotions, other carrots, and even a few sticks can get people to work
+      harder, for sure, but the gains are, like all manipulations, short-term. Over time,
+      such tactics cost more money and increase stress for employee and employer alike, and
+      eventually will become the main reason people show up for work every day. That's not
+      loyalty. That's the employee version of repeat business. Loyalty among employees is
+      when they turn down more money or benefits to continue working at the same company.
+      Loyalty to a company trumps pay and benefits. And unless you're an astronaut, it's not
+      the work we do that inspires us either. It's the cause that we come to work for. We
+      don't want to come to work to build a wall;
+      <span class="imply">we want to come to work to build a cathedral</span>.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">
+      * carrot and stick: 당근과 채찍 &nbsp; * trump: ~보다 우선하다, 능가하다
+    </p>
+
+    <ul class="choice-list">
+      <li class="en"><span class="num">①</span>exchange our daily effort for the most generous rewards available</li>
+      <li class="en"><span class="num">②</span>compete with our colleagues to prove our individual excellence</li>
+      <li class="en"><span class="num">③</span>contribute to a purpose that is larger than the tasks we perform</li>
+      <li class="en"><span class="num">④</span>master a craft demanding enough to earn us lasting recognition</li>
+      <li class="en"><span class="num">⑤</span>secure a workplace stable enough to outlast economic downturns</li>
+    </ul>
+
+    <div class="memo-area">메모 — 글의 요지를 한 문장으로 적어 보고, 그 요지로 밑줄을 번역해 볼 것</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제 — 문제</span>
+    <span>2 / 9</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 문항 2 (24번) ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> 글의 제목 <span class="type-tag">수능 24번</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 글의 제목으로 가장 적절한 것은?</p>
+
+    <div class="passage">
+      In the old Soviet Union, a famous U.S. beverage company wanted to set up a bottling
+      plant and distribution network. The prevailing ideology in the old Soviet Union at the
+      time stressed the importance of the group over the individual and the need to develop
+      industrial capacity at the expense of consumer goods. Soft drinks hardly seemed to fit
+      the country's ideological priorities. Indeed, one government official dismissed the
+      product as a "useless drink." Eventually, the two sides struck a deal, but not on the
+      basis that the drink would quench the local population's thirst. Instead, the U.S.
+      negotiators justified the project on the grounds that it would contribute to the
+      country's industrial development. They restructured the project to include a heavy
+      training component for local workers and managers, as well as a farm that would grow
+      certain of the drink's ingredients. In addition, the company promised to make efforts
+      to persuade other American companies to consider investments in the country.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">
+      * prevailing: 지배적인 &nbsp; * quench one's thirst: 갈증을 해소하다 &nbsp; * on the grounds that: ~라는 근거로
+    </p>
+
+    <ul class="choice-list">
+      <li class="en"><span class="num">①</span>Consumer Goods Can Never Outrank Heavy Industry</li>
+      <li class="en"><span class="num">②</span>Ideology: An Unbreakable Wall Against Foreign Capital</li>
+      <li class="en"><span class="num">③</span>Why Training Programs Fail in Unfamiliar Markets</li>
+      <li class="en"><span class="num">④</span>Thirst, Not Politics: What Really Sells a Drink</li>
+      <li class="en"><span class="num">⑤</span>Frame Your Proposal in the Other Side's Priorities</li>
+    </ul>
+
+    <div class="memo-area">메모 — 협상이 성사된 <b>근거</b>가 무엇이었는지에 밑줄을 그어 볼 것</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제 — 문제</span>
+    <span>3 / 9</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 문항 3 (32번) ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">3</span> 빈칸 추론 <span class="type-tag">수능 32번</span> <span class="ans-badge">3점</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">다음 빈칸에 들어갈 말로 가장 적절한 것을 고르시오.</p>
+
+    <div class="passage">
+      Limited animation is a process of making animated cartoons that does not follow a
+      "realistic" approach. The short cartoons and feature films of Walt Disney from the
+      1930s and 1940s are widely acclaimed for depicting animated simulations of reality,
+      with exquisite detail in every frame. However, this style of animation is very
+      time-consuming and expensive. "Limited" animation creates an image that uses abstract
+      art, symbolism, and limited movement to create the same effect, but at a much lower
+      production cost. This style of animation depends more upon suspension of disbelief to
+      tell a story; the story exists more in the viewer's imagination. It also encourages the
+      animators to indulge in artistic styles that are not necessarily bound to the limits of
+      the real world. The result is a new artistic style that
+      <span class="blank-line"></span>. Without limited animation, such ground-breaking films
+      as <i>Yellow Submarine</i> and Chuck Jones' <i>The Dot and the Line</i> could never have
+      been produced.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">
+      * acclaim: 극찬하다 &nbsp; * exquisite: 정교한 &nbsp; * suspension of disbelief: (허구에 대한) 불신의 유예
+    </p>
+
+    <ul class="choice-list">
+      <li class="en"><span class="num">①</span>faithfully reproduces the physical laws of the real world</li>
+      <li class="en"><span class="num">②</span>demands even larger budgets than realistic animation does</li>
+      <li class="en"><span class="num">③</span>leans less on the viewer's imagination than Disney's work did</li>
+      <li class="en"><span class="num">④</span>could not have emerged if animation had been devoted solely to simulating reality</li>
+      <li class="en"><span class="num">⑤</span>disappeared as soon as computer technology made realism affordable</li>
+    </ul>
+
+    <div class="memo-area">메모 — 빈칸 앞 두 문장이 말하는 "제한된 애니메이션이 가능하게 한 것"을 정리해 볼 것</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제 — 문제</span>
+    <span>4 / 9</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 문항 4 (36번) ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">4</span> 글의 순서 <span class="type-tag">수능 36번</span></h2>
+
+  <div class="question-block">
+    <p class="q-title">
+      주어진 글 다음에 이어질 글의 순서로 가장 적절한 것을 고르시오.
+    </p>
+
+    <div class="given-sentence">
+      <span class="label">주어진 글</span>
+      An in-group can become a reference group, a group that is used as the frame of
+      reference for evaluating one's own behavior. Members of a volunteer organization, for
+      example, may evaluate themselves by the standards of the group and feel proud about
+      their contribution to a community service project.
+    </div>
+
+    <div class="passage">
+      <span class="seg-label">(A)</span>
+      The normative effect basically involves imitating the reference group. However,
+      reference groups can also have comparison effects and associative effects on
+      self-appraisals. If most of your classmates shine in academic achievement, you are
+      likely to compare yourself with them.
+    </div>
+
+    <div class="passage">
+      <span class="seg-label">(B)</span>
+      This positive self-evaluation reflects the normative effect of a reference group whose
+      members share the same view of themselves. If other members of your reference group
+      (say, your parents) have high self-esteem, you, too, are likely to share that norm and
+      have high self-esteem.
+    </div>
+
+    <div class="passage">
+      <span class="seg-label">(C)</span>
+      As a result, you may have a negative self-evaluation, feeling that your academic
+      performance is not up to par. Being associated with the brilliant group, though, makes
+      you feel proud of yourself, "basking in reflected glory."
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">
+      * self-appraisal: 자기 평가 &nbsp; * up to par: 기준에 미치는 &nbsp; * bask in reflected glory: 반사된 영광을 누리다
+    </p>
+
+    <ul class="choice-list">
+      <li class="en"><span class="num">①</span>(A) - (C) - (B)</li>
+      <li class="en"><span class="num">②</span>(B) - (A) - (C)</li>
+      <li class="en"><span class="num">③</span>(B) - (C) - (A)</li>
+      <li class="en"><span class="num">④</span>(C) - (A) - (B)</li>
+      <li class="en"><span class="num">⑤</span>(C) - (B) - (A)</li>
+    </ul>
+
+    <div class="memo-area">메모 — (B)의 <b>This positive self-evaluation</b>, (C)의 <b>As a result</b>가 각각 무엇을 받는지 표시할 것</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제 — 문제</span>
+    <span>5 / 9</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 6 — 해설 1~2 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2 style="margin-top:4px;">실전 독해 4제 — 정답 및 해설</h2>
+  <p style="margin:0 0 6px;">
+    <span class="ans-badge">1번 ③</span>
+    <span class="ans-badge">2번 ⑤</span>
+    <span class="ans-badge">3번 ④</span>
+    <span class="ans-badge">4번 ②</span>
+  </p>
+
+  <h2><span class="q-badge">1</span> 정답 <span class="ans-badge">③</span> <span class="point-tag">밑줄 함의 · 21번</span></h2>
+
+  <div class="flow">
+    <b>도입</b> 보너스·승진 같은 외적 자극은 사람을 더 열심히 일하게 만든다<br>
+    <b>반전</b> 그러나 그 효과는 <b>단기적</b>이고, 결국 출근하는 <b>유일한 이유</b>가 되어 버린다 → 그건 충성심이 아니다<br>
+    <b>요지</b> 진짜 충성심은 <b>더 많은 돈을 거절하고도</b> 남는 것이며, 우리를 움직이는 건 일 자체가 아니라
+    <b>그 일이 향하는 대의(cause)</b>다<br>
+    <b>비유</b> 벽을 쌓으러 오는 것(= 눈앞의 과업) ↔ <b>대성당을 지으러</b> 오는 것(= 그보다 큰 목적)
+  </div>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답 ③ contribute to a purpose that is larger than the tasks we perform</p>
+    밑줄 바로 앞 두 문장이 답을 그대로 말해 준다 — <i>it's not the work we do that inspires us. It's the
+    <b>cause</b> that we come to work for.</i> 벽과 대성당은 <b>같은 벽돌 쌓기</b>지만, 대성당은 그 행위가
+    향하는 <b>더 큰 목적</b>이 있다. 즉 밑줄은 "과업 자체가 아니라 그보다 큰 목적에 기여하고 싶다"는 뜻이다.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">오답이 틀린 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox x">X</span> ① 보상과 노력을 교환한다 — 글이 <b>단기적 조작</b>이라고 비판한 바로 그것이다. 정반대.</li>
+      <li><span class="ox x">X</span> ② 동료와 경쟁해 개인의 우수함을 증명한다 — <b>경쟁</b>은 글에 등장하지 않는다.</li>
+      <li><span class="ox x">X</span> ④ 인정을 받을 만큼 어려운 기술을 익힌다 — 글은 <i>it's not the work we do that inspires us</i>라며
+        <b>일의 난이도나 숙련도를 명시적으로 배제</b>했다. 함정 선지.</li>
+      <li><span class="ox x">X</span> ⑤ 불황을 견딜 안정된 직장을 확보한다 — <b>고용 안정</b>은 언급되지 않는다.
+        오히려 충성심은 <i>더 많은 돈·혜택을 거절하는 것</i>이라 했다.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제 — 해설</span>
+    <span>6 / 9</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 7 — 해설 2 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">2</span> 정답 <span class="ans-badge">⑤</span> <span class="point-tag">글의 제목 · 24번</span></h2>
+
+  <div class="flow">
+    <b>상황</b> 미국 음료 회사가 구소련에 공장을 세우려 함<br>
+    <b>장애</b> 소련의 지배 이념은 <b>집단 &gt; 개인</b>, <b>중공업 &gt; 소비재</b> → 청량음료는 "쓸모없는 음료"<br>
+    <b>해결</b> 협상단은 <b>갈증 해소</b>가 아니라 <b>소련의 산업 발전에 기여한다</b>는 근거로 사업을 정당화<br>
+    <b>구체화</b> 현지 인력 교육 + 원료 농장 + 다른 미국 기업 투자 유치 약속 → <b>상대의 우선순위에 맞춰 제안을 재구성</b>
+  </div>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답 ⑤ Frame Your Proposal in the Other Side's Priorities</p>
+    글 전체가 하나의 사례로 하나의 교훈을 말한다 — 제안 자체(음료 판매)는 그대로인데,
+    <b>상대의 가치 기준(산업 발전)에 맞게 논리를 다시 짜서</b> 성사시켰다.
+    <i>not on the basis that ... Instead, ... justified the project on the grounds that ...</i>
+    이 대조 구조가 제목의 근거다.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">오답이 틀린 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox x">X</span> ① 소비재는 중공업을 이길 수 없다 — 소련 <b>이념의 내용</b>일 뿐 글의 주제가 아니다. 배경을 주제로 착각하게 만드는 함정.</li>
+      <li><span class="ox x">X</span> ② 이념은 외국 자본을 막는 깨지지 않는 벽 — 글은 그 벽을 <b>넘은</b> 이야기다. 결말과 정반대.</li>
+      <li><span class="ox x">X</span> ③ 교육 프로그램이 실패하는 이유 — 교육은 <b>해결책의 일부</b>였고 실패하지 않았다. 세부 정보를 제목으로 끌어올린 함정.</li>
+      <li><span class="ox x">X</span> ④ 정치가 아니라 갈증이 음료를 팔리게 한다 — 글이 명시적으로 <b>부정한</b> 근거(<i>not ... quench the thirst</i>)다.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제 — 해설</span>
+    <span>7 / 9</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 7 — 해설 3 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">3</span> 정답 <span class="ans-badge">④</span> <span class="point-tag">빈칸 추론(절) · 32번 · 3점</span></h2>
+
+  <div class="flow">
+    <b>대조 축</b> 디즈니식 사실주의 애니메이션(정교하지만 <b>비싸고 오래 걸림</b>)
+    ↔ 제한된 애니메이션(추상·상징·제한된 움직임, <b>저비용</b>)<br>
+    <b>근거 1</b> 관객의 <b>상상</b>에 더 많이 기댄다<br>
+    <b>근거 2</b> 애니메이터가 <b>현실의 한계에 얽매이지 않는</b> 예술적 스타일을 마음껏 시도하게 한다<br>
+    <b>빈칸(결론)</b> 그 결과 생겨난 새로운 예술 양식은 → <b>사실 재현에만 매달렸다면 나올 수 없었을</b> 것<br>
+    <b>확인</b> 빈칸 뒤 문장이 <i>Without limited animation, such films could never have been produced</i>로
+    <b>같은 말을 가정법으로 반복</b>한다
+  </div>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답 ④ could not have emerged if animation had been devoted solely to simulating reality</p>
+    빈칸은 글의 <b>결론</b> 자리이고, 앞의 두 근거가 모두 "현실 모방에서 벗어났기 때문에 가능했다"를 가리킨다.
+    결정적으로 <b>빈칸 바로 다음 문장</b>이 <i>Without limited animation ... could never have been produced</i>라며
+    같은 내용을 가정법 과거완료로 되풀이한다. 빈칸에도 같은 구조가 들어가야 자연스럽다.
+    <br><br>
+    <b>이 문항이 "절" 빈칸인 이유</b> — 빈칸은 관계대명사 <i>that</i>의 동사 자리다.
+    따라서 단어나 구가 아니라 <b>주어를 갖춘 서술부(절)</b>가 통째로 들어간다.
+    선지를 고를 때 <b>that + [선지]</b>를 붙여 문장이 성립하는지 반드시 확인할 것.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">오답이 틀린 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox x">X</span> ① 현실의 물리 법칙을 충실히 재현한다 — 제한된 애니메이션은 <b>사실주의를 따르지 않는다</b>(첫 문장). 정반대.</li>
+      <li><span class="ox x">X</span> ② 사실주의 애니메이션보다 더 큰 예산을 요구한다 — 글은 <i>at a much lower production cost</i>라고 명시했다. 정반대.</li>
+      <li><span class="ox x">X</span> ③ 관객의 상상에 덜 기댄다 — <i>depends <b>more</b> upon suspension of disbelief</i>, <i>the story exists <b>more</b> in the viewer's imagination</i>. 비교 방향이 뒤집힌 함정.</li>
+      <li><span class="ox x">X</span> ⑤ 컴퓨터 기술이 사실주의를 저렴하게 만들자 사라졌다 — <b>컴퓨터 기술은 글에 전혀 등장하지 않는다.</b>
+        게다가 빈칸 뒤에서 이 양식 덕분에 명작들이 나왔다고 했으므로 "사라졌다"는 흐름과 어긋난다.</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    <span class="label">32번 대비 한 줄</span>
+    빈칸 문제에서 <b>가장 강력한 단서는 빈칸 바로 앞뒤 문장</b>이다. 특히 빈칸 뒤에
+    <i>Without ~</i>, <i>Otherwise</i>, <i>That is why</i> 같은 표현이 나오면
+    <b>빈칸 내용을 다른 말로 반복</b>하고 있을 가능성이 매우 높다.
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제 — 해설</span>
+    <span>8 / 9</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 8 — 해설 4 + 마무리 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">4</span> 정답 <span class="ans-badge">②</span> <span class="point-tag">글의 순서 · 36번</span></h2>
+
+  <div class="flow">
+    <b>주어진 글</b> 내집단은 준거집단이 될 수 있다 → 자원봉사 단체 구성원은 집단 기준으로 자신을 평가하고
+    기여에 <b>자부심을 느낀다</b><br>
+    <b>↓ (B)</b> <i><b>This positive self-evaluation</b></i> ← 주어진 글의 "자부심"을 그대로 받는다.
+    이것이 <b>규범적 효과(normative effect)</b>라고 <b>이름 붙인다</b><br>
+    <b>↓ (A)</b> <i><b>The normative effect</b></i> ← (B)가 방금 붙인 이름을 받아 정리한 뒤,
+    <i>However</i>로 <b>비교 효과</b>라는 새 갈래를 연다 → "우등생 급우와 자신을 비교하게 된다"<br>
+    <b>↓ (C)</b> <i><b>As a result</b></i> ← (A)의 "비교하게 된다"의 <b>결과</b> → 부정적 자기 평가.
+    이어 <i>though</i>로 <b>연합 효과</b>(반사된 영광)까지 마무리
+  </div>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답 ② (B) - (A) - (C)</p>
+    <b>결정적 단서 세 개</b><br>
+    ① (B)의 <b>This positive self-evaluation</b> — 주어진 글의 <i>feel proud</i> 말고는 받을 대상이 없다.
+    따라서 (B)가 첫 순서다.<br>
+    ② (A)의 <b>The normative effect</b> — 정관사 The는 <b>이미 등장한</b> 용어를 받는다.
+    그 용어를 처음 꺼낸 곳이 (B)이므로 (A)는 (B) 뒤다.<br>
+    ③ (C)의 <b>As a result</b> — 결과를 낳은 원인이 필요하다.
+    (A) 끝의 <i>you are likely to compare yourself with them</i>이 그 원인이다.
+    <br><br>
+    글 전체는 준거집단의 세 효과 — <b>규범적 → 비교 → 연합</b> — 를 차례로 소개하는 구조다.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">오답이 틀린 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox x">X</span> ①④⑤ (A) 또는 (C)로 시작 — (A)의 <i>The normative effect</i>는 아직 정의되지 않은 용어이고,
+        (C)의 <i>As a result</i>는 받을 원인이 없다. 주어진 글 바로 뒤에 올 수 없다.</li>
+      <li><span class="ox x">X</span> ③ (B)-(C)-(A) — (C)의 <i>As a result</i>가 받아야 할 "비교"는 (A)에서 처음 나온다.
+        (A)보다 (C)가 먼저 오면 <b>결과가 원인보다 앞서는</b> 모순이 생긴다. 가장 많이 걸리는 함정.</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    <span class="label">시험 직전 5분 점검</span>
+    <b>21번</b> 밑줄은 비유다 — 요지를 한 문장으로 잡고 그 요지로 번역한다. 글이 <b>명시적으로 부정한 것</b>이 매력적인 오답으로 나온다. &nbsp;·&nbsp;
+    <b>24번</b> 소재만 겹치는 선지, 세부 정보를 끌어올린 선지를 먼저 지운다. &nbsp;·&nbsp;
+    <b>32번</b> 빈칸 뒤 문장이 같은 말을 반복하는지 확인한다. 비교급(more/less)의 <b>방향</b>이 뒤집힌 선지를 조심한다. &nbsp;·&nbsp;
+    <b>36번</b> 지시어(This, The + 명사)와 연결어(As a result, However)가 <b>가리키는 대상</b>을 앞 단락에서 찾는다.
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 독해 4제 — 해설</span>
+    <span>9 / 9</span>
+  </div>
+</section>
+
+</body>
+</html>
