@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9월 모평 영어 34 · 37 · 39번 — 지문분석</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .signal {
+  color: var(--accent); font-weight: 700;
+}
+.para-label {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 700;
+  font-size: 9.5pt; margin-right: 4px; font-family: sans-serif;
+}
+
+.syntax-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 12px 16px; margin: 10px 0;
+  break-inside: avoid;
+}
+.syntax-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.syntax-box .en {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; line-height: 1.7; margin-bottom: 4px;
+}
+.syntax-box .ko {
+  font-size: 10pt; color: var(--muted); line-height: 1.6;
+}
+.syntax-box .chunk {
+  display: inline; border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 1px;
+}
+
+.translation {
+  background: #f8f9fc; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-size: 10.5pt; line-height: 1.85; color: #333;
+}
+
+.flow {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 12px 0;
+}
+.flow-step {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 10px 16px; break-inside: avoid;
+}
+.flow-step .step-label {
+  font-size: 9pt; font-weight: 700; color: #fff;
+  background: var(--accent); border-radius: 4px;
+  padding: 1px 8px; display: inline-block; margin-bottom: 4px;
+}
+.flow-arrow {
+  text-align: center; font-size: 14pt; color: var(--accent);
+  line-height: 1; padding: 2px 0;
+}
+
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 6px 12px; margin: 4px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); margin-left: 4px; }
+
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  tr, .choice-list li, .concept, .tip, .explain-box, .syntax-box,
+  .translation, .flow-step, .given-sentence, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .syntax-box, .tip, .flow-step { break-inside: avoid; }
+}
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
+
+/* ===== 지문분석 전용 추가 스타일 ===== */
+:root { --purple-bg: #f3f0ff; --purple-line: #b0a0d8; }
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li { font-family: 'Times New Roman', Georgia, serif; line-height: 1.6; }
+
+.topic-bar {
+  display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap;
+  margin: 18px 0 8px; padding: 8px 12px;
+  background: var(--accent-soft);
+  border-left: 4px solid var(--accent); border-radius: 4px;
+  break-after: avoid; page-break-after: avoid; break-inside: avoid;
+}
+.topic-bar .no { font-size: 15pt; font-weight: 800; color: var(--accent); }
+.topic-bar .typ {
+  font-size: 9.5pt; font-weight: 700; color: #5a3d9e;
+  background: var(--purple-bg); border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 1px 9px;
+}
+.topic-bar .pt {
+  font-size: 9.5pt; font-weight: 700; color: #fff;
+  background: #c0392b; border-radius: 4px; padding: 1px 9px;
+}
+.topic-bar .topic { font-size: 10.5pt; font-weight: 600; color: #28344a; }
+.topic-bar .ans { margin-left: auto; font-size: 10pt; color: var(--muted); }
+.topic-bar .ans b { color: var(--accent); font-size: 12pt; }
+
+.passage .hl-dir {
+  background: #fff3b0; padding: 1px 3px; border-radius: 2px;
+  border-bottom: 2px solid #e0b400; font-weight: 600;
+}
+.passage .hl-turn {
+  background: #d6e8ff; padding: 1px 3px; border-radius: 2px;
+  border-bottom: 2px solid #5b8fd6; font-weight: 600;
+}
+.passage .cue { color: #c0392b; font-weight: 700; }
+.passage .mark { color: var(--accent); font-weight: 700; }
+.passage .blank-line {
+  display: inline-block; border-bottom: 2px solid var(--accent);
+  min-width: 165px; margin: 0 3px;
+}
+
+.legend { font-size: 9pt; color: var(--muted); margin: 4px 0 0; }
+.legend .sw { display: inline-block; width: 22px; height: 10px; border-radius: 2px;
+  vertical-align: middle; margin: 0 3px 0 10px; }
+.legend .sw.y { background: #fff3b0; border-bottom: 2px solid #e0b400; }
+.legend .sw.b { background: #d6e8ff; border-bottom: 2px solid #5b8fd6; }
+
+.dir-box {
+  background: #fffdf3; border: 1px solid var(--warn-line);
+  border-left: 4px solid #e0b400;
+  border-radius: 6px; padding: 13px 17px; margin: 11px 0;
+  break-inside: avoid;
+}
+.dir-box .label {
+  font-size: 9pt; font-weight: 700; color: #9a6b00;
+  letter-spacing: .5px; display: block; margin-bottom: 5px;
+}
+.dir-box .sent {
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 10.5pt; font-weight: 700; color: #222;
+  background: #fff3b0; border-radius: 3px;
+  padding: 3px 7px; display: inline-block; margin-bottom: 7px;
+}
+.dir-box .sent.turn { background: #d6e8ff; }
+
+.sum-box {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 8px; padding: 13px 17px; margin: 11px 0;
+  break-inside: avoid;
+}
+.sum-box .label {
+  font-size: 9pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 5px;
+}
+
+.vocab-table { width: 100%; border-collapse: collapse; margin: 9px 0; font-size: 9.5pt; }
+.vocab-table th, .vocab-table td {
+  border: 1px solid var(--accent-line); padding: 4px 8px; vertical-align: top;
+}
+.vocab-table th { background: var(--accent); color: #fff; font-size: 9pt; font-weight: 600; }
+.vocab-table tr:nth-child(even) td { background: #f6f8fb; }
+.vocab-table .c-no { width: 30px; }
+.vocab-table .c-word { width: 33%; }
+.vocab-table .c-pos { width: 44px; }
+.vocab-table td.word { font-family: 'Times New Roman', Georgia, serif; font-weight: 600; }
+.vocab-table td.pos { color: var(--muted); font-size: 8.5pt; text-align: center; }
+.vocab-table tr.is-phr td.word { color: #5a3d9e; }
+.vocab-table td.key { background: #fff8dc !important; }
+
+.ox { font-weight: 800; margin-right: 4px; }
+.ox.x { color: #c62828; }
+.wrong-list { margin: 8px 0 0; padding-left: 0; list-style: none; }
+.wrong-list li { font-size: 10pt; line-height: 1.6; margin: 5px 0; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 ============ -->
+<section class="page">
+  <div class="nav-bar">
+    <div class="nav-group">
+      <a class="nav-btn" href="index.html">← 목록</a>
+      <a class="nav-btn" href="9월모평-단어숙어정리.html">📖 단어정리</a>
+      <a class="nav-btn" href="9월모평-출제스타일.html">📋 출제스타일</a>
+    </div>
+    <button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button>
+  </div>
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">2026학년도 9월 모의평가 · 고난도 3문항</div>
+    <h1>34 · 37 · 39번 지문분석</h1>
+    <p class="subtitle">소재 · 글의 방향을 정하는 문장 · 핵심 어휘 · 지문 요약</p>
+    <p class="meta">
+      <span class="passage-badge">3문항 모두 3점</span>
+      <span class="code-badge">실제 시험지 원문 · 공식 정답 기준</span>
+    </p>
+  </div>
+
+  <div class="tip">
+    <span class="label">왜 이 세 문항인가</span>
+    34 · 37 · 39번은 이 시험지에서 <strong>3점이 걸린 자리</strong>이면서, 셋 다
+    <strong>“글이 어디로 갈지”를 몇 문장이 결정</strong>하는 구조다.
+    그 문장을 놓치면 나머지를 아무리 정확히 해석해도 답이 흔들린다.
+    이 자료는 문항마다 <strong>그 결정적 문장을 색으로 표시</strong>하고, 왜 그 문장이 방향을
+    정하는지 설명한다.
+  </div>
+
+  <h2>세 문항 한눈에 보기</h2>
+
+  <table>
+    <thead>
+      <tr><th style="width:52px;">번호</th><th style="width:96px;">유형</th><th>소재</th><th style="width:46px;">정답</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>34</b></td><td>빈칸 추론</td>
+        <td>집단적 선택에서 <b>익명성·중립성</b>이 충돌할 때 — 추첨의 필요</td>
+        <td style="text-align:center;"><b>①</b></td>
+      </tr>
+      <tr>
+        <td><b>37</b></td><td>글의 순서</td>
+        <td>수학적 글을 알아보는 법 — <b>기호는 사실 근대의 산물</b></td>
+        <td style="text-align:center;"><b>②</b></td>
+      </tr>
+      <tr>
+        <td><b>39</b></td><td>문장 삽입</td>
+        <td>건축사의 증거 — <b>살아남은 것이 곧 중요한 것은 아니다</b></td>
+        <td style="text-align:center;"><b>②</b></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>‘글의 방향을 정하는 문장’이란</h2>
+
+  <div class="explain-box">
+    <span class="label">정의</span>
+    글 전체가 <b>무엇을 하려는 글인지</b>를 선언하는 문장이다. 이번 세 문항은 각각 다른 방식으로
+    방향을 잡는다.<br><br>
+    <b>① 예시형</b> — 추상적 진술을 <b>구체적 사례</b>로 못 박는다.
+    (34번: <i>For example</i> 이하가 빈칸의 내용을 정의)<br>
+    <b>② 경험형</b> — 독자의 <b>경험</b>을 던져 놓고 그것을 받는 단락을 부른다.
+    (37번: “이해 못 한 적 있을 것이다” → <i>You would not be the first</i>)<br>
+    <b>③ 규정형</b> — 글이 다룰 <b>대상</b>을 정의한다.
+    (39번: 역사가는 <b>증거</b>를 사용한다 → 이후 증거의 종류와 한계)
+  </div>
+
+  <div class="tip">
+    <span class="label">읽는 순서</span>
+    ① 지문에서 <b>색칠된 문장만</b> 먼저 읽고 글이 어디로 갈지 예측한다. →
+    ② 예측을 적고 전체를 읽는다. → ③ ‘방향 문장 풀이’와 대조한다. →
+    ④ 어휘표에서 모르는 단어만 체크한다. → ⑤ 요약과 정답 근거로 마무리한다.
+  </div>
+
+  <p class="legend">
+    <span class="sw y"></span> 글의 방향을 정하는 문장
+    <span class="sw b"></span> 방향이 꺾이거나 결론이 도출되는 지점
+  </p>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 34 · 37 · 39번 지문분석</span>
+    <span>1 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 34번 원문 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="topic-bar">
+    <span class="no">34</span>
+    <span class="typ">빈칸 추론</span>
+    <span class="pt">3점</span>
+    <span class="topic">집단적 선택과 추첨 — 익명성·중립성이 충돌할 때</span>
+    <span class="ans">정답 <b>①</b></span>
+  </div>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage">
+    When gathering the preferences of multiple agents into one collective choice, it is easily
+    seen that certain cases <span class="blank-line"></span>.
+    <span class="hl-dir">For example, if there are two alternatives, a and b, and two agents
+    such that one prefers a and the other one b, there is no deterministic way of selecting a
+    single alternative without violating one of two basic fairness conditions known as
+    anonymity and neutrality.</span> Anonymity requires that the collective choice ought to be
+    independent of the agents’ identities whereas neutrality requires impartiality towards the
+    alternatives. <span class="hl-turn">Allowing lotteries as social outcomes
+    <span class="cue">hence</span> seems like a necessity for impartial collective
+    choice.</span> Indeed, most common “deterministic” social choice functions such as
+    plurality rule are only deterministic as long as there is no tie,
+    <span class="mark">which is usually resolved by drawing a lot</span>. The use of lotteries
+    for the selection of officials interestingly goes back to the world’s first democracy in
+    Athens, where it was widely regarded as a principal characteristic of democracy, and has
+    recently gained increasing attention in political science.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* plurality: 다수</p>
+
+  <ul class="choice-list">
+    <li><span class="num">①</span>call for randomization or other means of tiebreaking</li>
+    <li><span class="num">②</span>demonstrate how impartial selection could be invalidated</li>
+    <li><span class="num">③</span>necessitate deterministic systems of selecting voters blindly</li>
+    <li><span class="num">④</span>rely upon neutral agents to establish clear selection guidelines</li>
+    <li><span class="num">⑤</span>require understanding of the unpredictability inherent in democracy</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 34번 지문 원문</span>
+    <span>2 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 34번 방향 문장 풀이 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>34번 — 방향 문장 풀이</h2>
+
+  <div class="tip">
+    <span class="label">이 문항의 구조적 특징</span>
+    <b>빈칸이 첫 문장에 있다.</b> 즉 글의 방향을 잡아 주는 문장이 빈칸 <b>뒤</b>에 온다.
+    이런 배치에서는 <b>첫 문장을 붙들고 고민하지 말고 곧장 두 번째 문장으로 내려가야</b> 한다.
+    빈칸을 채울 재료는 전부 아래에 깔려 있다.
+  </div>
+
+  <div class="dir-box">
+    <span class="label">방향을 정하는 문장 · 예시형</span>
+    <span class="sent">For example, if there are two alternatives, a and b, and two agents such that one prefers a and the other one b, there is no deterministic way of selecting a single alternative ...</span><br>
+    <b>certain cases</b>가 무엇인지를 이 문장이 정의한다 — <b>두 대안, 두 행위자, 정확히 반반으로
+    갈린 상황</b>. 곧 <b>동점(tie)</b>이다.<br><br>
+    그리고 그런 상황에서는 <b>공정성 조건(익명성·중립성)을 위반하지 않고는 결정적으로 하나를 고를
+    방법이 없다</b>고 못 박는다. 여기서 <b>deterministic</b>(결정적)이 <b>불가능한 것</b>으로
+    규정된다는 점이 결정적이다 — 이 한 줄이 선지 ③을 지워 준다.
+  </div>
+
+  <div class="dir-box">
+    <span class="label">결론이 도출되는 지점 · hence</span>
+    <span class="sent turn">Allowing lotteries as social outcomes hence seems like a necessity for impartial collective choice.</span><br>
+    <b>hence</b>(따라서)는 앞의 예시로부터 결론을 끌어내는 신호다. 결론은 하나 —
+    <b>추첨(lotteries)을 허용하는 것이 공정한 집단적 선택의 필수 요소</b>다.<br><br>
+    빈칸은 첫 문장에 있지만, 그 내용은 <b>바로 이 결론</b>이다. 글이 “certain cases는 ___” 이라
+    말하고, 예시와 결론이 그 빈칸을 채워 준다.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">빈칸을 확정하는 마지막 한 줄</span>
+    <div class="flow">
+      <div class="flow-step"><b>예시</b> — 반반으로 갈리면 공정하게 고를 결정적 방법이 없다</div>
+      <div class="flow-arrow">↓ &nbsp;<b>hence</b></div>
+      <div class="flow-step"><b>결론</b> — 그래서 <b>추첨</b>이 필요하다</div>
+      <div class="flow-arrow">↓ &nbsp;<b>Indeed</b> (결론을 실제 사례로 재확인)</div>
+      <div class="flow-step"><b>확인</b> — 다수결조차 <b>동점이 없는 한에서만</b> 결정적이며,
+        동점은 보통 <i>resolved by <b>drawing a lot</b></i>(제비뽑기로 해결)</div>
+    </div>
+    마지막 문장에 <b>tie</b>(동점)와 <b>drawing a lot</b>(제비뽑기)이 나란히 등장한다.
+    이 두 단어가 정답 선지의 <b>tiebreaking</b>과 <b>randomization</b>으로 그대로 옮겨진다.
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 34번 방향 문장 풀이</span>
+    <span>3 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 34번 어휘 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>34번 핵심 어휘 · 숙어</h2>
+
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">gather A into B</td><td class="pos">phr.</td><td>A를 B로 모으다</td></tr>
+      <tr><td>2</td><td class="word key">preference</td><td class="pos">n.</td><td class="key">선호(도) &nbsp;← 글의 출발점</td></tr>
+      <tr><td>3</td><td class="word">agent</td><td class="pos">n.</td><td>행위자, 주체</td></tr>
+      <tr class="is-phr"><td>4</td><td class="word key">collective choice</td><td class="pos">phr.</td><td class="key">집단적 선택 &nbsp;← 글의 소재</td></tr>
+      <tr><td>5</td><td class="word">alternative</td><td class="pos">n.</td><td>대안, 선택지</td></tr>
+      <tr><td>6</td><td class="word key">deterministic</td><td class="pos">a.</td><td class="key">결정적인(확률에 의존하지 않는) &nbsp;← ③ 소거 근거</td></tr>
+      <tr><td>7</td><td class="word">violate</td><td class="pos">v.</td><td>위반하다, 침해하다</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">fairness condition</td><td class="pos">phr.</td><td>공정성 조건</td></tr>
+      <tr><td>9</td><td class="word key">anonymity</td><td class="pos">n.</td><td class="key">익명성 — 누가 골랐는지와 무관할 것</td></tr>
+      <tr><td>10</td><td class="word key">neutrality</td><td class="pos">n.</td><td class="key">중립성 — 대안을 차별하지 말 것</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">be independent of</td><td class="pos">phr.</td><td>~와 무관하다</td></tr>
+      <tr><td>12</td><td class="word">identity</td><td class="pos">n.</td><td>정체(성), 신원</td></tr>
+      <tr><td>13</td><td class="word">whereas</td><td class="pos">conj.</td><td>반면에</td></tr>
+      <tr><td>14</td><td class="word">impartiality</td><td class="pos">n.</td><td>공평(무사) (a. impartial)</td></tr>
+      <tr><td>15</td><td class="word key">lottery</td><td class="pos">n.</td><td class="key">추첨, 제비뽑기 &nbsp;← 정답의 randomization</td></tr>
+      <tr><td>16</td><td class="word">necessity</td><td class="pos">n.</td><td>필수 요소, 필요성</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word">social choice function</td><td class="pos">phr.</td><td>사회적 선택 함수</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word">plurality rule</td><td class="pos">phr.</td><td>다수결(최다 득표) 원칙</td></tr>
+      <tr class="is-phr"><td>19</td><td class="word">as long as</td><td class="pos">phr.</td><td>~하는 한</td></tr>
+      <tr><td>20</td><td class="word key">tie</td><td class="pos">n.</td><td class="key">동점, 무승부 &nbsp;← 정답의 tiebreaking</td></tr>
+      <tr><td>21</td><td class="word">resolve</td><td class="pos">v.</td><td>해결하다</td></tr>
+      <tr class="is-phr"><td>22</td><td class="word key">draw a lot</td><td class="pos">phr.</td><td class="key">제비를 뽑다 &nbsp;← 정답 확정 근거</td></tr>
+      <tr><td>23</td><td class="word">official</td><td class="pos">n.</td><td>공직자, 관리</td></tr>
+      <tr class="is-phr"><td>24</td><td class="word">go back to</td><td class="pos">phr.</td><td>~로 거슬러 올라가다</td></tr>
+      <tr><td>25</td><td class="word">principal</td><td class="pos">a.</td><td>주요한, 주된 (↔ principle 원칙 n.)</td></tr>
+      <tr><td>26</td><td class="word key">randomization</td><td class="pos">n.</td><td class="key">무작위화 (선지 ① · 정답)</td></tr>
+      <tr><td>27</td><td class="word key">tiebreaking</td><td class="pos">n.</td><td class="key">동점 처리, 승부 가르기 (선지 ① · 정답)</td></tr>
+      <tr><td>28</td><td class="word">invalidate</td><td class="pos">v.</td><td>무효화하다 (선지 ②)</td></tr>
+      <tr><td>29</td><td class="word">necessitate</td><td class="pos">v.</td><td>~을 필요로 하다 (선지 ③)</td></tr>
+      <tr class="is-phr"><td>30</td><td class="word">inherent in</td><td class="pos">phr.</td><td>~에 내재된 (선지 ⑤)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 34번 핵심 어휘</span>
+    <span>4 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 34번 요약 · 정답 근거 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>34번 지문 요약</h2>
+
+  <div class="sum-box">
+    <span class="label">한 문단으로</span>
+    여러 행위자의 선호를 하나의 집단적 선택으로 모을 때, <b>어떤 경우에는 무작위화가 필요하다</b>.
+    두 대안과 두 행위자가 정확히 반반으로 갈리면, <b>익명성</b>(누가 골랐는지와 무관할 것)과
+    <b>중립성</b>(대안을 차별하지 말 것)이라는 두 공정성 조건 중 하나를 어기지 않고서는
+    하나를 결정적으로 고를 방법이 없다. <b>그래서 추첨을 사회적 결과로 허용하는 것이 공정한
+    집단적 선택의 필수 요소</b>가 된다. 실제로 다수결처럼 ‘결정적’이라 불리는 방식조차
+    <b>동점이 없는 한에서만</b> 결정적이며, 동점은 대개 <b>제비뽑기</b>로 해결된다.
+    공직자 선발에 추첨을 쓴 관행은 아테네의 최초 민주주의로 거슬러 올라가며, 최근 정치학에서
+    다시 주목받고 있다.
+  </div>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답 ① call for randomization or other means of tiebreaking</p>
+    빈칸에 넣으면 — “<b>어떤 경우들은 무작위화나 동점을 가르는 다른 방법을 필요로 한다</b>.”<br><br>
+    지문의 두 단어가 선지에 그대로 대응한다.
+    <b>lotteries · drawing a lot</b> → <b>randomization</b>,
+    <b>tie</b> → <b>tiebreaking</b>.
+    글 전체가 “반반으로 갈리는 상황에서는 추첨밖에 없다”를 말하므로 빈칸의 자리에 정확히 맞는다.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">오답이 틀린 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox x">X</span> ② 공정한 선택이 <b>어떻게 무효화될 수 있는지 보여 준다</b> —
+        글은 공정성이 무너지는 과정을 보여 주는 게 아니라, <b>추첨으로 공정성을 지키는 길</b>을
+        말한다. 결론의 방향이 반대다.</li>
+      <li><span class="ox x">X</span> ③ <b>결정적</b> 시스템을 필요로 한다 —
+        글은 그런 상황에서 <i>there is no <b>deterministic</b> way</i>라고 <b>명시적으로 부정</b>했다.
+        게다가 <b>voters</b>(유권자)를 뽑는 이야기도 아니다(지문은 <b>officials</b>, 공직자).</li>
+      <li><span class="ox x">X</span> ④ <b>중립적 행위자</b>에게 의존한다 —
+        지문의 <b>neutrality</b>는 <b>대안</b>에 대한 공평(<i>impartiality towards the
+        alternatives</i>)이지 ‘중립적인 사람’이 아니다. 단어는 같지만 <b>가리키는 대상이 다르다</b>.
+        가장 많이 걸리는 함정.</li>
+      <li><span class="ox x">X</span> ⑤ 민주주의에 내재된 <b>예측 불가능성의 이해</b>를 요구한다 —
+        추첨이 아테네 민주주의의 주요 특징이었다는 <b>역사적 언급</b>은 있지만,
+        ‘예측 불가능성을 이해해야 한다’는 주장은 어디에도 없다. 마지막 문장만 보고 고르면 걸린다.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 34번 요약 · 정답 근거</span>
+    <span>5 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 6 — 37번 원문 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="topic-bar">
+    <span class="no">37</span>
+    <span class="typ">글의 순서</span>
+    <span class="pt">3점</span>
+    <span class="topic">수학적 글을 알아보는 법 — 기호는 사실 근대의 산물</span>
+    <span class="ans">정답 <b>②</b></span>
+  </div>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage">
+    <span class="para-label">주어진 글</span>
+    <span class="hl-dir">Perhaps at some point you have seen some mathematical writing and not
+    understood it.</span>
+  </div>
+
+  <div class="passage">
+    <span class="para-label">(A)</span>
+    The complicated notations that might spring to mind—all those strange dashes, squiggles
+    and letters—are obvious signs, but a lot of those are really quite modern. Mathematics had
+    been going on for a long time before the dashes and squiggles were invented.
+  </div>
+
+  <div class="passage">
+    <span class="para-label">(B)</span>
+    <span class="cue">You would not be the first</span>; rest assured, even professional
+    mathematicians sometimes have to rely on discussions with colleagues to properly
+    understand problems they are looking at.
+    <span class="hl-turn">But how do you recognise some writing is mathematical in the first
+    place?</span>
+  </div>
+
+  <div class="passage">
+    <span class="para-label">(C)</span>
+    <span class="cue">Put simply,</span> there has to be something mathematical going on for us
+    to say that it is mathematics. And if we are dealing with writing from a very distant past,
+    in a language that is not familiar to us, from a time even before recorded language, that
+    can be sometimes difficult to recognise.
+  </div>
+  <p style="font-size:9pt; color:var(--muted);">* squiggle: 구불구불한 선, 휘갈긴 기호</p>
+
+  <ul class="choice-list">
+    <li><span class="num">①</span>(A) - (C) - (B)</li>
+    <li><span class="num">②</span>(B) - (A) - (C)</li>
+    <li><span class="num">③</span>(B) - (C) - (A)</li>
+    <li><span class="num">④</span>(C) - (A) - (B)</li>
+    <li><span class="num">⑤</span>(C) - (B) - (A)</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 37번 지문 원문</span>
+    <span>6 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 7 — 37번 방향 문장 풀이 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>37번 — 방향 문장 풀이</h2>
+
+  <div class="dir-box">
+    <span class="label">방향을 정하는 문장 · 경험형</span>
+    <span class="sent">Perhaps at some point you have seen some mathematical writing and not understood it.</span><br>
+    주어진 글은 <b>딱 한 문장</b>이고, 내용은 <b>독자의 경험</b>이다 — “수학 글을 보고도 이해 못 한
+    적이 있을 것이다.”<br><br>
+    이런 <b>경험 제시형</b> 도입 뒤에는 <b>그 경험을 받아 주는 말</b>이 온다. “당신만 그런 게
+    아니다”, “걱정 마라” 같은 <b>위로·공감</b>이다. 세 단락 중 그런 말로 시작하는 것은 <b>(B)</b>
+    하나뿐이다.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">첫 단추 — (B)가 먼저인 이유</span>
+    (B)의 첫 마디가 <b><i>You would not be the first</i></b>(당신이 처음은 아닐 것이다)이다.
+    <b>the first</b> 뒤에 생략된 말은 <b>“수학 글을 이해 못 한 사람”</b>이며, 그 말은
+    <b>주어진 글에만</b> 있다.<br><br>
+    이어서 <b>rest assured</b>(안심해도 된다)로 위로하고, <b>전문 수학자조차 동료와 논의해야
+    이해한다</b>는 근거를 댄다. 주어진 글 → (B)의 연결이 <b>의미·어조 양쪽에서</b> 맞물린다.
+    <br><br>
+    이 한 수로 선지가 <b>② (B)-(A)-(C)</b>와 <b>③ (B)-(C)-(A)</b> 둘로 줄어든다.
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 37번 방향 문장 풀이 (1)</span>
+    <span>7 / 15</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="dir-box">
+    <span class="label">방향이 꺾이는 지점 · 새 질문</span>
+    <span class="sent turn">But how do you recognise some writing is mathematical in the first place?</span><br>
+    (B)는 위로로 끝나지 않고 <b>But</b>으로 방향을 튼다 — “그런데 <b>애초에</b> 그게 수학 글인 줄은
+    어떻게 아는가?”<br><br>
+    <b>여기서부터 글의 주제가 바뀐다.</b> ‘이해하지 못함’에서 <b>‘알아보기(recognise)’</b>로.
+    뒤 두 단락은 모두 이 질문에 답한다.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">(A)와 (C) 중 무엇이 먼저인가</span>
+    <div class="flow">
+      <div class="flow-step"><b>(B) 끝</b> — “어떻게 <b>알아보는가</b>?” &nbsp;<i>(질문)</i></div>
+      <div class="flow-arrow">↓ &nbsp;가장 먼저 떠오르는 답부터</div>
+      <div class="flow-step"><b>(A)</b> — <i>The complicated notations that might
+        <b>spring to mind</b></i>. 대시·구불구불한 기호가 <b>명백한 표시</b>다. 그런데
+        <b>but</b> — 그 기호들은 사실 <b>꽤 근대적</b>이고, 수학은 그 전부터 있었다.
+        &nbsp;<i>(1차 답 → 반박)</i></div>
+      <div class="flow-arrow">↓ &nbsp;그럼 진짜 기준은</div>
+      <div class="flow-step"><b>(C)</b> — <b>Put simply</b>(간단히 말해), <b>수학적인 무언가가
+        진행되고</b> 있어야 수학이다. 그리고 아주 먼 과거의 낯선 언어라면 그조차 알아보기 어렵다.
+        &nbsp;<i>(최종 답 · 마무리)</i></div>
+    </div>
+    <b>결정적 근거 두 가지</b><br>
+    ① <b>spring to mind</b>(문득 떠오르다) — 질문을 받고 <b>가장 먼저 떠오르는 것</b>을 다루므로
+    (A)가 질문 바로 뒤다.<br>
+    ② <b>Put simply</b>(간단히 말해) — 앞선 논의를 <b>정리</b>하는 표현이다. 정리할 내용이 있어야
+    쓸 수 있으므로 (C)는 마지막이다.<br><br>
+    <b>③ (B)-(C)-(A)가 함정</b> — (C)를 (A)보다 앞에 두면, <i>Put simply</i>가 정리할 대상이 없고
+    (A)의 <i>spring to mind</i>가 받을 질문도 사라진다. <b>(B)-(A)-(C)</b>, 정답 <b>②</b>.
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 37번 방향 문장 풀이</span>
+    <span>8 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 8 — 37번 어휘 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>37번 핵심 어휘 · 숙어</h2>
+
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr class="is-phr"><td>1</td><td class="word">at some point</td><td class="pos">phr.</td><td>어느 시점엔가, 언젠가</td></tr>
+      <tr><td>2</td><td class="word">mathematical</td><td class="pos">a.</td><td>수학적인 (n. mathematics)</td></tr>
+      <tr><td>3</td><td class="word">complicated</td><td class="pos">a.</td><td>복잡한</td></tr>
+      <tr><td>4</td><td class="word key">notation</td><td class="pos">n.</td><td class="key">표기법, 기호 &nbsp;← (A)의 소재</td></tr>
+      <tr class="is-phr"><td>5</td><td class="word key">spring to mind</td><td class="pos">phr.</td><td class="key">문득 떠오르다 &nbsp;← (A) 배치 근거</td></tr>
+      <tr><td>6</td><td class="word">dash</td><td class="pos">n.</td><td>대시(—), 줄표</td></tr>
+      <tr><td>7</td><td class="word">squiggle</td><td class="pos">n.</td><td>구불구불한 선, 휘갈긴 기호</td></tr>
+      <tr class="is-phr"><td>8</td><td class="word">obvious sign</td><td class="pos">phr.</td><td>명백한 표시</td></tr>
+      <tr><td>9</td><td class="word">modern</td><td class="pos">a.</td><td>근대의, 현대의</td></tr>
+      <tr class="is-phr"><td>10</td><td class="word key">You would not be the first</td><td class="pos">phr.</td><td class="key">당신이 처음은 아닐 것이다 &nbsp;← (B) 확정 근거</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word key">rest assured</td><td class="pos">phr.</td><td class="key">안심해도 좋다</td></tr>
+      <tr><td>12</td><td class="word">professional</td><td class="pos">a.</td><td>전문적인, 직업적인</td></tr>
+      <tr class="is-phr"><td>13</td><td class="word">rely on</td><td class="pos">phr.</td><td>~에 의존하다</td></tr>
+      <tr><td>14</td><td class="word">colleague</td><td class="pos">n.</td><td>동료</td></tr>
+      <tr><td>15</td><td class="word">properly</td><td class="pos">ad.</td><td>제대로, 적절히</td></tr>
+      <tr><td>16</td><td class="word key">recognise</td><td class="pos">v.</td><td class="key">알아보다 (美 recognize) &nbsp;← 주제 전환어</td></tr>
+      <tr class="is-phr"><td>17</td><td class="word key">in the first place</td><td class="pos">phr.</td><td class="key">애초에, 우선</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word key">put simply</td><td class="pos">phr.</td><td class="key">간단히 말해 &nbsp;← (C) 마지막 근거</td></tr>
+      <tr class="is-phr"><td>19</td><td class="word">deal with</td><td class="pos">phr.</td><td>~을 다루다</td></tr>
+      <tr class="is-phr"><td>20</td><td class="word">distant past</td><td class="pos">phr.</td><td>먼 과거</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word">familiar to</td><td class="pos">phr.</td><td>~에게 익숙한</td></tr>
+      <tr class="is-phr"><td>22</td><td class="word">recorded language</td><td class="pos">phr.</td><td>기록된 언어, 문자 기록</td></tr>
+      <tr class="is-phr"><td>23</td><td class="word">go on</td><td class="pos">phr.</td><td>계속되다; 진행되다</td></tr>
+      <tr><td>24</td><td class="word">invent</td><td class="pos">v.</td><td>발명하다, 고안하다</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 37번 핵심 어휘</span>
+    <span>9 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 9 — 37번 요약 · 정답 근거 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>37번 지문 요약</h2>
+
+  <div class="sum-box">
+    <span class="label">한 문단으로</span>
+    수학 글을 보고도 이해하지 못한 적이 있을 것이다. <b>당신만 그런 게 아니다</b> —
+    전문 수학자조차 동료와 논의해야 문제를 제대로 이해할 때가 있다. 그런데
+    <b>애초에 어떤 글이 수학적이라는 것은 어떻게 알아보는가?</b> 흔히 떠올리는 것은
+    낯선 대시와 구불구불한 기호, 문자들이고 그것들이 명백한 표시이긴 하다. <b>그러나 그런 기호들은
+    사실 꽤 근대적이며, 수학은 그것들이 발명되기 훨씬 전부터 계속되어 왔다.</b> 간단히 말해,
+    <b>‘수학적인 무언가가 진행되고 있어야’</b> 수학이라 부를 수 있다. 그리고 아주 먼 과거,
+    문자 기록조차 없던 시대의 낯선 언어로 된 글이라면 그것을 알아보기란 때로 어렵다.
+  </div>
+
+  <div class="answer-reveal">
+    <p class="ans-label">정답 ② (B) - (A) - (C)</p>
+    <b>연결 고리 세 개</b><br>
+    ① <b>(B) <i>You would not be the first</i></b> — “처음이 아니다”가 받을 대상은 주어진 글의
+    <b>‘이해하지 못한 경험’</b>뿐이다. → (B)가 첫 순서.<br>
+    ② <b>(A) <i>spring to mind</i></b> — (B) 끝의 질문 “어떻게 알아보는가?”에 대해
+    <b>가장 먼저 떠오르는 답</b>을 제시한다. → (A)가 (B) 뒤.<br>
+    ③ <b>(C) <i>Put simply</i></b> — 앞의 논의를 <b>정리</b>하는 표현이므로 마지막.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">이 유형에서 가져갈 것</span>
+    <b>주어진 글이 ‘경험’으로 끝나면 → 그 경험에 공감·위로하는 단락이 먼저.</b> &nbsp;·&nbsp;
+    <b>주어진 글이나 단락이 ‘질문’으로 끝나면 → 답하는 단락이 바로 뒤.</b> &nbsp;·&nbsp;
+    <b><i>Put simply</i>, <i>In short</i>, <i>So</i> 같은 정리 표현은 마지막 단락의 표식</b>이다.
+    <br><br>
+    이 문항은 <b>해석을 다 하지 않아도</b> 세 표현(<i>You would not be the first</i> /
+    <i>spring to mind</i> / <i>Put simply</i>)만으로 순서가 확정된다. 3점 문항일수록
+    <b>연결어와 지시 표현을 먼저 훑는 습관</b>이 시간을 벌어 준다.
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 37번 요약 · 정답 근거</span>
+    <span>10 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 10 — 39번 원문 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="topic-bar">
+    <span class="no">39</span>
+    <span class="typ">문장 삽입</span>
+    <span class="pt">3점</span>
+    <span class="topic">건축사의 증거 — 살아남은 것이 곧 중요한 것은 아니다</span>
+    <span class="ans">정답 <b>②</b></span>
+  </div>
+
+  <h2>지문 원문</h2>
+
+  <div class="passage" style="background:var(--purple-bg); border-color:var(--purple-line);">
+    <span class="para-label">주어진 문장</span>
+    <span class="hl-turn">The problem of survival lies at the root of many of the historian’s
+    problems, for what has survived may not necessarily be more significant than what has not
+    survived.</span>
+  </div>
+
+  <div class="passage">
+    <span class="hl-dir">Historians use evidence in order to understand what happened and why
+    it happened.</span> In architectural history this evidence may take the form of the
+    buildings themselves or their remains, and documents such as plans, drawings, descriptions,
+    diaries or bills.
+    (<span class="mark">①</span>) Our picture of any period of history is derived from a
+    multitude of sources, such as the paintings, literature, deeds, buildings and other
+    artefacts that have survived.
+    (<span class="mark">②</span>) The Egyptian pyramids have survived thousands of years, but
+    historical significance is not just a question of durability.
+    (<span class="mark">③</span>) These buildings were part of a rich and diverse culture, much
+    of which has been lost.
+    (<span class="mark">④</span>) They are historical facts, but facts by themselves, even such
+    massive facts as the pyramids, are just the first stage in any historical study, and until
+    they have been evaluated, placed in context and interpreted, they tell us little.
+    (<span class="mark">⑤</span>) Different historians may place different values on the same
+    facts, and the discovery of new evidence may modify or change existing theories and
+    interpretations.
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 39번 지문 원문</span>
+    <span>11 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 11 — 39번 방향 문장 풀이 · 정답 근거 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>39번 — 방향 문장 풀이</h2>
+
+  <div class="dir-box">
+    <span class="label">방향을 정하는 문장 · 규정형</span>
+    <span class="sent">Historians use evidence in order to understand what happened and why it happened.</span><br>
+    첫 문장이 글이 다룰 대상을 못 박는다 — <b>증거(evidence)</b>다. 그러면 글은
+    <b>“증거에는 무엇이 있고, 그 증거에 어떤 한계가 있는가”</b>를 따라간다.<br><br>
+    실제 전개도 그렇다. <b>증거의 종류</b>(건물·잔해·도면·일지·청구서) → <b>증거의 출처</b>
+    (그림·문학·증서 등 <b>살아남은</b> 것들) → <b>증거의 한계</b>(살아남았다고 중요한 건 아니다)
+    → <b>해석의 필요</b>.
+  </div>
+
+  <div class="dir-box">
+    <span class="label">주어진 문장이 하는 일 · 전환</span>
+    <span class="sent turn">The problem of survival lies at the root of many of the historian’s problems ...</span><br>
+    앞에서 계속 “<b>살아남은</b> 것들에서 역사상을 얻는다”고 했다. 주어진 문장은 거기에
+    <b>제동을 건다</b> — <b>살아남았다는 사실이 곧 중요하다는 뜻은 아니다.</b><br><br>
+    즉 이 문장은 <b>‘증거의 나열’에서 ‘증거의 한계’로 넘어가는 관문</b>이다. 이 문장이 들어가야
+    할 자리는 <b>나열이 끝나고 한계가 시작되는 바로 그 지점</b>이다.
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 39번 방향 문장 풀이</span>
+    <span>12 / 15</span>
+  </div>
+</section>
+
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <div class="explain-box">
+    <span class="label">정답 근거 — ②</span>
+    <div class="flow">
+      <div class="flow-step"><b>① 뒤</b> — 우리의 역사상은 <b>살아남은</b>(that have
+        <b>survived</b>) 수많은 출처에서 나온다. &nbsp;<i>(나열 · 마무리)</i></div>
+      <div class="flow-arrow">↓ &nbsp;<b>여기에 주어진 문장</b></div>
+      <div class="flow-step"><b>주어진 문장</b> — <b>survival의 문제</b>가 역사가 문제의 근원이다.
+        살아남은 것이 반드시 더 중요한 건 아니기 때문이다. &nbsp;<i>(제동)</i></div>
+      <div class="flow-arrow">↓ &nbsp;그 말을 예시로 증명</div>
+      <div class="flow-step"><b>② 뒤</b> — 피라미드는 수천 년 <b>살아남았지만</b>, 역사적 중요성은
+        <b>내구성의 문제가 아니다</b>. &nbsp;<i>(구체적 예시)</i></div>
+    </div>
+    <b>결정적 단서 두 가지</b><br>
+    ① <b>survived의 연결</b> — ① 뒤 문장이 <i>that have <b>survived</b></i>로 끝나고, 주어진 문장이
+    <i>The problem of <b>survival</b></i>로 시작한다. <b>같은 어근이 바로 이어진다.</b><br>
+    ② <b>일반 → 예시</b> — 주어진 문장은 “살아남은 것이 더 중요한 건 아니다”라는 <b>일반 진술</b>이고,
+    ② 뒤의 피라미드는 그 진술의 <b>정확한 예시</b>다(<i>survived thousands of years, <b>but</b>
+    historical significance is not just a question of durability</i>).
+  </div>
+
+  <div class="explain-box">
+    <span class="label">오답이 틀린 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox x">X</span> ① — 아직 <b>증거의 종류</b>를 열거하는 중이다.
+        “살아남음”이라는 말이 나오기도 전이라 <i>The problem of survival</i>이 받을 대상이 없다.</li>
+      <li><span class="ox x">X</span> ③ — 여기에 넣으면 <b>These buildings</b>가 가리킬 대상이
+        끊긴다. <b>These buildings</b>는 바로 앞의 <b>피라미드</b>를 받아야 한다.</li>
+      <li><span class="ox x">X</span> ④ — <b>They</b>가 받을 것이 필요하다.
+        <b>They</b>는 앞 문장의 <b>These buildings</b>(피라미드)를 받으므로 그 사이를 끊을 수 없다.</li>
+      <li><span class="ox x">X</span> ⑤ — 이미 “평가·맥락화·해석이 필요하다”는 <b>결론까지 도달한</b>
+        자리다. 여기서 다시 “살아남음의 문제”를 꺼내면 논의가 <b>거꾸로 되돌아간다</b>.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 39번 방향 문장 풀이</span>
+    <span>13 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 12 — 39번 어휘 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>39번 핵심 어휘 · 숙어</h2>
+
+  <table class="vocab-table">
+    <colgroup><col class="c-no"><col class="c-word"><col class="c-pos"><col></colgroup>
+    <thead><tr><th>#</th><th>단어 · 숙어</th><th>품사</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="word key">survival</td><td class="pos">n.</td><td class="key">살아남음, 잔존 &nbsp;← 정답의 연결 고리</td></tr>
+      <tr class="is-phr"><td>2</td><td class="word key">lie at the root of</td><td class="pos">phr.</td><td class="key">~의 근원에 있다</td></tr>
+      <tr><td>3</td><td class="word key">significant</td><td class="pos">a.</td><td class="key">중요한, 의미 있는 (n. significance)</td></tr>
+      <tr><td>4</td><td class="word">historian</td><td class="pos">n.</td><td>역사가</td></tr>
+      <tr><td>5</td><td class="word key">evidence</td><td class="pos">n.</td><td class="key">증거 &nbsp;← 글의 대상</td></tr>
+      <tr class="is-phr"><td>6</td><td class="word">architectural history</td><td class="pos">phr.</td><td>건축사(建築史)</td></tr>
+      <tr class="is-phr"><td>7</td><td class="word">take the form of</td><td class="pos">phr.</td><td>~의 형태를 취하다</td></tr>
+      <tr><td>8</td><td class="word">remains</td><td class="pos">n.</td><td>잔해, 유적 (항상 복수형)</td></tr>
+      <tr><td>9</td><td class="word">plan</td><td class="pos">n.</td><td>도면, 평면도 (여기서 ‘계획’ 아님)</td></tr>
+      <tr><td>10</td><td class="word">bill</td><td class="pos">n.</td><td>청구서, 계산서</td></tr>
+      <tr class="is-phr"><td>11</td><td class="word">be derived from</td><td class="pos">phr.</td><td>~에서 유래하다, 나오다</td></tr>
+      <tr class="is-phr"><td>12</td><td class="word">a multitude of</td><td class="pos">phr.</td><td>수많은, 다수의</td></tr>
+      <tr><td>13</td><td class="word">deed</td><td class="pos">n.</td><td>증서, 문서; 행위</td></tr>
+      <tr><td>14</td><td class="word">artefact</td><td class="pos">n.</td><td>인공물, 유물 (美 artifact)</td></tr>
+      <tr><td>15</td><td class="word key">durability</td><td class="pos">n.</td><td class="key">내구성, 오래 감 &nbsp;← 피라미드 예시의 핵심</td></tr>
+      <tr class="is-phr"><td>16</td><td class="word">historical significance</td><td class="pos">phr.</td><td>역사적 중요성</td></tr>
+      <tr><td>17</td><td class="word">diverse</td><td class="pos">a.</td><td>다양한</td></tr>
+      <tr class="is-phr"><td>18</td><td class="word">by themselves</td><td class="pos">phr.</td><td>그것들 자체로는</td></tr>
+      <tr><td>19</td><td class="word">massive</td><td class="pos">a.</td><td>거대한, 엄청난</td></tr>
+      <tr><td>20</td><td class="word">evaluate</td><td class="pos">v.</td><td>평가하다</td></tr>
+      <tr class="is-phr"><td>21</td><td class="word key">place A in context</td><td class="pos">phr.</td><td class="key">A를 맥락 속에 놓다</td></tr>
+      <tr><td>22</td><td class="word key">interpret</td><td class="pos">v.</td><td class="key">해석하다 (n. interpretation)</td></tr>
+      <tr class="is-phr"><td>23</td><td class="word">place value on</td><td class="pos">phr.</td><td>~에 가치를 두다</td></tr>
+      <tr><td>24</td><td class="word">modify</td><td class="pos">v.</td><td>수정하다, 변경하다</td></tr>
+      <tr><td>25</td><td class="word">existing</td><td class="pos">a.</td><td>기존의, 현존하는</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 39번 핵심 어휘</span>
+    <span>14 / 15</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 13 — 39번 요약 + 마무리 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2>39번 지문 요약</h2>
+
+  <div class="sum-box">
+    <span class="label">한 문단으로</span>
+    역사가는 무엇이 왜 일어났는지 이해하기 위해 <b>증거</b>를 쓴다. 건축사에서 그 증거는
+    건물 자체나 잔해, 그리고 도면·그림·설명서·일지·청구서 같은 문서다. 어떤 시대에 대한 우리의
+    그림은 그림·문학·증서·건물 같은 <b>살아남은</b> 수많은 출처에서 나온다.
+    <b>그런데 바로 여기에 문제가 있다 — 살아남은 것이 살아남지 못한 것보다 반드시 더 중요하지는
+    않다.</b> 이집트 피라미드는 수천 년을 견뎠지만, 역사적 중요성은 단지 <b>내구성</b>의 문제가
+    아니다. 피라미드는 풍요롭고 다양한 문화의 일부였고 그 문화의 상당 부분은 소실되었다.
+    피라미드는 역사적 사실이지만, <b>사실 그 자체는 연구의 첫 단계일 뿐</b>이며
+    <b>평가되고 맥락에 놓이고 해석되기 전까지는 알려 주는 것이 거의 없다.</b>
+    역사가마다 같은 사실에 다른 가치를 매길 수 있고, 새 증거가 나오면 기존 이론과 해석이 바뀐다.
+  </div>
+
+  <div class="tip">
+    <span class="label">세 문항이 공통으로 말하는 것</span>
+    셋 다 <b>한두 문장이 글 전체의 방향을 결정</b>한다. 다만 방식이 다르다.<br>
+    <b>34번</b>은 <i>For example</i> 이하의 <b>예시</b>가 빈칸의 내용을 정의하고,
+    <b>37번</b>은 <i>You would not be the first</i>라는 <b>공감</b>이 첫 단락을 확정하며,
+    <b>39번</b>은 <i>survived → survival</i>이라는 <b>어근 반복</b>이 삽입 위치를 확정한다.
+    <br><br>
+    <b>공통 교훈</b> — 3점 문항의 답은 <b>어려운 어휘</b>가 아니라
+    <b>연결어(hence, But, Put simply) · 지시어(These, They) · 반복되는 어근</b>에 걸려 있다.
+    시험장에서는 <b>그것부터 표시</b>하고 읽어라.
+  </div>
+
+  <div class="explain-box">
+    <span class="label">시험 직전 30초 점검</span>
+    <b>빈칸이 첫 문장</b> → 곧장 두 번째 문장으로. 재료는 전부 아래에 있다. &nbsp;·&nbsp;
+    <b>주어진 글이 질문·경험으로 끝남</b> → 답하거나 공감하는 단락이 먼저. &nbsp;·&nbsp;
+    <b>문장 삽입</b> → 주어진 문장의 <b>어근·지시어</b>가 앞 문장 끝과 맞물리는 자리를 찾아라.
+    &nbsp;·&nbsp; <b>선지에 지문 단어가 그대로 있다고 정답이 아니다</b> —
+    34번 ④의 <i>neutral</i>처럼 <b>가리키는 대상이 바뀐</b> 함정이 3점 문항의 단골이다.
+  </div>
+
+  <div class="page-footer">
+    <span>2026학년도 9월 모평 영어 · 39번 요약 · 마무리</span>
+    <span>15 / 15</span>
+  </div>
+</section>
+
+</body>
+</html>
