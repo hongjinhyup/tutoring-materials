@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9월 모평 대비 — 실전 어법 10제 (수능 29번 유형)</title>
+<style>
+@page { size: A4; margin: 8mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root {
+  --accent:        #1f3a5f;
+  --accent-soft:   #eef2f7;
+  --accent-line:   #c9d4e2;
+  --ink:           #1a1a1a;
+  --muted:         #5a6473;
+  --warn-bg:       #fff7e6;
+  --warn-line:     #e8c97a;
+  --green-bg:      #edf7ed;
+  --green-line:    #8bc48b;
+  --red-bg:        #fef2f2;
+  --red-line:      #e8a0a0;
+  --purple-bg:     #f3f0ff;
+  --purple-line:   #b0a0d8;
+}
+
+body {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic',
+               -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  font-size: 11pt;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  background: #e9edf1;
+}
+
+.page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 16mm;
+  margin: 0 auto 8mm;
+  background: #fff;
+  box-shadow: 0 1px 8px rgba(0,0,0,.12);
+  page-break-after: always;
+}
+.page:last-of-type { page-break-after: auto; margin-bottom: 0; }
+
+.author-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 8.7pt;
+  color: var(--muted);
+  letter-spacing: .2px;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--accent-line);
+}
+.author-bar b { color: var(--ink); font-weight: 600; }
+
+.doc-header { margin: 4px 0 22px; }
+.doc-header .eyebrow {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+.doc-header h1 {
+  font-size: 22pt; line-height: 1.25; margin: 6px 0 4px;
+  color: var(--accent); font-weight: 800; letter-spacing: -.3px;
+}
+.doc-header .subtitle { font-size: 12pt; color: var(--muted); margin: 0; }
+.doc-header .meta { font-size: 9.5pt; color: var(--muted); margin-top: 8px; }
+
+h2 {
+  font-size: 14.5pt; color: var(--accent); font-weight: 700;
+  margin: 22px 0 10px; padding-left: 10px;
+  border-left: 4px solid var(--accent);
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt; font-weight: 700; color: #28344a;
+  margin: 16px 0 6px; page-break-after: avoid;
+}
+p { margin: 8px 0; }
+strong { color: var(--accent); font-weight: 700; }
+
+/* 지문 박스 */
+.passage {
+  background: #fafbfd; border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 16px 20px; margin: 12px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.passage .hl {
+  background: #fff3b0; padding: 1px 2px; border-radius: 2px;
+}
+.passage .ul-word {
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+/* 빈칸 표시 */
+.blank {
+  display: inline;
+  border-bottom: 2px solid var(--accent);
+  padding: 0 40px;
+  margin: 0 2px;
+  min-width: 120px;
+}
+
+/* 문제 번호 뱃지 */
+.q-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 50%; width: 28px; height: 28px;
+  text-align: center; line-height: 28px;
+  font-size: 13pt; font-weight: 700;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* 변형문제 유형 태그 */
+.type-tag {
+  display: inline-block; background: var(--purple-bg); color: #5a3d9e;
+  border: 1px solid var(--purple-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt; margin-left: 6px;
+}
+
+/* 선지 리스트 */
+.choice-list { margin: 10px 0; padding: 0; list-style: none; }
+.choice-list li {
+  padding: 8px 14px; margin: 5px 0; border-radius: 6px;
+  font-size: 10.5pt; border: 1px solid var(--accent-line);
+  break-inside: avoid; line-height: 1.65;
+}
+.choice-list li .num {
+  font-weight: 700; color: var(--accent); margin-right: 8px;
+  display: inline-block; min-width: 18px;
+}
+.choice-list li.correct {
+  background: var(--green-bg); border-color: var(--green-line);
+}
+.choice-list li.wrong {
+  background: #fff; border-color: var(--accent-line);
+}
+.choice-list .tag {
+  font-size: 9pt; font-weight: 700; border-radius: 3px;
+  padding: 1px 6px; margin-right: 6px; display: inline-block;
+}
+.choice-list .tag-o { background: #2e7d32; color: #fff; }
+.choice-list .tag-x { background: #bbb; color: #fff; }
+.choice-list .reason { font-size: 9.5pt; color: var(--muted); display: block; margin-top: 3px; margin-left: 26px; }
+
+/* 뱃지 */
+.code-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 9.5pt;
+  margin-right: 6px;
+}
+.passage-badge {
+  display: inline-block; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  border-radius: 4px; padding: 2px 10px; font-weight: 600;
+  font-size: 9.5pt;
+}
+.ans-badge {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 10pt;
+}
+.transform-badge {
+  display: inline-block; background: #5a3d9e; color: #fff;
+  border-radius: 4px; padding: 2px 10px; font-weight: 700;
+  font-size: 9.5pt;
+}
+
+/* 해설 박스 */
+.explain-box {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px; padding: 14px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.explain-box .label {
+  font-size: 9pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 팁 박스 */
+.tip {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 6px; padding: 10px 14px; margin: 12px 0;
+  font-size: 10.5pt; break-inside: avoid;
+}
+.tip .label { font-weight: 700; color: #9a6b00; margin-right: 6px; }
+
+/* 구분선 */
+.divider { border: none; border-top: 1px solid var(--accent-line); margin: 14px 0; }
+
+/* 테이블 */
+table {
+  width: 100%; border-collapse: collapse; margin: 10px 0;
+  font-size: 10pt; break-inside: avoid;
+}
+th, td { border: 1px solid var(--accent-line); padding: 6px 10px; text-align: left; }
+th { background: var(--accent); color: #fff; font-weight: 600; font-size: 9.5pt; }
+tr:nth-child(even) td { background: #f6f8fb; }
+
+/* 페이지 푸터 */
+.page-footer {
+  margin-top: auto; padding-top: 6px;
+  display: flex; justify-content: space-between;
+  font-size: 8.5pt; color: var(--muted);
+  border-top: 1px solid var(--accent-line);
+}
+
+/* 문제 영역: 학생 풀이용 깔끔한 스타일 */
+.question-block {
+  background: #fff; border: 2px solid var(--accent);
+  border-radius: 10px; padding: 18px 22px; margin: 14px 0;
+  break-inside: avoid;
+}
+.question-block .q-title {
+  font-size: 11pt; font-weight: 700; color: var(--accent);
+  margin: 0 0 12px; line-height: 1.5;
+}
+
+/* 정답 공개 영역 */
+.answer-reveal {
+  background: var(--green-bg); border: 2px solid var(--green-line);
+  border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+  break-inside: avoid;
+}
+.answer-reveal .ans-label {
+  font-size: 12pt; font-weight: 800; color: #2e7d32;
+  margin: 0 0 6px;
+}
+
+/* 학생 메모 공간 */
+.memo-area {
+  border: 1px dashed var(--accent-line);
+  border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+  min-height: 50px;
+  color: var(--muted); font-size: 9.5pt;
+}
+
+/* 서술형 답안 작성 영역 */
+.writing-area {
+  border: 1.5px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 10px 0;
+  min-height: 120px;
+  background: #fafbfd;
+}
+.writing-area .guide {
+  color: var(--muted); font-size: 9pt; font-style: italic;
+  border-bottom: 1px dashed var(--accent-line);
+  padding-bottom: 8px; margin-bottom: 10px;
+}
+.writing-area .lines {
+  background: repeating-linear-gradient(
+    transparent, transparent 27px, var(--accent-line) 27px, var(--accent-line) 28px
+  );
+  min-height: 90px;
+}
+
+/* 모범답안 박스 */
+.model-answer {
+  background: #edf7ed; border: 2px solid var(--green-line);
+  border-left: 5px solid #2e7d32;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.model-answer .label {
+  font-size: 9.5pt; font-weight: 700; color: #2e7d32;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+
+/* 채점 기준 */
+.rubric {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  break-inside: avoid;
+}
+.rubric .label {
+  font-size: 9.5pt; font-weight: 700; color: var(--accent);
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+}
+.rubric table { margin: 6px 0 0; }
+.condition-tag {
+  display: inline-block; background: var(--accent); color: #fff;
+  border-radius: 4px; padding: 1px 8px; font-weight: 600;
+  font-size: 9pt; margin: 2px 4px 2px 0;
+}
+
+/* 제시어 박스 */
+.word-bank {
+  background: var(--purple-bg); border: 1.5px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  break-inside: avoid;
+}
+.word-bank .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 8px;
+}
+.word-bank .words {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.word-bank .word {
+  display: inline-block; background: #fff; border: 1px solid var(--purple-line);
+  border-radius: 5px; padding: 3px 12px; font-size: 10.5pt;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-weight: 600; color: #5a3d9e;
+}
+
+/* 주어진 문장 박스 */
+.given-sentence {
+  background: var(--purple-bg); border: 2px solid var(--purple-line);
+  border-radius: 8px; padding: 12px 18px; margin: 10px 0;
+  font-family: 'Times New Roman', Georgia, serif;
+  font-size: 11pt; line-height: 1.85; color: #222;
+  break-inside: avoid;
+}
+.given-sentence .label {
+  font-size: 9pt; font-weight: 700; color: #5a3d9e;
+  letter-spacing: .5px; display: block; margin-bottom: 6px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+/* 삽입 위치 표시 */
+.insert-mark {
+  display: inline-block;
+  font-weight: 700; color: var(--accent);
+  margin: 0 2px;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 10pt;
+}
+
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page {
+    width: auto; height: auto; min-height: 0; margin: 0; padding: 0;
+    box-shadow: none;
+  }
+  .page + .page { break-before: page; page-break-before: always; }
+  .question-block, .answer-reveal, .explain-box, .tip, .word-bank,
+  .model-answer, .rubric, .writing-area, .memo-area, .dist-table,
+  table, tr, .choice-list li, h2, h3 { break-inside: avoid; }
+  h2, h3, table, .explain-box, .tip, .question-block, .answer-reveal { break-inside: avoid; }
+}
+
+/* ===== nav-bar (네비게이션/PDF) — 화면 전용, 인쇄 시 숨김 ===== */
+.nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 14px;}
+.nav-bar .nav-group{display:flex;gap:7px;flex-wrap:wrap;}
+.nav-btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;cursor:pointer;font-family:inherit;font-size:9.5pt;font-weight:600;line-height:1;padding:6px 12px;border-radius:6px;border:1px solid var(--accent-line);background:#fff;color:var(--accent);transition:all .15s ease;}
+.nav-btn:hover{background:var(--accent-soft);border-color:var(--accent);}
+.nav-btn.vocab{background:#f3f0ff;color:#5a3d9e;border-color:#b0a0d8;}
+.nav-btn.vocab:hover{background:#e9e2fb;}
+.nav-btn.pdf{background:var(--accent);color:#fff;border-color:var(--accent);}
+.nav-btn.pdf:hover{background:#16304f;}
+@media print{.nav-bar{display:none !important;}}
+
+/* ===== 어법 자료 전용 추가 스타일 ===== */
+.gm {
+  font-weight: 700; color: var(--accent);
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+}
+.uline { border-bottom: 1.5px solid var(--accent); padding-bottom: 1px; }
+.point-tag {
+  display: inline-block; background: var(--warn-bg);
+  border: 1px solid var(--warn-line); border-radius: 4px;
+  padding: 2px 10px; font-size: 9.5pt; font-weight: 600;
+  color: #8a6d1f; margin-left: 6px;
+}
+.ox { font-weight: 800; margin-right: 4px; }
+.ox.o { color: #2e7d32; }
+.ox.x { color: #c62828; }
+.wrong-list { margin: 8px 0 0; padding-left: 0; list-style: none; }
+.wrong-list li {
+  font-size: 10pt; line-height: 1.6; margin: 4px 0;
+  padding-left: 4px;
+}
+.fix {
+  background: var(--green-bg); border: 1px solid var(--green-line);
+  border-radius: 4px; padding: 1px 8px; font-weight: 700;
+  font-family: 'Times New Roman', Georgia, serif;
+}
+.strike { text-decoration: line-through; color: #c62828; }
+.dist-table td, .dist-table th { text-align: center; }
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — 표지 ============ -->
+<section class="page">
+  <div class="nav-bar">
+    <div class="nav-group">
+      <a class="nav-btn" href="index.html">← 목록</a>
+      <a class="nav-btn vocab" href="9월모평-단어숙어정리.html">📖 단어정리</a>
+      <a class="nav-btn" href="9월모평-출제스타일.html">📋 출제스타일</a>
+      <a class="nav-btn" href="9월모평-실전독해-4제.html">📝 실전독해</a>
+    </div>
+    <button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button>
+  </div>
+  <div class="author-bar">
+    <span>작성자: <b>홍진협</b></span>
+    <span>Email: <b>hongjinhyup@gmail.com</b></span>
+  </div>
+
+  <div class="doc-header">
+    <div class="eyebrow">EBS 2027 수능특강 연계 · 9월 모평 대비</div>
+    <h1>실전 어법 10제</h1>
+    <p class="subtitle">수능 29번 유형 — 밑줄 친 부분 중 어법상 틀린 것 고르기</p>
+    <p class="meta">
+      <span class="transform-badge">10문항</span>
+      <span class="passage-badge">지문당 110~130단어</span>
+      <span class="code-badge">EBS 연계 변형</span>
+    </p>
+  </div>
+
+  <div class="tip">
+    <span class="label">이 자료의 사용법</span>
+    수능 <strong>29번</strong>과 똑같은 구조다. 지문 하나에 밑줄 ①~⑤가 있고, 그중
+    <strong>어법상 틀린 것 하나</strong>를 고른다. 10개 문항이 서로 다른 출제 포인트를 하나씩 맡고 있으므로,
+    <strong>10문항을 다 풀면 수능 어법 빈출 포인트를 한 바퀴 도는</strong> 셈이다.
+    문제 페이지(2~6쪽)를 먼저 다 풀고, 해설 페이지(7~11쪽)에서 채점한다.
+    해설에는 정답뿐 아니라 <strong>나머지 네 개가 왜 맞는 표현인지</strong>도 적어 두었다.
+  </div>
+
+  <h2>출제 포인트 배분</h2>
+
+  <table>
+    <thead>
+      <tr><th style="width:56px;">문항</th><th>출제 포인트</th><th>무엇을 보고 판단하는가</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><b>주어–동사 수일치</b></td><td>주어와 동사 사이에 낀 수식어구를 걷어내고 진짜 주어를 찾는다</td></tr>
+      <tr><td>2</td><td><b>관계대명사 what vs 접속사 that</b></td><td>뒤 절이 완전한가, 선행사가 있는가</td></tr>
+      <tr><td>3</td><td><b>관계부사 · 전치사+관계대명사</b></td><td>뒤 절이 완전하면 관계대명사 단독은 쓸 수 없다</td></tr>
+      <tr><td>4</td><td><b>대동사 do / be</b></td><td>앞에서 반복되는 동사가 be동사인지 일반동사인지</td></tr>
+      <tr><td>5</td><td><b>분사 vs 정동사</b></td><td>그 문장에 본동사가 있는가</td></tr>
+      <tr><td>6</td><td><b>병렬구조</b></td><td>등위접속사 앞뒤의 형태가 같은가</td></tr>
+      <tr><td>7</td><td><b>능동 vs 수동</b></td><td>주어가 그 동작을 하는가, 당하는가</td></tr>
+      <tr><td>8</td><td><b>전치사 to + 동명사</b></td><td>to가 부정사의 to인가 전치사인가</td></tr>
+      <tr><td>9</td><td><b>형용사 vs 부사</b></td><td>보어 자리인가 수식 자리인가</td></tr>
+      <tr><td>10</td><td><b>도치</b></td><td>부정어·Only 부사구가 문두에 나왔는가</td></tr>
+    </tbody>
+  </table>
+
+  <div class="explain-box">
+    <span class="label">29번을 푸는 순서</span>
+    ① 밑줄 다섯 개를 먼저 훑어 <b>무엇을 묻는지</b> 유형을 짐작한다 (동사 형태? 관계사? 병렬?).<br>
+    ② 각 밑줄마다 <b>그 자리에 필요한 문법 기능</b>을 정한 뒤 실제 형태와 대조한다.<br>
+    ③ 동사 밑줄은 <b>수 → 태 → 시제</b> 순으로 확인한다.<br>
+    ④ 관계사 밑줄은 <b>뒤 절이 완전한지 불완전한지</b>만 보면 대부분 갈린다.<br>
+    ⑤ 확신이 서지 않으면 넘기고, 나머지 네 개가 확실히 맞는지로 <b>소거</b>한다.
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제</span>
+    <span>1 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — 문항 1~2 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">1</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      Reformist approaches assume that markets could operate in more equitable and
+      environmentally reasonable ways, and that a market is the most efficient option
+      available. Yet the logic of market efficiencies generally <span class="gm">①</span><span class="uline">rotate</span>
+      on purely monetary calculations, effectively <span class="gm">②</span><span class="uline">marginalising</span>
+      real social and environmental values. Familiar examples are conventional food
+      retailers, such as supermarkets, which purchase fruit and vegetables as
+      <span class="gm">③</span><span class="uline">cheaply</span> as possible. Inexpensive produce might be grown
+      using soil- and water-damaging fertilisers and <span class="gm">④</span><span class="uline">transported</span>
+      long distances using more cheap labour. Real social and environmental values
+      involved in caring for people and Earth <span class="gm">⑤</span><span class="uline">highlight</span>
+      the inequities and damage of market-oriented activities.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* equitable: 공정한 &nbsp; * marginalise: 주변화하다, 하찮게 만들다</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <h2><span class="q-badge">2</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      Many factors contribute to Americans' growing waistlines, but one observation in
+      particular cannot be overlooked: the incidence of obesity has increased in parallel
+      with increasing portion sizes. Adults today consume an average of 300 more calories
+      per day than they <span class="gm">①</span><span class="uline">did</span> in the year 1985. In almost
+      every eating situation, we are now confronted by huge portions,
+      <span class="gm">②</span><span class="uline">which</span> are perceived as "normal." Americans have
+      created the perception <span class="gm">③</span><span class="uline">what</span> large portion sizes are
+      appropriate, creating an environment of portion distortion. We find portion distortions
+      in restaurants, where the jumbo-sized portions are <span class="gm">④</span><span class="uline">consistently</span>
+      250 percent larger than the regular portions. Research shows that people unintentionally
+      consume more calories when <span class="gm">⑤</span><span class="uline">offered</span> larger portions.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* waistline: 허리둘레 &nbsp; * incidence: 발생률</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 문제</span>
+    <span>2 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — 문항 3~4 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">3</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      There is no scientific basis for the term "race." Most humans are genetically very
+      similar, and there is so little variation amongst us that it is not possible to draw
+      neat boundaries around people and <span class="gm">①</span><span class="uline">label</span> them as a
+      distinct racial group. Race is an example of social construction,
+      <span class="gm">②</span><span class="uline">which</span> social processes create something that
+      essentially does not exist but takes on real force in people's lives. For example, in
+      ancient Rome there were various leading figures, such as Emperor Septimius Severus,
+      who <span class="gm">③</span><span class="uline">were</span> black. Little is said of their skin colour
+      in accounts <span class="gm">④</span><span class="uline">written</span> at the time, because the ancient
+      Romans did not think it <span class="gm">⑤</span><span class="uline">made</span> any difference.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* social construction: 사회적 구성물</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <h2><span class="q-badge">4</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      Below-grade-level readers in my urban middle school have a great deal of difficulty
+      doing research. Their answer when <span class="gm">①</span><span class="uline">assigned</span> to do
+      "a report" is to come to the media center and copy verbatim everything in the
+      encyclopedia article. <span class="gm">②</span><span class="uline">To try</span> to get the students to
+      understand why it isn't necessary to copy everything, I use a comparison to a
+      supermarket. I ask them if everything in the supermarket is useful, and we discuss
+      this, with the usual conclusion being that it <span class="gm">③</span><span class="uline">does</span>,
+      but we don't buy everything all the time. Then I ask them how they determine
+      <span class="gm">④</span><span class="uline">what to buy</span> when they go with their parents. It
+      sometimes helps them to understand that <span class="gm">⑤</span><span class="uline">copying</span>
+      everything is a wasteful strategy.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* verbatim: 그대로, 축어적으로</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 문제</span>
+    <span>3 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — 문항 5~6 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">5</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      What is soft-path river engineering? One way to visualize its spirit is to liken it to
+      a footpath in the forest. Suppose a tree falls across a footpath. A soft-path response
+      would be simply <span class="gm">①</span><span class="uline">to redirect</span> the trail around the
+      fallen tree. A more interventionist response would be to remove the tree and
+      <span class="gm">②</span><span class="uline">restore</span> the original route. The true high-modernist
+      step would be to create a superhighway that <span class="gm">③</span><span class="uline">removes</span>
+      the landscape and bulldozes straight through all obstacles. Soft-path engineering
+      <span class="gm">④</span><span class="uline">having</span> the unique advantage of intellectual modesty
+      with respect to what we actually know about river movement. Backwaters, short-lived
+      wetlands, and swamps — all undesirable to hard-path engineering — are presumed by
+      soft-path engineers <span class="gm">⑤</span><span class="uline">to be</span> ecologically important.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* liken: 비유하다 &nbsp; * backwater: 배후 습지, 정체 수역</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <h2><span class="q-badge">6</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      The purpose of class discussions is to encourage you to be an active participant, not
+      a passive recorder. Much of the emphasis in a discussion is on getting students
+      involved in thinking, reacting, and <span class="gm">①</span><span class="uline">respond</span>. These
+      are important intellectual activities in the learning process, for through them you are
+      supposed to discover and <span class="gm">②</span><span class="uline">express</span> your opinions.
+      Admittedly, it is considerably more difficult to take notes from discussions than from
+      lectures, for, unlike lectures, discussions tend <span class="gm">③</span><span class="uline">to be</span>
+      disorganized and difficult to follow. Also, students usually don't know
+      <span class="gm">④</span><span class="uline">how much</span> of what other students are saying is
+      important. Note taking helps to keep you active and alert; it allows you
+      <span class="gm">⑤</span><span class="uline">to impose</span> some organization on the discussion.
+    </div>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 문제</span>
+    <span>4 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 — 문항 7~8 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">7</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      Linguists typically distinguish between signals that are communicative and those that
+      are informative, <span class="gm">①</span><span class="uline">depending</span> on whether the
+      information is conveyed intentionally or not. For example, a deliberate wink
+      <span class="gm">②</span><span class="uline">is distinguished</span> from an involuntary blink by the
+      communicative intention that lies behind it. Yet in intercultural interaction,
+      information conveyed unintentionally may actually <span class="gm">③</span><span class="uline">interpret</span>
+      as intentional; for instance, in some cultures, showing the soles of one's shoes can
+      communicate an insult. However, for someone from a cultural group
+      <span class="gm">④</span><span class="uline">where</span> that convention does not exist, such behaviour
+      would be unintentional and hence would not be communicative. In other words, a given
+      piece of behaviour may be communicative to some of the participants and only
+      <span class="gm">⑤</span><span class="uline">informative</span> to others.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* sole: (신발의) 밑창</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <h2><span class="q-badge">8</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      One reason that people participate in social media is because it builds social
+      relations. We increase our social capital when we successfully
+      <span class="gm">①</span><span class="uline">engage</span> in social media. Social capital describes the
+      networks of relationships we have that <span class="gm">②</span><span class="uline">are built</span> on
+      mutuality and sharing of identity, understanding, norms and values. "The premise behind
+      the notion of social capital is rather simple and straightforward: investment in social
+      relations with expected returns," <span class="gm">③</span><span class="uline">noted</span> sociologist
+      Nan Lin. Lin's work stresses that it is who you know as much as what you know
+      <span class="gm">④</span><span class="uline">that</span> shapes our experience in society. With new
+      media, our reach of connecting is all the greater, and we are increasingly devoted to
+      <span class="gm">⑤</span><span class="uline">expand</span> our "who you know" to greater and greater
+      lengths.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* mutuality: 상호 관계 &nbsp; * premise: 전제</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 문제</span>
+    <span>5 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 6 — 문항 9~10 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">9</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      A good example of chaos is the magnetic pendulum sold as an executive toy. It has four
+      magnets <span class="gm">①</span><span class="uline">arranged</span> in a square at the base and a
+      pendulum that swings back and forth between them. Release the pendulum and note the
+      magnets that it visits, and in what order. If the pendulum is released from the same
+      position a second time, the pattern of movement may at first seem
+      <span class="gm">②</span><span class="uline">similarly</span>, but soon it will become completely
+      different. No matter how <span class="gm">③</span><span class="uline">much</span> care is taken to start
+      the pendulum in the same position, it will visit an entirely different set of points on
+      the two occasions. Chaotic systems are generated by iteration, though not all iteration
+      <span class="gm">④</span><span class="uline">leads</span> to chaos. Before the critical point is
+      reached, such systems may behave in a quite <span class="gm">⑤</span><span class="uline">orderly</span>
+      fashion.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* pendulum: 진자 &nbsp; * iteration: 반복</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <h2><span class="q-badge">10</span> 다음 글의 밑줄 친 부분 중, 어법상 <u>틀린</u> 것은?</h2>
+  <div class="question-block">
+    <div class="passage">
+      When gathering the preferences of multiple agents into one collective choice, it is
+      easily seen that certain cases require randomization. For example, if there are two
+      alternatives, a and b, and two agents such that one prefers a and
+      <span class="gm">①</span><span class="uline">the other</span> b, there is no deterministic way of
+      selecting a single alternative without violating one of two basic fairness conditions
+      known as anonymity and neutrality. Anonymity requires that the collective choice
+      <span class="gm">②</span><span class="uline">be</span> independent of the agents' identities,
+      <span class="gm">③</span><span class="uline">whereas</span> neutrality requires impartiality towards
+      the alternatives. Indeed, most common "deterministic" social choice functions such as
+      plurality rule are only deterministic as long as there is no tie, which is usually
+      <span class="gm">④</span><span class="uline">resolved</span> by drawing a lot. Only when a tie occurs
+      <span class="gm">⑤</span><span class="uline">the outcome is</span> determined by lot.
+    </div>
+    <p style="font-size:9pt; color:var(--muted);">* anonymity: 익명성 &nbsp; * plurality rule: 다수결 원칙 &nbsp; * tie: 동점</p>
+    <div class="memo-area">메모</div>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 문제</span>
+    <span>6 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 7 — 해설 1~2 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2 style="margin-top:4px;">실전 어법 10제 — 정답 및 해설</h2>
+  <table class="dist-table">
+    <thead><tr><th>문항</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th></tr></thead>
+    <tbody>
+      <tr><td><b>정답</b></td><td>①</td><td>③</td><td>②</td><td>③</td><td>④</td><td>①</td><td>③</td><td>⑤</td><td>②</td><td>⑤</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:9.5pt; color:var(--muted); margin-top:-4px;">
+    정답 분포 — ① 2개 · ② 2개 · ③ 3개 · ④ 1개 · ⑤ 2개
+  </p>
+
+  <h2><span class="q-badge">1</span> 정답 <span class="ans-badge">①</span> <span class="point-tag">주어–동사 수일치</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">① <span class="strike">rotate</span> → <span class="fix">rotates</span></p>
+    주어는 <b>the logic</b>(단수)이다. 뒤에 붙은 <i>of market efficiencies</i>는 전치사구 수식어일 뿐 주어가 아니다.
+    수식어구에 있는 복수명사(efficiencies)에 동사를 맞추면 안 된다.
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ② <b>marginalising</b> — "~하면서"의 분사구문. 주절의 주어 the logic이 주변화하는 주체이므로 현재분사가 맞다.</li>
+      <li><span class="ox o">O</span> ③ <b>cheaply</b> — <i>as ... as possible</i> 사이에 들어가 동사 purchase를 수식하므로 부사가 맞다.</li>
+      <li><span class="ox o">O</span> ④ <b>transported</b> — <i>might be grown ... and (be) transported</i>의 병렬. 앞의 be가 생략된 수동태다.</li>
+      <li><span class="ox o">O</span> ⑤ <b>highlight</b> — 주어가 <b>values</b>(복수)다. <i>involved in caring for people and Earth</i>는 과거분사 수식어구다. 1번 밑줄과 정확히 반대되는 상황이니 비교해서 익혀 둘 것.</li>
+    </ul>
+  </div>
+
+  <h2><span class="q-badge">2</span> 정답 <span class="ans-badge">③</span> <span class="point-tag">what vs that</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">③ <span class="strike">what</span> → <span class="fix">that</span></p>
+    <i>the perception</i> 뒤에 오는 <b>동격절</b>이다. 뒤 문장(<i>large portion sizes are appropriate</i>)이
+    주어·동사·보어를 다 갖춘 <b>완전한 절</b>이므로 접속사 that을 써야 한다.
+    what은 그 자체가 명사 역할을 하므로 뒤에 불완전한 절이 와야 한다.
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ① <b>did</b> — 앞의 일반동사 consume을 대신하는 대동사. <i>than they did (consume) in 1985</i>.</li>
+      <li><span class="ox o">O</span> ② <b>which</b> — 계속적 용법. 선행사 huge portions를 받고 뒤 절에 주어가 비어 있으므로 관계대명사가 맞다.</li>
+      <li><span class="ox o">O</span> ④ <b>consistently</b> — 형용사 larger를 수식하므로 부사가 맞다.</li>
+      <li><span class="ox o">O</span> ⑤ <b>offered</b> — <i>when (they are) offered</i>. 사람들이 제공받는 쪽이므로 과거분사가 맞다.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 해설</span>
+    <span>7 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 8 — 해설 3~4 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">3</span> 정답 <span class="ans-badge">②</span> <span class="point-tag">관계부사 · 전치사+관계대명사</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">② <span class="strike">which</span> → <span class="fix">in which</span> 또는 <span class="fix">where</span></p>
+    뒤 절 <i>social processes create something</i>은 주어와 목적어가 모두 있는 <b>완전한 절</b>이다.
+    완전한 절 앞에는 관계대명사 which를 단독으로 쓸 수 없고, <b>전치사+관계대명사</b>나 <b>관계부사</b>를 써야 한다.
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ① <b>label</b> — <i>to draw ... and (to) label</i>의 병렬. 반복되는 to가 생략된 형태다.</li>
+      <li><span class="ox o">O</span> ③ <b>were</b> — 관계사절의 주어는 선행사 <b>figures</b>(복수)다. 바로 앞의 Severus에 맞추면 안 된다.</li>
+      <li><span class="ox o">O</span> ④ <b>written</b> — <i>accounts (which were) written at the time</i>. 기록은 쓰이는 대상이므로 과거분사가 맞다.</li>
+      <li><span class="ox o">O</span> ⑤ <b>made</b> — <i>think (that) it made any difference</i>의 that절 동사. 주절 시제에 맞춘 과거형이다.</li>
+    </ul>
+  </div>
+
+  <h2><span class="q-badge">4</span> 정답 <span class="ans-badge">③</span> <span class="point-tag">대동사 do / be</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">③ <span class="strike">does</span> → <span class="fix">is</span></p>
+    앞 문장이 <i>everything in the supermarket <b>is</b> useful</i>이다. 반복되는 동사가 <b>be동사</b>이므로
+    대동사도 be동사를 써야 한다. 일반동사가 반복될 때만 do/does/did를 쓴다.
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ① <b>assigned</b> — <i>when (they are) assigned</i>. 학생이 과제를 받는 쪽이므로 과거분사가 맞다.</li>
+      <li><span class="ox o">O</span> ② <b>To try</b> — "~하기 위해"라는 목적을 나타내는 부사적 용법의 to부정사다.</li>
+      <li><span class="ox o">O</span> ④ <b>what to buy</b> — determine의 목적어. <i>의문사 + to부정사</i> 형태로 명사구를 이룬다.</li>
+      <li><span class="ox o">O</span> ⑤ <b>copying</b> — that절의 주어 자리이므로 동명사가 맞다. 뒤에 단수 동사 is가 이어진다.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 해설</span>
+    <span>8 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 9 — 해설 5~6 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">5</span> 정답 <span class="ans-badge">④</span> <span class="point-tag">분사 vs 정동사</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">④ <span class="strike">having</span> → <span class="fix">has</span></p>
+    그 문장에는 <b>본동사가 없다</b>. 주어 <i>Soft-path engineering</i> 뒤에 바로 동사가 와야 하는데
+    현재분사 having을 쓰면 문장이 성립하지 않는다. 접속사도 없으므로 분사구문으로도 볼 수 없다.
+    <br><b>밑줄이 -ing나 p.p.면 "이 문장에 본동사가 따로 있나?"를 먼저 확인한다.</b>
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ① <b>to redirect</b> — <i>would be</i>의 보어. 명사적 용법의 to부정사다.</li>
+      <li><span class="ox o">O</span> ② <b>restore</b> — <i>to remove ... and (to) restore</i>의 병렬. to가 생략됐다.</li>
+      <li><span class="ox o">O</span> ③ <b>removes</b> — 관계대명사 that의 선행사가 <b>a superhighway</b>(단수)이므로 단수 동사가 맞다. 뒤의 bulldozes와도 병렬이다.</li>
+      <li><span class="ox o">O</span> ⑤ <b>to be</b> — <i>be presumed to be ~</i>("~라고 여겨지다")의 고정 형태다.</li>
+    </ul>
+  </div>
+
+  <h2><span class="q-badge">6</span> 정답 <span class="ans-badge">①</span> <span class="point-tag">병렬구조</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">① <span class="strike">respond</span> → <span class="fix">responding</span></p>
+    전치사 <b>in</b>의 목적어로 <i>thinking, reacting, and responding</i> 세 개가 나열된다.
+    앞의 두 개가 동명사이므로 세 번째도 동명사여야 한다.
+    <br><b>등위접속사(and/or/but)를 보면 앞뒤 형태를 반드시 맞춰 본다.</b>
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ② <b>express</b> — <i>are supposed to discover and (to) express</i>의 병렬. 반복되는 to가 생략된 원형이다.</li>
+      <li><span class="ox o">O</span> ③ <b>to be</b> — <i>tend to +동사원형</i>("~하는 경향이 있다").</li>
+      <li><span class="ox o">O</span> ④ <b>how much</b> — <i>how much of what ... is important</i> 전체가 know의 목적어인 간접의문문이다.</li>
+      <li><span class="ox o">O</span> ⑤ <b>to impose</b> — <i>allow + 목적어 + to부정사</i> 구조다.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 해설</span>
+    <span>9 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 10 — 해설 7~8 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">7</span> 정답 <span class="ans-badge">③</span> <span class="point-tag">능동 vs 수동</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">③ <span class="strike">interpret</span> → <span class="fix">be interpreted</span></p>
+    주어는 <i>information conveyed unintentionally</i>, 즉 <b>정보</b>다. 정보는 해석하는 주체가 아니라
+    <b>해석되는 대상</b>이므로 수동태를 써야 한다. 조동사 may 뒤이므로 <i>be interpreted</i>가 된다.
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ① <b>depending</b> — <i>depending on ~</i>("~에 따라")는 분사구문에서 굳어진 표현이다.</li>
+      <li><span class="ox o">O</span> ② <b>is distinguished</b> — 윙크가 구별되는 대상이므로 수동태가 맞다. ③과 정반대 상황이니 짝지어 볼 것.</li>
+      <li><span class="ox o">O</span> ④ <b>where</b> — 선행사가 <i>a cultural group</i>이고 뒤 절(<i>that convention does not exist</i>)이 완전하므로 관계부사가 맞다.</li>
+      <li><span class="ox o">O</span> ⑤ <b>informative</b> — <i>may be communicative ... and only informative</i>. be동사의 보어로 형용사가 병렬된 것이다.</li>
+    </ul>
+  </div>
+
+  <h2><span class="q-badge">8</span> 정답 <span class="ans-badge">⑤</span> <span class="point-tag">전치사 to + 동명사</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">⑤ <span class="strike">expand</span> → <span class="fix">expanding</span></p>
+    <i>be devoted to</i>의 <b>to는 전치사</b>다. 전치사 뒤에는 동사원형이 아니라 동명사가 온다.
+    <br><b>to 뒤에 원형이 오면 안 되는 표현들</b> — be devoted to, be committed to, look forward to,
+    be used to(~에 익숙하다), object to, contribute to.
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ① <b>engage</b> — when절의 동사. 주어 we에 맞는 현재형이다.</li>
+      <li><span class="ox o">O</span> ② <b>are built</b> — 선행사가 <i>the networks of relationships</i>(복수)이고, 관계는 구축되는 대상이므로 복수 수동태가 맞다.</li>
+      <li><span class="ox o">O</span> ③ <b>noted</b> — 인용문 뒤에서 <i>noted + 주어</i>로 도치된 형태다. 주어가 sociologist Nan Lin으로 길어 도치가 자연스럽다.</li>
+      <li><span class="ox o">O</span> ④ <b>that</b> — <i>it is ... that ~</i> 강조구문. <i>who you know as much as what you know</i>를 강조하고 있다.</li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 해설</span>
+    <span>10 / 11</span>
+  </div>
+</section>
+
+<!-- ============ PAGE 11 — 해설 9~10 + 마무리 ============ -->
+<section class="page">
+  <div class="nav-bar"><a class="nav-btn" href="index.html">← 목록</a><button class="nav-btn pdf" onclick="window.print()">🖨 PDF 저장</button></div>
+
+  <h2><span class="q-badge">9</span> 정답 <span class="ans-badge">②</span> <span class="point-tag">형용사 vs 부사</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">② <span class="strike">similarly</span> → <span class="fix">similar</span></p>
+    <b>seem</b>은 뒤에 보어가 오는 동사다. 보어 자리에는 부사가 아니라 <b>형용사</b>를 쓴다.
+    <br><b>보어를 취하는 동사</b> — be, seem, appear, look, feel, sound, taste, smell, become, remain, stay.
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ① <b>arranged</b> — <i>four magnets (which are) arranged in a square</i>. 자석은 배치되는 대상이므로 과거분사가 맞다.</li>
+      <li><span class="ox o">O</span> ③ <b>much</b> — <i>No matter how much care is taken</i>. care가 불가산명사이므로 much가 맞다.</li>
+      <li><span class="ox o">O</span> ④ <b>leads</b> — 주어가 <i>not all iteration</i>으로 불가산명사이므로 단수 동사가 맞다.</li>
+      <li><span class="ox o">O</span> ⑤ <b>orderly</b> — <b>-ly로 끝나지만 형용사</b>다. 뒤의 명사 fashion을 수식하므로 형용사 자리가 맞다. (같은 부류: friendly, lovely, costly, likely, timely)</li>
+    </ul>
+  </div>
+
+  <h2><span class="q-badge">10</span> 정답 <span class="ans-badge">⑤</span> <span class="point-tag">도치</span></h2>
+  <div class="answer-reveal">
+    <p class="ans-label">⑤ <span class="strike">the outcome is</span> → <span class="fix">is the outcome</span></p>
+    <b>Only + 부사절</b>이 문장 맨 앞에 나오면 주절의 주어와 (조)동사가 <b>도치</b>된다.
+    <i>Only when a tie occurs <b>is the outcome</b> determined by lot.</i>
+    <br><b>도치를 일으키는 문두 표현</b> — Only + 부사(구·절), Never, Hardly, Seldom, Little, Not until, No sooner.
+  </div>
+  <div class="explain-box">
+    <span class="label">나머지가 맞는 이유</span>
+    <ul class="wrong-list">
+      <li><span class="ox o">O</span> ① <b>the other</b> — 둘 중 나머지 하나를 가리키므로 the other가 맞다. (셋 이상이면 another)</li>
+      <li><span class="ox o">O</span> ② <b>be</b> — <i>require</i>가 이끄는 that절은 <i>(should) + 동사원형</i>을 쓴다. (같은 부류: demand, insist, suggest, recommend, propose)</li>
+      <li><span class="ox o">O</span> ③ <b>whereas</b> — 두 조건을 대조하는 접속사다. 뒤에 완전한 절이 온다.</li>
+      <li><span class="ox o">O</span> ④ <b>resolved</b> — 선행사는 <i>a tie</i>이고 동점은 해결되는 대상이므로 수동태가 맞다.</li>
+    </ul>
+  </div>
+
+  <div class="tip">
+    <span class="label">시험 직전 5분 점검</span>
+    <b>동사 밑줄</b> → 수 → 태 → 시제 순으로 본다. &nbsp;·&nbsp;
+    <b>-ing / p.p. 밑줄</b> → 이 문장에 본동사가 따로 있는지 본다. &nbsp;·&nbsp;
+    <b>관계사 밑줄</b> → 뒤 절이 완전한지 불완전한지만 본다. &nbsp;·&nbsp;
+    <b>and / or 주변 밑줄</b> → 앞뒤 형태를 맞춰 본다. &nbsp;·&nbsp;
+    <b>to 밑줄</b> → 부정사의 to인지 전치사의 to인지 본다.
+  </div>
+
+  <div class="page-footer">
+    <span>9월 모평 대비 · 실전 어법 10제 — 해설</span>
+    <span>11 / 11</span>
+  </div>
+</section>
+
+</body>
+</html>
